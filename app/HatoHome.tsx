@@ -231,13 +231,15 @@ const content = {
 } as const;
 
 export function HatoHome() {
-  const [lang, setLang] = useState<Lang>("vi");
+  const [lang, setLang] = useState<Lang>("en");
   const [menuOpen, setMenuOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [heroIndex, setHeroIndex] = useState(0);
   const [serviceIndex, setServiceIndex] = useState(0);
+  const [connectionIndex, setConnectionIndex] = useState(0);
   const touchStart = useRef(0);
+  const connectionTouchStart = useRef(0);
   const t = content[lang];
   const activeService = services[serviceIndex];
 
@@ -255,6 +257,11 @@ export function HatoHome() {
     return () => window.clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const timer = window.setInterval(() => setConnectionIndex((index) => (index + 1) % 3), 5200);
+    return () => window.clearInterval(timer);
+  }, []);
+
   function submitBooking(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSubmitted(true);
@@ -269,6 +276,13 @@ export function HatoHome() {
     if (Math.abs(distance) > 45) changeService(distance > 0 ? -1 : 1);
   }
 
+  function handleConnectionSwipe(event: TouchEvent) {
+    const distance = event.changedTouches[0].clientX - connectionTouchStart.current;
+    if (Math.abs(distance) > 45) {
+      setConnectionIndex((index) => (index + (distance > 0 ? -1 : 1) + 3) % 3);
+    }
+  }
+
   const heroImages = ["/images/hato-hero.png", ...services.map((service) => service.image)];
   const navTargets = ["#about", "#services", "#ritual", "#journal", "#contact"];
 
@@ -280,17 +294,17 @@ export function HatoHome() {
       </div>
 
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Hato Beauty">
-          <Image src="/brand/hato-logo.png" alt="Hato Beauty" width={280} height={150} priority />
+        <a className="brand" href="#top" aria-label="hato Beauty">
+          <Image src="/brand/hato-logo.png" alt="hato Beauty" width={280} height={150} priority />
         </a>
         <nav className={menuOpen ? "nav is-open" : "nav"} aria-label={lang === "vi" ? "Điều hướng chính" : "Main navigation"}>
           {t.nav.map((label, index) => <a key={label} href={navTargets[index]} onClick={() => setMenuOpen(false)}>{brandText(label)}</a>)}
         </nav>
         <div className="header-tools">
           <div className="language-switch" aria-label="Language">
-            <button className={lang === "vi" ? "active" : ""} onClick={() => setLang("vi")} aria-pressed={lang === "vi"}>VI</button>
-            <span>/</span>
             <button className={lang === "en" ? "active" : ""} onClick={() => setLang("en")} aria-pressed={lang === "en"}>EN</button>
+            <span>/</span>
+            <button className={lang === "vi" ? "active" : ""} onClick={() => setLang("vi")} aria-pressed={lang === "vi"}>VI</button>
           </div>
           <button className="header-cta" onClick={() => setBookingOpen(true)}>{t.consult}<span>↗</span></button>
           <button className="menu-button" aria-label={menuOpen ? t.menuClose : t.menuOpen} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
@@ -357,7 +371,7 @@ export function HatoHome() {
       </section>
 
       <section className="ritual section" id="ritual">
-        <div className="ritual-visual"><Image src="/images/service-hair-v2.png" alt={services[1][lang].title} fill sizes="(max-width: 800px) 100vw, 48vw" /><div className="ritual-card"><span>H</span><p>{lang === "vi" ? "Khoảng thời gian dành trọn cho bạn" : "Time reserved entirely for you"}</p></div></div>
+        <div className="ritual-visual"><Image src="/images/service-hair-v2.png" alt={services[1][lang].title} fill sizes="(max-width: 800px) 100vw, 48vw" /><div className="ritual-card"><span>h</span><p>{lang === "vi" ? "Khoảng thời gian dành trọn cho bạn" : "Time reserved entirely for you"}</p></div></div>
         <div className="ritual-copy">
           <div className="section-label"><span>03</span>{brandText(t.ritualLabel)}</div><p className="eyebrow">{t.ritualEyebrow}</p><h2>{t.ritualTitle}<br /><em>{t.ritualAccent}</em></h2>
           <div className="ritual-steps">{t.steps.map((step, index) => <div key={step[0]}><span>{String(index + 1).padStart(2, "0")}</span><h3>{step[0]}</h3><p>{step[1]}</p></div>)}</div>
@@ -378,7 +392,40 @@ export function HatoHome() {
         </div>
       </section>
 
-      <section className="booking-banner section" id="contact"><p className="eyebrow">Your moment starts here</p><h2>{t.bannerTitle}<br /><em>{t.bannerAccent}</em></h2><p>{brandText(t.bannerText)}</p><button className="button light-button" onClick={() => setBookingOpen(true)}>{brandText(t.bookWith)}<span>↗</span></button></section>
+      <section
+        className="booking-banner"
+        id="contact"
+        aria-roledescription="carousel"
+        aria-label={lang === "en" ? "Ways to connect with Hato" : "Kết nối cùng Hato"}
+        onTouchStart={(event) => { connectionTouchStart.current = event.touches[0].clientX; }}
+        onTouchEnd={handleConnectionSwipe}
+      >
+        <div className="connection-rail" style={{ transform: `translateX(-${connectionIndex * 100}%)` }}>
+          <article className="connection-slide connection-book">
+            <p className="eyebrow">{lang === "en" ? "Your moment starts here" : "Khoảnh khắc của bạn bắt đầu từ đây"}</p>
+            <h2>{t.bannerTitle}<br /><em>{t.bannerAccent}</em></h2>
+            <p>{brandText(t.bannerText)}</p>
+            <button className="button light-button" onClick={() => setBookingOpen(true)}>{brandText(t.bookWith)}<span>↗</span></button>
+          </article>
+          <article className="connection-slide connection-consult">
+            <p className="eyebrow">{lang === "en" ? "A conversation before every ritual" : "Một cuộc trò chuyện trước mỗi liệu trình"}</p>
+            <h2>{lang === "en" ? "Let us listen," : "Hãy để hato lắng nghe,"}<br /><em>{lang === "en" ? "then care with intention." : "rồi chăm sóc thật tinh tế."}</em></h2>
+            <p>{lang === "en" ? "Tell us what you need. We will suggest a thoughtful ritual and a time that fits your day." : "Chia sẻ điều bạn cần. hato sẽ gợi ý liệu trình phù hợp và khung giờ thuận tiện nhất."}</p>
+            <button className="button light-button" onClick={() => setBookingOpen(true)}>{t.privateConsult}<span>↗</span></button>
+          </article>
+          <article className="connection-slide connection-visit">
+            <p className="eyebrow">{lang === "en" ? "Come as you are" : "Ghé hato theo cách của bạn"}</p>
+            <h2>{lang === "en" ? "A calm space," : "Một không gian dịu nhẹ,"}<br /><em>{lang === "en" ? "reserved for you." : "dành riêng cho bạn."}</em></h2>
+            <p>{lang === "en" ? "Open daily from 09:00 to 20:00. Connect with our team before your visit for a more personal experience." : "Mở cửa mỗi ngày từ 09:00 đến 20:00. Kết nối với đội ngũ trước khi ghé để trải nghiệm được chuẩn bị riêng hơn."}</p>
+            <button className="button light-button" onClick={() => setBookingOpen(true)}>{t.sendConsult}<span>↗</span></button>
+          </article>
+        </div>
+        <div className="connection-controls">
+          <button onClick={() => setConnectionIndex((connectionIndex + 2) % 3)} aria-label={t.previous}>←</button>
+          <div>{[0, 1, 2].map((index) => <button key={index} className={connectionIndex === index ? "active" : ""} onClick={() => setConnectionIndex(index)} aria-label={`Slide ${index + 1}`} />)}</div>
+          <button onClick={() => setConnectionIndex((connectionIndex + 1) % 3)} aria-label={t.next}>→</button>
+        </div>
+      </section>
 
       <footer>
         <div className="footer-brand"><Image src="/brand/hato-logo.png" alt="Hato Beauty" width={300} height={160} /><p>Beauty, made personal.</p></div>

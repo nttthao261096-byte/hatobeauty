@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { HatoHome } from "./HatoHome";
 
 export const metadata: Metadata = {
-  title: "Hato Beauty | Vẻ đẹp tự nhiên, theo cách của bạn",
+  title: { absolute: "hato Beauty | Beauty, made personal" },
   description:
-    "Không gian chăm sóc sắc đẹp tinh tế, ấm áp với các liệu trình được cá nhân hóa tại Hato Beauty.",
+    "Personal facial care, herbal scalp therapy, lashes and brows in a calm, refined space at hato Beauty.",
 };
 
 export default function Home() {
