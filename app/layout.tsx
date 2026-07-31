@@ -2,13 +2,27 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://hatobeauty.vn"),
+  metadataBase: new URL("https://hato-beauty-studio.nttthao261096.chatgpt.site"),
   title: {
     default: "Hato Beauty | Beauty, made personal",
     template: "%s | Hato Beauty",
   },
-  description: "Không gian chăm sóc sắc đẹp tinh tế, ấm áp và được cá nhân hóa tại Hato Beauty.",
-  icons: { icon: "/favicon.svg" },
+  description: "Hato Beauty — chăm sóc da, gội đầu dưỡng sinh, mi và mày trong không gian màu be tinh tế. Facial care, herbal scalp therapy, lashes and brows.",
+  icons: { icon: "/brand/hato-logo.png", shortcut: "/brand/hato-logo.png" },
+  openGraph: {
+    type: "website",
+    locale: "vi_VN",
+    alternateLocale: "en_US",
+    title: "Hato Beauty | Beauty, made personal",
+    description: "Ba nghi thức chăm sóc được thiết kế riêng: chăm sóc da, gội đầu dưỡng sinh, mi và mày.",
+    images: [{ url: "/og.png", width: 1792, height: 936, alt: "Hato Beauty — Beauty, made personal" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hato Beauty | Beauty, made personal",
+    description: "Facial care, herbal scalp therapy, lashes and brows — designed around you.",
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
