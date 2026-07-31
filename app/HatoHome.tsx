@@ -314,8 +314,14 @@ export function HatoHome() {
 
       <section className="intro section" id="about">
         <div className="section-label"><span>01</span>{t.introLabel}</div>
-        <div className="intro-copy"><p className="kicker">{t.introKicker}</p><h2>{t.introTitle} <em>{t.introAccent}</em> {t.introSuffix}</h2></div>
-        <div className="intro-aside"><p>{t.introText}</p><a href="#ritual">{t.introLink}<span>→</span></a></div>
+        <div className="intro-copy">
+          <p className="kicker">{t.introKicker}</p>
+          <h2><span>{t.introTitle}</span><br /><em>{t.introAccent}</em><br /><span>{t.introSuffix}</span></h2>
+        </div>
+        <div className="intro-aside">
+          <div className="intro-logo"><Image src="/brand/hato-logo.png" alt="Hato Beauty" width={220} height={118} /></div>
+          <p>{t.introText}</p><a href="#ritual">{t.introLink}<span>→</span></a>
+        </div>
       </section>
 
       <section className="services section" id="services">
