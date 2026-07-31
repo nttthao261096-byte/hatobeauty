@@ -1,9 +1,16 @@
 "use client";
 
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { FormEvent, TouchEvent, useEffect, useRef, useState } from "react";
 
 type Lang = "vi" | "en";
+
+function brandText(text: string): ReactNode {
+  return text.split(/(hato)/gi).map((part, index) =>
+    /^hato$/i.test(part) ? <span className="hato-word" key={`${part}-${index}`}>hato</span> : part,
+  );
+}
 
 const services = [
   {
@@ -268,7 +275,7 @@ export function HatoHome() {
   return (
     <main>
       <div className="announcement">
-        <span>{t.announcement}</span>
+        <span>{brandText(t.announcement)}</span>
         <button onClick={() => setBookingOpen(true)}>{t.consult}</button>
       </div>
 
@@ -277,7 +284,7 @@ export function HatoHome() {
           <Image src="/brand/hato-logo.png" alt="Hato Beauty" width={280} height={150} priority />
         </a>
         <nav className={menuOpen ? "nav is-open" : "nav"} aria-label={lang === "vi" ? "Điều hướng chính" : "Main navigation"}>
-          {t.nav.map((label, index) => <a key={label} href={navTargets[index]} onClick={() => setMenuOpen(false)}>{label}</a>)}
+          {t.nav.map((label, index) => <a key={label} href={navTargets[index]} onClick={() => setMenuOpen(false)}>{brandText(label)}</a>)}
         </nav>
         <div className="header-tools">
           <div className="language-switch" aria-label="Language">
@@ -300,10 +307,10 @@ export function HatoHome() {
         <div className="hero-copy" key={`${lang}-${heroIndex}`}>
           <p className="eyebrow">{t.heroEyebrow[heroIndex]}</p>
           <h1>{t.heroTitle[heroIndex]}<br /><em>{t.heroAccent[heroIndex]}</em></h1>
-          <p className="hero-lead">{t.heroLead[heroIndex]}</p>
+          <p className="hero-lead">{brandText(t.heroLead[heroIndex])}</p>
           <div className="hero-actions">
             <a className="button primary" href="#services">{t.explore}<span>↗</span></a>
-            <a className="text-link" href="#about">{t.story}<span>↓</span></a>
+            <a className="text-link" href="#about">{brandText(t.story)}<span>↓</span></a>
           </div>
         </div>
         <div className="hero-controls" aria-label="Hero slides">
@@ -313,20 +320,20 @@ export function HatoHome() {
       </section>
 
       <section className="intro section" id="about">
-        <div className="section-label"><span>01</span>{t.introLabel}</div>
+        <div className="section-label"><span>01</span>{brandText(t.introLabel)}</div>
         <div className="intro-copy">
           <p className="kicker">{t.introKicker}</p>
           <h2><span>{t.introTitle}</span><br /><em>{t.introAccent}</em><br /><span>{t.introSuffix}</span></h2>
         </div>
         <div className="intro-aside">
           <div className="intro-logo"><Image src="/brand/hato-logo.png" alt="Hato Beauty" width={220} height={118} /></div>
-          <p>{t.introText}</p><a href="#ritual">{t.introLink}<span>→</span></a>
+          <p>{brandText(t.introText)}</p><a href="#ritual">{brandText(t.introLink)}<span>→</span></a>
         </div>
       </section>
 
       <section className="services section" id="services">
         <div className="services-heading">
-          <div className="section-label light"><span>02</span>{t.serviceLabel}</div>
+          <div className="section-label light"><span>02</span>{brandText(t.serviceLabel)}</div>
           <h2>{t.serviceTitle}<br /><em>{t.serviceAccent}</em></h2>
           <p>{t.serviceText}</p>
           <div className="service-arrows">
@@ -352,33 +359,33 @@ export function HatoHome() {
       <section className="ritual section" id="ritual">
         <div className="ritual-visual"><Image src="/images/service-hair-v2.png" alt={services[1][lang].title} fill sizes="(max-width: 800px) 100vw, 48vw" /><div className="ritual-card"><span>H</span><p>{lang === "vi" ? "Khoảng thời gian dành trọn cho bạn" : "Time reserved entirely for you"}</p></div></div>
         <div className="ritual-copy">
-          <div className="section-label"><span>03</span>{t.ritualLabel}</div><p className="eyebrow">{t.ritualEyebrow}</p><h2>{t.ritualTitle}<br /><em>{t.ritualAccent}</em></h2>
+          <div className="section-label"><span>03</span>{brandText(t.ritualLabel)}</div><p className="eyebrow">{t.ritualEyebrow}</p><h2>{t.ritualTitle}<br /><em>{t.ritualAccent}</em></h2>
           <div className="ritual-steps">{t.steps.map((step, index) => <div key={step[0]}><span>{String(index + 1).padStart(2, "0")}</span><h3>{step[0]}</h3><p>{step[1]}</p></div>)}</div>
           <button className="button outline" onClick={() => setBookingOpen(true)}>{t.privateConsult}<span>↗</span></button>
         </div>
       </section>
 
       <section className="commitment section">
-        <div><div className="section-label"><span>04</span>{t.whyLabel}</div><h2>{t.whyTitle}<br /><em>{t.whyAccent}</em></h2></div>
-        <div className="commitment-grid">{t.commitments.map((item, index) => <article key={item[0]}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item[0]}</h3><p>{item[1]}</p></article>)}</div>
+        <div><div className="section-label"><span>04</span>{brandText(t.whyLabel)}</div><h2>{t.whyTitle}<br /><em>{t.whyAccent}</em></h2></div>
+        <div className="commitment-grid">{t.commitments.map((item, index) => <article key={item[0]}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item[0]}</h3><p>{brandText(item[1])}</p></article>)}</div>
       </section>
 
       <section className="journal section" id="journal">
-        <div className="journal-head"><div><div className="section-label"><span>05</span>{t.journalLabel}</div><h2>{t.journalTitle}<br /><em>{t.journalAccent}</em></h2></div><p>{t.journalText}</p></div>
+        <div className="journal-head"><div><div className="section-label"><span>05</span>{brandText(t.journalLabel)}</div><h2>{t.journalTitle}<br /><em>{t.journalAccent}</em></h2></div><p>{t.journalText}</p></div>
         <div className="journal-grid">
           <article><div className="journal-image"><Image src="/images/service-skin-v2.png" alt={t.articles[0][1]} fill sizes="(max-width: 640px) 100vw, 55vw" /><span>SKIN NOTES</span></div><p>{t.articles[0][0]}</p><h3>{t.articles[0][1]}</h3><a href="#contact">{t.read}<span>→</span></a></article>
           <article><div className="journal-image"><Image src="/images/service-brow-v2.png" alt={t.articles[1][1]} fill sizes="(max-width: 640px) 100vw, 40vw" /><span>SLOW BEAUTY</span></div><p>{t.articles[1][0]}</p><h3>{t.articles[1][1]}</h3><a href="#contact">{t.read}<span>→</span></a></article>
         </div>
       </section>
 
-      <section className="booking-banner section" id="contact"><p className="eyebrow">Your moment starts here</p><h2>{t.bannerTitle}<br /><em>{t.bannerAccent}</em></h2><p>{t.bannerText}</p><button className="button light-button" onClick={() => setBookingOpen(true)}>{t.bookWith}<span>↗</span></button></section>
+      <section className="booking-banner section" id="contact"><p className="eyebrow">Your moment starts here</p><h2>{t.bannerTitle}<br /><em>{t.bannerAccent}</em></h2><p>{brandText(t.bannerText)}</p><button className="button light-button" onClick={() => setBookingOpen(true)}>{brandText(t.bookWith)}<span>↗</span></button></section>
 
       <footer>
         <div className="footer-brand"><Image src="/brand/hato-logo.png" alt="Hato Beauty" width={300} height={160} /><p>Beauty, made personal.</p></div>
         <div><h3>{t.discover}</h3><a href="#about">{t.nav[0]}</a><a href="#services">{t.nav[1]}</a><a href="#journal">{t.nav[3]}</a></div>
         <div><h3>{t.contact}</h3><p>{t.openTime}<br />09:00 – 20:00</p><button onClick={() => setBookingOpen(true)}>{t.sendConsult}</button></div>
-        <div className="footer-news"><h3>{t.newsletter}</h3><p>{t.newsletterText}</p><label><span className="sr-only">{t.email}</span><input type="email" placeholder={t.email} /><button aria-label={t.newsletter}>→</button></label></div>
-        <div className="footer-bottom"><span>© 2026 Hato Beauty</span><span>Instagram&nbsp;&nbsp;·&nbsp;&nbsp;Facebook</span></div>
+        <div className="footer-news"><h3>{brandText(t.newsletter)}</h3><p>{t.newsletterText}</p><label><span className="sr-only">{t.email}</span><input type="email" placeholder={t.email} /><button aria-label={t.newsletter}>→</button></label></div>
+        <div className="footer-bottom"><span>© 2026 {brandText("Hato")} Beauty</span><span>Instagram&nbsp;&nbsp;·&nbsp;&nbsp;Facebook</span></div>
       </footer>
 
       <button className="floating-book" onClick={() => setBookingOpen(true)} aria-label={t.consult}><span>{t.consult}</span>↗</button>
@@ -386,7 +393,7 @@ export function HatoHome() {
       {bookingOpen && <div className="modal-backdrop" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setBookingOpen(false)}>
         <section className="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-title">
           <button className="modal-close" onClick={() => setBookingOpen(false)} aria-label={t.close}>×</button>
-          {submitted ? <div className="success"><span>✓</span><p className="eyebrow">{t.received}</p><h2>{t.thankYou}</h2><p>{t.thankText}</p><button className="button primary" onClick={() => { setBookingOpen(false); setSubmitted(false); }}>{t.finish}</button></div> : <><p className="eyebrow">A moment for you</p><h2 id="booking-title">{t.modalTitle}</h2><p>{t.modalText}</p>
+          {submitted ? <div className="success"><span>✓</span><p className="eyebrow">{t.received}</p><h2>{brandText(t.thankYou)}</h2><p>{brandText(t.thankText)}</p><button className="button primary" onClick={() => { setBookingOpen(false); setSubmitted(false); }}>{t.finish}</button></div> : <><p className="eyebrow">A moment for you</p><h2 id="booking-title">{brandText(t.modalTitle)}</h2><p>{brandText(t.modalText)}</p>
           <form onSubmit={submitBooking}><label>{t.name}<input name="name" required placeholder={t.namePlaceholder} /></label><label>{t.phone}<input name="phone" required inputMode="tel" placeholder={t.phone} /></label><label>{t.selectService}<select name="service" defaultValue=""><option value="" disabled>{t.chooseService}</option>{services.map((service) => <option key={service.number}>{service[lang].title}</option>)}</select></label><label>{t.preferredDate}<input name="date" type="date" required /></label><button className="button primary" type="submit">{t.submit}<span>↗</span></button></form></>}
         </section>
       </div>}
