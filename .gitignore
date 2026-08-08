@@ -42,3 +42,9 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# local review/export artifacts
+/hato-beauty-project-verified.zip
+/Danh sách từ khóa SEO.html
+/Danh sách từ khóa SEO_files/
+/.tools/
