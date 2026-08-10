@@ -217,18 +217,19 @@ img { user-select: none; }
 .booking-banner::after { width: 760px; height: 760px; right: -330px; bottom: -510px; }
 .banner-orbit { width: min(80vw, 980px); height: min(80vw, 980px); position: absolute; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; }
 .booking-banner article { max-width: 1060px; padding: 100px 7vw; position: relative; z-index: 2; }
-.banner-note { width: min(820px, 88vw); min-height: 108px; margin: 0 auto 54px; padding: 20px 28px; display: grid; grid-template-columns: minmax(190px, .9fr) minmax(150px, .7fr) minmax(210px, 1fr); align-items: center; gap: 28px; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,.38); border-radius: 32px; background: linear-gradient(115deg, rgba(255,250,246,.17), rgba(255,255,255,.055)); box-shadow: inset 0 1px 0 rgba(255,255,255,.24), 0 22px 60px rgba(49,31,21,.17); color: #fff8f2; backdrop-filter: blur(12px); }
-.banner-note::before { content: ""; position: absolute; width: 190px; height: 190px; left: -75px; top: -108px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; pointer-events: none; }
-.banner-note::after { content: ""; position: absolute; inset: 9px; border: 1px solid rgba(255,255,255,.08); border-radius: 24px; pointer-events: none; }
-.banner-note-brand { display: flex; align-items: baseline; gap: 9px; position: relative; z-index: 1; white-space: nowrap; }
-.banner-note-brand b { font-family: var(--brand); font-size: 52px; font-weight: 500; letter-spacing: -.055em; line-height: .65; text-transform: lowercase; }
-.banner-note-brand em { font-size: 10px; font-style: normal; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
-.banner-note-mark { display: flex; align-items: center; gap: 12px; color: #ead4c2; }
-.banner-note-mark::before, .banner-note-mark::after { content: ""; height: 1px; flex: 1; background: rgba(255,255,255,.3); }
-.banner-note-mark i { width: 40px; height: 40px; display: grid; flex: 0 0 auto; place-items: center; border: 1px solid rgba(255,255,255,.32); border-radius: 50%; font-size: 13px; font-style: normal; }
-.banner-note-tag { padding-left: 28px; display: flex; flex-direction: column; align-items: flex-start; gap: 7px; position: relative; z-index: 1; border-left: 1px solid rgba(255,255,255,.24); text-align: left; }
+.banner-note { width: min(780px, 82vw); min-height: 96px; margin: 0 auto 58px; padding: 18px 4px; display: grid; grid-template-columns: minmax(210px, 1fr) 190px minmax(210px, 1fr); align-items: center; gap: 22px; position: relative; color: #fff8f2; border-top: 1px solid rgba(255,255,255,.38); border-bottom: 1px solid rgba(255,255,255,.38); }
+.banner-note::before, .banner-note::after { content: ""; width: 1px; height: 13px; position: absolute; background: rgba(255,255,255,.52); }
+.banner-note::before { left: 0; top: 0; }
+.banner-note::after { right: 0; bottom: 0; }
+.banner-note-brand { display: flex; align-items: baseline; gap: 10px; white-space: nowrap; }
+.banner-note-brand b { font-family: var(--brand); font-size: 56px; font-weight: 500; letter-spacing: -.058em; line-height: .65; text-transform: lowercase; text-shadow: 0 10px 30px rgba(46,28,19,.18); }
+.banner-note-brand em { color: rgba(255,248,242,.82); font-size: 10px; font-style: normal; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+.banner-note-mark { display: flex; align-items: center; gap: 13px; color: #5f4638; }
+.banner-note-mark::before, .banner-note-mark::after { content: ""; height: 1px; flex: 1; background: rgba(255,255,255,.25); }
+.banner-note-mark i { width: 48px; height: 48px; display: grid; flex: 0 0 auto; place-items: center; border: 1px solid rgba(255,255,255,.62); border-radius: 50%; background: #efe0d3; box-shadow: 0 12px 32px rgba(49,31,21,.2), inset 0 1px 0 rgba(255,255,255,.75); font-size: 13px; font-style: normal; }
+.banner-note-tag { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; text-align: right; }
 .banner-note-tag small { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .2em; line-height: 1.35; text-transform: uppercase; }
-.banner-note-tag em { color: rgba(255,248,242,.68); font-family: var(--display); font-size: 15px; font-style: italic; letter-spacing: .02em; }
+.banner-note-tag em { color: rgba(255,248,242,.66); font-family: var(--display); font-size: 15px; font-style: italic; letter-spacing: .03em; }
 .booking-banner h2 { max-width: 1010px; font-size: clamp(44px, 5.6vw, 76px); line-height: 1.1; }
 .booking-banner .hato-word { color: white; font-size: 1.95em; }
 .booking-banner article > p:not(.banner-note) { max-width: 800px; margin: 32px auto 38px; font-size: 16px; line-height: 1.9; white-space: pre-line; }
@@ -420,14 +421,14 @@ img { user-select: none; }
   .booking-banner { min-height: 580px; }
   .booking-banner article { padding: 80px 24px; }
   .booking-banner h2 { font-size: 40px; }
-  .banner-note { width: 100%; min-height: 0; padding: 25px 22px; grid-template-columns: 1fr auto; gap: 20px 16px; border-radius: 26px; }
-  .banner-note::after { inset: 7px; border-radius: 20px; }
+  .banner-note { width: 100%; min-height: 0; padding: 21px 0 20px; grid-template-columns: 1fr auto; gap: 19px 16px; }
+  .banner-note::before, .banner-note::after { height: 10px; }
   .banner-note-brand { justify-content: flex-start; }
-  .banner-note-brand b { font-size: 47px; }
-  .banner-note-mark { width: 42px; }
+  .banner-note-brand b { font-size: 49px; }
+  .banner-note-mark { width: 44px; }
   .banner-note-mark::before, .banner-note-mark::after { display: none; }
-  .banner-note-mark i { width: 38px; height: 38px; }
-  .banner-note-tag { grid-column: 1 / -1; padding: 18px 0 0; align-items: flex-start; border-top: 1px solid rgba(255,255,255,.2); border-left: 0; }
+  .banner-note-mark i { width: 42px; height: 42px; }
+  .banner-note-tag { grid-column: 1 / -1; padding-top: 17px; align-items: flex-start; border-top: 1px solid rgba(255,255,255,.16); text-align: left; }
   .banner-note-tag small { font-size: 11px; }
   .site-footer { padding: 0 24px 25px; grid-template-columns: 1fr 1fr; column-gap: 25px; }
   .site-footer { margin-top: -28px; border-radius: 30px 30px 0 0; }
