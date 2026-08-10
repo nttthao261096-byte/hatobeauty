@@ -1,0 +1,15 @@
+/.openai/
+/.pnpm-store/
+/.wrangler/
+/build/
+/db/
+/dist/
+/drizzle/
+/examples/
+/outputs/
+/worker/
+/Danh*
+/hato-beauty-project-verified.zip
+/hato-beauty-*.png
+/1785489271646_5520658941331250930_5520658941331250930_h.jpg
+/logo.png

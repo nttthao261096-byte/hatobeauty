@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://hato-beauty-studio.nttthao261096.chatgpt.site"),
+  metadataBase: new URL("https://hatobeauty.vercel.app"),
   title: {
     default: "hato Beauty | Shine as you are",
     template: "%s | hato Beauty",
