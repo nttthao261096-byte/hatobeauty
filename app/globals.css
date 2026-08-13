@@ -217,19 +217,20 @@ img { user-select: none; }
 .booking-banner::after { width: 760px; height: 760px; right: -330px; bottom: -510px; }
 .banner-orbit { width: min(80vw, 980px); height: min(80vw, 980px); position: absolute; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; }
 .booking-banner article { max-width: 1060px; padding: 100px 7vw; position: relative; z-index: 2; }
-.banner-note { width: min(780px, 82vw); min-height: 96px; margin: 0 auto 58px; padding: 18px 4px; display: grid; grid-template-columns: minmax(210px, 1fr) 190px minmax(210px, 1fr); align-items: center; gap: 22px; position: relative; color: #fff8f2; border-top: 1px solid rgba(255,255,255,.38); border-bottom: 1px solid rgba(255,255,255,.38); }
-.banner-note::before, .banner-note::after { content: ""; width: 1px; height: 13px; position: absolute; background: rgba(255,255,255,.52); }
-.banner-note::before { left: 0; top: 0; }
-.banner-note::after { right: 0; bottom: 0; }
+.banner-note { width: min(820px, 84vw); min-height: 112px; margin: 0 auto 58px; padding: 20px 32px; display: grid; grid-template-columns: minmax(210px, 1fr) 170px minmax(210px, 1fr); align-items: center; gap: 24px; position: relative; isolation: isolate; color: #fffaf6; border: 1px solid rgba(255,255,255,.34); border-radius: 999px; background: linear-gradient(115deg, rgba(255,246,239,.14), rgba(255,255,255,.06)); box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 24px 65px rgba(73,45,31,.14); backdrop-filter: blur(10px); }
+.banner-note::before, .banner-note::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; pointer-events: none; }
+.banner-note::before { width: 96px; height: 96px; left: 27%; top: -42px; background: radial-gradient(circle, rgba(255,228,218,.24), transparent 68%); filter: blur(2px); }
+.banner-note::after { width: 130px; height: 130px; right: 8%; bottom: -76px; background: radial-gradient(circle, rgba(255,218,208,.2), transparent 68%); filter: blur(3px); }
 .banner-note-brand { display: flex; align-items: baseline; gap: 10px; white-space: nowrap; }
 .banner-note-brand b { font-family: var(--brand); font-size: 56px; font-weight: 500; letter-spacing: -.058em; line-height: .65; text-transform: lowercase; text-shadow: 0 10px 30px rgba(46,28,19,.18); }
 .banner-note-brand em { color: rgba(255,248,242,.82); font-size: 10px; font-style: normal; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
-.banner-note-mark { display: flex; align-items: center; gap: 13px; color: #5f4638; }
-.banner-note-mark::before, .banner-note-mark::after { content: ""; height: 1px; flex: 1; background: rgba(255,255,255,.25); }
-.banner-note-mark i { width: 48px; height: 48px; display: grid; flex: 0 0 auto; place-items: center; border: 1px solid rgba(255,255,255,.62); border-radius: 50%; background: #efe0d3; box-shadow: 0 12px 32px rgba(49,31,21,.2), inset 0 1px 0 rgba(255,255,255,.75); font-size: 13px; font-style: normal; }
+.banner-note-mark { display: flex; align-items: center; justify-content: center; color: #745143; }
+.banner-note-mark::before, .banner-note-mark::after { content: ""; width: 34px; height: 18px; position: absolute; border-radius: 100% 0 100% 0; background: rgba(255,242,235,.2); transform-origin: right center; }
+.banner-note-mark::before { transform: translate(-26px, -18px) rotate(22deg); }
+.banner-note-mark::after { transform: translate(26px, 18px) rotate(202deg); }
+.banner-note-mark i { width: 58px; height: 58px; display: grid; flex: 0 0 auto; place-items: center; position: relative; z-index: 1; border: 1px solid rgba(255,255,255,.7); border-radius: 50%; background: linear-gradient(145deg, #fff4ed, #ead4c5); box-shadow: 0 14px 36px rgba(49,31,21,.18), inset 0 1px 0 rgba(255,255,255,.9); font-size: 13px; font-style: normal; }
 .banner-note-tag { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; text-align: right; }
-.banner-note-tag small { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .2em; line-height: 1.35; text-transform: uppercase; }
-.banner-note-tag em { color: rgba(255,248,242,.66); font-family: var(--display); font-size: 15px; font-style: italic; letter-spacing: .03em; }
+.banner-note-tag small { max-width: 190px; font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .22em; line-height: 1.65; text-transform: uppercase; }
 .booking-banner h2 { max-width: 1010px; font-size: clamp(44px, 5.6vw, 76px); line-height: 1.1; }
 .booking-banner .hato-word { color: white; font-size: 1.95em; }
 .booking-banner article > p:not(.banner-note) { max-width: 800px; margin: 32px auto 38px; font-size: 16px; line-height: 1.9; white-space: pre-line; }
