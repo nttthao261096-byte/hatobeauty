@@ -1,8 +1,7 @@
-# vinext-starter
+# Hato Beauty
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Website thương hiệu và đặt lịch của Hato Beauty, chạy trên vinext và lưu yêu cầu
+đặt lịch trong Supabase.
 
 ## Prerequisites
 
@@ -18,14 +17,17 @@ npm run build
 
 This starter does not use `wrangler.jsonc`.
 
-## Included Shape
+## Supabase
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+- Chạy migration trong `supabase/migrations` trên dự án Supabase.
+- Đặt `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` và `SUPABASE_SECRET_KEY` trong
+  `.env.local` khi phát triển. Publishable key chỉ đọc dữ liệu website công khai;
+  secret key chỉ dùng cho route đặt lịch phía máy chủ.
+- Nội dung dịch vụ, điểm nổi bật, kết quả, đánh giá và bài viết được seed bằng
+  migration rồi đọc từ Supabase Data API; không còn hard-code trong component.
+- Đặt cùng hai biến môi trường trên nền tảng hosting khi xuất bản.
+- `SUPABASE_SECRET_KEY` chỉ được dùng ở route phía máy chủ và không bao giờ được
+  đưa vào biến `NEXT_PUBLIC_*`.
 
 ## Workspace Auth Headers
 
@@ -89,10 +91,9 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 
 - `npm run dev`: start local development
 - `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+- `npm test`: build và kiểm tra HTML cùng API đặt lịch
 
 ## Learn More
 
 - [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+- [Supabase Documentation](https://supabase.com/docs)

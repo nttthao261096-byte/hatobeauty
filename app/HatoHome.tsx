@@ -4,65 +4,13 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { FormEvent, useEffect, useRef, useState } from "react";
 
-type Lang = "vi" | "en";
-type Category = "all" | "care" | "relax" | "shape" | "smooth" | "body";
+import type { Category, HomeContent, Lang } from "./content";
 
 function brandText(text: string): ReactNode {
   return text.split(/(hato)/gi).map((part, index) =>
     /^hato$/i.test(part) ? <span className="hato-word" key={`${part}-${index}`}>hato</span> : part,
   );
 }
-
-const services = [
-  {
-    id: "skin",
-    category: "care" as const,
-    number: "01",
-    image: "/images/service-skin-v2.webp",
-    vi: { title: "Chăm sóc da chuyên sâu", summary: "Làm sạch · Phục hồi · Nuôi dưỡng", description: "Liệu trình được thiết kế sau bước soi và lắng nghe làn da, tập trung vào nhu cầu thực tế thay vì áp dụng một công thức chung.", suitable: "Da thiếu ẩm, xỉn màu, cần làm sạch và phục hồi nhịp chăm sóc." },
-    en: { title: "Personalized facial care", summary: "Cleanse · Restore · Nourish", description: "A thoughtful facial designed after listening to your skin, focused on what it genuinely needs rather than a one-size-fits-all routine.", suitable: "For dehydrated, tired-looking skin in need of cleansing and restoration." },
-  },
-  {
-    id: "scalp",
-    category: "relax" as const,
-    number: "02",
-    image: "/images/service-hair-v2.webp",
-    vi: { title: "Gội đầu dưỡng sinh", summary: "Thảo mộc · Massage · Thư giãn", description: "Nghi thức chăm sóc da đầu kết hợp làm sạch, massage vùng đầu–vai–gáy và nhịp chạm thư thái để cơ thể được nghỉ ngơi trọn vẹn.", suitable: "Người thường xuyên căng thẳng, mỏi vai gáy hoặc cần một khoảng nghỉ sâu." },
-    en: { title: "Herbal scalp therapy", summary: "Herbs · Massage · Relaxation", description: "A restorative scalp ritual combining cleansing, head–shoulder massage and an unhurried rhythm for complete relaxation.", suitable: "For anyone feeling stressed, tense through the shoulders or simply in need of a deep pause." },
-  },
-  {
-    id: "brow-lash",
-    category: "shape" as const,
-    number: "03",
-    image: "/images/service-brow-v2.webp",
-    vi: { title: "Định hình chân mày & Uốn mi", summary: "Cân đối · Tự nhiên · Tinh tế", description: "Chân mày được định hình theo tỷ lệ gương mặt; hàng mi được uốn cong mềm mại để làm rõ đường nét tự nhiên mà không tạo cảm giác nặng nề.", suitable: "Khách hàng muốn gương mặt sáng, đường nét hài hòa và dễ chăm sóc mỗi ngày." },
-    en: { title: "Brow shaping & Lash lift", summary: "Balanced · Natural · Refined", description: "Brows are shaped to your facial proportions while lashes are softly lifted to enhance your natural features without heaviness.", suitable: "For a brighter, balanced look that stays effortless day to day." },
-  },
-  {
-    id: "hair-removal",
-    category: "smooth" as const,
-    number: "04",
-    image: "/images/service-hair-removal-v2.webp",
-    vi: { title: "Triệt lông công nghệ cao", summary: "Êm dịu · Chính xác · Riêng tư", description: "Ứng dụng thiết bị hiện đại với thông số được điều chỉnh theo vùng da, thực hiện trong không gian riêng tư và quy trình vệ sinh rõ ràng.", suitable: "Các vùng tay, chân, nách hoặc vùng cần chăm sóc theo tư vấn cá nhân." },
-    en: { title: "Advanced hair removal", summary: "Gentle · Precise · Private", description: "Modern technology with settings tailored to each treatment area, delivered in a private space with a clear hygiene protocol.", suitable: "For arms, legs, underarms or other areas following a personal consultation." },
-  },
-  {
-    id: "waxing",
-    category: "smooth" as const,
-    number: "05",
-    image: "/images/service-waxing-v2.webp",
-    vi: { title: "Waxing dịu nhẹ", summary: "Gọn gàng · Nhanh chóng · Chăm da", description: "Kỹ thuật waxing cẩn trọng, lựa chọn sản phẩm phù hợp và chăm sóc da trước–sau dịch vụ để hạn chế cảm giác khó chịu.", suitable: "Khách hàng cần hiệu quả gọn gàng ngay và một quy trình chăm sóc kín đáo." },
-    en: { title: "Gentle waxing", summary: "Smooth · Efficient · Skin-aware", description: "Careful waxing techniques, considered product selection and before–after skin care for a more comfortable experience.", suitable: "For an immediate smooth result delivered with discretion and care." },
-  },
-  {
-    id: "body",
-    category: "body" as const,
-    number: "06",
-    image: "/images/service-body-scrub-v2.webp",
-    vi: { title: "Chăm sóc body", summary: "Tẩy tế bào chết · Dưỡng ẩm · Thư giãn", description: "Nghi thức tẩy tế bào chết body kết hợp thao tác nhẹ nhàng và dưỡng ẩm, giúp bề mặt da sạch thoáng, mềm mại và được chăm sóc trọn vẹn hơn.", suitable: "Làn da body khô ráp, thiếu mềm mại hoặc cần một khoảng chăm sóc thư giãn định kỳ." },
-    en: { title: "Body care ritual", summary: "Exfoliate · Hydrate · Unwind", description: "A gentle body exfoliation ritual followed by thoughtful hydration, leaving skin feeling refreshed, smoother and cared for.", suitable: "For dry or rough body skin, or anyone seeking a regular restorative ritual." },
-  },
-];
 
 const copy = {
   vi: {
@@ -95,6 +43,7 @@ const copy = {
     modalTitle: "Đặt lịch cùng chúng tôi",
     modalText: "Để lại thông tin, chúng tôi sẽ liên hệ tư vấn và xác nhận thời gian phù hợp.",
     name: "Họ và tên", phone: "Số điện thoại", service: "Dịch vụ quan tâm", date: "Ngày mong muốn", submit: "Gửi yêu cầu", close: "Đóng", chooseService: "Chọn dịch vụ", received: "Chúng tôi đã nhận yêu cầu", thanks: "Cảm ơn bạn. Chúng tôi sẽ sớm liên hệ để lắng nghe và xác nhận lịch phù hợp.", done: "Hoàn tất", menu: "Mở menu",
+    sending: "Đang gửi...", bookingError: "Chưa thể gửi yêu cầu. Vui lòng thử lại sau ít phút.",
   },
   en: {
     announcement: "Let us awaken the beauty within you.",
@@ -114,43 +63,12 @@ const copy = {
     bannerTitle: "Thank you for trusting us to be part of your beauty journey.", bannerText: "We are committed to bringing the very best to every guest.\nEvery small change in you is not only our happiness, but also the motivation that keeps us growing each day.", contactNow: "Contact us now",
     modalTitle: "Book with us", modalText: "Leave your details and we will contact you for a personal consultation.",
     name: "Full name", phone: "Phone number", service: "Service of interest", date: "Preferred date", submit: "Send request", close: "Close", chooseService: "Choose a service", received: "Request received", thanks: "Thank you. We will contact you shortly to listen and confirm a suitable time.", done: "Done", menu: "Open menu",
+    sending: "Sending...", bookingError: "We could not send your request. Please try again in a few minutes.",
   },
 } as const;
 
-const highlights = [
-  { number: "01", image: "/images/feature-equipment-v2.webp", vi: ["Thiết bị hiện đại", "Công nghệ được lựa chọn có mục đích và điều chỉnh theo từng vùng da, luôn đi cùng bước đánh giá và tư vấn rõ ràng."], en: ["Modern technology", "Purposefully selected technology, adjusted to each treatment area and guided by a clear consultation."] },
-  { number: "02", image: "/images/feature-team-v2.webp", vi: ["Đội ngũ chuyên nghiệp", "Đội ngũ của chúng tôi thao tác cẩn trọng, giao tiếp chân thành và luôn tôn trọng cảm nhận riêng của mỗi khách hàng."], en: ["Professional team", "Our team combines careful technique, honest communication and respect for every guest's comfort."] },
-  { number: "03", image: "/images/feature-personalized-v2.webp", vi: ["Dịch vụ cá nhân hóa", "Mỗi liệu trình bắt đầu bằng việc lắng nghe, phân tích nhu cầu và giải thích rõ mục tiêu trước khi thực hiện."], en: ["Personalized services", "Every ritual begins by listening, understanding your needs and clarifying the goal before treatment."] },
-  { number: "04", image: "/images/feature-space-v2.webp", vi: ["Không gian thư giãn", "Màu sắc ấm, chất liệu tự nhiên và nhịp phục vụ không vội tạo nên một khoảng riêng đủ dịu để bạn thả lỏng."], en: ["A calming space", "Warm tones, natural textures and an unhurried rhythm create a private pause where you can unwind."] },
-];
-
-const results = [
-  { image: "/images/result-skin-v2.webp", vi: ["Da sáng khỏe, ẩm mượt tự nhiên", "Sau trải nghiệm chăm sóc da chuyên sâu", "Chăm sóc da"], en: ["Naturally brighter, replenished skin", "After a personalized facial ritual", "Facial care"] },
-  { image: "/images/result-brow-lash-v2.webp", vi: ["Chân mày thanh thoát, hàng mi cong nhẹ", "Sau định hình chân mày và uốn mi", "Chân mày & Mi"], en: ["Refined brows, softly lifted lashes", "After brow shaping and a lash lift", "Brow & Lash"] },
-  { image: "/images/result-body-v2.webp", vi: ["Da body mịn màng, rạng rỡ hơn", "Sau nghi thức tẩy tế bào chết body", "Chăm sóc body"], en: ["Smoother, more radiant body skin", "After a body exfoliation ritual", "Body care"] },
-];
-
-const serviceDetails = {
-  skin: { price: "450.000 – 1.200.000đ", duration: "60 – 90 phút", plan: "1 – 4 buổi, tùy tình trạng", vi: ["Soi da và trao đổi nhu cầu", "Làm sạch – tẩy da chết phù hợp", "Chăm sóc chuyên sâu và phục hồi", "Hướng dẫn duy trì tại nhà"], en: ["Skin consultation", "Suitable cleanse and exfoliation", "Targeted care and recovery", "Simple home-care guidance"] },
-  scalp: { price: "180.000 – 450.000đ", duration: "45 – 75 phút", plan: "Theo nhu cầu thư giãn", vi: ["Kiểm tra da đầu và lựa chọn thảo mộc", "Làm sạch da đầu nhẹ nhàng", "Massage đầu – vai – gáy", "Sấy và hoàn thiện thư giãn"], en: ["Scalp check and herb selection", "Gentle scalp cleansing", "Head, neck and shoulder massage", "Drying and finishing ritual"] },
-  "brow-lash": { price: "250.000 – 750.000đ", duration: "45 – 90 phút", plan: "Duy trì sau 4 – 8 tuần", vi: ["Phân tích tỷ lệ gương mặt", "Thống nhất dáng mày và độ cong", "Tạo dáng hoặc uốn mi cẩn trọng", "Hướng dẫn chăm sóc sau dịch vụ"], en: ["Facial proportion consultation", "Agree on shape and lift", "Careful shaping or lash lift", "Aftercare guidance"] },
-  "hair-removal": { price: "250.000 – 1.500.000đ / vùng", duration: "20 – 60 phút", plan: "Thường 6 – 10 buổi", vi: ["Đánh giá vùng da và sợi lông", "Làm sạch và bảo vệ vùng da", "Điều chỉnh thiết bị theo vùng", "Làm dịu và dặn dò sau buổi"], en: ["Assess skin and hair", "Cleanse and protect the area", "Tailor device settings", "Soothe and explain aftercare"] },
-  waxing: { price: "120.000 – 650.000đ / vùng", duration: "20 – 50 phút", plan: "Lặp lại sau 3 – 6 tuần", vi: ["Kiểm tra tình trạng da", "Làm sạch và chuẩn bị vùng wax", "Wax theo hướng phù hợp", "Làm dịu và dưỡng ẩm"], en: ["Check skin condition", "Cleanse and prepare", "Wax with suitable technique", "Soothe and moisturize"] },
-  body: { price: "350.000 – 850.000đ", duration: "60 – 90 phút", plan: "2 – 4 tuần / lần", vi: ["Trao đổi nhu cầu và vùng ưu tiên", "Làm sạch và tẩy tế bào chết", "Thao tác thư giãn nhẹ nhàng", "Dưỡng ẩm và hoàn thiện"], en: ["Discuss priorities", "Cleanse and exfoliate", "Gentle relaxing technique", "Hydrate and finish"] },
-} as const;
-
-const testimonials = [
-  { initials: "NT", name: { vi: "Nguyễn Thảo", en: "Nguyen Thao" }, quote: { vi: "Không gian rất dịu và sạch. Mình được hỏi kỹ về điều mình cần, không hề có cảm giác bị thúc ép chọn thêm dịch vụ.", en: "The space felt calm and immaculate. I was listened to carefully and never pressured into adding services." } },
-  { initials: "MA", name: { vi: "Minh Anh", en: "Minh Anh" }, quote: { vi: "Mọi bước đều được giải thích rõ ràng. Mình thích cảm giác chuyên nghiệp nhưng vẫn gần gũi và thật sự riêng tư.", en: "Every step was clearly explained. It felt professional, welcoming and genuinely private." } },
-  { initials: "KL", name: { vi: "Khánh Linh", en: "Khanh Linh" }, quote: { vi: "Đội ngũ nhẹ nhàng, quan sát kỹ phản ứng của mình và luôn hỏi lại mức độ thoải mái trong suốt buổi chăm sóc.", en: "The team was gentle, attentive and checked my comfort throughout the entire visit." } },
-  { initials: "BT", name: { vi: "Bảo Trân", en: "Bao Tran" }, quote: { vi: "Mình ấn tượng vì cách tư vấn vừa đủ và thực tế. Sau buổi hẹn, mình biết rõ nên chăm sóc tiếp như thế nào.", en: "The advice was practical and considered. I left knowing exactly how to continue caring for myself." } },
-  { initials: "TH", name: { vi: "Thu Hà", en: "Thu Ha" }, quote: { vi: "Từ lúc đặt lịch đến khi ra về đều rất chỉn chu. Đây là nơi mình muốn quay lại khi cần một khoảng nghỉ thật sự.", en: "From booking to goodbye, everything felt thoughtful. It is where I want to return for a genuine pause." } },
-  { initials: "NM", name: { vi: "Ngọc Mai", en: "Ngoc Mai" }, quote: { vi: "Mình thấy được tôn trọng và chăm sóc theo đúng nhu cầu, không theo một công thức có sẵn cho tất cả mọi người.", en: "I felt respected and cared for according to my needs, never treated with a one-size-fits-all formula." } },
-  { initials: "TV", name: { vi: "Thanh Vy", en: "Thanh Vy" }, quote: { vi: "Tông màu, mùi hương và nhịp phục vụ đều rất dễ chịu. Một trải nghiệm đẹp nhưng không hề phô trương.", en: "The palette, scent and pace were all soothing—beautifully refined without ever feeling showy." } },
-  { initials: "HA", name: { vi: "Hoài An", en: "Hoai An" }, quote: { vi: "Điều mình nhớ nhất là sự cẩn thận. Những chi tiết nhỏ khiến mình cảm thấy an tâm ngay từ lần đầu tiên.", en: "What stayed with me was the care in every detail. I felt reassured from my very first visit." } },
-];
-
-export function HatoHome() {
+export function HatoHome({ content }: { content: HomeContent }) {
+  const { services, serviceDetails, highlights, results, testimonials, journalArticles } = content;
   const [lang, setLang] = useState<Lang>("vi");
   const [category, setCategory] = useState<Category>("all");
   const [highlightIndex, setHighlightIndex] = useState(0);
@@ -162,6 +80,8 @@ export function HatoHome() {
   const [offerOpen, setOfferOpen] = useState(true);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [bookingError, setBookingError] = useState("");
   const dialogRef = useRef<HTMLElement>(null);
   const serviceDialogRef = useRef<HTMLElement>(null);
   const t = copy[lang];
@@ -201,8 +121,44 @@ export function HatoHome() {
     return () => window.clearInterval(timer);
   }, []);
 
-  function openBooking(serviceId?: unknown) { setBookingServiceId(typeof serviceId === "string" ? serviceId : ""); setSubmitted(false); setBookingOpen(true); }
-  function submitBooking(event: FormEvent<HTMLFormElement>) { event.preventDefault(); setSubmitted(true); }
+  function openBooking(serviceId?: unknown) {
+    setBookingServiceId(typeof serviceId === "string" ? serviceId : "");
+    setSubmitted(false);
+    setBookingError("");
+    setBookingOpen(true);
+  }
+
+  async function submitBooking(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setBookingError("");
+    setIsSubmitting(true);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          phone: formData.get("phone"),
+          service: formData.get("service"),
+          date: formData.get("date"),
+          locale: lang,
+        }),
+      });
+
+      if (!response.ok) throw new Error(`Booking request failed with ${response.status}`);
+      form.reset();
+      setSubmitted(true);
+    } catch (error) {
+      console.error(error);
+      setBookingError(t.bookingError);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
     <main>
@@ -270,14 +226,7 @@ export function HatoHome() {
         <span className="knowledge-orbit" aria-hidden="true" />
         <div className="knowledge-heading"><div><p className="eyebrow">{lang === "vi" ? "Góc kiến thức" : "The journal"}</p><h2>{lang === "vi" ? "Những mẹo nhỏ giúp bạn chăm sóc chính mình." : "Small rituals to help you care for yourself."}</h2></div><p>{lang === "vi" ? "Những gợi ý ngắn gọn, dễ áp dụng để bạn hiểu làn da hơn và duy trì cảm giác khỏe đẹp mỗi ngày." : "Simple, practical notes to help you understand your skin and sustain a healthy glow every day."}</p></div>
         <div className="knowledge-grid">
-          {[
-            lang === "vi" ? ["01", "Da cần làm sạch sâu hay ưu tiên phục hồi?", "3 phút đọc", "/images/journal-skin-v2.webp"] : ["01", "Does your skin need deep cleansing or recovery first?", "3 min read", "/images/journal-skin-v2.webp"],
-            lang === "vi" ? ["02", "Vì sao vùng đầu và vai gáy nên được thả lỏng cùng nhau?", "4 phút đọc", "/images/journal-scalp-v2.webp"] : ["02", "Why should the scalp, neck and shoulders unwind together?", "4 min read", "/images/journal-scalp-v2.webp"],
-            lang === "vi" ? ["03", "Đường nét nào giúp gương mặt vẫn giữ vẻ tự nhiên?", "3 phút đọc", "/images/journal-brow-v2.webp"] : ["03", "Which shape keeps your features feeling naturally yours?", "3 min read", "/images/journal-brow-v2.webp"],
-            lang === "vi" ? ["04", "Cần chuẩn bị gì trước một liệu trình công nghệ cao?", "3 phút đọc", "/images/journal-technology-v2.webp"] : ["04", "How should you prepare for an advanced treatment?", "3 min read", "/images/journal-technology-v2.webp"],
-            lang === "vi" ? ["05", "Làm thế nào để làn da dịu hơn sau liệu trình?", "3 phút đọc", "/images/journal-aftercare-v2.webp"] : ["05", "How can skin feel calmer after a treatment?", "3 min read", "/images/journal-aftercare-v2.webp"],
-            lang === "vi" ? ["06", "Khi nào là thời điểm phù hợp để tái tạo bề mặt da?", "4 phút đọc", "/images/journal-body-v2.webp"] : ["06", "When is the right time to refresh the skin's surface?", "4 min read", "/images/journal-body-v2.webp"],
-          ].map((item) => <article className="knowledge-card" key={item[0]}><div className="knowledge-image"><Image src={item[3]} alt="" fill sizes="(max-width: 900px) 100vw, 33vw" unoptimized /></div><div className="knowledge-body"><div className="knowledge-meta"><span>{item[0]}</span><small>{item[2]}</small></div><h3>{item[1]}</h3><span className="knowledge-arrow" aria-hidden="true">↗</span></div></article>)}
+          {journalArticles.map((item) => <article className="knowledge-card" key={item.number}><div className="knowledge-image"><Image src={item.image} alt="" fill sizes="(max-width: 900px) 100vw, 33vw" unoptimized /></div><div className="knowledge-body"><div className="knowledge-meta"><span>{item.number}</span><small>{item[lang].readingTime}</small></div><h3>{item[lang].title}</h3><span className="knowledge-arrow" aria-hidden="true">↗</span></div></article>)}
         </div>
       </section>
 
@@ -338,7 +287,7 @@ export function HatoHome() {
 
       {bookingOpen && <div className="modal-backdrop" onMouseDown={(event) => event.target === event.currentTarget && setBookingOpen(false)}>
         <section className="booking-modal" ref={dialogRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="booking-title"><button className="modal-close" onClick={() => setBookingOpen(false)} aria-label={t.close}>×</button>
-          {submitted ? <div className="success" role="status"><span>✓</span><p className="eyebrow">{brandText(t.received)}</p><h2>{brandText(t.modalTitle)}</h2><p>{brandText(t.thanks)}</p><button className="button primary" onClick={() => setBookingOpen(false)}>{t.done}</button></div> : <><p className="eyebrow">SHINE AS YOU ARE</p><h2 id="booking-title">{brandText(t.modalTitle)}</h2><p>{brandText(t.modalText)}</p><form onSubmit={submitBooking}><label>{t.name}<input name="name" autoComplete="name" required /></label><label>{t.phone}<input name="phone" type="tel" autoComplete="tel" inputMode="tel" required /></label><label>{t.service}<select name="service" defaultValue={bookingServiceId} required><option value="" disabled>{t.chooseService}</option>{services.map((service) => <option value={service.id} key={service.id}>{service[lang].title}</option>)}</select></label><label>{t.date}<input name="date" type="date" required /></label><button className="button primary" type="submit">{t.submit}<span>↗</span></button></form></>}
+          {submitted ? <div className="success" role="status"><span>✓</span><p className="eyebrow">{brandText(t.received)}</p><h2>{brandText(t.modalTitle)}</h2><p>{brandText(t.thanks)}</p><button className="button primary" onClick={() => setBookingOpen(false)}>{t.done}</button></div> : <><p className="eyebrow">SHINE AS YOU ARE</p><h2 id="booking-title">{brandText(t.modalTitle)}</h2><p>{brandText(t.modalText)}</p><form onSubmit={submitBooking}><label>{t.name}<input name="name" autoComplete="name" maxLength={120} required /></label><label>{t.phone}<input name="phone" type="tel" autoComplete="tel" inputMode="tel" minLength={8} maxLength={30} required /></label><label>{t.service}<select name="service" defaultValue={bookingServiceId} required><option value="" disabled>{t.chooseService}</option>{services.map((service) => <option value={service.id} key={service.id}>{service[lang].title}</option>)}</select></label><label>{t.date}<input name="date" type="date" required /></label>{bookingError && <p className="booking-error" role="alert">{bookingError}</p>}<button className="button primary" type="submit" disabled={isSubmitting}>{isSubmitting ? t.sending : t.submit}<span>↗</span></button></form></>}
         </section>
       </div>}
     </main>
