@@ -17,8 +17,8 @@ const copy = {
     announcement: "Hãy để chúng tôi đánh thức vẻ đẹp trong bạn.",
     book: "Đặt lịch tư vấn",
     nav: ["Về chúng tôi", "Dịch vụ", "Trải nghiệm", "Kết quả", "Cảm nhận"],
-    heroEyebrow: "SHINE AS YOU ARE",
-    heroTitle: "Effective & Personalized Skin Solutions.",
+    heroEyebrow: "TỎA SÁNG THEO CÁCH CỦA BẠN",
+    heroTitle: "Giải pháp chăm sóc da hiệu quả & cá nhân hóa.",
     heroText: "Bởi mỗi người đều có một vẻ đẹp riêng. Tại đây, chúng tôi lắng nghe, thấu hiểu và thiết kế từng trải nghiệm để phù hợp với làn da, nhu cầu và nhịp sống của bạn.",
     explore: "Khám phá dịch vụ",
     learn: "Hiểu về chúng tôi",
@@ -27,7 +27,7 @@ const copy = {
     servicesEyebrow: "Dịch vụ của chúng tôi",
     servicesTitle: "Để chúng tôi giúp bạn tỏa sáng theo cách của chính mình.",
     servicesText: "Năm nhóm chăm sóc được sắp xếp như năm không gian riêng, giúp bạn dễ dàng tìm đúng trải nghiệm cho làn da, cơ thể và nhịp sống của mình.",
-    categories: { all: "Tất cả", care: "Skin", relax: "Head Spa", body: "Body", shape: "Brow & Lash", smooth: "Hair Removal" },
+    categories: { all: "Tất cả", care: "Chăm sóc da", relax: "Gội đầu dưỡng sinh", body: "Chăm sóc cơ thể", shape: "Mi & chân mày", smooth: "Triệt lông" },
     suitable: "Phù hợp với",
     choose: "Khám phá dịch vụ",
     experienceEyebrow: "Trải nghiệm dành cho bạn",
@@ -64,6 +64,23 @@ const copy = {
     modalTitle: "Book with us", modalText: "Leave your details and we will contact you for a personal consultation.",
     name: "Full name", phone: "Phone number", service: "Service of interest", date: "Preferred date", submit: "Send request", close: "Close", chooseService: "Choose a service", received: "Request received", thanks: "Thank you. We will contact you shortly to listen and confirm a suitable time.", done: "Done", menu: "Open menu",
     sending: "Sending...", bookingError: "We could not send your request. Please try again in a few minutes.",
+  },
+} as const;
+
+const serviceGroupLabels = {
+  vi: {
+    skin: "Chăm sóc da",
+    scalp: "Gội đầu dưỡng sinh",
+    body: "Chăm sóc cơ thể",
+    "brow-lash": "Mi & chân mày",
+    "hair-removal": "Triệt lông & làm sạch lông bằng sáp",
+  },
+  en: {
+    skin: "Skin",
+    scalp: "Head Spa",
+    body: "Body",
+    "brow-lash": "Brow & Lash",
+    "hair-removal": "Hair Removal",
   },
 } as const;
 
@@ -192,14 +209,14 @@ export function HatoHome({ content }: { content: HomeContent }) {
         </div>
         <div className="hero-overlay" />
         <div className="hero-copy">
-          <p className="eyebrow hero-eyebrow">SHINE AS YOU ARE</p>
-          <h1>Effective &amp; Personalized Skin Solutions.</h1>
+          <p className="eyebrow hero-eyebrow">{t.heroEyebrow}</p>
+          <h1>{t.heroTitle}</h1>
           <p className="hero-lead">{lang === "vi" ? "Hiệu quả đến từ sự thấu hiểu: công nghệ phù hợp, chuyên môn cẩn trọng và một lộ trình được thiết kế theo nhu cầu thật của bạn." : "Results begin with understanding: considered technology, careful expertise and a plan shaped around what you truly need."}</p>
           <div className="hero-actions"><a className="button primary" href="#services">{t.explore}<span>↗</span></a><a className="text-link" href="#about">{brandText(t.learn)}<span>↓</span></a></div>
         </div>
       </section>
 
-      <div className="service-ribbon" aria-label={lang === "vi" ? "Năm nhóm dịch vụ" : "Five service groups"}><div><span>Skin</span><i>✦</i><span>Head Spa</span><i>✦</i><span>Body</span><i>✦</i><span>Brow &amp; Lash</span><i>✦</i><span>Hair Removal</span><i>✦</i><span>Skin</span><i>✦</i><span>Head Spa</span><i>✦</i></div></div>
+      <div className="service-ribbon" aria-label={lang === "vi" ? "Năm nhóm dịch vụ" : "Five service groups"}><div>{(["skin", "scalp", "body", "brow-lash", "hair-removal", "skin", "scalp"] as const).map((id, index) => <span className="ribbon-item" key={`${id}-${index}`}><span>{serviceGroupLabels[lang][id]}</span><i>✦</i></span>)}</div></div>
 
       <section className="why section" id="about">
         <div className="section-heading"><p className="eyebrow">{t.whyEyebrow}</p><h2>{t.whyTitle}</h2><p>{lang === "vi" ? "Chúng tôi xây dựng trải nghiệm làm đẹp từ những điều cụ thể: công nghệ phù hợp, không gian dễ chịu, dịch vụ minh bạch và đội ngũ có chuyên môn." : "We build every beauty experience around concrete values: suitable technology, a calming space, clear services and a capable team."}</p></div>
@@ -219,15 +236,15 @@ export function HatoHome({ content }: { content: HomeContent }) {
         <div className="services-intro"><div><p className="eyebrow">{brandText(t.servicesEyebrow)}</p><h2>{t.servicesTitle}</h2></div><p>{t.servicesText}</p></div>
         <div className="service-filters" role="group" aria-label={t.servicesEyebrow}>{(Object.keys(t.categories) as Category[]).map((key) => <button key={key} className={category === key ? "active" : ""} onClick={() => setCategory(key)}>{t.categories[key]}</button>)}</div>
         {serviceQuery && <p className="search-status">{lang === "vi" ? `Kết quả cho “${serviceQuery}”` : `Results for “${serviceQuery}”`} <button onClick={() => setServiceQuery("")}>{lang === "vi" ? "Xóa tìm kiếm" : "Clear search"}</button></p>}
-        <div className="service-grid">{filteredServices.map((service) => <article className="service-card" key={service.id}>
+        <div className="service-grid">{filteredServices.map((service) => <article className={`service-card service-card-${service.id}`} key={service.id}>
           <div className="service-photo"><Image src={service.image} alt={service[lang].title} fill sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" unoptimized /><span>{service.number}</span></div>
-          <div className="service-body"><p className="service-summary">{service[lang].summary}</p><h3>{service[lang].title}</h3><p className="service-description">{service[lang].description}</p><div className="service-suitable"><strong>{t.suitable}</strong><p>{service[lang].suitable}</p></div><button onClick={() => setSelectedServiceId(service.id)}>{t.choose}<span>↗</span></button></div>
+          <div className="service-body">{service.id === "skin" && <span className="skin-signature">{lang === "vi" ? "Dịch vụ chủ đạo" : "Signature care"}</span>}<p className="service-summary">{serviceGroupLabels[lang][service.id as keyof typeof serviceGroupLabels.vi]}</p><h3>{service[lang].title}</h3><p className="service-description">{service[lang].description}</p><div className="service-suitable"><strong>{t.suitable}</strong><p>{service[lang].suitable}</p></div><button onClick={() => setSelectedServiceId(service.id)}>{t.choose}<span>↗</span></button></div>
         </article>)}{filteredServices.length === 0 && <p className="service-empty">{lang === "vi" ? "Chưa tìm thấy dịch vụ phù hợp. Hãy thử một từ khóa khác." : "No matching service yet. Try another keyword."}</p>}</div>
       </section>
 
       <section className="knowledge section" id="knowledge">
         <span className="knowledge-orbit" aria-hidden="true" />
-        <div className="knowledge-heading"><div><p className="eyebrow">{lang === "vi" ? "Góc kiến thức · 05 chuyên mục" : "The journal · 05 care notes"}</p><h2>{lang === "vi" ? "Hiểu đúng để mỗi lựa chọn chăm sóc đều nhẹ nhàng hơn." : "A little knowledge makes every care choice feel easier."}</h2></div><p>{lang === "vi" ? "Những ghi chú thực tế dành cho Skin, Head Spa, Body, Brow & Lash và Hair Removal — dễ đọc, dễ áp dụng cho cả khách Việt Nam và quốc tế." : "Practical, bilingual notes for Skin, Head Spa, Body, Brow & Lash and Hair Removal — clear for both Vietnamese and international guests."}</p></div>
+        <div className="knowledge-heading"><div><p className="eyebrow">{lang === "vi" ? "Góc kiến thức · 05 chuyên mục" : "The journal · 05 care notes"}</p><h2>{lang === "vi" ? "Hiểu đúng để mỗi lựa chọn chăm sóc đều nhẹ nhàng hơn." : "A little knowledge makes every care choice feel easier."}</h2></div><p>{lang === "vi" ? "Những ghi chú thực tế về chăm sóc da, gội đầu dưỡng sinh, chăm sóc cơ thể, mi & chân mày và triệt lông — dễ đọc, dễ áp dụng cho cả khách Việt Nam và quốc tế." : "Practical, bilingual notes for Skin, Head Spa, Body, Brow & Lash and Hair Removal — clear for both Vietnamese and international guests."}</p></div>
         <div className="knowledge-grid">
           {journalArticles.map((item) => <article className="knowledge-card" key={item.number}><div className="knowledge-image"><Image src={item.image} alt="" fill sizes="(max-width: 900px) 100vw, 33vw" unoptimized /></div><div className="knowledge-body"><div className="knowledge-meta"><span>{item.number}</span><small>{item[lang].readingTime}</small></div><h3>{item[lang].title}</h3><span className="knowledge-arrow" aria-hidden="true">↗</span></div></article>)}
         </div>
@@ -246,11 +263,11 @@ export function HatoHome({ content }: { content: HomeContent }) {
         <div className="review-pagination" aria-label={lang === "vi" ? "Nhóm đánh giá" : "Review group"}><span>{reviewOffset === 0 ? "01 — 04" : "05 — 08"}<small>/ 08</small></span><div><button className={reviewOffset === 0 ? "active" : ""} onClick={() => setReviewOffset(0)} aria-label={lang === "vi" ? "Xem đánh giá 1 đến 4" : "View reviews 1 to 4"} /><button className={reviewOffset === 4 ? "active" : ""} onClick={() => setReviewOffset(4)} aria-label={lang === "vi" ? "Xem đánh giá 5 đến 8" : "View reviews 5 to 8"} /></div></div>
       </section>
 
-      <section className="booking-banner" id="contact"><div className="banner-orbit" /><article><div className="banner-note"><span className="banner-note-brand"><b>hato</b></span><span className="banner-note-mark" aria-hidden="true"><i>✦</i></span><span className="banner-note-tag"><small>SHINE AS YOU ARE</small></span></div><h2>{t.bannerTitle}</h2><p>{brandText(t.bannerText)}</p><button className="button light" onClick={openBooking}><span>{lang === "vi" ? "Nhận tư vấn riêng" : "Request personal guidance"}</span><b>↗</b></button></article></section>
+      <section className="booking-banner" id="contact"><div className="banner-orbit" /><article><div className="banner-note"><span className="banner-note-brand"><b>hato</b><em>Beauty</em></span><span className="banner-note-line" aria-hidden="true" /><span className="banner-note-mark" aria-hidden="true"><i>✦</i></span><span className="banner-note-line" aria-hidden="true" /><span className="banner-note-tag"><small>{lang === "vi" ? "TỎA SÁNG THEO CÁCH CỦA BẠN" : "SHINE AS YOU ARE"}</small></span></div><h2>{t.bannerTitle}</h2><p>{brandText(t.bannerText)}</p><button className="button light" onClick={openBooking}><span>{lang === "vi" ? "Nhận tư vấn riêng" : "Request personal guidance"}</span><b>↗</b></button></article></section>
 
       <footer className="site-footer">
         <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />
-        <div className="footer-intro"><p>{lang === "vi" ? "Hato Beauty · Beauty Studio" : "Hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
+        <div className="footer-intro"><p>{lang === "vi" ? "Hato Beauty · Không gian làm đẹp" : "Hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
         <div className="footer-brand"><Image src="/brand/hato-logo-transparent-v3.png" alt="hato Beauty" width={1016} height={638} unoptimized /></div>
         <div className="footer-links"><h3>{lang === "vi" ? "Khám phá" : "Discover"}</h3>{navItems.slice(0, 4).map(([href, label], index) => <a href={href} key={href}><span>0{index + 1}</span>{label}</a>)}</div>
         <div className="footer-contact"><h3>{lang === "vi" ? "Ghé thăm chúng tôi" : "Visit us"}</h3><p>{lang === "vi" ? "Thứ Hai – Chủ Nhật" : "Monday – Sunday"}<br /><strong>09:00 – 20:00</strong></p><button onClick={openBooking}>{t.book}<span>↗</span></button></div>
@@ -262,8 +279,8 @@ export function HatoHome({ content }: { content: HomeContent }) {
       {offerOpen && <div className="offer-backdrop" role="presentation">
         <section className="offer-modal" role="dialog" aria-modal="true" aria-labelledby="offer-title">
           <button className="offer-close" onClick={() => setOfferOpen(false)} aria-label={t.close}>×</button>
-          <div className="offer-visual"><span className="offer-star" aria-hidden="true">✦</span><strong>SHINE<br />AS YOU ARE</strong><span>{lang === "vi" ? "Chăm sóc theo cách của bạn" : "Care, in your own way"}</span></div>
-          <div className="offer-copy"><p className="eyebrow">SHINE AS YOU ARE</p><h2 id="offer-title">{lang === "vi" ? "Giảm giá 10% ngay hôm nay" : "Enjoy 10% off today"}</h2><p>{lang === "vi" ? "Kích vào đường link đăng ký bên dưới để nhận ưu đãi dành riêng cho lần trải nghiệm tiếp theo của bạn." : "Use the registration link below to receive your offer for your next experience."}</p><a href="#contact" className="offer-link" onClick={(event) => { event.preventDefault(); setOfferOpen(false); openBooking(); }}><span>{lang === "vi" ? "Đăng ký nhận ưu đãi" : "Register for the offer"}</span><b>↗</b></a><button className="offer-later" onClick={() => setOfferOpen(false)}>{lang === "vi" ? "Tiếp tục xem website" : "Continue to website"}</button></div>
+          <div className="offer-visual"><span className="offer-star" aria-hidden="true">✦</span><strong>{lang === "vi" ? <>TỎA SÁNG<br />THEO CÁCH CỦA BẠN</> : <>SHINE<br />AS YOU ARE</>}</strong><span>{lang === "vi" ? "Chăm sóc theo cách của bạn" : "Care, in your own way"}</span></div>
+          <div className="offer-copy"><p className="eyebrow">{lang === "vi" ? "TỎA SÁNG THEO CÁCH CỦA BẠN" : "SHINE AS YOU ARE"}</p><h2 id="offer-title">{lang === "vi" ? "Giảm giá 10% ngay hôm nay" : "Enjoy 10% off today"}</h2><p>{lang === "vi" ? "Kích vào đường link đăng ký bên dưới để nhận ưu đãi dành riêng cho lần trải nghiệm tiếp theo của bạn." : "Use the registration link below to receive your offer for your next experience."}</p><a href="#contact" className="offer-link" onClick={(event) => { event.preventDefault(); setOfferOpen(false); openBooking(); }}><span>{lang === "vi" ? "Đăng ký nhận ưu đãi" : "Register for the offer"}</span><b>↗</b></a><button className="offer-later" onClick={() => setOfferOpen(false)}>{lang === "vi" ? "Tiếp tục xem website" : "Continue to website"}</button></div>
           <span className="offer-timer" aria-hidden="true" />
         </section>
       </div>}
@@ -290,7 +307,7 @@ export function HatoHome({ content }: { content: HomeContent }) {
 
       {bookingOpen && <div className="modal-backdrop" onMouseDown={(event) => event.target === event.currentTarget && setBookingOpen(false)}>
         <section className="booking-modal" ref={dialogRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="booking-title"><button className="modal-close" onClick={() => setBookingOpen(false)} aria-label={t.close}>×</button>
-          {submitted ? <div className="success" role="status"><span>✓</span><p className="eyebrow">{brandText(t.received)}</p><h2>{brandText(t.modalTitle)}</h2><p>{brandText(t.thanks)}</p><button className="button primary" onClick={() => setBookingOpen(false)}>{t.done}</button></div> : <><p className="eyebrow">SHINE AS YOU ARE</p><h2 id="booking-title">{brandText(t.modalTitle)}</h2><p>{brandText(t.modalText)}</p><form onSubmit={submitBooking}><label>{t.name}<input name="name" autoComplete="name" maxLength={120} required /></label><label>{t.phone}<input name="phone" type="tel" autoComplete="tel" inputMode="tel" minLength={8} maxLength={30} required /></label><label>{t.service}<select name="service" defaultValue={bookingServiceId} required><option value="" disabled>{t.chooseService}</option>{services.map((service) => <option value={service.id} key={service.id}>{service[lang].title}</option>)}</select></label><label>{t.date}<input name="date" type="date" required /></label>{bookingError && <p className="booking-error" role="alert">{bookingError}</p>}<button className="button primary" type="submit" disabled={isSubmitting}>{isSubmitting ? t.sending : t.submit}<span>↗</span></button></form></>}
+          {submitted ? <div className="success" role="status"><span>✓</span><p className="eyebrow">{brandText(t.received)}</p><h2>{brandText(t.modalTitle)}</h2><p>{brandText(t.thanks)}</p><button className="button primary" onClick={() => setBookingOpen(false)}>{t.done}</button></div> : <><p className="eyebrow">{lang === "vi" ? "TỎA SÁNG THEO CÁCH CỦA BẠN" : "SHINE AS YOU ARE"}</p><h2 id="booking-title">{brandText(t.modalTitle)}</h2><p>{brandText(t.modalText)}</p><form onSubmit={submitBooking}><label>{t.name}<input name="name" autoComplete="name" maxLength={120} required /></label><label>{t.phone}<input name="phone" type="tel" autoComplete="tel" inputMode="tel" minLength={8} maxLength={30} required /></label><label>{t.service}<select name="service" defaultValue={bookingServiceId} required><option value="" disabled>{t.chooseService}</option>{services.map((service) => <option value={service.id} key={service.id}>{service[lang].title}</option>)}</select></label><label>{t.date}<input name="date" type="date" required /></label>{bookingError && <p className="booking-error" role="alert">{bookingError}</p>}<button className="button primary" type="submit" disabled={isSubmitting}>{isSubmitting ? t.sending : t.submit}<span>↗</span></button></form></>}
         </section>
       </div>}
     </main>

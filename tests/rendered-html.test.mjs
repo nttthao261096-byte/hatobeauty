@@ -83,14 +83,14 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
   assert.match(html, /<html lang="vi">/i);
-  assert.match(html, /hato Beauty \| Shine as you are/i);
-  assert.match(html, /Triệt lông &amp; Waxing/i);
+  assert.match(html, /HATO BEAUTY — Shine as you are/i);
+  assert.match(html, /Triệt lông &amp; làm sạch lông bằng sáp/i);
   assert.doesNotMatch(html, /Waxing dịu nhẹ/i);
   assert.match(html, /Chăm sóc body/i);
   assert.match(html, /Tẩy tế bào chết/i);
   assert.match(html, /Định hình chân mày &amp; Uốn mi/i);
   assert.match(html, /Hãy để chúng tôi đánh thức vẻ đẹp trong bạn/i);
-  assert.match(html, /Effective &amp; Personalized Skin Solutions/i);
+  assert.match(html, /Giải pháp chăm sóc da hiệu quả &amp; cá nhân hóa/i);
   assert.match(html, /Hiệu quả đến từ sự thấu hiểu/i);
   assert.match(html, /Thiết bị hiện đại/i);
   assert.match(html, /Không gian thư giãn/i);
@@ -107,7 +107,7 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, /Nguyễn Thảo/i);
   assert.match(html, /Cảm ơn bạn đã tin tưởng và lựa chọn chúng tôi/i);
   assert.match(html, /Chúng tôi cam kết sẽ mang đến những điều tốt nhất/i);
-  assert.match(html, /SHINE AS YOU ARE/i);
+  assert.match(html, /TỎA SÁNG THEO CÁCH CỦA BẠN/i);
   assert.match(html, /Nhận tư vấn riêng/i);
 });
 
@@ -129,8 +129,10 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.match(html, /class="footer-intro"/i);
   assert.match(html, /Hẹn gặp bạn trong một ngày gần nhất/i);
   assert.match(html, /Góc kiến thức/i);
-  assert.match(html, /Hair Removal: Chuẩn bị gì trước triệt lông hoặc waxing/i);
-  assert.match(html, /Brow &amp; Lash: Giữ đường nét tự nhiên/i);
+  assert.match(html, /Triệt lông: Cần chuẩn bị gì trước khi thực hiện/i);
+  assert.match(html, /Mi &amp; chân mày: Giữ đường nét tự nhiên/i);
+  assert.match(html, /class="service-card service-card-skin"/i);
+  assert.match(html, /Dịch vụ chủ đạo/i);
   assert.doesNotMatch(html, /class="header-cta"/i);
   assert.match(source, /aria-modal="true"/i);
   assert.match(source, /autoComplete="tel"/i);

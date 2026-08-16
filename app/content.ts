@@ -140,10 +140,10 @@ export async function loadHomeContent(): Promise<HomeContent> {
         number,
         vi: {
           ...service.vi,
-          title: "Triệt lông & Waxing",
-          summary: "Công nghệ · Waxing · Riêng tư",
-          description: "Giải pháp loại bỏ lông bằng công nghệ hoặc waxing, được lựa chọn theo vùng da, nhu cầu và mức độ thoải mái của riêng bạn.",
-          suitable: "Các vùng mặt, tay, chân, nách hoặc body cần chăm sóc kín đáo và phù hợp với tình trạng da.",
+          title: "Triệt lông & làm sạch lông bằng sáp",
+          summary: "Công nghệ · Sáp chuyên dụng · Riêng tư",
+          description: "Giải pháp loại bỏ lông bằng công nghệ hoặc sáp chuyên dụng, được lựa chọn theo vùng da, nhu cầu và mức độ thoải mái của riêng bạn.",
+          suitable: "Các vùng mặt, tay, chân, nách hoặc cơ thể cần chăm sóc kín đáo và phù hợp với tình trạng da.",
         },
         en: {
           ...service.en,
@@ -171,11 +171,11 @@ export async function loadHomeContent(): Promise<HomeContent> {
 
   const journalOrder = ["01", "02", "06", "03", "04"];
   const journalOverrides: Record<string, JournalArticleContent> = {
-    "01": { number: "01", image: "/images/journal-skin-v2.webp", vi: { title: "Skin: Làm sạch sâu hay ưu tiên phục hồi?", readingTime: "3 phút đọc" }, en: { title: "Skin: Deep cleansing or recovery first?", readingTime: "3 min read" } },
-    "02": { number: "02", image: "/images/journal-scalp-v2.webp", vi: { title: "Head Spa: Vì sao da đầu và vai gáy nên thả lỏng cùng nhau?", readingTime: "4 phút đọc" }, en: { title: "Head Spa: Why should the scalp, neck and shoulders unwind together?", readingTime: "4 min read" } },
-    "06": { number: "03", image: "/images/journal-body-v2.webp", vi: { title: "Body: Khi nào là lúc phù hợp để làm mới bề mặt da?", readingTime: "4 phút đọc" }, en: { title: "Body: When is the right time to refresh your skin?", readingTime: "4 min read" } },
-    "03": { number: "04", image: "/images/journal-brow-v2.webp", vi: { title: "Brow & Lash: Giữ đường nét tự nhiên bằng cách nào?", readingTime: "3 phút đọc" }, en: { title: "Brow & Lash: How do you keep the result naturally yours?", readingTime: "3 min read" } },
-    "04": { number: "05", image: "/images/journal-technology-v2.webp", vi: { title: "Hair Removal: Chuẩn bị gì trước triệt lông hoặc waxing?", readingTime: "3 phút đọc" }, en: { title: "Hair Removal: How should you prepare for technology or waxing?", readingTime: "3 min read" } },
+    "01": { number: "01", image: "/images/journal-skin-v2.webp", vi: { title: "Chăm sóc da: Làm sạch sâu hay ưu tiên phục hồi?", readingTime: "3 phút đọc" }, en: { title: "Skin: Deep cleansing or recovery first?", readingTime: "3 min read" } },
+    "02": { number: "02", image: "/images/journal-scalp-v2.webp", vi: { title: "Gội đầu dưỡng sinh: Vì sao da đầu và vai gáy nên thả lỏng cùng nhau?", readingTime: "4 phút đọc" }, en: { title: "Head Spa: Why should the scalp, neck and shoulders unwind together?", readingTime: "4 min read" } },
+    "06": { number: "03", image: "/images/journal-body-v2.webp", vi: { title: "Chăm sóc cơ thể: Khi nào là lúc phù hợp để làm mới bề mặt da?", readingTime: "4 phút đọc" }, en: { title: "Body: When is the right time to refresh your skin?", readingTime: "4 min read" } },
+    "03": { number: "04", image: "/images/journal-brow-v2.webp", vi: { title: "Mi & chân mày: Giữ đường nét tự nhiên bằng cách nào?", readingTime: "3 phút đọc" }, en: { title: "Brow & Lash: How do you keep the result naturally yours?", readingTime: "3 min read" } },
+    "04": { number: "05", image: "/images/journal-technology-v2.webp", vi: { title: "Triệt lông: Cần chuẩn bị gì trước khi thực hiện?", readingTime: "3 phút đọc" }, en: { title: "Hair Removal: How should you prepare for technology or waxing?", readingTime: "3 min read" } },
   };
 
   return {
