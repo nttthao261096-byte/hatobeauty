@@ -83,14 +83,14 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
   assert.match(html, /<html lang="vi">/i);
-  assert.match(html, /HATO BEAUTY — Shine as you are/i);
+  assert.match(html, /hato Beauty — Shine as you are/);
   assert.match(html, /Triệt lông &amp; làm sạch lông bằng sáp/i);
   assert.doesNotMatch(html, /Waxing dịu nhẹ/i);
   assert.match(html, /Chăm sóc cơ thể/i);
   assert.match(html, /Tẩy tế bào chết/i);
   assert.match(html, /Định hình chân mày &amp; Uốn mi/i);
   assert.match(html, /Hãy để chúng tôi đánh thức vẻ đẹp trong bạn/i);
-  assert.match(html, /Giải pháp chăm sóc da hiệu quả &amp; cá nhân hóa/i);
+  assert.match(html, /Giải pháp chăm sóc da hiệu quả\./i);
   assert.match(html, /Hiệu quả đến từ sự thấu hiểu/i);
   assert.match(html, /Thiết bị hiện đại/i);
   assert.match(html, /Không gian thư giãn/i);
@@ -120,7 +120,8 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   const contentSource = await readFile(new URL("../app/content.ts", import.meta.url), "utf8");
   const dataMigration = await readFile(new URL("../supabase/migrations/20260814114657_create_site_pages.sql", import.meta.url), "utf8");
   const styles = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
-  assert.match(source, /Khách hàng Hato Beauty/i);
+  assert.match(source, /Khách hàng hato Beauty/);
+  assert.doesNotMatch(html, />[^<]*\b(?:Hato|HATO)\b[^<]*</);
   assert.match(source, /Giá tham khảo/i);
   assert.match(html, /hato-logo-transparent-v3\.png/i);
   assert.doesNotMatch(html, /class="hero-manifesto"/i);

@@ -3,7 +3,7 @@ import { HatoHome } from "./HatoHome";
 import { loadHomeContent } from "./content";
 
 export const metadata: Metadata = {
-  title: { absolute: "HATO BEAUTY — Shine as you are" },
+  title: { absolute: "hato Beauty — Shine as you are" },
   description:
     "Skin, Head Spa, Body, Brow & Lash và Hair Removal trong không gian riêng tư tại hato Beauty.",
 };

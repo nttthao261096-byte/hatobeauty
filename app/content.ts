@@ -69,8 +69,12 @@ function text(value: unknown): string {
   return typeof value === "string" ? value : "";
 }
 
+function lowercaseHato(value: string): string {
+  return value.replace(/hato/gi, "hato");
+}
+
 function textArray(value: unknown): string[] {
-  return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
+  return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string").map(lowercaseHato) : [];
 }
 
 function vietnamizeBody(value: string): string {
@@ -78,7 +82,7 @@ function vietnamizeBody(value: string): string {
 }
 
 function localized(row: JsonRow, field: string, lang: Lang): string {
-  return text(row[`${field}_${lang}`]);
+  return lowercaseHato(text(row[`${field}_${lang}`]));
 }
 
 async function fetchRows(baseUrl: string, apiKey: string, table: string): Promise<JsonRow[]> {
