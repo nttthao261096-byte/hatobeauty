@@ -73,6 +73,10 @@ function textArray(value: unknown): string[] {
   return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
 }
 
+function vietnamizeBody(value: string): string {
+  return value.replace(/\bbody\b/gi, "cơ thể");
+}
+
 function localized(row: JsonRow, field: string, lang: Lang): string {
   return text(row[`${field}_${lang}`]);
 }
@@ -133,6 +137,19 @@ export async function loadHomeContent(): Promise<HomeContent> {
   })).filter((service) => serviceOrder.includes(service.id))
     .map((service) => {
       const number = String(serviceOrder.indexOf(service.id) + 1).padStart(2, "0");
+      if (service.id === "body") {
+        return {
+          ...service,
+          number,
+          vi: {
+            title: vietnamizeBody(service.vi.title),
+            summary: vietnamizeBody(service.vi.summary),
+            description: vietnamizeBody(service.vi.description),
+            suitable: vietnamizeBody(service.vi.suitable),
+          },
+        };
+      }
+
       if (service.id !== "hair-removal") return { ...service, number };
 
       return {
@@ -189,7 +206,7 @@ export async function loadHomeContent(): Promise<HomeContent> {
     })),
     results: resultRows.map((row) => ({
       image: text(row.image_path),
-      vi: [localized(row, "title", "vi"), localized(row, "description", "vi"), localized(row, "category_label", "vi")],
+      vi: [localized(row, "title", "vi"), localized(row, "description", "vi"), localized(row, "category_label", "vi")].map(vietnamizeBody),
       en: [localized(row, "title", "en"), localized(row, "description", "en"), localized(row, "category_label", "en")],
     })),
     testimonials: testimonialRows.map((row, index) => {
