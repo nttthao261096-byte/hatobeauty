@@ -3,17 +3,12 @@ import { HatoHome } from "./HatoHome";
 import { loadHomeContent } from "./content";
 
 export const metadata: Metadata = {
-  title: { absolute: "hato Beauty | Beauty, made personal" },
+  title: { absolute: "hato Beauty | SHINE AS YOU ARE" },
   description:
-    "Chăm sóc da, dưỡng sinh, định hình chân mày, uốn mi, triệt lông và waxing trong không gian riêng tư tại hato Beauty.",
+    "Skin, Head Spa, Body, Brow & Lash và Hair Removal trong không gian riêng tư tại hato Beauty.",
 };
 
 export default async function Home() {
-  try {
-    const content = await loadHomeContent();
-    return <HatoHome content={content} />;
-  } catch (error) {
-    console.error("Could not load Hato Beauty content from Supabase.", error);
-    throw error;
-  }
+  const content = await loadHomeContent();
+  return <HatoHome content={content} />;
 }
