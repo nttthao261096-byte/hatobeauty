@@ -84,14 +84,14 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   const html = await response.text();
   assert.match(html, /<html lang="vi">/i);
   assert.match(html, /hato Beauty \| Shine as you are/i);
-  assert.match(html, /Triệt lông công nghệ cao/i);
-  assert.match(html, /Waxing dịu nhẹ/i);
+  assert.match(html, /Triệt lông &amp; Waxing/i);
+  assert.doesNotMatch(html, /Waxing dịu nhẹ/i);
   assert.match(html, /Chăm sóc body/i);
   assert.match(html, /Tẩy tế bào chết/i);
   assert.match(html, /Định hình chân mày &amp; Uốn mi/i);
   assert.match(html, /Hãy để chúng tôi đánh thức vẻ đẹp trong bạn/i);
-  assert.match(html, /Những giải pháp hiện đại cho làn da/i);
-  assert.match(html, /Kết hợp công nghệ phù hợp/i);
+  assert.match(html, /Effective &amp; Personalized Skin Solutions/i);
+  assert.match(html, /Hiệu quả đến từ sự thấu hiểu/i);
   assert.match(html, /Thiết bị hiện đại/i);
   assert.match(html, /Không gian thư giãn/i);
   assert.match(html, /Đội ngũ chuyên nghiệp/i);
@@ -103,7 +103,7 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, /Chạm đến phiên bản đẹp nhất của bạn/i);
   assert.match(html, /Giảm giá 10% ngay hôm nay/i);
   assert.match(html, /Đăng ký nhận ưu đãi/i);
-  assert.match(html, /Đánh giá chung/i);
+  assert.match(html, /Khách Việt Nam &amp; quốc tế/i);
   assert.match(html, /Nguyễn Thảo/i);
   assert.match(html, /Cảm ơn bạn đã tin tưởng và lựa chọn chúng tôi/i);
   assert.match(html, /Chúng tôi cam kết sẽ mang đến những điều tốt nhất/i);
@@ -129,8 +129,8 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.match(html, /class="footer-intro"/i);
   assert.match(html, /Hẹn gặp bạn trong một ngày gần nhất/i);
   assert.match(html, /Góc kiến thức/i);
-  assert.match(html, /Cần chuẩn bị gì trước một liệu trình công nghệ cao/i);
-  assert.match(html, /Làm thế nào để làn da dịu hơn sau liệu trình/i);
+  assert.match(html, /Hair Removal: Chuẩn bị gì trước triệt lông hoặc waxing/i);
+  assert.match(html, /Brow &amp; Lash: Giữ đường nét tự nhiên/i);
   assert.doesNotMatch(html, /class="header-cta"/i);
   assert.match(source, /aria-modal="true"/i);
   assert.match(source, /autoComplete="tel"/i);
@@ -148,7 +148,7 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.match(source, /\/video\/hero-head-spa\.mp4/i);
   assert.match(source, /\/video\/hero-brow-warm\.mp4/i);
   assert.match(source, /className="offer-modal"/i);
-  assert.match(source, /className="offer-logo"/i);
+  assert.match(source, /className="offer-star"/i);
   assert.match(source, /setTimeout\(\(\) => setOfferOpen\(false\), 1800\)/i);
   assert.doesNotMatch(source, /hero-scene-label/i);
   assert.match(source, /Về chúng tôi/i);
