@@ -83,7 +83,7 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
   assert.match(html, /<html lang="vi">/i);
-  assert.match(html, /hato Beauty — Shine as you are/);
+  assert.match(html, /hato Beauty Đà Nẵng \| Skin, Head Spa, Body &amp; Beauty Care/);
   assert.match(html, /Triệt lông &amp; làm sạch lông bằng sáp/i);
   assert.doesNotMatch(html, /Waxing dịu nhẹ/i);
   assert.match(html, /Chăm sóc cơ thể/i);
@@ -126,7 +126,7 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.match(html, /hato-logo-transparent-v3\.png/i);
   assert.doesNotMatch(html, /class="hero-manifesto"/i);
   assert.doesNotMatch(html, /class="hero-brand">hato</i);
-  assert.match(html, /href="#knowledge">Kiến thức</i);
+  assert.match(html, /href="\/kien-thuc\/cham-soc-da\/">Kiến thức</i);
   assert.match(html, /role="search"/i);
   assert.match(html, /<div class="announcement"><p>[^<]+<\/p><\/div>/i);
   assert.match(html, /class="footer-intro"/i);

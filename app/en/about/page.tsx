@@ -1,0 +1,2 @@
+import type { Metadata } from "next"; import { TrustPage } from "../../seo-pages";
+export const metadata:Metadata={title:"About hato Beauty",description:"The values and care approach behind hato Beauty in Da Nang.",alternates:{canonical:"/en/about/",languages:{"vi-VN":"/ve-hato-beauty/",en:"/en/about/","x-default":"/ve-hato-beauty/"}}}; export default function Page(){return <TrustPage lang="en" kind="about"/>}

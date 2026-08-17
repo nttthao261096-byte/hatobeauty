@@ -210,17 +210,15 @@ export async function loadHomeContent(): Promise<HomeContent> {
     })),
     results: resultRows.map((row) => ({
       image: text(row.image_path),
-      vi: [localized(row, "title", "vi"), localized(row, "description", "vi"), localized(row, "category_label", "vi")].map(vietnamizeBody),
+      vi: [
+        vietnamizeBody(localized(row, "title", "vi")),
+        vietnamizeBody(localized(row, "description", "vi")),
+        vietnamizeBody(localized(row, "category_label", "vi")),
+      ],
       en: [localized(row, "title", "en"), localized(row, "description", "en"), localized(row, "category_label", "en")],
     })),
-    testimonials: testimonialRows.map((row, index) => {
-      const internationalGuests: Record<number, TestimonialContent> = {
-        4: { initials: "EL", name: { vi: "Emma Lewis · Úc", en: "Emma Lewis · Australia" }, quote: { vi: "Tư vấn bằng tiếng Anh rất rõ ràng và chu đáo. Tôi cảm thấy thoải mái, được lắng nghe và hiểu từng bước của liệu trình.", en: "The English consultation was clear and thoughtful. I felt comfortable, listened to and informed at every step." } },
-        5: { initials: "YK", name: { vi: "Yuna Kim · Hàn Quốc", en: "Yuna Kim · South Korea" }, quote: { vi: "Không gian thanh lịch nhưng gần gũi. Đội ngũ luôn kiểm tra cảm giác của tôi nên toàn bộ trải nghiệm rất dễ chịu.", en: "The space is elegant yet welcoming. The team checked my comfort throughout, which made the whole experience effortless." } },
-        6: { initials: "MS", name: { vi: "Mia Santos · Singapore", en: "Mia Santos · Singapore" }, quote: { vi: "Tôi thích cách mọi lựa chọn đều được giải thích thực tế, không hề tạo áp lực. Đây là nơi tôi muốn quay lại khi đến Việt Nam.", en: "I loved how every option was explained without pressure. This is somewhere I would return to whenever I am in Vietnam." } },
-        7: { initials: "CL", name: { vi: "Chloé Laurent · Pháp", en: "Chloé Laurent · France" }, quote: { vi: "Từng chi tiết đều tinh tế, từ mùi hương đến nhịp phục vụ. Một trải nghiệm làm đẹp rất riêng và đáng nhớ.", en: "Every detail felt considered, from the scent to the pace of care. A personal and memorable beauty experience." } },
-      };
-      return internationalGuests[index] ?? {
+    testimonials: testimonialRows.map((row) => {
+      return {
         initials: text(row.initials),
         name: { vi: localized(row, "name", "vi"), en: localized(row, "name", "en") },
         quote: { vi: localized(row, "quote", "vi"), en: localized(row, "quote", "en") },
