@@ -210,7 +210,11 @@ export async function loadHomeContent(): Promise<HomeContent> {
     })),
     results: resultRows.map((row) => ({
       image: text(row.image_path),
-      vi: [localized(row, "title", "vi"), localized(row, "description", "vi"), localized(row, "category_label", "vi")].map(vietnamizeBody),
+      vi: [
+        vietnamizeBody(localized(row, "title", "vi")),
+        vietnamizeBody(localized(row, "description", "vi")),
+        vietnamizeBody(localized(row, "category_label", "vi")),
+      ],
       en: [localized(row, "title", "en"), localized(row, "description", "en"), localized(row, "category_label", "en")],
     })),
     testimonials: testimonialRows.map((row, index) => {
