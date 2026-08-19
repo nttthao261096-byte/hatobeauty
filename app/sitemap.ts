@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 import { journalPath, seoServices, servicePath, siteUrl } from "./seo-data";
 export default function sitemap(): MetadataRoute.Sitemap {
-  const modified = new Date("2026-08-17T00:00:00+07:00");
-  const paths = ["/", "/en/", "/ve-hato-beauty/", "/en/about/", "/lien-he/", "/en/contact/", "/bang-gia/", "/en/prices/", "/dat-lich/", "/en/book/", "/chinh-sach-bien-tap/", "/chinh-sach-bao-mat/", ...seoServices.flatMap(s => [servicePath(s,"vi"),servicePath(s,"en"),journalPath(s,"vi"),journalPath(s,"en")])];
+  const modified = new Date("2026-08-18T00:00:00+07:00");
+  const paths = ["/", "/en/", "/dich-vu/", "/en/services/", "/kien-thuc/", "/en/journal/", "/ve-hato-beauty/", "/en/about/", "/lien-he/", "/en/contact/", "/bang-gia/", "/en/prices/", "/dat-lich/", "/en/book/", "/chinh-sach-bien-tap/", "/chinh-sach-bao-mat/", ...seoServices.flatMap(s => [servicePath(s,"vi"),servicePath(s,"en"),journalPath(s,"vi"),journalPath(s,"en")])];
   return paths.map((path,index)=>({
     url:`${siteUrl}${path === "/" ? "" : path}`,
     lastModified:modified,

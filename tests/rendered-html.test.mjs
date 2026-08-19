@@ -103,8 +103,8 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.doesNotMatch(html, />Chăm sóc body</i);
   assert.doesNotMatch(html, />Da body/i);
   assert.match(html, /Chạm đến phiên bản đẹp nhất của bạn/i);
-  assert.match(html, /Giảm giá 10% ngay hôm nay/i);
-  assert.match(html, /Đăng ký nhận ưu đãi/i);
+  assert.doesNotMatch(html, /Giảm giá 10% ngay hôm nay/i);
+  assert.doesNotMatch(html, /Đăng ký nhận ưu đãi/i);
   assert.match(html, /Khách Việt Nam &amp; quốc tế/i);
   assert.match(html, /Nguyễn Thảo/i);
   assert.match(html, /Cảm ơn bạn đã tin tưởng và lựa chọn chúng tôi/i);
@@ -117,31 +117,44 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   const response = await render();
   const html = await response.text();
   const source = await readFile(new URL("../app/HatoHome.tsx", import.meta.url), "utf8");
+  const bookingSource = await readFile(new URL("../app/BookingForm.tsx", import.meta.url), "utf8");
+  const bookingErrorSource = await readFile(new URL("../app/booking-errors.ts", import.meta.url), "utf8");
+  const bookingValidationSource = await readFile(new URL("../app/booking-validation.ts", import.meta.url), "utf8");
+  const seoPagesSource = await readFile(new URL("../app/seo-pages.tsx", import.meta.url), "utf8");
   const contentSource = await readFile(new URL("../app/content.ts", import.meta.url), "utf8");
   const dataMigration = await readFile(new URL("../supabase/migrations/20260814114657_create_site_pages.sql", import.meta.url), "utf8");
   const styles = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(source, /Khách hàng hato Beauty/);
   assert.doesNotMatch(html, />[^<]*\b(?:Hato|HATO)\b[^<]*</);
-  assert.match(source, /Giá tham khảo/i);
+  assert.match(seoPagesSource, /Giá tham khảo/i);
   assert.match(html, /hato-logo-transparent-v3\.png/i);
   assert.doesNotMatch(html, /class="hero-manifesto"/i);
   assert.doesNotMatch(html, /class="hero-brand">hato</i);
-  assert.match(html, /href="\/kien-thuc\/cham-soc-da\/">Kiến thức</i);
+  assert.match(html, /href="\/kien-thuc\/">Kiến thức</i);
   assert.match(html, /role="search"/i);
   assert.match(html, /<div class="announcement"><p>[^<]+<\/p><\/div>/i);
   assert.match(html, /class="footer-intro"/i);
   assert.match(html, /Hẹn gặp bạn trong một ngày gần nhất/i);
   assert.match(html, /Góc kiến thức/i);
-  assert.match(html, /Triệt lông: Cần chuẩn bị gì trước khi thực hiện/i);
+  assert.match(source, /Xem tất cả bài viết/i);
   assert.match(html, /Mi &amp; chân mày: Giữ đường nét tự nhiên/i);
   assert.match(html, /class="service-card service-card-skin"/i);
   assert.match(html, /Dịch vụ chủ đạo/i);
   assert.doesNotMatch(html, /class="header-cta"/i);
   assert.match(source, /aria-modal="true"/i);
   assert.match(source, /autoComplete="tel"/i);
+  assert.match(source, /name="name"[^>]*minLength=\{2\}/i);
+  assert.match(bookingSource, /name="name"[^>]*minLength=\{2\}/i);
+  assert.match(bookingSource, /getBookingErrorMessage\(response, lang\)/i);
+  assert.match(source, /pattern=\{BOOKING_PHONE_PATTERN\}/i);
+  assert.match(bookingSource, /pattern=\{BOOKING_PHONE_PATTERN\}/i);
+  assert.match(source, /min=\{minimumBookingDate\}/i);
+  assert.match(bookingSource, /min=\{minimumBookingDate\}/i);
+  assert.match(bookingValidationSource, /Asia\/Ho_Chi_Minh/i);
+  assert.match(bookingErrorSource, /response\.status === 400/i);
   assert.doesNotMatch(source, /className="hero-note"/i);
   assert.match(source, /className="review-grid"/i);
-  assert.match(source, /className="service-detail-modal"/i);
+  assert.doesNotMatch(source, /className="service-detail-modal"/i);
   assert.match(contentSource, /rest\/v1\/\$\{table\}/i);
   assert.match(dataMigration, /journal-skin-v2\.webp/i);
   assert.match(source, /className=\{`hero-video hero-video-/i);
@@ -152,9 +165,9 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.match(source, /\/video\/hero-hair-removal\.mp4/i);
   assert.match(source, /\/video\/hero-head-spa\.mp4/i);
   assert.match(source, /\/video\/hero-brow-warm\.mp4/i);
-  assert.match(source, /className="offer-modal"/i);
-  assert.match(source, /className="offer-star"/i);
-  assert.match(source, /setTimeout\(\(\) => setOfferOpen\(false\), 1800\)/i);
+  assert.doesNotMatch(source, /className="offer-modal"/i);
+  assert.doesNotMatch(source, /setOfferOpen/i);
+  assert.doesNotMatch(source, /Giảm giá 10% ngay hôm nay/i);
   assert.doesNotMatch(source, /hero-scene-label/i);
   assert.match(source, /Về chúng tôi/i);
   assert.match(dataMigration, /feature-equipment-v2\.webp/i);
@@ -185,6 +198,61 @@ test("validates booking requests before contacting Supabase", async () => {
     context,
   );
   assert.equal(invalidResponse.status, 400);
+  assert.equal((await invalidResponse.json()).code, "invalid_details");
+
+  const invalidPhoneResponse = await worker.fetch(
+    new Request("http://localhost/api/bookings", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        name: "Nguyễn Thảo",
+        phone: "abcdefgh",
+        service: "skin",
+        date: "2099-09-01",
+        locale: "vi",
+      }),
+    }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    context,
+  );
+  assert.equal(invalidPhoneResponse.status, 400);
+  assert.equal((await invalidPhoneResponse.json()).code, "invalid_phone");
+
+  const pastDateResponse = await worker.fetch(
+    new Request("http://localhost/api/bookings", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        name: "Nguyễn Thảo",
+        phone: "0901234567",
+        service: "skin",
+        date: "2020-01-01",
+        locale: "vi",
+      }),
+    }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    context,
+  );
+  assert.equal(pastDateResponse.status, 400);
+  assert.equal((await pastDateResponse.json()).code, "invalid_date");
+
+  const impossibleDateResponse = await worker.fetch(
+    new Request("http://localhost/api/bookings", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        name: "Nguyễn Thảo",
+        phone: "+84 901 234 567",
+        service: "skin",
+        date: "2099-02-30",
+        locale: "vi",
+      }),
+    }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    context,
+  );
+  assert.equal(impossibleDateResponse.status, 400);
+  assert.equal((await impossibleDateResponse.json()).code, "invalid_date");
 
   const unconfiguredResponse = await worker.fetch(
     new Request("http://localhost/api/bookings", {
@@ -194,7 +262,7 @@ test("validates booking requests before contacting Supabase", async () => {
         name: "Nguyễn Thảo",
         phone: "0901234567",
         service: "skin",
-        date: "2026-09-01",
+        date: "2099-09-01",
         locale: "vi",
       }),
     }),
@@ -234,7 +302,7 @@ test("validates booking requests before contacting Supabase", async () => {
           name: "Nguyễn Thảo",
           phone: "0901234567",
           service: "skin",
-          date: "2026-09-01",
+          date: "2099-09-01",
           locale: "vi",
         }),
       }),
@@ -246,7 +314,7 @@ test("validates booking requests before contacting Supabase", async () => {
       full_name: "Nguyễn Thảo",
       phone: "0901234567",
       service_slug: "skin",
-      preferred_date: "2026-09-01",
+      preferred_date: "2099-09-01",
       locale: "vi",
       source: "hato-website",
     });
@@ -257,4 +325,27 @@ test("validates booking requests before contacting Supabase", async () => {
     if (originalSecret === undefined) delete process.env.SUPABASE_SECRET_KEY;
     else process.env.SUPABASE_SECRET_KEY = originalSecret;
   }
+});
+
+test("explains booking validation errors in both languages", async () => {
+  const moduleUrl = new URL("../app/booking-errors.ts", import.meta.url);
+  moduleUrl.searchParams.set("booking-errors-test", `${process.pid}-${Date.now()}`);
+  const { getBookingErrorMessage } = await import(moduleUrl.href);
+
+  assert.match(
+    await getBookingErrorMessage(Response.json({ code: "invalid_phone" }, { status: 400 }), "vi"),
+    /8–15 chữ số/,
+  );
+  assert.match(
+    await getBookingErrorMessage(Response.json({ code: "invalid_phone" }, { status: 400 }), "en"),
+    /8–15 digits/,
+  );
+  assert.match(
+    await getBookingErrorMessage(Response.json({ code: "invalid_date" }, { status: 400 }), "vi"),
+    /hôm nay hoặc một ngày trong tương lai/,
+  );
+  assert.match(
+    await getBookingErrorMessage(Response.json({ code: "invalid_date" }, { status: 400 }), "en"),
+    /today or a future date/,
+  );
 });

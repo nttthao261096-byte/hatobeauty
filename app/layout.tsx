@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+import { LanguageSync } from "./LanguageSync";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,5 +29,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="vi"><body>{children}</body></html>;
+  return <html lang="vi" suppressHydrationWarning><body>
+    <Script id="sync-document-language" strategy="beforeInteractive">{`document.documentElement.lang=location.pathname.startsWith('/en')?'en':'vi'`}</Script>
+    <LanguageSync />
+    {children}
+  </body></html>;
 }

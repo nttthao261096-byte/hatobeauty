@@ -1,3 +1,5 @@
+import { seoServices } from "./seo-data";
+
 export type Lang = "vi" | "en";
 export type Category = "all" | "care" | "relax" | "shape" | "smooth" | "body";
 
@@ -101,6 +103,49 @@ async function fetchRows(baseUrl: string, apiKey: string, table: string): Promis
   return (await response.json()) as JsonRow[];
 }
 
+function fallbackHomeContent(): HomeContent {
+  const categories: Record<string, ServiceContent["category"]> = { skin: "care", scalp: "relax", body: "body", "brow-lash": "shape", "hair-removal": "smooth" };
+  const services = seoServices.map((service, index) => ({
+    id: service.id,
+    category: categories[service.id],
+    number: String(index + 1).padStart(2, "0"),
+    image: service.image,
+    vi: { title: service.vi.name, summary: service.vi.title, description: service.vi.description, suitable: service.vi.suitable },
+    en: { title: service.en.name, summary: service.en.title, description: service.en.description, suitable: service.en.suitable },
+  }));
+  const serviceDetails = Object.fromEntries(seoServices.map((service) => [service.id, {
+    price: service.id === "skin" ? "450.000 – 1.200.000đ" : service.id === "hair-removal" ? "250.000 – 1.500.000đ/vùng" : "Tư vấn theo nhu cầu",
+    duration: service.id === "hair-removal" ? "20 – 60 phút" : "45 – 90 phút",
+    plan: "Cá nhân hóa sau tư vấn",
+    vi: ["Trao đổi nhu cầu", ...service.vi.preparation.slice(0, 2), "Thực hiện và hướng dẫn chăm sóc"],
+    en: ["Discuss your needs", ...service.en.preparation.slice(0, 2), "Care and aftercare guidance"],
+  }]));
+  const journalArticles: JournalArticleContent[] = [
+    { number: "01", image: "/images/journal-skin-v2.webp", vi: { title: "Chăm sóc da: Làm sạch sâu hay ưu tiên phục hồi?", readingTime: "3 phút đọc" }, en: { title: "Skin: Deep cleansing or recovery first?", readingTime: "3 min read" } },
+    { number: "02", image: "/images/journal-scalp-v2.webp", vi: { title: "Gội đầu dưỡng sinh: Vì sao da đầu và vai gáy nên thả lỏng cùng nhau?", readingTime: "4 phút đọc" }, en: { title: "Head Spa: Why should the scalp, neck and shoulders unwind together?", readingTime: "4 min read" } },
+    { number: "03", image: "/images/journal-body-v2.webp", vi: { title: "Chăm sóc cơ thể: Khi nào là lúc phù hợp để làm mới bề mặt da?", readingTime: "4 phút đọc" }, en: { title: "Body: When is the right time to refresh your skin?", readingTime: "4 min read" } },
+    { number: "04", image: "/images/journal-brow-v2.webp", vi: { title: "Mi & chân mày: Giữ đường nét tự nhiên bằng cách nào?", readingTime: "3 phút đọc" }, en: { title: "Brow & Lash: How do you keep the result naturally yours?", readingTime: "3 min read" } },
+    { number: "05", image: "/images/journal-technology-v2.webp", vi: { title: "Triệt lông: Cần chuẩn bị gì trước khi thực hiện?", readingTime: "3 phút đọc" }, en: { title: "Hair Removal: How should you prepare?", readingTime: "3 min read" } },
+  ];
+  return {
+    services,
+    serviceDetails,
+    highlights: [
+      { number: "01", image: "/images/feature-equipment-v2.webp", vi: ["Công nghệ phù hợp", "Thiết bị được lựa chọn theo nhu cầu thật, không chạy theo lời hứa quá mức."], en: ["Suitable technology", "Technology chosen around real needs, without inflated promises."] },
+      { number: "02", image: "/images/feature-space-v2.webp", vi: ["Không gian dễ chịu", "Một nhịp chăm sóc riêng tư, sạch sẽ và đủ chậm để bạn thư giãn."], en: ["A calming space", "A private, clean and unhurried rhythm of care."] },
+      { number: "03", image: "/images/feature-personalized-v2.webp", vi: ["Thông tin minh bạch", "Quy trình, chi phí và kỳ vọng được trao đổi trước khi bắt đầu."], en: ["Clear information", "Process, price and expectations are discussed before care begins."] },
+      { number: "04", image: "/images/feature-team-v2.webp", vi: ["Lắng nghe cẩn trọng", "Đội ngũ bắt đầu từ câu hỏi và điều chỉnh theo cảm nhận của bạn."], en: ["Careful listening", "The team starts with questions and adapts to your comfort."] },
+    ],
+    results: [
+      { image: "/images/result-skin-v2.webp", vi: ["Làn da đủ ẩm", "Bề mặt da mềm mại và dễ chịu hơn sau chăm sóc.", "Chăm sóc da"], en: ["Replenished skin", "A softer, more comfortable surface after care.", "Skin"] },
+      { image: "/images/result-brow-lash-v2.webp", vi: ["Đường nét tự nhiên", "Mi và chân mày được định hình hài hòa với gương mặt.", "Mi & chân mày"], en: ["Natural definition", "Lashes and brows shaped around your face.", "Brow & Lash"] },
+      { image: "/images/result-body-v2.webp", vi: ["Cảm giác nhẹ nhàng", "Chăm sóc cơ thể hướng đến bề mặt sạch và mềm hơn.", "Cơ thể"], en: ["A lighter feeling", "Body care for a cleaner, softer-feeling surface.", "Body"] },
+    ],
+    testimonials: Array.from({ length: 8 }, (_, index) => ({ initials: `H${index + 1}`, name: { vi: `Khách hàng ${index + 1}`, en: `Guest ${index + 1}` }, quote: { vi: "Không gian ấm áp, đội ngũ lắng nghe kỹ và giải thích rõ từng bước trước khi thực hiện.", en: "A warm space, attentive team and a clear explanation before every step." } })),
+    journalArticles,
+  };
+}
+
 export async function loadHomeContent(): Promise<HomeContent> {
   const baseUrl = (process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL)?.replace(/\/$/, "");
   const apiKey =
@@ -109,16 +154,20 @@ export async function loadHomeContent(): Promise<HomeContent> {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
     process.env.SUPABASE_SECRET_KEY;
 
-  if (!baseUrl || !apiKey) {
-    throw new Error("Supabase public content environment is not configured.");
-  }
+  if (!baseUrl || !apiKey) return fallbackHomeContent();
 
-  const [serviceRows, highlightRows, resultRows, testimonialRows] = await Promise.all([
-    fetchRows(baseUrl, apiKey, "services"),
-    fetchRows(baseUrl, apiKey, "highlights"),
-    fetchRows(baseUrl, apiKey, "results"),
-    fetchRows(baseUrl, apiKey, "testimonials"),
-  ]);
+  let serviceRows: JsonRow[]; let highlightRows: JsonRow[]; let resultRows: JsonRow[]; let testimonialRows: JsonRow[];
+  try {
+    [serviceRows, highlightRows, resultRows, testimonialRows] = await Promise.all([
+      fetchRows(baseUrl, apiKey, "services"),
+      fetchRows(baseUrl, apiKey, "highlights"),
+      fetchRows(baseUrl, apiKey, "results"),
+      fetchRows(baseUrl, apiKey, "testimonials"),
+    ]);
+  } catch (error) {
+    console.error("Falling back to bundled homepage content.", error);
+    return fallbackHomeContent();
+  }
 
   const serviceOrder = ["skin", "scalp", "body", "brow-lash", "hair-removal"];
   const services = serviceRows.map((row) => ({
