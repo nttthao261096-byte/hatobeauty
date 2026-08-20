@@ -82,7 +82,8 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
-  assert.match(html, /<html lang="vi">/i);
+  assert.match(html, /<html lang="vi"[^>]*>/i);
+  assert.match(html, /data-scroll-behavior="smooth"/i);
   assert.match(html, /hato Beauty Đà Nẵng \| Skin, Head Spa, Body &amp; Beauty Care/);
   assert.match(html, /Triệt lông &amp; làm sạch lông bằng sáp/i);
   assert.doesNotMatch(html, /Waxing dịu nhẹ/i);

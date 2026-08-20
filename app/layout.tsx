@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="vi" suppressHydrationWarning><body>
+  return <html lang="vi" data-scroll-behavior="smooth" suppressHydrationWarning><body>
     <Script id="sync-document-language" strategy="beforeInteractive">{`document.documentElement.lang=location.pathname.startsWith('/en')?'en':'vi'`}</Script>
     <LanguageSync />
     {children}

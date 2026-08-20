@@ -51,7 +51,7 @@ export function ServiceIndex({ lang }: { lang: SeoLang }) {
   return <div className="seo-page" lang={lang}><SeoHeader lang={lang} /><main className="index-page">
     <header className="index-hero"><p className="seo-eyebrow">{lang === "vi" ? "KHÁM PHÁ DỊCH VỤ" : "EXPLORE SERVICES"}</p><h1>{title}</h1><p>{intro}</p></header>
     <section className="index-grid service-index-grid" aria-label={title}>{seoServices.map((service, index) => <Link className="index-card" href={servicePath(service, lang)} key={service.id}>
-      <div className="index-card-image"><Image src={service.image} alt={service[lang].name} fill sizes="(max-width: 760px) 100vw, 50vw" /></div>
+      <div className="index-card-image"><Image src={service.image} alt={service[lang].name} fill priority={index === 0} sizes="(max-width: 760px) 100vw, 50vw" /></div>
       <div className="index-card-copy"><span>{String(index + 1).padStart(2, "0")}</span><p>{service[lang].description}</p><h2>{service[lang].name}</h2><strong>{lang === "vi" ? "Xem dịch vụ" : "View service"} ↗</strong></div>
     </Link>)}</section>
   </main><SeoFooter lang={lang} /></div>;
