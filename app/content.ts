@@ -1,4 +1,4 @@
-import { seoServices } from "./seo-data";
+import { mediaUrl, seoServices } from "./seo-data";
 
 export type Lang = "vi" | "en";
 export type Category = "all" | "care" | "relax" | "shape" | "smooth" | "body";
@@ -75,6 +75,17 @@ function lowercaseHato(value: string): string {
   return value.replace(/hato/gi, "hato");
 }
 
+function withMediaOrigin(content: HomeContent): HomeContent {
+  const resolve = (path: string) => path.startsWith("/") ? mediaUrl(path) : path;
+  return {
+    ...content,
+    services: content.services.map((item) => ({ ...item, image: resolve(item.image) })),
+    highlights: content.highlights.map((item) => ({ ...item, image: resolve(item.image) })),
+    results: content.results.map((item) => ({ ...item, image: resolve(item.image) })),
+    journalArticles: content.journalArticles.map((item) => ({ ...item, image: resolve(item.image) })),
+  };
+}
+
 function textArray(value: unknown): string[] {
   return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string").map(lowercaseHato) : [];
 }
@@ -127,7 +138,7 @@ function fallbackHomeContent(): HomeContent {
     { number: "04", image: "/images/journal-brow-v2.webp", vi: { title: "Mi & chân mày: Giữ đường nét tự nhiên bằng cách nào?", readingTime: "3 phút đọc" }, en: { title: "Brow & Lash: How do you keep the result naturally yours?", readingTime: "3 min read" } },
     { number: "05", image: "/images/journal-technology-v2.webp", vi: { title: "Triệt lông: Cần chuẩn bị gì trước khi thực hiện?", readingTime: "3 phút đọc" }, en: { title: "Hair Removal: How should you prepare?", readingTime: "3 min read" } },
   ];
-  return {
+  return withMediaOrigin({
     services,
     serviceDetails,
     highlights: [
@@ -143,7 +154,7 @@ function fallbackHomeContent(): HomeContent {
     ],
     testimonials: Array.from({ length: 8 }, (_, index) => ({ initials: `H${index + 1}`, name: { vi: `Khách hàng ${index + 1}`, en: `Guest ${index + 1}` }, quote: { vi: "Không gian ấm áp, đội ngũ lắng nghe kỹ và giải thích rõ từng bước trước khi thực hiện.", en: "A warm space, attentive team and a clear explanation before every step." } })),
     journalArticles,
-  };
+  });
 }
 
 export async function loadHomeContent(): Promise<HomeContent> {
@@ -248,7 +259,7 @@ export async function loadHomeContent(): Promise<HomeContent> {
     "04": { number: "05", image: "/images/journal-technology-v2.webp", vi: { title: "Triệt lông: Cần chuẩn bị gì trước khi thực hiện?", readingTime: "3 phút đọc" }, en: { title: "Hair Removal: How should you prepare for technology or waxing?", readingTime: "3 min read" } },
   };
 
-  return {
+  return withMediaOrigin({
     services,
     serviceDetails,
     highlights: highlightRows.map((row) => ({
@@ -274,5 +285,5 @@ export async function loadHomeContent(): Promise<HomeContent> {
       };
     }),
     journalArticles: journalOrder.map((number) => journalOverrides[number]),
-  };
+  });
 }

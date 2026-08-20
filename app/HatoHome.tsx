@@ -8,7 +8,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import type { Category, HomeContent, Lang } from "./content";
 import { getBookingErrorMessage } from "./booking-errors";
 import { BOOKING_PHONE_PATTERN, getMinimumBookingDate } from "./booking-validation";
-import { journalPath, seoServices, servicePath } from "./seo-data";
+import { journalPath, mediaUrl, seoServices, servicePath } from "./seo-data";
 
 function brandText(text: string): ReactNode {
   return text.split(/(hato)/gi).map((part, index) =>
@@ -176,7 +176,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       <div className="announcement"><p>{brandText(t.announcement)}</p></div>
 
       <header className="site-header">
-        <a className="brand" href={lang === "vi" ? "/" : "/en/"} aria-label="hato Beauty"><Image src="/brand/hato-logo-transparent-v3.png" alt="hato Beauty" width={1016} height={638} priority unoptimized /></a>
+        <a className="brand" href={lang === "vi" ? "/" : "/en/"} aria-label="hato Beauty"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} priority unoptimized /></a>
         <nav className={menuOpen ? "nav is-open" : "nav"} aria-label={lang === "vi" ? "Điều hướng chính" : "Main navigation"}>
           {navItems.map(([href, label]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
           <form className="nav-search" role="search" onSubmit={(event) => { event.preventDefault(); setMenuOpen(false); document.querySelector("#services")?.scrollIntoView(); }}>
@@ -193,11 +193,11 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       <section className="hero" id="top">
         <div className="hero-media" aria-label={lang === "vi" ? "Chuỗi trải nghiệm chăm sóc tại hato Beauty" : "A sequence of care experiences at hato Beauty"}>
           {[
-            ["/video/hero-head-spa.mp4", "Gội đầu dưỡng sinh", "Head spa"],
-            ["/video/hero-hair-removal.mp4", "Triệt lông", "Hair removal"],
-            ["/video/hero-brow-warm.mp4", "Uốn mi & định hình mày", "Lash & brow"],
-            ["/video/hero-care-beige-clinic.mp4", "Chăm sóc da", "Facial care"],
-          ].map((scene, index) => <video className={`hero-video hero-video-${index + 1}`} autoPlay loop muted playsInline preload={index === 0 ? "metadata" : "none"} poster={index === 0 ? "/images/service-hair-v2.webp" : undefined} aria-hidden="true" key={scene[0]}><source src={scene[0]} type="video/mp4" /></video>)}
+            [mediaUrl("/video/hero-head-spa.mp4"), "Gội đầu dưỡng sinh", "Head spa"],
+            [mediaUrl("/video/hero-hair-removal.mp4"), "Triệt lông", "Hair removal"],
+            [mediaUrl("/video/hero-brow-warm.mp4"), "Uốn mi & định hình mày", "Lash & brow"],
+            [mediaUrl("/video/hero-care-beige-clinic.mp4"), "Chăm sóc da", "Facial care"],
+          ].map((scene, index) => <video className={`hero-video hero-video-${index + 1}`} autoPlay loop muted playsInline preload={index === 0 ? "metadata" : "none"} poster={index === 0 ? mediaUrl("/images/service-hair-v2.webp") : undefined} aria-hidden="true" key={scene[0]}><source src={scene[0]} type="video/mp4" /></video>)}
         </div>
         <div className="hero-overlay" />
         <div className="hero-copy">
@@ -262,7 +262,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       <footer className="site-footer">
         <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />
         <div className="footer-intro"><p>{lang === "vi" ? "hato Beauty · Không gian làm đẹp" : "hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
-        <div className="footer-brand"><Image src="/brand/hato-logo-transparent-v3.png" alt="hato Beauty" width={1016} height={638} unoptimized /></div>
+        <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} unoptimized /></div>
         <div className="footer-links"><h3>{lang === "vi" ? "Khám phá" : "Discover"}</h3>{navItems.slice(0, 4).map(([href, label], index) => <a href={href} key={href}><span>0{index + 1}</span>{label}</a>)}</div>
         <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><p>{lang === "vi" ? "Thời gian và địa điểm được xác nhận trực tiếp cùng lịch hẹn." : "Time and location are confirmed directly with your appointment."}</p><button onClick={openBooking}>{t.book}<span>↗</span></button></div>
         <div className="footer-bottom"><span>© 2026 hato Beauty</span><div><a href="#top">{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</a><a href="/chinh-sach-bien-tap/">{lang === "vi" ? "Biên tập" : "Editorial"}</a><a href="/chinh-sach-bao-mat/">{lang === "vi" ? "Bảo mật" : "Privacy"}</a></div></div>
