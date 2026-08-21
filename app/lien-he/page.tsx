@@ -1,0 +1,2 @@
+import type { Metadata } from "next"; import { TrustPage } from "../seo-pages";
+export const metadata:Metadata={title:"Liên hệ hato Beauty",description:"Gửi yêu cầu để hato Beauty trao đổi nhu cầu và xác nhận lịch chăm sóc.",alternates:{canonical:"/lien-he/",languages:{"vi-VN":"/lien-he/",en:"/en/contact/","x-default":"/lien-he/"}}}; export default function Page(){return <TrustPage lang="vi" kind="contact"/>}

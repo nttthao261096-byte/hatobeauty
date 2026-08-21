@@ -1,0 +1,2 @@
+import type { Metadata } from "next"; import { TrustPage } from "../../seo-pages";
+export const metadata:Metadata={title:"Contact hato Beauty",description:"Contact hato Beauty to discuss your needs and confirm an appointment.",alternates:{canonical:"/en/contact/",languages:{"vi-VN":"/lien-he/",en:"/en/contact/","x-default":"/lien-he/"}}}; export default function Page(){return <TrustPage lang="en" kind="contact"/>}
