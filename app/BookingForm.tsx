@@ -4,11 +4,12 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 import { getBookingErrorMessage } from "./booking-errors";
-import { BOOKING_PHONE_PATTERN, getMinimumBookingDate } from "./booking-validation";
+import { BOOKING_PHONE_PATTERN } from "./booking-validation";
 import { seoServices, type SeoLang } from "./seo-data";
+import { useMinimumBookingDate } from "./use-minimum-booking-date";
 
 export function BookingForm({ lang }: { lang: SeoLang }) {
-  const minimumBookingDate = getMinimumBookingDate();
+  const minimumBookingDate = useMinimumBookingDate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -67,7 +68,7 @@ export function BookingForm({ lang }: { lang: SeoLang }) {
       <label>{lang === "vi" ? "Dịch vụ quan tâm" : "Service of interest"}<select name="service" defaultValue="" required><option value="" disabled>{lang === "vi" ? "Chọn một dịch vụ" : "Choose a service"}</option>{seoServices.map(service => <option value={service.id} key={service.id}>{service[lang].name}</option>)}</select></label>
       <label>{lang === "vi" ? "Ngày mong muốn" : "Preferred date"}<input name="date" type="date" min={minimumBookingDate} required /></label>
     </div>
-    <p className="booking-consent">{lang === "vi" ? "Khi gửi yêu cầu, bạn đồng ý để hato liên hệ về lịch hẹn này theo " : "By sending this request, you agree that hato may contact you about this appointment under the "}<Link href="/chinh-sach-bao-mat/">{lang === "vi" ? "chính sách bảo mật" : "privacy policy"}</Link>.</p>
+    <p className="booking-consent">{lang === "vi" ? "Khi gửi yêu cầu, bạn đồng ý để hato liên hệ về lịch hẹn này theo " : "By sending this request, you agree that hato may contact you about this appointment under the "}<Link href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "chính sách bảo mật" : "privacy policy"}</Link>.</p>
     {error && <p className="booking-error" role="alert">{error}</p>}
     <button className="seo-cta" type="submit" disabled={isSubmitting}>{isSubmitting ? (lang === "vi" ? "Đang gửi..." : "Sending...") : (lang === "vi" ? "Gửi yêu cầu đặt lịch" : "Send booking request")} <span>↗</span></button>
   </form>;

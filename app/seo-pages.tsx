@@ -4,6 +4,7 @@ import Link from "next/link";
 import { BookingForm } from "./BookingForm";
 import { journalPath, journalTopics, seoServices, servicePath, siteUrl, type SeoLang, type SeoService } from "./seo-data";
 
+import { journalIntentFaqs, serviceIntentFaqs } from "./seo-faq-data";
 const facts: Record<SeoService["id"], { vi: [string, string]; en: [string, string] }> = {
   skin: { vi: ["450.000 – 1.200.000đ", "60 – 90 phút"], en: ["VND 450,000 – 1,200,000", "60 – 90 minutes"] },
   scalp: { vi: ["180.000 – 450.000đ", "45 – 75 phút"], en: ["VND 180,000 – 450,000", "45 – 75 minutes"] },
@@ -37,7 +38,7 @@ export function SeoFooter({ lang }: { lang: SeoLang }) {
     <nav aria-label={lang === "vi" ? "Liên kết chân trang" : "Footer links"}>
       <Link href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{lang === "vi" ? "Đặt lịch" : "Book"}</Link>
       <Link href={lang === "vi" ? "/bang-gia/" : "/en/prices/"}>{lang === "vi" ? "Bảng giá" : "Prices"}</Link>
-      <Link href="/chinh-sach-bao-mat/">{lang === "vi" ? "Bảo mật" : "Privacy"}</Link>
+      <Link href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</Link>
     </nav>
   </footer>;
 }
@@ -81,23 +82,24 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
   const [price, duration] = facts[service.id][lang];
   const path = servicePath(service, lang);
   const pairedPath = servicePath(service, lang === "vi" ? "en" : "vi");
+  const faqs = [...c.faq, ...serviceIntentFaqs[service.id][lang]];
   const schema = {
     "@context": "https://schema.org", "@graph": [
       { "@type": "WebPage", "@id": `${siteUrl}${path}#webpage`, url: `${siteUrl}${path}`, name: c.title, inLanguage: lang === "vi" ? "vi-VN" : "en", isPartOf: { "@id": `${siteUrl}/#website` } },
-      { "@type": "Service", "@id": `${siteUrl}${path}#service`, name: c.name, description: c.description, image: `${siteUrl}${service.image}`, areaServed: { "@type": "City", name: "Da Nang" }, provider: { "@id": `${siteUrl}/#organization` }, offers: { "@type": "Offer", priceCurrency: "VND", description: `${price} · ${duration}`, url: `${siteUrl}${path}` } },
+      { "@type": "Service", "@id": `${siteUrl}${path}#service`, name: c.name, description: c.description, image: service.image, areaServed: { "@type": "City", name: "Da Nang" }, provider: { "@id": `${siteUrl}/#organization` }, offers: { "@type": "Offer", priceCurrency: "VND", description: `${price} · ${duration}`, url: `${siteUrl}${path}` } },
       { "@type": "BreadcrumbList", itemListElement: [
         { "@type": "ListItem", position: 1, name: lang === "vi" ? "Trang chủ" : "Home", item: `${siteUrl}${lang === "vi" ? "/" : "/en/"}` },
         { "@type": "ListItem", position: 2, name: lang === "vi" ? "Dịch vụ" : "Services" },
         { "@type": "ListItem", position: 3, name: c.name, item: `${siteUrl}${path}` },
       ] },
-      { "@type": "FAQPage", mainEntity: c.faq.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) },
+      { "@type": "FAQPage", mainEntity: faqs.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) },
     ],
   };
   return <div className="seo-page" lang={lang}><JsonLd data={schema} /><SeoHeader lang={lang} />
     <main>
       <section className="seo-hero"><div><p className="seo-eyebrow">{lang === "vi" ? "DỊCH VỤ · ĐÀ NẴNG" : "SERVICE · DA NANG"}</p><h1>{c.title}</h1><p className="seo-answer">{c.answer}</p><div className="seo-facts"><span><small>{lang === "vi" ? "Giá tham khảo" : "Guide price"}</small>{price}</span><span><small>{lang === "vi" ? "Thời lượng" : "Duration"}</small>{duration}</span></div><Link className="seo-cta" href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"} ↗</Link></div><div className="seo-hero-image"><Image src={service.image} alt={`${c.name} tại hato Beauty`} fill priority sizes="(max-width: 800px) 100vw, 45vw" /></div></section>
       <section className="seo-content"><article><h2>{lang === "vi" ? "Dịch vụ này phù hợp với ai?" : "Who is this service for?"}</h2><p>{c.suitable}</p><h2>{lang === "vi" ? "Trước buổi hẹn" : "Before your visit"}</h2><ul>{c.preparation.map(x => <li key={x}>{x}</li>)}</ul><h2>{lang === "vi" ? "Sau buổi chăm sóc" : "Aftercare"}</h2><ul>{c.aftercare.map(x => <li key={x}>{x}</li>)}</ul></article><aside><h2>{lang === "vi" ? "Lưu ý an toàn" : "Safety note"}</h2><p>{c.caution}</p><h2>{lang === "vi" ? "Kỳ vọng thực tế" : "Realistic expectations"}</h2><p>{c.expectations}</p></aside></section>
-      <section className="seo-faq"><p className="seo-eyebrow">FAQ</p><h2>{lang === "vi" ? "Câu hỏi thường gặp" : "Frequently asked questions"}</h2>{c.faq.map(([q, a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
+      <section className="seo-faq"><p className="seo-eyebrow">FAQ</p><h2>{lang === "vi" ? "Câu hỏi thường gặp" : "Frequently asked questions"}</h2>{faqs.map(([q, a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
       <section className="seo-related"><h2>{lang === "vi" ? "Khám phá thêm" : "Explore more"}</h2><div>{seoServices.filter(x => x.id !== service.id).map(x => <Link href={servicePath(x, lang)} key={x.id}>{x[lang].name}<span>↗</span></Link>)}</div><p><Link href={journalPath(service, lang)}>{lang === "vi" ? "Đọc kiến thức liên quan" : "Read the related care guide"} →</Link> · <Link href={pairedPath} hrefLang={lang === "vi" ? "en" : "vi-VN"}>{lang === "vi" ? "Read in English" : "Đọc tiếng Việt"}</Link></p></section>
     </main><SeoFooter lang={lang} /></div>;
 }
@@ -105,7 +107,8 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
 export function JournalLanding({ service, lang }: { service: SeoService; lang: SeoLang }) {
   const c = service[lang]; const path = journalPath(service, lang);
   const title = lang === "vi" ? `${c.name}: hướng dẫn chuẩn bị và chăm sóc` : `${c.name}: preparation and aftercare guide`;
-  const schema = { "@context": "https://schema.org", "@type": "Article", headline: title, description: c.description, image: `${siteUrl}${service.image}`, dateModified: "2026-08-18", inLanguage: lang === "vi" ? "vi-VN" : "en", author: { "@id": `${siteUrl}/#organization` }, publisher: { "@id": `${siteUrl}/#organization` }, mainEntityOfPage: `${siteUrl}${path}` };
+  const faqs = journalIntentFaqs[service.id][lang];
+  const schema = { "@context": "https://schema.org", "@type": "Article", headline: title, description: c.description, image: service.image, dateModified: "2026-08-21", inLanguage: lang === "vi" ? "vi-VN" : "en", author: { "@id": `${siteUrl}/#organization` }, publisher: { "@id": `${siteUrl}/#organization` }, mainEntityOfPage: `${siteUrl}${path}` };
   return <div className="seo-page" lang={lang}><JsonLd data={schema} /><SeoHeader lang={lang} /><main className="seo-article">
     <nav className="breadcrumbs" aria-label={lang === "vi" ? "Đường dẫn" : "Breadcrumb"}><Link href={lang === "vi" ? "/" : "/en/"}>{lang === "vi" ? "Trang chủ" : "Home"}</Link><span>/</span><Link href={lang === "vi" ? "/kien-thuc/" : "/en/journal/"}>{lang === "vi" ? "Kiến thức" : "Journal"}</Link><span>/</span><span>{c.name}</span></nav>
     <div className="article-tags"><span>{c.name}</span><span>{lang === "vi" ? "Hướng dẫn thực tế" : "Practical guide"}</span></div>
@@ -120,7 +123,7 @@ export function JournalLanding({ service, lang }: { service: SeoService; lang: S
       <h2>{lang === "vi" ? "Cần chuẩn bị gì trước buổi hẹn?" : "How should you prepare?"}</h2><ol>{c.preparation.map(x => <li key={x}>{x}</li>)}</ol>
       <h2>{lang === "vi" ? "Chăm sóc sau buổi thực hiện" : "Aftercare"}</h2><ul>{c.aftercare.map(x => <li key={x}>{x}</li>)}</ul>
       <h2>{lang === "vi" ? "An toàn và kỳ vọng thực tế" : "Safety and realistic expectations"}</h2><p>{c.caution}</p><p>{c.expectations}</p>
-      <section className="article-faq"><h2>{lang === "vi" ? "Câu hỏi thường gặp" : "Frequently asked questions"}</h2>{c.faq.map(([question, answer]) => <div key={question}><h3>{question}</h3><p>{answer}</p></div>)}</section>
+      <section className="article-faq"><h2>{lang === "vi" ? "Câu hỏi thường gặp" : "Frequently asked questions"}</h2>{faqs.map(([question, answer]) => <div key={question}><h3>{question}</h3><p>{answer}</p></div>)}</section>
       {service.id === "hair-removal" && <p className="seo-source">{lang === "vi" ? "Nguồn tham khảo y khoa:" : "Medical reference:"} <a href="https://www.aad.org/public/cosmetic/hair-removal/laser-hair-removal-preparation" rel="noopener noreferrer">American Academy of Dermatology</a>.</p>}
       <div className="article-next"><Link className="seo-cta" href={servicePath(service, lang)}>{lang === "vi" ? "Xem dịch vụ liên quan" : "View related service"} ↗</Link><Link href={lang === "vi" ? "/kien-thuc/" : "/en/journal/"}>{lang === "vi" ? "Xem tất cả bài viết" : "View all articles"} →</Link></div>
     </article>

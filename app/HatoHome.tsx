@@ -7,8 +7,9 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 
 import type { Category, HomeContent, Lang } from "./content";
 import { getBookingErrorMessage } from "./booking-errors";
-import { BOOKING_PHONE_PATTERN, getMinimumBookingDate } from "./booking-validation";
+import { BOOKING_PHONE_PATTERN } from "./booking-validation";
 import { journalPath, mediaUrl, seoServices, servicePath } from "./seo-data";
+import { useMinimumBookingDate } from "./use-minimum-booking-date";
 
 function brandText(text: string): ReactNode {
   return text.split(/(hato)/gi).map((part, index) =>
@@ -103,7 +104,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
   const [bookingError, setBookingError] = useState("");
   const dialogRef = useRef<HTMLElement>(null);
   const t = copy[lang];
-  const minimumBookingDate = getMinimumBookingDate();
+  const minimumBookingDate = useMinimumBookingDate();
   const normalizedQuery = serviceQuery.trim().toLocaleLowerCase(lang === "vi" ? "vi" : "en");
   const filteredServices = services.filter((service) => {
     const matchesCategory = category === "all" || service.category === category;
@@ -265,7 +266,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} unoptimized /></div>
         <div className="footer-links"><h3>{lang === "vi" ? "Khám phá" : "Discover"}</h3>{navItems.slice(0, 4).map(([href, label], index) => <a href={href} key={href}><span>0{index + 1}</span>{label}</a>)}</div>
         <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><p>{lang === "vi" ? "Thời gian và địa điểm được xác nhận trực tiếp cùng lịch hẹn." : "Time and location are confirmed directly with your appointment."}</p><button onClick={openBooking}>{t.book}<span>↗</span></button></div>
-        <div className="footer-bottom"><span>© 2026 hato Beauty</span><div><a href="#top">{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</a><a href="/chinh-sach-bien-tap/">{lang === "vi" ? "Biên tập" : "Editorial"}</a><a href="/chinh-sach-bao-mat/">{lang === "vi" ? "Bảo mật" : "Privacy"}</a></div></div>
+        <div className="footer-bottom"><span>© 2026 hato Beauty</span><div><a href="#top">{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</a><a href={lang === "vi" ? "/chinh-sach-bien-tap/" : "/en/editorial-policy/"}>{lang === "vi" ? "Biên tập" : "Editorial"}</a><a href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</a></div></div>
       </footer>
 
       <button className="floating-book" onClick={openBooking} aria-label={t.book}>↗<span>{t.book}</span></button>
