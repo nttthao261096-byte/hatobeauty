@@ -32,7 +32,7 @@ export default function LoginForm({ activated = false }: { activated?: boolean }
       <label>Email<input name="email" type="email" autoComplete="username" required /></label>
       <label>Mật khẩu<input name="password" type="password" autoComplete="current-password" minLength={8} required /></label>
       {activated && (
-        <p className="admin-notice" role="status">
+        <p className="admin-muted" role="status">
           Mật khẩu đã được thiết lập. Bạn có thể đăng nhập ngay.
         </p>
       )}

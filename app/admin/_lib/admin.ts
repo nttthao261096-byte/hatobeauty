@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 
 export const ADMIN_COOKIE = "hato_admin_session";
+const ADMIN_OWNER_EMAIL = "nttthao261096@gmail.com";
 
 type AdminUser = {
   id: string;
@@ -25,6 +26,24 @@ function env() {
   return { url: url.replace(/\/$/, ""), publishableKey, secretKey };
 }
 
+export async function requestOwnerMagicLink(redirectTo: string) {
+  const { url, publishableKey } = env();
+  const response = await fetch(`${url}/auth/v1/otp?redirect_to=${encodeURIComponent(redirectTo)}`, {
+    method: "POST",
+    headers: {
+      apikey: publishableKey,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: ADMIN_OWNER_EMAIL,
+      create_user: true,
+    }),
+    cache: "no-store",
+  });
+
+  return response.ok;
+}
+
 async function verifyAccessToken(token: string): Promise<AdminUser | null> {
   const { url, publishableKey } = env();
   const response = await fetch(`${url}/auth/v1/user`, {
@@ -43,7 +62,10 @@ export async function setAdminPassword(accessToken: string, password: string) {
   const user = await verifyAccessToken(accessToken);
   if (!user) return false;
 
-  const membership = await findMembership(user.id);
+  let membership = await findMembership(user.id);
+  if (!membership && user.email?.toLowerCase() === ADMIN_OWNER_EMAIL) {
+    membership = await provisionOwnerMembership(user.id);
+  }
   if (!membership) return false;
 
   const { url, publishableKey } = env();
@@ -78,6 +100,29 @@ async function findMembership(userId: string) {
   });
 
   if (!response.ok) throw new Error("Could not verify admin membership.");
+  const rows = (await response.json()) as Array<{ user_id: string; display_name: string }>;
+  return rows[0] ?? null;
+
+}
+async function provisionOwnerMembership(userId: string) {
+  const { url, secretKey } = env();
+  const response = await fetch(`${url}/rest/v1/admin_users?on_conflict=user_id`, {
+    method: "POST",
+    headers: {
+      apikey: secretKey,
+      Authorization: `Bearer ${secretKey}`,
+      "Content-Type": "application/json",
+      Prefer: "resolution=merge-duplicates,return=representation",
+    },
+    body: JSON.stringify({
+      user_id: userId,
+      display_name: "Hato Beauty",
+      is_active: true,
+    }),
+    cache: "no-store",
+  });
+
+  if (!response.ok) throw new Error("Could not provision admin membership.");
   const rows = (await response.json()) as Array<{ user_id: string; display_name: string }>;
   return rows[0] ?? null;
 }

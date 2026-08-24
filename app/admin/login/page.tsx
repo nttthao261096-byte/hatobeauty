@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getAdminSession } from "../_lib/admin";
 import LoginForm from "./login-form";
+import RequestAccessButton from "./request-access-button";
 
 export default async function AdminLoginPage({
   searchParams,
@@ -22,6 +23,7 @@ export default async function AdminLoginPage({
         <p className="admin-muted">Quản lý bài viết, khách hàng, yêu cầu liên hệ và lịch hẹn.</p>
         <LoginForm activated={activated === "1"} />
       </section>
+        <RequestAccessButton />
     </main>
   );
 }
