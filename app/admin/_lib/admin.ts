@@ -39,6 +39,28 @@ async function verifyAccessToken(token: string): Promise<AdminUser | null> {
   return (await response.json()) as AdminUser;
 }
 
+export async function setAdminPassword(accessToken: string, password: string) {
+  const user = await verifyAccessToken(accessToken);
+  if (!user) return false;
+
+  const membership = await findMembership(user.id);
+  if (!membership) return false;
+
+  const { url, publishableKey } = env();
+  const response = await fetch(`${url}/auth/v1/user`, {
+    method: "PUT",
+    headers: {
+      apikey: publishableKey,
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ password }),
+    cache: "no-store",
+  });
+
+  return response.ok;
+}
+
 async function findMembership(userId: string) {
   const { url, secretKey } = env();
   const query = new URLSearchParams({

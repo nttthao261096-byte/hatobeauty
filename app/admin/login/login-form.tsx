@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 
-export default function LoginForm() {
+export default function LoginForm({ activated = false }: { activated?: boolean }) {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
 
@@ -31,6 +31,11 @@ export default function LoginForm() {
     <form className="admin-login-form" onSubmit={submit}>
       <label>Email<input name="email" type="email" autoComplete="username" required /></label>
       <label>Mật khẩu<input name="password" type="password" autoComplete="current-password" minLength={8} required /></label>
+      {activated && (
+        <p className="admin-notice" role="status">
+          Mật khẩu đã được thiết lập. Bạn có thể đăng nhập ngay.
+        </p>
+      )}
       {error && <p className="admin-alert" role="alert">{error}</p>}
       <button className="admin-primary-button" type="submit" disabled={pending}>{pending ? "Đang đăng nhập…" : "Đăng nhập"}</button>
     </form>
