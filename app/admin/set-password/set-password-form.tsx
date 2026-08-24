@@ -17,7 +17,9 @@ export default function SetPasswordForm() {
 
       if (description) {
         setLinkError(decodeURIComponent(description.replace(/\+/g, " ")));
-      } else if (!token || (type !== "invite" && type !== "recovery")) {
+      } else if (
+        !token || !type || !["email", "invite", "magiclink", "recovery", "signup"].includes(type)
+      ) {
         setLinkError("Liên kết kích hoạt không hợp lệ hoặc đã hết hạn.");
       } else {
         setAccessToken(token);
