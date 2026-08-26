@@ -37,7 +37,7 @@ const contentFixtures = {
   ],
 };
 
-async function render() {
+async function render(pathname = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
@@ -58,7 +58,7 @@ async function render() {
 
   try {
     const response = await worker.fetch(
-      new Request("http://localhost/", { headers: { accept: "text/html" } }),
+      new Request(new URL(pathname, "http://localhost"), { headers: { accept: "text/html" } }),
       {
         ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) },
         SUPABASE_URL: contentUrl,
@@ -112,6 +112,28 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, /Chúng tôi cam kết sẽ mang đến những điều tốt nhất/i);
   assert.match(html, /TỎA SÁNG THEO CÁCH CỦA BẠN/i);
   assert.match(html, /Nhận tư vấn riêng/i);
+});
+
+test("renders valid URLs for every service breadcrumb item", async () => {
+  const cases = [
+    ["/dich-vu/cham-soc-da-chuyen-sau-da-nang", "https://hatobeauty.com/dich-vu/"],
+    ["/en/services/facial-treatment-da-nang", "https://hatobeauty.com/en/services/"],
+  ];
+
+  for (const [pathname, expectedSectionUrl] of cases) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    const jsonLdBlocks = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)]
+      .map((match) => JSON.parse(match[1]));
+    const breadcrumb = jsonLdBlocks
+      .flatMap((block) => block["@graph"] ?? [block])
+      .find((entry) => entry["@type"] === "BreadcrumbList");
+
+    assert.ok(breadcrumb, `Missing BreadcrumbList on ${pathname}`);
+    assert.equal(breadcrumb.itemListElement[1].item, expectedSectionUrl);
+    assert.ok(breadcrumb.itemListElement.every((entry) => typeof entry.item === "string" && entry.item.startsWith("https://")));
+  }
 });
 
 test("ships the new brand hierarchy and accessible booking form", async () => {
