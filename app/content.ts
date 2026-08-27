@@ -259,7 +259,8 @@ async function fetchRows(baseUrl: string, apiKey: string, table: string): Promis
 
 function fallbackHomeContent(): HomeContent {
   const categories: Record<string, ServiceContent["category"]> = { skin: "care", scalp: "relax", body: "body", "brow-lash": "shape", "hair-removal": "smooth" };
-  const services: ServiceContent[] = seoServices.map((service, index) => ({
+  const serviceOrder = ["skin", "brow-lash", "scalp", "hair-removal"];
+  const services: ServiceContent[] = seoServices.filter((service) => serviceOrder.includes(service.id)).sort((a, b) => serviceOrder.indexOf(a.id) - serviceOrder.indexOf(b.id)).map((service, index) => ({
     id: service.id,
     category: categories[service.id],
     number: String(index + 1).padStart(2, "0"),
@@ -288,7 +289,7 @@ function fallbackHomeContent(): HomeContent {
     hairRemoval.vi.title = "Triệt lông";
     hairRemoval.en.title = "Advanced hair removal";
   }
-  services.splice(4, 0, {
+  services.push({
     id: "waxing",
     category: "smooth",
     number: "05",
@@ -371,7 +372,7 @@ export async function loadHomeContent(): Promise<HomeContent> {
     return fallbackHomeContent();
   }
 
-  const serviceOrder = ["skin", "scalp", "body", "brow-lash", "waxing", "hair-removal"];
+  const serviceOrder = ["skin", "brow-lash", "scalp", "hair-removal", "waxing"];
   const services = serviceRows.map((row) => ({
     id: text(row.slug),
     category: text(row.category) as ServiceContent["category"],

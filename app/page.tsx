@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description:
     "Khám phá Skin, Head Spa, Body, Brow & Lash và Hair Removal tại hato Beauty Đà Nẵng. Thông tin dịch vụ rõ ràng, song ngữ Việt–Anh.",
   alternates: { canonical: "/", languages: { "vi-VN": "/", en: "/en/", "x-default": "/" } },
-  openGraph: { url: siteUrl, locale: "vi_VN", title: "hato Beauty Đà Nẵng | SHINE AS YOU ARE", description: "Sáu nhóm chăm sóc thẩm mỹ với thông tin rõ ràng cho khách Việt Nam và quốc tế.", images: [{ url: mediaUrl("/og-shine.png"), width: 1731, height: 909 }] },
-  twitter: { card: "summary_large_image", title: "hato Beauty Đà Nẵng | SHINE AS YOU ARE", description: "Sáu nhóm chăm sóc thẩm mỹ với thông tin rõ ràng cho khách Việt Nam và quốc tế.", images: [mediaUrl("/og-shine.png")] },
+  openGraph: { url: siteUrl, locale: "vi_VN", title: "hato Beauty Đà Nẵng | SHINE AS YOU ARE", description: "Năm nhóm dịch vụ làm đẹp với thông tin rõ ràng cho khách Việt Nam và quốc tế.", images: [{ url: mediaUrl("/og-shine.png"), width: 1731, height: 909 }] },
+  twitter: { card: "summary_large_image", title: "hato Beauty Đà Nẵng | SHINE AS YOU ARE", description: "Năm nhóm dịch vụ làm đẹp với thông tin rõ ràng cho khách Việt Nam và quốc tế.", images: [mediaUrl("/og-shine.png")] },
 };
 
 export default async function Home() {

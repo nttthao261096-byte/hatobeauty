@@ -88,10 +88,10 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, />Triệt lông</i);
   assert.match(html, />Tẩy lông</i);
   assert.match(html, /Chăm sóc da đầu &amp; Thư giãn/i);
-  assert.match(html, /06<\/span><p>nhóm dịch vụ chăm sóc/i);
+  assert.match(html, /05<\/span><p>nhóm dịch vụ chăm sóc/i);
   assert.doesNotMatch(html, />Bảng giá</i);
   assert.match(html, />Kết quả</i);
-  assert.match(html, /Chăm sóc cơ thể/i);
+  assert.doesNotMatch(html, /class="service-card service-card-body"/i);
   assert.match(html, /Tẩy tế bào chết/i);
   assert.match(html, /Định hình chân mày &amp; Uốn mi/i);
   assert.match(html, /Hãy để chúng tôi đánh thức vẻ đẹp trong bạn/i);
@@ -140,6 +140,15 @@ test("renders valid URLs for every service breadcrumb item", async () => {
   }
 });
 
+test("renders the service index in the requested five-group order", async () => {
+  const seoData = await readFile(new URL("../app/seo-data.ts", import.meta.url), "utf8");
+  const seoPages = await readFile(new URL("../app/seo-pages.tsx", import.meta.url), "utf8");
+  assert.match(seoData, /primaryServiceOrder[^=]*=\s*\["skin",\s*"brow-lash",\s*"scalp",\s*"hair-removal",\s*"waxing"\]/i);
+  assert.match(seoData, /waxing:\s*"Tẩy lông"/i);
+  assert.match(seoData, /service-waxing-v2\.webp/i);
+  assert.match(seoPages, /primarySeoServices\.map\(\(service, index\)/i);
+});
+
 test("ships the new brand hierarchy and accessible booking form", async () => {
   const response = await render();
   const html = await response.text();
@@ -153,7 +162,10 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   const styles = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(source, /Khách hàng hato Beauty/);
   assert.doesNotMatch(html, />[^<]*\b(?:Hato|HATO)\b[^<]*</);
-  assert.match(seoPagesSource, /Giá tham khảo/i);
+  assert.doesNotMatch(seoPagesSource, />Bảng giá</i);
+  assert.match(seoPagesSource, /Khoảng giá tham khảo/i);
+  assert.match(seoPagesSource, /DANH MỤC DỊCH VỤ/i);
+  assert.match(seoPagesSource, /service-care-grid/i);
   assert.match(html, /hato-logo-transparent-v3\.png/i);
   assert.doesNotMatch(html, /class="hero-manifesto"/i);
   assert.doesNotMatch(html, /class="hero-brand">hato</i);

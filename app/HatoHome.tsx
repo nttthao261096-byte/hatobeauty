@@ -31,8 +31,8 @@ const copy = {
     whyTitle: "Mọi chi tiết đều có lý do.",
     servicesEyebrow: "Dịch vụ của chúng tôi",
     servicesTitle: "Để chúng tôi giúp bạn tỏa sáng theo cách của chính mình.",
-    servicesText: "Sáu nhóm chăm sóc được sắp xếp như sáu không gian riêng, giúp bạn dễ dàng tìm đúng trải nghiệm cho làn da, cơ thể và nhịp sống của mình.",
-    categories: { all: "Tất cả", care: "Chăm sóc da", relax: "Da đầu & thư giãn", body: "Chăm sóc cơ thể", shape: "Mi & chân mày", smooth: "Triệt lông & Waxing" },
+    servicesText: "Năm nhóm dịch vụ được sắp xếp rõ ràng, giúp bạn dễ dàng tìm đúng trải nghiệm cho làn da, diện mạo và nhịp sống của mình.",
+    categories: { all: "Tất cả", care: "Chăm sóc da", shape: "Mi & Mày", relax: "Da đầu & thư giãn", smooth: "Triệt lông & Tẩy lông" },
     suitable: "Phù hợp với",
     choose: "Khám phá dịch vụ",
     experienceEyebrow: "Trải nghiệm dành cho bạn",
@@ -59,8 +59,8 @@ const copy = {
     heroText: "Because everyone has a beauty of their own. Here, we listen, understand and shape every experience around your skin, your needs and the rhythm of your life.",
     explore: "Explore services", learn: "Discover us",
     whyEyebrow: "Why choose us", whyTitle: "Every detail has a purpose.",
-    servicesEyebrow: "Our services", servicesTitle: "Six care worlds. One place to feel like yourself.", servicesText: "Six care worlds arranged as a living gallery, so every local and international guest can understand the experience before booking.",
-    categories: { all: "All", care: "Skin", relax: "Scalp & Relaxation", body: "Body", shape: "Brow & Lash", smooth: "Hair Removal & Waxing" },
+    servicesEyebrow: "Our services", servicesTitle: "Five care worlds. One place to feel like yourself.", servicesText: "Five service groups arranged clearly, so every local and international guest can understand the experience before booking.",
+    categories: { all: "All", care: "Skin", shape: "Brow & Lash", relax: "Scalp & Relaxation", smooth: "Hair Removal & Waxing" },
     suitable: "Best suited for", choose: "Choose this service",
     experienceEyebrow: "Your experience", experienceTitle: "Modern in technique, gentle in every touch.",
     resultEyebrow: "Client results", resultTitle: "Become the most beautiful version of yourself.", resultNote: "Individual results vary according to your starting point and personal care plan.",
@@ -214,11 +214,11 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
           <h1>{t.heroTitle}</h1>
           <p className="hero-lead">{lang === "vi" ? "Hiệu quả đến từ sự thấu hiểu: công nghệ phù hợp, chuyên môn cẩn trọng và một lộ trình được thiết kế theo nhu cầu thật của bạn." : "Results begin with understanding: considered technology, careful expertise and a plan shaped around what you truly need."}</p>
           <div className="hero-actions"><a className="button primary" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{t.explore}<span>↗</span></a><a className="text-link" href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{t.book}<span>↗</span></a></div>
-          <div className="hero-proof"><span>06</span><p>{lang === "vi" ? "nhóm dịch vụ chăm sóc" : "care service groups"}</p><span>VI · EN</span><p>{lang === "vi" ? "tư vấn rõ ràng, dễ tiếp cận" : "clear, accessible guidance"}</p></div>
+          <div className="hero-proof"><span>05</span><p>{lang === "vi" ? "nhóm dịch vụ chăm sóc" : "care service groups"}</p><span>VI · EN</span><p>{lang === "vi" ? "tư vấn rõ ràng, dễ tiếp cận" : "clear, accessible guidance"}</p></div>
         </div>
       </section>
 
-      <div className="service-ribbon" aria-label={lang === "vi" ? "Sáu nhóm dịch vụ" : "Six service groups"}><div>{(["skin", "scalp", "body", "brow-lash", "waxing", "hair-removal", "skin"] as const).map((id, index) => <Link className="ribbon-item" href={id === "waxing" ? (lang === "vi" ? "/dich-vu/" : "/en/services/") : servicePath(seoServices.find(service => service.id === id) ?? seoServices[0], lang)} key={`${id}-${index}`}><span>{serviceGroupLabels[lang][id]}</span><i>✦</i></Link>)}</div></div>
+      <div className="service-ribbon" aria-label={lang === "vi" ? "Năm nhóm dịch vụ" : "Five service groups"}><div>{(["skin", "brow-lash", "scalp", "hair-removal", "waxing", "skin"] as const).map((id, index) => <Link className="ribbon-item" href={id === "waxing" ? (lang === "vi" ? "/dich-vu/" : "/en/services/") : servicePath(seoServices.find(service => service.id === id) ?? seoServices[0], lang)} key={`${id}-${index}`}><span>{serviceGroupLabels[lang][id]}</span><i>✦</i></Link>)}</div></div>
 
       <section className="why section" id="about">
         <div className="section-heading"><p className="eyebrow">{t.whyEyebrow}</p><h2>{t.whyTitle}</h2><div className="section-heading-side"><p>{lang === "vi" ? "Chúng tôi xây dựng trải nghiệm làm đẹp từ những điều cụ thể: công nghệ phù hợp, không gian dễ chịu, dịch vụ minh bạch và đội ngũ có chuyên môn." : "We build every beauty experience around concrete values: suitable technology, a calming space, clear services and a capable team."}</p><Link className="section-route-link" href={lang === "vi" ? "/ve-hato-beauty/" : "/en/about/"}>{lang === "vi" ? "Về hato Beauty" : "About hato Beauty"}<span>↗</span></Link></div></div>
@@ -246,7 +246,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
 
       <section className="knowledge section" id="knowledge">
         <span className="knowledge-orbit" aria-hidden="true" />
-        <div className="knowledge-heading"><div><p className="eyebrow">{lang === "vi" ? "Góc kiến thức · 04 bài nổi bật" : "The journal · 04 featured notes"}</p><h2>{lang === "vi" ? "Hiểu đúng để mỗi lựa chọn chăm sóc đều nhẹ nhàng hơn." : "A little knowledge makes every care choice feel easier."}</h2></div><p>{lang === "vi" ? "Bốn bài nổi bật trên trang chủ và thư viện đầy đủ cho sáu nhóm dịch vụ — dễ đọc, dễ áp dụng cho cả khách Việt Nam và quốc tế." : "Four featured reads here, with a complete library covering all six care groups for Vietnamese and international guests."}</p></div>
+        <div className="knowledge-heading"><div><p className="eyebrow">{lang === "vi" ? "Góc kiến thức · 04 bài nổi bật" : "The journal · 04 featured notes"}</p><h2>{lang === "vi" ? "Hiểu đúng để mỗi lựa chọn chăm sóc đều nhẹ nhàng hơn." : "A little knowledge makes every care choice feel easier."}</h2></div><p>{lang === "vi" ? "Bốn bài nổi bật trên trang chủ và thư viện đầy đủ cho năm nhóm dịch vụ — dễ đọc, dễ áp dụng cho cả khách Việt Nam và quốc tế." : "Four featured reads here, with a complete library covering all five care groups for Vietnamese and international guests."}</p></div>
         <div className="knowledge-grid">
           {journalArticles.slice(0, 4).map((item, index) => <article className="knowledge-card" key={item.number}><Link href={journalPath(seoServices[index] ?? seoServices[0], lang)}><div className="knowledge-image"><Image src={item.image} alt={item[lang].title} fill sizes="(max-width: 900px) 100vw, 25vw" unoptimized /></div><div className="knowledge-body"><div className="knowledge-meta"><span>{item.number}</span><small>{item[lang].readingTime}</small></div><h3>{item[lang].title}</h3><span className="knowledge-arrow" aria-hidden="true">↗</span></div></Link></article>)}
         </div>
