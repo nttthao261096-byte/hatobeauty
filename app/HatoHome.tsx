@@ -78,7 +78,7 @@ const serviceGroupLabels = {
     scalp: "Chăm sóc da đầu & Thư giãn",
     body: "Chăm sóc cơ thể",
     "brow-lash": "Mi & chân mày",
-    waxing: "Waxing dịu nhẹ",
+    waxing: "Tẩy lông bằng sáp",
     "hair-removal": "Triệt lông công nghệ cao",
   },
   en: {
@@ -287,6 +287,12 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
             <p className="eyebrow">{lang === "vi" ? "Chi tiết dịch vụ" : "Service details"}</p>
             <h2 id="service-detail-title">{selectedService[lang].title}</h2>
             <p className="service-detail-lead">{selectedService[lang].description}</p>
+            {selectedServiceDetail.groups && <div className={`service-option-groups ${selectedService.id === "skin" ? "service-option-groups-featured" : ""}`}>
+              {selectedServiceDetail.groups.map((group, index) => <section className="service-option-group" key={group.viTitle}>
+                <div className="service-option-group-heading"><span>0{index + 1}</span><h3>{lang === "vi" ? group.viTitle : group.enTitle}</h3></div>
+                <ul>{group[lang].map((option) => <li key={option}><span>↗</span>{option}</li>)}</ul>
+              </section>)}
+            </div>}
             {selectedServiceDetail.options && <div className="service-options">
               <h3>{lang === "vi" ? "Dịch vụ trong nhóm" : "Services in this group"}</h3>
               <ul>{selectedServiceDetail.options[lang].map((option) => <li key={option}><span>↗</span>{option}</li>)}</ul>

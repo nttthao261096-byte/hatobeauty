@@ -32,6 +32,106 @@ export interface ServiceDetailContent {
     vi: string[];
     en: string[];
   };
+  groups?: Array<{
+    viTitle: string;
+    enTitle: string;
+    vi: string[];
+    en: string[];
+  }>;
+}
+
+const curatedServiceChoices: Partial<Record<string, Pick<ServiceDetailContent, "options" | "groups">>> = {
+  skin: {
+    groups: [
+      {
+        viTitle: "Chăm sóc da mặt",
+        enTitle: "Facial care",
+        vi: [
+          "Trị liệu làm sạch da chuyên sâu",
+          "Trị liệu phục hồi da chuyên sâu",
+          "Trị liệu căng bóng & trẻ hóa da",
+          "Trị liệu chăm sóc da mụn",
+          "Trị liệu tăng sắc tố và nám",
+          "Trị liệu Mesotherapy",
+        ],
+        en: [
+          "Deep-cleansing facial",
+          "Intensive skin recovery",
+          "Glow & rejuvenation facial",
+          "Acne-prone skin care",
+          "Pigmentation & melasma care",
+          "Mesotherapy treatment",
+        ],
+      },
+      {
+        viTitle: "Chăm sóc da cơ thể",
+        enTitle: "Body skin care",
+        vi: [
+          "Tẩy tế bào chết & dưỡng ẩm chuyên sâu",
+          "Phục hồi da cháy nắng",
+          "Chăm sóc & điều trị mụn lưng",
+        ],
+        en: [
+          "Intensive exfoliation & hydration",
+          "Sun-exposed skin recovery",
+          "Back acne care & treatment",
+        ],
+      },
+    ],
+  },
+  "brow-lash": {
+    groups: [
+      {
+        viTitle: "Dịch vụ Mi",
+        enTitle: "Lash services",
+        vi: ["Uốn mi", "Nhuộm mi", "Uốn mi kiểu Hàn + nhuộm mi"],
+        en: ["Lash lift", "Lash tint", "Korean lash lift + tint"],
+      },
+      {
+        viTitle: "Dịch vụ Mày",
+        enTitle: "Brow services",
+        vi: ["Nhuộm chân mày", "Nhuộm + tạo hình chân mày", "Định hình + nhuộm mày"],
+        en: ["Brow tint", "Brow tint + shaping", "Brow definition + tint"],
+      },
+    ],
+  },
+  scalp: {
+    options: {
+      vi: [
+        "Gội đầu chăm sóc da đầu cơ bản",
+        "Gội đầu thư giãn",
+        "Gội đầu chăm sóc da đầu chuyên sâu",
+        "Gội đầu & Massage mặt chuyên sâu",
+        "Gội đầu thư giãn cao cấp",
+      ],
+      en: [
+        "Essential scalp-care wash",
+        "Relaxing hair wash",
+        "Intensive scalp-care wash",
+        "Hair wash & intensive facial massage",
+        "Premium relaxing hair wash",
+      ],
+    },
+  },
+  "hair-removal": {
+    options: {
+      vi: ["Triệt vùng mặt", "Triệt vùng nách", "Triệt vùng tay", "Triệt vùng chân", "Triệt bikini", "Triệt full body"],
+      en: ["Face", "Underarms", "Arms", "Legs", "Bikini", "Full body"],
+    },
+  },
+  waxing: {
+    options: {
+      vi: ["Tẩy lông mày", "Tẩy môi trên", "Tẩy theo vùng cơ thể"],
+      en: ["Brow waxing", "Upper-lip waxing", "Body-area waxing"],
+    },
+  },
+};
+
+function applyCuratedServiceChoices(details: Record<string, ServiceDetailContent>) {
+  Object.entries(curatedServiceChoices).forEach(([serviceId, choices]) => {
+    if (details[serviceId]) details[serviceId] = { ...details[serviceId], ...choices };
+  });
+  return details;
 }
 
 export interface HighlightContent {
@@ -133,6 +233,16 @@ function fallbackHomeContent(): HomeContent {
     scalp.vi.title = "Chăm sóc da đầu & Thư giãn";
     scalp.en.title = "Scalp Care & Relaxation";
   }
+  const skin = services.find((service) => service.id === "skin");
+  if (skin) {
+    skin.vi.title = "Chăm sóc da";
+    skin.en.title = "Skin Care";
+  }
+  const browLash = services.find((service) => service.id === "brow-lash");
+  if (browLash) {
+    browLash.vi.title = "Mi & Mày";
+    browLash.en.title = "Lashes & Brows";
+  }
   const hairRemoval = services.find((service) => service.id === "hair-removal");
   if (hairRemoval) {
     hairRemoval.vi.title = "Triệt lông công nghệ cao";
@@ -144,7 +254,7 @@ function fallbackHomeContent(): HomeContent {
     number: "05",
     image: mediaUrl("/images/service-waxing-v2.webp"),
     vi: {
-      title: "Waxing dịu nhẹ",
+      title: "Tẩy lông bằng sáp",
       summary: "Gọn gàng · Nhanh chóng · Chăm da",
       description: "Kỹ thuật waxing cẩn trọng, lựa chọn sản phẩm phù hợp và chăm sóc da trước–sau dịch vụ để hạn chế cảm giác khó chịu.",
       suitable: "Khách hàng cần hiệu quả gọn gàng ngay và một quy trình chăm sóc kín đáo.",
@@ -164,10 +274,6 @@ function fallbackHomeContent(): HomeContent {
     vi: ["Trao đổi nhu cầu", ...service.vi.preparation.slice(0, 2), "Thực hiện và hướng dẫn chăm sóc"],
     en: ["Discuss your needs", ...service.en.preparation.slice(0, 2), "Care and aftercare guidance"],
   }]));
-  serviceDetails.scalp.options = {
-    vi: ["Gội đầu chăm sóc da đầu cơ bản", "Gội đầu thư giãn"],
-    en: ["Essential scalp-care wash", "Relaxing hair wash"],
-  };
   serviceDetails.waxing = {
     price: "120.000 – 650.000đ/vùng",
     duration: "20 – 50 phút",
@@ -175,6 +281,7 @@ function fallbackHomeContent(): HomeContent {
     vi: ["Kiểm tra tình trạng da", "Làm sạch và chuẩn bị vùng wax", "Wax theo hướng phù hợp", "Làm dịu và dưỡng ẩm"],
     en: ["Check skin condition", "Cleanse and prepare", "Wax with suitable technique", "Soothe and moisturize"],
   };
+  applyCuratedServiceChoices(serviceDetails);
   const journalArticles: JournalArticleContent[] = [
     { number: "01", image: "/images/journal-skin-v2.webp", vi: { title: "Chăm sóc da: Làm sạch sâu hay ưu tiên phục hồi?", readingTime: "3 phút đọc" }, en: { title: "Skin: Deep cleansing or recovery first?", readingTime: "3 min read" } },
     { number: "02", image: "/images/journal-scalp-v2.webp", vi: { title: "Gội đầu dưỡng sinh: Vì sao da đầu và vai gáy nên thả lỏng cùng nhau?", readingTime: "4 phút đọc" }, en: { title: "Head Spa: Why should the scalp, neck and shoulders unwind together?", readingTime: "4 min read" } },
@@ -267,6 +374,33 @@ export async function loadHomeContent(): Promise<HomeContent> {
         };
       }
 
+      if (service.id === "skin") {
+        return {
+          ...service,
+          number,
+          vi: { ...service.vi, title: "Chăm sóc da" },
+          en: { ...service.en, title: "Skin Care" },
+        };
+      }
+
+      if (service.id === "brow-lash") {
+        return {
+          ...service,
+          number,
+          vi: { ...service.vi, title: "Mi & Mày" },
+          en: { ...service.en, title: "Lashes & Brows" },
+        };
+      }
+
+      if (service.id === "waxing") {
+        return {
+          ...service,
+          number,
+          vi: { ...service.vi, title: "Tẩy lông bằng sáp" },
+          en: { ...service.en, title: "Waxing" },
+        };
+      }
+
       if (service.id !== "hair-removal") return { ...service, number };
 
       return {
@@ -302,12 +436,7 @@ export async function loadHomeContent(): Promise<HomeContent> {
       },
     ]),
   );
-  if (serviceDetails.scalp) {
-    serviceDetails.scalp.options = {
-      vi: ["Gội đầu chăm sóc da đầu cơ bản", "Gội đầu thư giãn"],
-      en: ["Essential scalp-care wash", "Relaxing hair wash"],
-    };
-  }
+  applyCuratedServiceChoices(serviceDetails);
 
   const journalOrder = ["01", "02", "06", "03", "04"];
   const journalOverrides: Record<string, JournalArticleContent> = {
