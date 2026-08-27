@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default async function Home() {
   const content = await loadHomeContent();
   const schema = { "@context": "https://schema.org", "@graph": [
-    { "@type": "Organization", "@id": `${siteUrl}/#organization`, name: "hato Beauty", url: siteUrl, logo: mediaUrl("/brand/hato-logo-transparent-v3.png") },
+    { "@type": "Organization", "@id": `${siteUrl}/#organization`, name: "hato Beauty", url: siteUrl, logo: mediaUrl("/brand/hato-logo-transparent-v3.png"), telephone: ["+84703214868", "+84915860446"], email: "hatobeautydanang@gmail.com", openingHours: "Mo-Su 08:00-19:30", sameAs: ["https://www.tiktok.com/@hatobeauty", "https://www.instagram.com/hatobeauty/", "https://facebook.com/hatobeautyy", "https://wa.me/84703214868"] },
     { "@type": "WebSite", "@id": `${siteUrl}/#website`, url: siteUrl, name: "hato Beauty", inLanguage: ["vi-VN", "en"], publisher: { "@id": `${siteUrl}/#organization` } },
     { "@type": "WebPage", "@id": `${siteUrl}/#webpage`, url: siteUrl, name: "hato Beauty Đà Nẵng", inLanguage: "vi-VN", isPartOf: { "@id": `${siteUrl}/#website` } },
   ] };

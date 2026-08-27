@@ -118,6 +118,19 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, /Nhận tư vấn riêng/i);
 });
 
+test("renders complete contact details and social links", async () => {
+  const response = await render("/lien-he");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /href="tel:\+84703214868"/i);
+  assert.match(html, /href="tel:\+84915860446"/i);
+  assert.match(html, /href="mailto:hatobeautydanang@gmail\.com"/i);
+  assert.match(html, /href="https:\/\/www\.tiktok\.com\/@hatobeauty"/i);
+  assert.match(html, /href="https:\/\/wa\.me\/84703214868"/i);
+  assert.match(html, /href="https:\/\/www\.instagram\.com\/hatobeauty\/"/i);
+  assert.match(html, /href="https:\/\/facebook\.com\/hatobeautyy"/i);
+  assert.match(html, /Hằng ngày · 08:00–19:30/i);
+});
 test("renders valid URLs for every service breadcrumb item", async () => {
   const cases = [
     ["/dich-vu/cham-soc-da-chuyen-sau-da-nang", "https://hatobeauty.com/dich-vu/"],
