@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     default: "hato Beauty — Shine as you are",
     template: "%s | hato Beauty",
   },
-  description: "Skin, Head Spa, Body, Brow & Lash, Waxing và Hair Removal tại hato Beauty Đà Nẵng — thông tin rõ ràng, chăm sóc nhẹ nhàng và kỳ vọng thực tế.",
+  description: "Chăm sóc da, Mi & Mày, Chăm sóc da đầu & Thư giãn, Triệt lông và Tẩy lông tại hato Beauty Đà Nẵng.",
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   icons: { icon: mediaUrl("/brand/hato-logo-transparent-v3.png"), shortcut: mediaUrl("/brand/hato-logo-transparent-v3.png") },
   openGraph: {
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     locale: "vi_VN",
     alternateLocale: "en_US",
     title: "hato Beauty — Shine as you are",
-    description: "Six personalized care worlds: Skin, Head Spa, Body, Brow & Lash, Waxing and Hair Removal.",
+    description: "Five care groups in Da Nang: Skin, Brow & Lash, Scalp Care & Relaxation, Hair Removal and Waxing.",
     images: [{ url: mediaUrl("/og-shine.png"), width: 1731, height: 909, alt: "hato Beauty — SHINE AS YOU ARE" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "hato Beauty — Shine as you are",
-    description: "Skin, Head Spa, Body, Brow & Lash, Waxing and Hair Removal — designed around you.",
+    description: "Skin, Brow & Lash, Scalp Care & Relaxation, Hair Removal and Waxing in Da Nang.",
     images: [mediaUrl("/og-shine.png")],
   },
 };

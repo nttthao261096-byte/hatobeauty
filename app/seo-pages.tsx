@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { BookingForm } from "./BookingForm";
-import { journalPath, journalTopics, mediaUrl, primarySeoServices, seoServices, servicePath, siteUrl, type SeoLang, type SeoService } from "./seo-data";
+import { journalPath, journalTopics, mediaUrl, primarySeoServices, servicePath, siteUrl, type SeoLang, type SeoService } from "./seo-data";
 
 import { journalIntentFaqs, serviceIntentFaqs } from "./seo-faq-data";
 const facts: Record<SeoService["id"], { vi: [string, string]; en: [string, string] }> = {
@@ -18,6 +18,14 @@ type ServiceDetailGroup = { title: string; items: string[] };
 
 const serviceNumbers: Partial<Record<SeoService["id"], string>> = {
   skin: "01", "brow-lash": "02", scalp: "03", "hair-removal": "04", waxing: "05",
+};
+
+const serviceCardTaglines: Partial<Record<SeoService["id"], Record<SeoLang, string>>> = {
+  skin: { vi: "Chăm sóc da mặt và cơ thể với liệu trình làm sạch, phục hồi theo nhu cầu riêng.", en: "Face and body care with cleansing and recovery tailored to individual needs." },
+  "brow-lash": { vi: "Uốn, nhuộm và định hình mi mày hài hòa, giúp đường nét gương mặt tự nhiên hơn.", en: "Lifting, tinting and shaping for naturally balanced lashes, brows and facial features." },
+  scalp: { vi: "Làm sạch da đầu kết hợp massage thư giãn, giúp cơ thể thả lỏng nhẹ nhàng.", en: "Scalp cleansing with relaxing massage to help the body gently unwind." },
+  "hair-removal": { vi: "Giảm lông theo từng vùng với lộ trình phù hợp tình trạng da và nhu cầu cá nhân.", en: "Area-focused hair reduction with a plan suited to skin condition and personal needs." },
+  waxing: { vi: "Tẩy lông theo vùng nhanh gọn, kín đáo và chú trọng làm dịu bề mặt da.", en: "Efficient, discreet area waxing with thoughtful care to soothe the skin." },
 };
 
 const serviceDetailMenus: Partial<Record<SeoService["id"], Record<SeoLang, ServiceDetailGroup[]>>> = {
@@ -97,7 +105,7 @@ export function ServiceIndex({ lang }: { lang: SeoLang }) {
     <header className="service-index-compact-intro"><div><p>{lang === "vi" ? <>DỊCH VỤ <span className="compact-hato-kicker">hato</span></> : <>SERVICES BY <span className="compact-hato-kicker">hato</span></>}</p><h1>{lang === "vi" ? <>Chăm sóc tại <span className="hato-heading-word">hato</span> Beauty</> : <>Care at <span className="hato-heading-word">hato</span> Beauty</>}</h1></div><p><span>{lang === "vi" ? "05 nhóm dịch vụ" : "05 service groups"}</span>{lang === "vi" ? "Chạm vào từng khung để xem chi tiết." : "Select a card to view the details."}<i aria-hidden="true">↓</i></p></header>
     <section className="index-grid service-index-grid" aria-label={title}>{primarySeoServices.map((service, index) => <Link className={`index-card index-card--${service.id}`} href={`${servicePath(service, lang)}#service-menu`} key={service.id}>
       <div className="index-card-image"><Image src={service.image} alt={service[lang].name} fill priority={index === 0} sizes="(max-width: 760px) 100vw, 50vw" /></div>
-      <div className="index-card-copy"><span>{String(index + 1).padStart(2, "0")}{index === 0 && <small>{lang === "vi" ? "Đặc biệt" : "Signature"}</small>}</span><h2>{service[lang].name}</h2><strong>{lang === "vi" ? "Khám phá" : "Explore"} <i aria-hidden="true">↗</i></strong></div>
+      <div className="index-card-copy"><span>{String(index + 1).padStart(2, "0")}{index === 0 && <small>{lang === "vi" ? "Đặc biệt" : "Signature"}</small>}</span><div className="service-card-title"><h2>{service[lang].name}</h2><p>{serviceCardTaglines[service.id]?.[lang]}</p></div></div>
     </Link>)}</section>
   </main><SeoFooter lang={lang} /></div>;
 }
@@ -150,6 +158,12 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
           <ol>{group.items.map((item, itemIndex) => <li key={item}><span>{String(itemIndex + 1).padStart(2, "0")}</span><strong>{item}</strong></li>)}</ol>
         </article>)}</div>
       </section>}
+      <section className="seo-content service-answer-panel" aria-labelledby="service-answer-title">
+        <p className="seo-eyebrow">{lang === "vi" ? "CÂU TRẢ LỜI NHANH" : "QUICK ANSWER"}</p>
+        <h2 id="service-answer-title">{lang === "vi" ? `${c.name} phù hợp khi nào?` : `When is ${c.name} a good fit?`}</h2>
+        <p className="seo-answer">{c.answer}</p>
+        <p>{c.expectations}</p>
+      </section>
       <section className="seo-content service-care-grid">
         <article className="service-care-card"><span>01</span><h2>{lang === "vi" ? "Phù hợp với bạn khi" : "A good fit when"}</h2><p>{c.suitable}</p></article>
         <article className="service-care-card"><span>02</span><h2>{lang === "vi" ? "Trước buổi hẹn" : "Before your visit"}</h2><ul>{c.preparation.map(x => <li key={x}>{x}</li>)}</ul></article>

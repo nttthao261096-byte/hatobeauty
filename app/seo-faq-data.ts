@@ -18,8 +18,8 @@ export const serviceIntentFaqs: Record<SeoService["id"], LocalizedFaqs> = {
   },
   scalp: {
     vi: [
-      ["Gội đầu dưỡng sinh tại Đà Nẵng giá bao nhiêu?", "Giá tham khảo là 180.000–450.000đ cho khoảng 45–75 phút, tùy thời lượng và phạm vi chăm sóc được chọn."],
-      ["Gội đầu dưỡng sinh có tác dụng gì?", "Mục tiêu thực tế là làm sạch da đầu, chăm sóc tóc và tạo khoảng thư giãn qua massage đầu–vai–gáy; dịch vụ không điều trị bệnh lý da đầu."],
+      ["Chăm sóc da đầu tại Đà Nẵng giá bao nhiêu?", "Giá tham khảo là 180.000–450.000đ cho khoảng 45–75 phút, tùy thời lượng và phạm vi chăm sóc được chọn."],
+      ["Gội đầu thư giãn có tác dụng gì?", "Mục tiêu thực tế là làm sạch da đầu, chăm sóc tóc và tạo khoảng thư giãn qua massage đầu–vai–gáy; dịch vụ không điều trị bệnh lý da đầu."],
       ["Khách du lịch có thể đặt Head Spa không?", "Có. Đây là lựa chọn thư giãn sau khi di chuyển, nhưng bạn nên báo trước nếu chóng mặt, đau cấp tính hoặc da đầu có tổn thương."],
     ],
     en: [
@@ -42,7 +42,7 @@ export const serviceIntentFaqs: Record<SeoService["id"], LocalizedFaqs> = {
   },
   "brow-lash": {
     vi: [
-      ["Uốn mi và Brow Lamination tại Đà Nẵng giá bao nhiêu?", "Giá tham khảo là 250.000–750.000đ, tùy dịch vụ riêng lẻ hay kết hợp, tình trạng sợi và thời lượng thực hiện."],
+      ["Uốn mi, nhuộm mi và làm chân mày tại Đà Nẵng giá bao nhiêu?", "Giá tham khảo là 250.000–750.000đ, tùy dịch vụ riêng lẻ hay kết hợp, tình trạng sợi và thời lượng thực hiện."],
       ["Brow Lamination khác phun xăm chân mày thế nào?", "Brow Lamination sắp xếp và định hình sợi mày tự nhiên; dịch vụ không đưa mực vào da như phun xăm."],
       ["Uốn mi có làm rụng mi không?", "Kết quả phụ thuộc tình trạng sợi, kỹ thuật và chăm sóc. Vùng mắt đang kích ứng hoặc sợi quá yếu cần được trao đổi và có thể nên hoãn."],
     ],
@@ -65,7 +65,7 @@ export const serviceIntentFaqs: Record<SeoService["id"], LocalizedFaqs> = {
     ],
   },
   waxing: {
-    vi: [["Tẩy lông phù hợp với những vùng nào?", "Dịch vụ áp dụng cho lông mày, môi trên và các vùng cơ thể được trao đổi trước."], ["Tẩy lông có cần chuẩn bị trước không?", "Tránh tẩy tế bào chết mạnh, báo sản phẩm đang dùng và giữ chiều dài sợi theo hướng dẫn."], ["Sau tẩy lông cần lưu ý gì?", "Hạn chế nắng, nhiệt và ma sát; giữ vùng da sạch và làm dịu theo hướng dẫn."]],
+    vi: [["Tẩy lông tại Đà Nẵng giá bao nhiêu?", "Giá tham khảo tùy vùng như lông mày, môi trên hoặc cơ thể; hato xác nhận mức cụ thể trước khi thực hiện."], ["Tẩy lông phù hợp với những vùng nào?", "Dịch vụ áp dụng cho lông mày, môi trên và các vùng cơ thể được trao đổi trước."], ["Tẩy lông có cần chuẩn bị trước không?", "Tránh tẩy tế bào chết mạnh, báo sản phẩm đang dùng và giữ chiều dài sợi theo hướng dẫn."], ["Sau tẩy lông cần lưu ý gì?", "Hạn chế nắng, nhiệt và ma sát; giữ vùng da sạch và làm dịu theo hướng dẫn."]],
     en: [["Which areas are suitable for waxing?", "The service covers brows, upper lip and body areas confirmed in advance."], ["How should I prepare?", "Avoid strong exfoliation, share current products and keep suitable hair length as advised."], ["What should I do afterwards?", "Limit sun, heat and friction; keep the area clean and soothe as advised."]],
   },
 };

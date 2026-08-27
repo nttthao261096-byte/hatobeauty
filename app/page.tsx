@@ -5,12 +5,12 @@ import { JsonLd } from "./seo-pages";
 import { mediaUrl, siteUrl } from "./seo-data";
 
 export const metadata: Metadata = {
-  title: { absolute: "hato Beauty Đà Nẵng | Skin, Head Spa, Body & Beauty Care" },
+  title: { absolute: "hato Beauty Đà Nẵng | Chăm sóc da, Mi Mày & Tẩy lông" },
   description:
-    "Khám phá Skin, Head Spa, Body, Brow & Lash và Hair Removal tại hato Beauty Đà Nẵng. Thông tin dịch vụ rõ ràng, song ngữ Việt–Anh.",
+    "Chăm sóc da, Mi & Mày, Chăm sóc da đầu & Thư giãn, Triệt lông và Tẩy lông tại hato Beauty Đà Nẵng. Xem dịch vụ, giá tham khảo và đặt lịch.",
   alternates: { canonical: "/", languages: { "vi-VN": "/", en: "/en/", "x-default": "/" } },
-  openGraph: { url: siteUrl, locale: "vi_VN", title: "hato Beauty Đà Nẵng | SHINE AS YOU ARE", description: "Năm nhóm dịch vụ làm đẹp với thông tin rõ ràng cho khách Việt Nam và quốc tế.", images: [{ url: mediaUrl("/og-shine.png"), width: 1731, height: 909 }] },
-  twitter: { card: "summary_large_image", title: "hato Beauty Đà Nẵng | SHINE AS YOU ARE", description: "Năm nhóm dịch vụ làm đẹp với thông tin rõ ràng cho khách Việt Nam và quốc tế.", images: [mediaUrl("/og-shine.png")] },
+  openGraph: { url: siteUrl, locale: "vi_VN", title: "hato Beauty Đà Nẵng | Chăm sóc theo nhu cầu", description: "Năm nhóm dịch vụ: Chăm sóc da, Mi & Mày, Chăm sóc da đầu & Thư giãn, Triệt lông và Tẩy lông.", images: [{ url: mediaUrl("/og-shine.png"), width: 1731, height: 909 }] },
+  twitter: { card: "summary_large_image", title: "hato Beauty Đà Nẵng | Chăm sóc theo nhu cầu", description: "Chăm sóc da, Mi & Mày, Chăm sóc da đầu & Thư giãn, Triệt lông và Tẩy lông.", images: [mediaUrl("/og-shine.png")] },
 };
 
 export default async function Home() {

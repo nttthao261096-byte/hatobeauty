@@ -1836,3 +1836,92 @@ img { user-select: none; }
   align-self: center;
   margin: 0;
 }
+
+/* Softer card finish without labels or divider lines. */
+.service-index-page .service-index-grid .index-card {
+  border-radius: 30px;
+  border-color: rgba(88, 58, 44, .09);
+  box-shadow: 0 12px 32px rgba(76, 49, 35, .075);
+}
+.service-index-page .service-index-grid .index-card:first-child {
+  background:
+    radial-gradient(circle at 100% 0, rgba(191, 131, 98, .27), transparent 35%),
+    linear-gradient(145deg, #684737, #5c3d31);
+}
+.service-index-page .service-index-grid .index-card:first-child .index-card-copy > span {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.service-index-page .service-index-grid .index-card:first-child strong,
+.service-index-page .service-index-grid .index-card:not(:first-child) strong {
+  width: 38px;
+  height: 38px;
+  min-height: 38px;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-column: 2;
+  place-items: center;
+  justify-self: end;
+  align-self: end;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 250, 246, .58);
+  color: #714d3a;
+}
+.service-index-page .service-index-grid .index-card:first-child strong {
+  grid-column: 1;
+  background: rgba(255, 250, 246, .14);
+  color: #fffaf6;
+}
+.service-index-page .service-index-grid .index-card strong i { font-size: 13px; }
+.service-index-page .service-index-grid .index-card:nth-child(2) { background: linear-gradient(145deg, #f6e4dc, #efd7cc); }
+.service-index-page .service-index-grid .index-card:nth-child(3) { background: linear-gradient(145deg, #e6dfd1, #dcd2c0); }
+.service-index-page .service-index-grid .index-card:nth-child(4) { background: linear-gradient(145deg, #e2c8ba, #d6b4a3); }
+.service-index-page .service-index-grid .index-card:nth-child(5) { background: linear-gradient(145deg, #f1dacb, #e9c8b5); }
+
+@media (max-width: 720px) {
+  .service-index-page .service-index-grid .index-card { border-radius: 24px; }
+}
+
+/* Concise benefit lines replace the circular arrow control. */
+.service-index-page .service-index-grid .index-card:first-child .index-card-copy,
+.service-index-page .service-index-grid .index-card:not(:first-child) .index-card-copy {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+.service-index-page .service-index-grid .service-card-title {
+  grid-column: 1 / -1;
+  align-self: center;
+  display: block;
+  color: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.service-index-page .service-index-grid .service-card-title h2 { margin: 0; }
+.service-index-page .service-index-grid .service-card-title p {
+  display: block;
+  margin: 12px 0 0;
+  color: #785b4b;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .025em;
+  line-height: 1.45;
+}
+.service-index-page .service-index-grid .index-card:first-child .service-card-title p {
+  color: #e8cfc0;
+  font-size: 12px;
+}
+.service-index-page .service-index-grid .index-card:not(:first-child) .service-card-title p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+@media (max-width: 720px) {
+  .service-index-page .service-index-grid .index-card:not(:first-child) .service-card-title p {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+}
