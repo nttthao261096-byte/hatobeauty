@@ -118,8 +118,8 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
     return matchesCategory && (!normalizedQuery || searchableText.includes(normalizedQuery));
   });
   const navItems = lang === "vi"
-    ? [["/ve-hato-beauty/", "Về chúng tôi"], ["/dich-vu/", "Dịch vụ"], ["/kien-thuc/", "Kiến thức"], ["/bang-gia/", "Bảng giá"], ["/lien-he/", "Liên hệ"]]
-    : [["/en/about/", "About"], ["/en/services/", "Services"], ["/en/journal/", "Journal"], ["/en/prices/", "Prices"], ["/en/contact/", "Contact"]];
+    ? [["/ve-hato-beauty/", "Về chúng tôi"], ["/dich-vu/", "Dịch vụ"], ["/kien-thuc/", "Kiến thức"], ["#results", "Kết quả"], ["/lien-he/", "Liên hệ"]]
+    : [["/en/about/", "About"], ["/en/services/", "Services"], ["/en/journal/", "Journal"], ["#results", "Results"], ["/en/contact/", "Contact"]];
   useEffect(() => {
     document.body.style.overflow = bookingOpen || Boolean(selectedService) ? "hidden" : "";
     if (bookingOpen) window.requestAnimationFrame(() => dialogRef.current?.focus());
@@ -289,6 +289,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
             <p className="service-detail-lead">{selectedService[lang].description}</p>
             {selectedServiceDetail.groups && <div className={`service-option-groups ${selectedService.id === "skin" ? "service-option-groups-featured" : ""}`}>
               {selectedServiceDetail.groups.map((group, index) => <section className="service-option-group" key={group.viTitle}>
+                <div className="service-option-group-image"><Image src={group.image} alt={lang === "vi" ? group.viTitle : group.enTitle} fill sizes="(max-width: 760px) 100vw, 300px" /></div>
                 <div className="service-option-group-heading"><span>0{index + 1}</span><h3>{lang === "vi" ? group.viTitle : group.enTitle}</h3></div>
                 <ul>{group[lang].map((option) => <li key={option}><span>↗</span>{option}</li>)}</ul>
               </section>)}
@@ -298,12 +299,11 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
               <ul>{selectedServiceDetail.options[lang].map((option) => <li key={option}><span>↗</span>{option}</li>)}</ul>
             </div>}
             <dl className="service-facts">
-              <div><dt>{lang === "vi" ? "Giá tham khảo" : "Guide price"}</dt><dd>{selectedServiceDetail.price}</dd></div>
+              <div><dt>{lang === "vi" ? "Kết quả hướng đến" : "Intended result"}</dt><dd>{selectedServiceDetail.result?.[lang] ?? selectedService[lang].suitable}</dd></div>
               <div><dt>{lang === "vi" ? "Thời lượng" : "Duration"}</dt><dd>{selectedServiceDetail.duration}</dd></div>
               <div><dt>{lang === "vi" ? "Gợi ý liệu trình" : "Suggested plan"}</dt><dd>{selectedServiceDetail.plan}</dd></div>
             </dl>
             <div className="service-steps"><h3>{lang === "vi" ? "Trải nghiệm gồm" : "What to expect"}</h3><ol>{selectedServiceDetail[lang].map((step) => <li key={step}><span>✓</span>{step}</li>)}</ol></div>
-            <p className="price-note">{lang === "vi" ? "Khoảng giá mang tính tham khảo và có thể thay đổi theo vùng chăm sóc, tình trạng thực tế, sản phẩm và liệu trình được tư vấn. hato sẽ xác nhận giá trước khi thực hiện." : "Prices are indicative and may vary by treatment area, condition, products and the recommended plan. hato will confirm the price before treatment."}</p>
             <button className="button primary" onClick={() => { const serviceId = selectedService.id; setSelectedServiceId(null); openBooking(serviceId); }}>{lang === "vi" ? "Đặt lịch dịch vụ này" : "Book this service"}<span>↗</span></button>
           </div>
         </section>

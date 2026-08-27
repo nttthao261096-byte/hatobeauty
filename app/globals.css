@@ -295,19 +295,23 @@ img { user-select: none; }
 .service-options li { display: flex; align-items: center; gap: 11px; color: var(--brown); font-family: var(--display); font-size: 21px; line-height: 1.25; }
 .service-options li span { width: 26px; height: 26px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: var(--cocoa); color: white; font-family: var(--body); font-size: 10px; }
 .service-option-groups { margin: 0 0 30px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.service-option-group { padding: 24px 22px; border: 1px solid var(--line); border-radius: 20px; background: #fffaf6; }
+.service-option-group { padding: 12px 12px 24px; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: #fffaf6; }
+.service-option-group-image { min-height: 150px; margin-bottom: 20px; position: relative; overflow: hidden; border-radius: 14px; background: var(--sand); }
+.service-option-group-image img { object-fit: cover; }
 .service-option-group-heading { margin-bottom: 18px; display: flex; align-items: center; gap: 11px; }
 .service-option-group-heading > span { width: 29px; height: 29px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: var(--cocoa); color: white; font-size: 9px; font-weight: 700; }
 .service-option-group-heading h3 { margin: 0; color: var(--brown); font-family: var(--display); font-size: 24px; font-weight: 500; line-height: 1.1; }
-.service-option-group ul { margin: 0; padding: 0; display: grid; gap: 11px; list-style: none; }
+.service-option-group-heading, .service-option-group ul { margin-left: 10px; margin-right: 10px; }
+.service-option-group ul { margin-top: 0; margin-bottom: 0; padding: 0; display: grid; gap: 11px; list-style: none; }
 .service-option-group li { display: flex; align-items: flex-start; gap: 9px; color: #655246; font-size: 13px; line-height: 1.45; }
 .service-option-group li > span { color: var(--cocoa); font-size: 11px; }
 .service-option-groups-featured .service-option-group:first-child { border-color: rgba(137, 91, 62, .46); background: linear-gradient(145deg, #fffaf6, #f4e3d5); }
-.service-facts { margin: 0 0 28px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.service-facts { margin: 0 0 28px; display: grid; grid-template-columns: 1.7fr .65fr .65fr; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .service-facts > div { padding: 18px 16px 19px 0; }
 .service-facts > div + div { padding-left: 18px; border-left: 1px solid var(--line); }
 .service-facts dt { color: var(--taupe); font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
 .service-facts dd { margin: 9px 0 0; color: var(--brown); font-family: var(--display); font-size: 20px; line-height: 1.25; }
+.service-facts > div:first-child dd { font-family: var(--body); font-size: 14px; line-height: 1.55; }
 .service-steps h3 { margin: 0 0 14px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
 .service-steps ol { margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 9px 18px; list-style: none; }
 .service-steps li { display: flex; align-items: center; gap: 9px; color: #665347; font-size: 13px; }

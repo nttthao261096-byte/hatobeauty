@@ -32,20 +32,30 @@ export interface ServiceDetailContent {
     vi: string[];
     en: string[];
   };
+  result?: {
+    vi: string;
+    en: string;
+  };
   groups?: Array<{
     viTitle: string;
     enTitle: string;
+    image: string;
     vi: string[];
     en: string[];
   }>;
 }
 
-const curatedServiceChoices: Partial<Record<string, Pick<ServiceDetailContent, "options" | "groups">>> = {
+const curatedServiceChoices: Partial<Record<string, Pick<ServiceDetailContent, "options" | "groups" | "result">>> = {
   skin: {
+    result: {
+      vi: "Làn da sạch thoáng, đủ ẩm và được chăm sóc đúng trọng tâm theo tình trạng thực tế.",
+      en: "Skin that feels cleansed, replenished and cared for around its current needs.",
+    },
     groups: [
       {
         viTitle: "Chăm sóc da mặt",
         enTitle: "Facial care",
+        image: "/images/service-skin-v2.webp",
         vi: [
           "Trị liệu làm sạch da chuyên sâu",
           "Trị liệu phục hồi da chuyên sâu",
@@ -53,6 +63,8 @@ const curatedServiceChoices: Partial<Record<string, Pick<ServiceDetailContent, "
           "Trị liệu chăm sóc da mụn",
           "Trị liệu tăng sắc tố và nám",
           "Trị liệu Mesotherapy",
+          "Trị liệu phục hồi hàng rào bảo vệ & da nhạy cảm",
+          "Trị liệu chăm sóc da cá nhân hóa",
         ],
         en: [
           "Deep-cleansing facial",
@@ -61,11 +73,14 @@ const curatedServiceChoices: Partial<Record<string, Pick<ServiceDetailContent, "
           "Acne-prone skin care",
           "Pigmentation & melasma care",
           "Mesotherapy treatment",
+          "Skin-barrier recovery & sensitive-skin care",
+          "Personalized facial care",
         ],
       },
       {
         viTitle: "Chăm sóc da cơ thể",
         enTitle: "Body skin care",
+        image: "/images/service-body-scrub-v2.webp",
         vi: [
           "Tẩy tế bào chết & dưỡng ẩm chuyên sâu",
           "Phục hồi da cháy nắng",
@@ -80,22 +95,32 @@ const curatedServiceChoices: Partial<Record<string, Pick<ServiceDetailContent, "
     ],
   },
   "brow-lash": {
+    result: {
+      vi: "Hàng mi và chân mày gọn nét, cân đối, vẫn giữ vẻ mềm mại tự nhiên của gương mặt.",
+      en: "Neater, balanced lashes and brows that preserve a naturally soft expression.",
+    },
     groups: [
       {
         viTitle: "Dịch vụ Mi",
         enTitle: "Lash services",
+        image: "/images/result-brow-lash-v2.webp",
         vi: ["Uốn mi", "Nhuộm mi", "Uốn mi kiểu Hàn + nhuộm mi"],
         en: ["Lash lift", "Lash tint", "Korean lash lift + tint"],
       },
       {
         viTitle: "Dịch vụ Mày",
         enTitle: "Brow services",
+        image: "/images/service-brow-v2.webp",
         vi: ["Nhuộm chân mày", "Nhuộm + tạo hình chân mày", "Định hình + nhuộm mày"],
         en: ["Brow tint", "Brow tint + shaping", "Brow definition + tint"],
       },
     ],
   },
   scalp: {
+    result: {
+      vi: "Da đầu sạch thoáng hơn, tóc được chăm sóc và cơ thể có một khoảng nghỉ thư giãn.",
+      en: "A fresher-feeling scalp, cared-for hair and a restorative pause.",
+    },
     options: {
       vi: [
         "Gội đầu chăm sóc da đầu cơ bản",
@@ -114,15 +139,29 @@ const curatedServiceChoices: Partial<Record<string, Pick<ServiceDetailContent, "
     },
   },
   "hair-removal": {
+    result: {
+      vi: "Vùng da gọn gàng hơn theo lộ trình phù hợp với vùng, sợi lông và phản ứng cá nhân.",
+      en: "A smoother-looking area through a plan suited to the zone, hair and individual response.",
+    },
     options: {
       vi: ["Triệt vùng mặt", "Triệt vùng nách", "Triệt vùng tay", "Triệt vùng chân", "Triệt bikini", "Triệt full body"],
       en: ["Face", "Underarms", "Arms", "Legs", "Bikini", "Full body"],
     },
   },
   waxing: {
+    result: {
+      vi: "Bề mặt da gọn gàng ngay sau buổi chăm sóc, với quy trình kín đáo và chú trọng làm dịu.",
+      en: "An immediately smoother finish with discreet, skin-aware aftercare.",
+    },
     options: {
       vi: ["Tẩy lông mày", "Tẩy môi trên", "Tẩy theo vùng cơ thể"],
       en: ["Brow waxing", "Upper-lip waxing", "Body-area waxing"],
+    },
+  },
+  body: {
+    result: {
+      vi: "Bề mặt da cơ thể sạch thoáng, mềm mại và đủ ẩm hơn sau buổi chăm sóc.",
+      en: "Body skin that feels fresher, softer and more replenished after care.",
     },
   },
 };
@@ -180,7 +219,7 @@ function lowercaseHato(value: string): string {
 }
 
 function withMediaOrigin(content: HomeContent): HomeContent {
-  const resolve = (path: string) => path.startsWith("/") ? mediaUrl(path) : path;
+  const resolve = (path: string) => path === "/images/service-skin-signature-v3.png" ? path : path.startsWith("/") ? mediaUrl(path) : path;
   return {
     ...content,
     services: content.services.map((item) => ({ ...item, image: resolve(item.image) })),
@@ -237,6 +276,7 @@ function fallbackHomeContent(): HomeContent {
   if (skin) {
     skin.vi.title = "Chăm sóc da";
     skin.en.title = "Skin Care";
+    skin.image = "/images/service-skin-signature-v3.png";
   }
   const browLash = services.find((service) => service.id === "brow-lash");
   if (browLash) {
@@ -378,6 +418,7 @@ export async function loadHomeContent(): Promise<HomeContent> {
         return {
           ...service,
           number,
+          image: "/images/service-skin-signature-v3.png",
           vi: { ...service.vi, title: "Chăm sóc da" },
           en: { ...service.en, title: "Skin Care" },
         };

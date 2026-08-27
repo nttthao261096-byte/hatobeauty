@@ -89,6 +89,8 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, /Tẩy lông bằng sáp/i);
   assert.match(html, /Chăm sóc da đầu &amp; Thư giãn/i);
   assert.match(html, /06<\/span><p>nhóm dịch vụ chăm sóc/i);
+  assert.doesNotMatch(html, />Bảng giá</i);
+  assert.match(html, />Kết quả</i);
   assert.match(html, /Chăm sóc cơ thể/i);
   assert.match(html, /Tẩy tế bào chết/i);
   assert.match(html, /Định hình chân mày &amp; Uốn mi/i);
@@ -183,11 +185,17 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.match(contentSource, /Gội đầu chăm sóc da đầu cơ bản/i);
   assert.match(contentSource, /Gội đầu thư giãn/i);
   assert.match(contentSource, /Trị liệu làm sạch da chuyên sâu/i);
+  assert.match(contentSource, /Trị liệu phục hồi hàng rào bảo vệ & da nhạy cảm/i);
+  assert.match(contentSource, /Trị liệu chăm sóc da cá nhân hóa/i);
   assert.match(contentSource, /Chăm sóc da cơ thể/i);
   assert.match(contentSource, /Dịch vụ Mi/i);
   assert.match(contentSource, /Dịch vụ Mày/i);
   assert.match(contentSource, /Triệt full body/i);
   assert.match(contentSource, /Tẩy môi trên/i);
+  assert.match(contentSource, /service-skin-signature-v3\.png/i);
+  assert.doesNotMatch(source, /selectedServiceDetail\.price/i);
+  assert.match(source, /Kết quả hướng đến/i);
+  assert.match(source, /service-option-group-image/i);
   assert.match(contentSource, /rest\/v1\/\$\{table\}/i);
   assert.match(dataMigration, /journal-skin-v2\.webp/i);
   assert.match(source, /className=\{`hero-video hero-video-/i);
