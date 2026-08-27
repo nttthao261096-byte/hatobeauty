@@ -89,7 +89,7 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
       { "@type": "Service", "@id": `${siteUrl}${path}#service`, name: c.name, description: c.description, image: service.image, areaServed: { "@type": "City", name: "Da Nang" }, provider: { "@id": `${siteUrl}/#organization` }, offers: { "@type": "Offer", priceCurrency: "VND", description: `${price} · ${duration}`, url: `${siteUrl}${path}` } },
       { "@type": "BreadcrumbList", itemListElement: [
         { "@type": "ListItem", position: 1, name: lang === "vi" ? "Trang chủ" : "Home", item: `${siteUrl}${lang === "vi" ? "/" : "/en/"}` },
-        { "@type": "ListItem", position: 2, name: lang === "vi" ? "Dịch vụ" : "Services" },
+        { "@type": "ListItem", position: 2, name: lang === "vi" ? "Dịch vụ" : "Services", item: `${siteUrl}${lang === "vi" ? "/dich-vu/" : "/en/services/"}` },
         { "@type": "ListItem", position: 3, name: c.name, item: `${siteUrl}${path}` },
       ] },
       { "@type": "FAQPage", mainEntity: faqs.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) },

@@ -37,7 +37,7 @@ const contentFixtures = {
   ],
 };
 
-async function render() {
+async function render(pathname = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
@@ -58,7 +58,7 @@ async function render() {
 
   try {
     const response = await worker.fetch(
-      new Request("http://localhost/", { headers: { accept: "text/html" } }),
+      new Request(new URL(pathname, "http://localhost"), { headers: { accept: "text/html" } }),
       {
         ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) },
         SUPABASE_URL: contentUrl,
@@ -85,8 +85,10 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, /<html lang="vi"[^>]*>/i);
   assert.match(html, /data-scroll-behavior="smooth"/i);
   assert.match(html, /hato Beauty Đà Nẵng \| Skin, Head Spa, Body &amp; Beauty Care/);
-  assert.match(html, /Triệt lông &amp; làm sạch lông bằng sáp/i);
-  assert.doesNotMatch(html, /Waxing dịu nhẹ/i);
+  assert.match(html, /Triệt lông công nghệ cao/i);
+  assert.match(html, /Waxing dịu nhẹ/i);
+  assert.match(html, /Chăm sóc da đầu &amp; Thư giãn/i);
+  assert.match(html, /06<\/span><p>nhóm dịch vụ chăm sóc/i);
   assert.match(html, /Chăm sóc cơ thể/i);
   assert.match(html, /Tẩy tế bào chết/i);
   assert.match(html, /Định hình chân mày &amp; Uốn mi/i);
@@ -112,6 +114,28 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, /Chúng tôi cam kết sẽ mang đến những điều tốt nhất/i);
   assert.match(html, /TỎA SÁNG THEO CÁCH CỦA BẠN/i);
   assert.match(html, /Nhận tư vấn riêng/i);
+});
+
+test("renders valid URLs for every service breadcrumb item", async () => {
+  const cases = [
+    ["/dich-vu/cham-soc-da-chuyen-sau-da-nang", "https://hatobeauty.com/dich-vu/"],
+    ["/en/services/facial-treatment-da-nang", "https://hatobeauty.com/en/services/"],
+  ];
+
+  for (const [pathname, expectedSectionUrl] of cases) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    const jsonLdBlocks = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)]
+      .map((match) => JSON.parse(match[1]));
+    const breadcrumb = jsonLdBlocks
+      .flatMap((block) => block["@graph"] ?? [block])
+      .find((entry) => entry["@type"] === "BreadcrumbList");
+
+    assert.ok(breadcrumb, `Missing BreadcrumbList on ${pathname}`);
+    assert.equal(breadcrumb.itemListElement[1].item, expectedSectionUrl);
+    assert.ok(breadcrumb.itemListElement.every((entry) => typeof entry.item === "string" && entry.item.startsWith("https://")));
+  }
 });
 
 test("ships the new brand hierarchy and accessible booking form", async () => {
@@ -155,7 +179,9 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.match(bookingErrorSource, /response\.status === 400/i);
   assert.doesNotMatch(source, /className="hero-note"/i);
   assert.match(source, /className="review-grid"/i);
-  assert.doesNotMatch(source, /className="service-detail-modal"/i);
+  assert.match(source, /className="service-detail-modal"/i);
+  assert.match(contentSource, /Gội đầu chăm sóc da đầu cơ bản/i);
+  assert.match(contentSource, /Gội đầu thư giãn/i);
   assert.match(contentSource, /rest\/v1\/\$\{table\}/i);
   assert.match(dataMigration, /journal-skin-v2\.webp/i);
   assert.match(source, /className=\{`hero-video hero-video-/i);

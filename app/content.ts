@@ -28,6 +28,10 @@ export interface ServiceDetailContent {
   plan: string;
   vi: string[];
   en: string[];
+  options?: {
+    vi: string[];
+    en: string[];
+  };
 }
 
 export interface HighlightContent {
@@ -116,7 +120,7 @@ async function fetchRows(baseUrl: string, apiKey: string, table: string): Promis
 
 function fallbackHomeContent(): HomeContent {
   const categories: Record<string, ServiceContent["category"]> = { skin: "care", scalp: "relax", body: "body", "brow-lash": "shape", "hair-removal": "smooth" };
-  const services = seoServices.map((service, index) => ({
+  const services: ServiceContent[] = seoServices.map((service, index) => ({
     id: service.id,
     category: categories[service.id],
     number: String(index + 1).padStart(2, "0"),
@@ -124,6 +128,35 @@ function fallbackHomeContent(): HomeContent {
     vi: { title: service.vi.name, summary: service.vi.title, description: service.vi.description, suitable: service.vi.suitable },
     en: { title: service.en.name, summary: service.en.title, description: service.en.description, suitable: service.en.suitable },
   }));
+  const scalp = services.find((service) => service.id === "scalp");
+  if (scalp) {
+    scalp.vi.title = "Chăm sóc da đầu & Thư giãn";
+    scalp.en.title = "Scalp Care & Relaxation";
+  }
+  const hairRemoval = services.find((service) => service.id === "hair-removal");
+  if (hairRemoval) {
+    hairRemoval.vi.title = "Triệt lông công nghệ cao";
+    hairRemoval.en.title = "Advanced hair removal";
+  }
+  services.splice(4, 0, {
+    id: "waxing",
+    category: "smooth",
+    number: "05",
+    image: mediaUrl("/images/service-waxing-v2.webp"),
+    vi: {
+      title: "Waxing dịu nhẹ",
+      summary: "Gọn gàng · Nhanh chóng · Chăm da",
+      description: "Kỹ thuật waxing cẩn trọng, lựa chọn sản phẩm phù hợp và chăm sóc da trước–sau dịch vụ để hạn chế cảm giác khó chịu.",
+      suitable: "Khách hàng cần hiệu quả gọn gàng ngay và một quy trình chăm sóc kín đáo.",
+    },
+    en: {
+      title: "Gentle waxing",
+      summary: "Smooth · Efficient · Skin-aware",
+      description: "Careful waxing techniques, considered product selection and before–after skin care for a more comfortable experience.",
+      suitable: "For an immediate smooth result delivered with discretion and care.",
+    },
+  });
+  services.forEach((service, index) => { service.number = String(index + 1).padStart(2, "0"); });
   const serviceDetails = Object.fromEntries(seoServices.map((service) => [service.id, {
     price: service.id === "skin" ? "450.000 – 1.200.000đ" : service.id === "hair-removal" ? "250.000 – 1.500.000đ/vùng" : "Tư vấn theo nhu cầu",
     duration: service.id === "hair-removal" ? "20 – 60 phút" : "45 – 90 phút",
@@ -131,6 +164,17 @@ function fallbackHomeContent(): HomeContent {
     vi: ["Trao đổi nhu cầu", ...service.vi.preparation.slice(0, 2), "Thực hiện và hướng dẫn chăm sóc"],
     en: ["Discuss your needs", ...service.en.preparation.slice(0, 2), "Care and aftercare guidance"],
   }]));
+  serviceDetails.scalp.options = {
+    vi: ["Gội đầu chăm sóc da đầu cơ bản", "Gội đầu thư giãn"],
+    en: ["Essential scalp-care wash", "Relaxing hair wash"],
+  };
+  serviceDetails.waxing = {
+    price: "120.000 – 650.000đ/vùng",
+    duration: "20 – 50 phút",
+    plan: "Lặp lại sau 3 – 6 tuần",
+    vi: ["Kiểm tra tình trạng da", "Làm sạch và chuẩn bị vùng wax", "Wax theo hướng phù hợp", "Làm dịu và dưỡng ẩm"],
+    en: ["Check skin condition", "Cleanse and prepare", "Wax with suitable technique", "Soothe and moisturize"],
+  };
   const journalArticles: JournalArticleContent[] = [
     { number: "01", image: "/images/journal-skin-v2.webp", vi: { title: "Chăm sóc da: Làm sạch sâu hay ưu tiên phục hồi?", readingTime: "3 phút đọc" }, en: { title: "Skin: Deep cleansing or recovery first?", readingTime: "3 min read" } },
     { number: "02", image: "/images/journal-scalp-v2.webp", vi: { title: "Gội đầu dưỡng sinh: Vì sao da đầu và vai gáy nên thả lỏng cùng nhau?", readingTime: "4 phút đọc" }, en: { title: "Head Spa: Why should the scalp, neck and shoulders unwind together?", readingTime: "4 min read" } },
@@ -180,7 +224,7 @@ export async function loadHomeContent(): Promise<HomeContent> {
     return fallbackHomeContent();
   }
 
-  const serviceOrder = ["skin", "scalp", "body", "brow-lash", "hair-removal"];
+  const serviceOrder = ["skin", "scalp", "body", "brow-lash", "waxing", "hair-removal"];
   const services = serviceRows.map((row) => ({
     id: text(row.slug),
     category: text(row.category) as ServiceContent["category"],
@@ -214,6 +258,15 @@ export async function loadHomeContent(): Promise<HomeContent> {
         };
       }
 
+      if (service.id === "scalp") {
+        return {
+          ...service,
+          number,
+          vi: { ...service.vi, title: "Chăm sóc da đầu & Thư giãn" },
+          en: { ...service.en, title: "Scalp Care & Relaxation" },
+        };
+      }
+
       if (service.id !== "hair-removal") return { ...service, number };
 
       return {
@@ -221,16 +274,16 @@ export async function loadHomeContent(): Promise<HomeContent> {
         number,
         vi: {
           ...service.vi,
-          title: "Triệt lông & làm sạch lông bằng sáp",
-          summary: "Công nghệ · Sáp chuyên dụng · Riêng tư",
-          description: "Giải pháp loại bỏ lông bằng công nghệ hoặc sáp chuyên dụng, được lựa chọn theo vùng da, nhu cầu và mức độ thoải mái của riêng bạn.",
+          title: "Triệt lông công nghệ cao",
+          summary: "Công nghệ · Êm dịu · Riêng tư",
+          description: "Giải pháp giảm lông bằng công nghệ được lựa chọn theo vùng da, nhu cầu và mức độ thoải mái của riêng bạn.",
           suitable: "Các vùng mặt, tay, chân, nách hoặc cơ thể cần chăm sóc kín đáo và phù hợp với tình trạng da.",
         },
         en: {
           ...service.en,
-          title: "Hair Removal & Waxing",
-          summary: "Technology · Waxing · Privacy",
-          description: "Technology-led hair removal or waxing, selected around the treatment area, your skin and your preferred level of comfort.",
+          title: "Advanced hair removal",
+          summary: "Technology · Gentle · Private",
+          description: "Technology-led hair removal selected around the treatment area, your skin and your preferred level of comfort.",
           suitable: "For the face, arms, legs, underarms or body areas that benefit from discreet, skin-aware care.",
         },
       };
@@ -249,6 +302,12 @@ export async function loadHomeContent(): Promise<HomeContent> {
       },
     ]),
   );
+  if (serviceDetails.scalp) {
+    serviceDetails.scalp.options = {
+      vi: ["Gội đầu chăm sóc da đầu cơ bản", "Gội đầu thư giãn"],
+      en: ["Essential scalp-care wash", "Relaxing hair wash"],
+    };
+  }
 
   const journalOrder = ["01", "02", "06", "03", "04"];
   const journalOverrides: Record<string, JournalArticleContent> = {
