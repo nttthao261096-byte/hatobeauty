@@ -78,8 +78,8 @@ const serviceGroupLabels = {
     scalp: "Chăm sóc da đầu & Thư giãn",
     body: "Chăm sóc cơ thể",
     "brow-lash": "Mi & chân mày",
-    waxing: "Tẩy lông bằng sáp",
-    "hair-removal": "Triệt lông công nghệ cao",
+    waxing: "Tẩy lông",
+    "hair-removal": "Triệt lông",
   },
   en: {
     skin: "Skin",

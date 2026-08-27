@@ -285,7 +285,7 @@ function fallbackHomeContent(): HomeContent {
   }
   const hairRemoval = services.find((service) => service.id === "hair-removal");
   if (hairRemoval) {
-    hairRemoval.vi.title = "Triệt lông công nghệ cao";
+    hairRemoval.vi.title = "Triệt lông";
     hairRemoval.en.title = "Advanced hair removal";
   }
   services.splice(4, 0, {
@@ -294,7 +294,7 @@ function fallbackHomeContent(): HomeContent {
     number: "05",
     image: mediaUrl("/images/service-waxing-v2.webp"),
     vi: {
-      title: "Tẩy lông bằng sáp",
+      title: "Tẩy lông",
       summary: "Gọn gàng · Nhanh chóng · Chăm da",
       description: "Kỹ thuật waxing cẩn trọng, lựa chọn sản phẩm phù hợp và chăm sóc da trước–sau dịch vụ để hạn chế cảm giác khó chịu.",
       suitable: "Khách hàng cần hiệu quả gọn gàng ngay và một quy trình chăm sóc kín đáo.",
@@ -437,7 +437,7 @@ export async function loadHomeContent(): Promise<HomeContent> {
         return {
           ...service,
           number,
-          vi: { ...service.vi, title: "Tẩy lông bằng sáp" },
+          vi: { ...service.vi, title: "Tẩy lông" },
           en: { ...service.en, title: "Waxing" },
         };
       }
@@ -449,7 +449,7 @@ export async function loadHomeContent(): Promise<HomeContent> {
         number,
         vi: {
           ...service.vi,
-          title: "Triệt lông công nghệ cao",
+          title: "Triệt lông",
           summary: "Công nghệ · Êm dịu · Riêng tư",
           description: "Giải pháp giảm lông bằng công nghệ được lựa chọn theo vùng da, nhu cầu và mức độ thoải mái của riêng bạn.",
           suitable: "Các vùng mặt, tay, chân, nách hoặc cơ thể cần chăm sóc kín đáo và phù hợp với tình trạng da.",

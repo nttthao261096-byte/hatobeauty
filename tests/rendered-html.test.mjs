@@ -8,7 +8,7 @@ const contentFixtures = {
     ["skin", "care", "01", "/images/service-skin-v2.webp", "Chăm sóc da chuyên sâu", "Personalized facial care", "Làm sạch · Phục hồi · Nuôi dưỡng"],
     ["scalp", "relax", "02", "/images/service-hair-v2.webp", "Gội đầu dưỡng sinh", "Herbal scalp therapy", "Thảo mộc · Massage · Thư giãn"],
     ["brow-lash", "shape", "03", "/images/service-brow-v2.webp", "Định hình chân mày & Uốn mi", "Brow shaping & Lash lift", "Cân đối · Tự nhiên · Tinh tế"],
-    ["hair-removal", "smooth", "04", "/images/service-hair-removal-v2.webp", "Triệt lông công nghệ cao", "Advanced hair removal", "Êm dịu · Chính xác · Riêng tư"],
+    ["hair-removal", "smooth", "04", "/images/service-hair-removal-v2.webp", "Triệt lông", "Advanced hair removal", "Êm dịu · Chính xác · Riêng tư"],
     ["waxing", "smooth", "05", "/images/service-waxing-v2.webp", "Waxing dịu nhẹ", "Gentle waxing", "Gọn gàng · Nhanh chóng · Chăm da"],
     ["body", "body", "06", "/images/service-body-scrub-v2.webp", "Chăm sóc body", "Body care ritual", "Tẩy tế bào chết · Dưỡng ẩm · Thư giãn"],
   ].map(([slug, category, display_number, image_path, title_vi, title_en, summary_vi], index) => ({
@@ -85,8 +85,8 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, /<html lang="vi"[^>]*>/i);
   assert.match(html, /data-scroll-behavior="smooth"/i);
   assert.match(html, /hato Beauty Đà Nẵng \| Skin, Head Spa, Body &amp; Beauty Care/);
-  assert.match(html, /Triệt lông công nghệ cao/i);
-  assert.match(html, /Tẩy lông bằng sáp/i);
+  assert.match(html, />Triệt lông</i);
+  assert.match(html, />Tẩy lông</i);
   assert.match(html, /Chăm sóc da đầu &amp; Thư giãn/i);
   assert.match(html, /06<\/span><p>nhóm dịch vụ chăm sóc/i);
   assert.doesNotMatch(html, />Bảng giá</i);
