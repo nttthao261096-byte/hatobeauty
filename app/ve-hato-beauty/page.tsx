@@ -1,2 +1,2 @@
-import type { Metadata } from "next"; import { TrustPage } from "../seo-pages";
-export const metadata:Metadata={title:"Về hato Beauty",description:"Giá trị, cách tiếp cận và năm nhóm dịch vụ tại hato Beauty Đà Nẵng.",alternates:{canonical:"/ve-hato-beauty/",languages:{"vi-VN":"/ve-hato-beauty/",en:"/en/about/","x-default":"/ve-hato-beauty/"}}}; export default function Page(){return <TrustPage lang="vi" kind="about"/>}
+import { createPageMetadata } from "../seo-metadata"; import { TrustPage } from "../seo-pages";
+export const metadata=createPageMetadata({title:"Về hato Beauty",description:"Tìm hiểu giá trị, cách tiếp cận chăm sóc cá nhân hóa và năm nhóm dịch vụ tại hato Beauty, Ngũ Hành Sơn, Đà Nẵng.",path:"/ve-hato-beauty/",viPath:"/ve-hato-beauty/",enPath:"/en/about/",lang:"vi"}); export default function Page(){return <TrustPage lang="vi" kind="about"/>}

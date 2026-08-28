@@ -1,2 +1,2 @@
-import type { Metadata } from "next"; import { TrustPage } from "../../seo-pages";
-export const metadata:Metadata={title:"Contact hato Beauty",description:"Visit hato Beauty at 127 Chau Thi Vinh Te, Ngu Hanh Son, Da Nang. View the map, call or message us. Open daily from 8:00 AM to 7:30 PM.",alternates:{canonical:"/en/contact/",languages:{"vi-VN":"/lien-he/",en:"/en/contact/","x-default":"/lien-he/"}}}; export default function Page(){return <TrustPage lang="en" kind="contact"/>}
+import { createPageMetadata } from "../../seo-metadata"; import { TrustPage } from "../../seo-pages";
+export const metadata=createPageMetadata({title:"Contact hato Beauty",description:"Visit hato Beauty at 127 Chau Thi Vinh Te, Ngu Hanh Son, Da Nang. View the map, call or message us. Open daily from 8:00 AM to 7:30 PM.",path:"/en/contact/",viPath:"/lien-he/",enPath:"/en/contact/",lang:"en"}); export default function Page(){return <TrustPage lang="en" kind="contact"/>}

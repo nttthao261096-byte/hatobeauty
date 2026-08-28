@@ -1,2 +1,2 @@
-import type { Metadata } from "next"; import { TrustPage } from "../seo-pages";
-export const metadata:Metadata={title:"Đặt lịch hato Beauty",description:"Gửi yêu cầu tư vấn và đặt lịch chăm sóc tại hato Beauty.",alternates:{canonical:"/dat-lich/",languages:{"vi-VN":"/dat-lich/",en:"/en/book/","x-default":"/dat-lich/"}}}; export default function Page(){return <TrustPage lang="vi" kind="book"/>}
+import { createPageMetadata } from "../seo-metadata"; import { TrustPage } from "../seo-pages";
+export const metadata=createPageMetadata({title:"Đặt lịch hato Beauty",description:"Gửi thông tin liên hệ, chọn dịch vụ và thời gian mong muốn; đội ngũ hato Beauty sẽ gọi lại để tư vấn và xác nhận lịch hẹn.",path:"/dat-lich/",viPath:"/dat-lich/",enPath:"/en/book/",lang:"vi"}); export default function Page(){return <TrustPage lang="vi" kind="book"/>}

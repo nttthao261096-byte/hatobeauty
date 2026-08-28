@@ -163,7 +163,9 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
       </section>}
       <section className="seo-content service-answer-panel" aria-labelledby="service-answer-title">
         <p className="seo-eyebrow">{lang === "vi" ? "CÂU TRẢ LỜI NHANH" : "QUICK ANSWER"}</p>
-        <h2 id="service-answer-title">{lang === "vi" ? `${c.name} phù hợp khi nào?` : `When is ${c.name} a good fit?`}</h2>
+        {detailGroups.length === 0
+          ? <h1 id="service-answer-title">{lang === "vi" ? `${c.name} phù hợp khi nào?` : `When is ${c.name} a good fit?`}</h1>
+          : <h2 id="service-answer-title">{lang === "vi" ? `${c.name} phù hợp khi nào?` : `When is ${c.name} a good fit?`}</h2>}
         <p className="seo-answer">{c.answer}</p>
         <p>{c.expectations}</p>
       </section>

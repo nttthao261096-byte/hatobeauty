@@ -1,2 +1,2 @@
-import type { Metadata } from "next"; import { TrustPage } from "../seo-pages";
-export const metadata:Metadata={title:"Bảng giá dịch vụ hato Beauty",description:"Khoảng giá tham khảo cho năm nhóm dịch vụ tại hato Beauty.",alternates:{canonical:"/bang-gia/",languages:{"vi-VN":"/bang-gia/",en:"/en/prices/","x-default":"/bang-gia/"}}}; export default function Page(){return <TrustPage lang="vi" kind="prices"/>}
+import { createPageMetadata } from "../seo-metadata"; import { TrustPage } from "../seo-pages";
+export const metadata=createPageMetadata({title:"Bảng giá dịch vụ hato Beauty",description:"Tham khảo khoảng giá năm nhóm dịch vụ tại hato Beauty; chi phí chính xác được xác nhận theo vùng chăm sóc, thời lượng và nhu cầu thực tế.",path:"/bang-gia/",viPath:"/bang-gia/",enPath:"/en/prices/",lang:"vi"}); export default function Page(){return <TrustPage lang="vi" kind="prices"/>}

@@ -1,2 +1,2 @@
-import type { Metadata } from "next"; import { TrustPage } from "../../seo-pages";
-export const metadata:Metadata={title:"hato Beauty guide prices",description:"Guide price ranges for five care categories at hato Beauty.",alternates:{canonical:"/en/prices/",languages:{"vi-VN":"/bang-gia/",en:"/en/prices/","x-default":"/bang-gia/"}}}; export default function Page(){return <TrustPage lang="en" kind="prices"/>}
+import { createPageMetadata } from "../../seo-metadata"; import { TrustPage } from "../../seo-pages";
+export const metadata=createPageMetadata({title:"hato Beauty guide prices",description:"View guide prices for five hato Beauty care categories; final pricing is confirmed for the treatment area, duration and individual needs.",path:"/en/prices/",viPath:"/bang-gia/",enPath:"/en/prices/",lang:"en"}); export default function Page(){return <TrustPage lang="en" kind="prices"/>}

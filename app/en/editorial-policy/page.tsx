@@ -1,19 +1,7 @@
-import type { Metadata } from "next";
-
+import { createPageMetadata } from "../../seo-metadata";
 import { TrustPage } from "../../seo-pages";
 
-export const metadata: Metadata = {
-  title: "Editorial policy",
-  description: "How hato Beauty prepares, reviews and qualifies its beauty-care journal content.",
-  alternates: {
-    canonical: "/en/editorial-policy/",
-    languages: {
-      "vi-VN": "/chinh-sach-bien-tap/",
-      en: "/en/editorial-policy/",
-      "x-default": "/chinh-sach-bien-tap/",
-    },
-  },
-};
+export const metadata = createPageMetadata({ title: "Editorial policy", description: "Learn how hato Beauty selects sources, prepares, reviews and updates the practical beauty-care information published in its journal.", path: "/en/editorial-policy/", viPath: "/chinh-sach-bien-tap/", enPath: "/en/editorial-policy/", lang: "en" });
 
 export default function Page() {
   return <TrustPage lang="en" kind="editorial" />;

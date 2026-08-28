@@ -1,2 +1,2 @@
-import type { Metadata } from "next"; import { TrustPage } from "../seo-pages";
-export const metadata:Metadata={title:"Chính sách bảo mật",description:"Cách hato Beauty sử dụng thông tin trong yêu cầu tư vấn và đặt lịch.",alternates:{canonical:"/chinh-sach-bao-mat/",languages:{"vi-VN":"/chinh-sach-bao-mat/",en:"/en/privacy/","x-default":"/chinh-sach-bao-mat/"}}}; export default function Page(){return <TrustPage lang="vi" kind="privacy"/>}
+import { createPageMetadata } from "../seo-metadata"; import { TrustPage } from "../seo-pages";
+export const metadata=createPageMetadata({title:"Chính sách bảo mật",description:"Tìm hiểu cách hato Beauty tiếp nhận, sử dụng và bảo vệ thông tin cá nhân khi khách hàng gửi yêu cầu tư vấn hoặc đặt lịch.",path:"/chinh-sach-bao-mat/",viPath:"/chinh-sach-bao-mat/",enPath:"/en/privacy/",lang:"vi"}); export default function Page(){return <TrustPage lang="vi" kind="privacy"/>}

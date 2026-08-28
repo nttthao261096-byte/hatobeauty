@@ -182,7 +182,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
   }
 
   return (
-    <main>
+    <main lang={lang}>
       <div className="announcement"><p>{brandText(t.announcement)}</p></div>
 
       <header className="site-header">
