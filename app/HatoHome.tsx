@@ -106,7 +106,6 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingError, setBookingError] = useState("");
-  const [loadFirstHeroVideo, setLoadFirstHeroVideo] = useState(false);
   const [loadHeroSequence, setLoadHeroSequence] = useState(false);
   const [heroSequenceReady, setHeroSequenceReady] = useState(false);
   const heroReadyVideos = useRef(new Set<number>());
@@ -144,9 +143,8 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
   }, [testimonials.length]);
 
   useEffect(() => {
-    const firstVideoTimer = window.setTimeout(() => setLoadFirstHeroVideo(true), 750);
     const timer = window.setTimeout(() => setLoadHeroSequence(true), 12000);
-    return () => { window.clearTimeout(firstVideoTimer); window.clearTimeout(timer); };
+    return () => window.clearTimeout(timer);
   }, []);
 
   function markHeroVideoReady(index: number) {
@@ -224,7 +222,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
             [mediaUrl("/video/hero-hair-removal.mp4"), "Triệt lông", "Hair removal"],
             [mediaUrl("/video/hero-brow-warm.mp4"), "Uốn mi & định hình mày", "Lash & brow"],
             [mediaUrl("/video/hero-care-beige-clinic.mp4"), "Chăm sóc da", "Facial care"],
-          ].map((scene, index) => { const shouldLoad = index === 0 ? loadFirstHeroVideo : loadHeroSequence; return <video className={`hero-video hero-video-${index + 1}`} autoPlay={shouldLoad} loop muted playsInline preload="none" poster={mediaUrl("/images/service-hair-v2.webp")} src={shouldLoad ? scene[0] : undefined} onCanPlay={() => markHeroVideoReady(index)} aria-hidden="true" key={scene[0]} />; })}
+          ].map((scene, index) => { const shouldLoad = index === 0 || loadHeroSequence; return <video className={`hero-video hero-video-${index + 1}`} autoPlay={shouldLoad} loop muted playsInline preload={index === 0 ? "auto" : "none"} poster={mediaUrl("/images/service-hair-v2.webp")} src={shouldLoad ? scene[0] : undefined} onCanPlay={() => markHeroVideoReady(index)} aria-hidden="true" key={scene[0]} />; })}
         </div>
         <div className="hero-overlay" />
         <div className="hero-copy">
