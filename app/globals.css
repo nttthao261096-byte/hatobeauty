@@ -72,8 +72,8 @@ img { user-select: none; }
 @keyframes quietReveal { from { opacity: 0; transform: translateY(14px); } }
 
 .service-ribbon { height: 64px; display: flex; align-items: center; overflow: hidden; border-top: 1px solid rgba(255,255,255,.28); border-bottom: 1px solid rgba(92,61,43,.15); background: linear-gradient(90deg, #80634f, #b48e72 48%, #80634f); color: #fffaf6; }
-.service-ribbon > div { width: max-content; display: flex; align-items: center; gap: 34px; white-space: nowrap; animation: ribbonDrift 28s linear infinite; }
-.service-ribbon .ribbon-item { display: inline-flex; align-items: center; gap: 34px; }
+.service-ribbon > div { width: max-content; display: flex; align-items: center; gap: 0; white-space: nowrap; animation: ribbonDrift 32s linear infinite; }
+.service-ribbon .ribbon-item { min-width: clamp(270px, 22vw, 410px); padding: 0 clamp(20px, 2.2vw, 42px); display: inline-flex; align-items: center; justify-content: space-between; gap: 28px; }
 .service-ribbon .ribbon-item > span { font-family: var(--display); font-size: 21px; }
 .service-ribbon i { color: #ead5c4; font-size: 10px; font-style: normal; }
 @keyframes ribbonDrift { to { transform: translateX(-42%); } }
@@ -1932,13 +1932,14 @@ img { user-select: none; }
 .contact-page-intro { position: relative; min-height: 230px; padding-right: clamp(120px, 18vw, 300px); isolation: isolate; }
 .contact-page-intro h1 { max-width: 920px; font-size: clamp(54px, 6vw, 88px); line-height: .94; letter-spacing: -.035em; }
 .contact-page-intro .seo-answer { max-width: 790px; margin-top: 22px; font-size: clamp(17px, 1.45vw, 22px); line-height: 1.55; }
-.contact-orbit { position: absolute; z-index: -1; display: block; border: 1px solid rgba(142, 96, 72, .22); border-radius: 50%; pointer-events: none; }
-.contact-orbit-one { width: clamp(190px, 20vw, 310px); height: clamp(190px, 20vw, 310px); top: -68px; right: 0; box-shadow: inset 0 0 0 34px rgba(225, 197, 179, .11), inset 0 0 0 35px rgba(142, 96, 72, .1); }
-.contact-orbit-one::before, .contact-orbit-one::after { content: ""; position: absolute; border-radius: 50%; }
-.contact-orbit-one::before { width: 32%; height: 32%; top: 34%; left: 34%; border: 1px solid rgba(142, 96, 72, .18); background: rgba(226, 190, 168, .14); }
-.contact-orbit-one::after { width: 12px; height: 12px; right: 11%; bottom: 20%; background: #b77e5f; box-shadow: 0 0 0 8px rgba(183, 126, 95, .11); }
-.contact-orbit-two { width: 74px; height: 74px; top: 142px; right: clamp(150px, 16vw, 250px); background: rgba(245, 222, 208, .42); }
-.contact-orbit-two::after { content: ""; position: absolute; width: clamp(100px, 10vw, 160px); height: 1px; top: 36px; left: 73px; background: linear-gradient(90deg, rgba(142,96,72,.3), transparent); transform: rotate(-16deg); transform-origin: left; }
+.contact-orbit { position: absolute; z-index: -1; display: block; border: 1px solid rgba(153, 105, 81, .22); border-radius: 50%; background: transparent; pointer-events: none; animation: contactThreadFloat 14s ease-in-out infinite alternate; }
+.contact-orbit-one { width: clamp(720px, 72vw, 1160px); height: clamp(420px, 45vw, 690px); top: clamp(-470px, -29vw, -320px); right: clamp(-420px, -20vw, -220px); transform: rotate(-8deg); }
+.contact-orbit-one::before, .contact-orbit-one::after { content: ""; position: absolute; border: 1px solid rgba(153, 105, 81, .13); border-radius: 50%; }
+.contact-orbit-one::before { inset: 9% 7%; }
+.contact-orbit-one::after { inset: 19% 15%; }
+.contact-orbit-two { width: clamp(760px, 78vw, 1240px); height: clamp(420px, 48vw, 720px); top: clamp(90px, 10vw, 150px); right: clamp(-920px, -54vw, -620px); transform: rotate(-18deg); animation-delay: -7s; }
+.contact-orbit-two::before { content: ""; position: absolute; inset: 12% 9%; border: 1px solid rgba(153, 105, 81, .12); border-radius: 50%; }
+@keyframes contactThreadFloat { from { translate: 0 0; } to { translate: -12px 9px; } }
 .contact-page .contact-page-panel { margin-top: clamp(34px, 4vw, 52px); }
 .contact-page-info { padding: 10px 0; display: flex; flex-direction: column; justify-content: center; }
 .contact-details { min-width: 0; }
@@ -2016,9 +2017,8 @@ img { user-select: none; }
   .contact-page-intro { min-height: 210px; padding-right: 54px; }
   .contact-page-intro h1 { max-width: 310px; font-size: clamp(45px, 15vw, 61px); line-height: .95; }
   .contact-page-intro .seo-answer { max-width: 92%; margin-top: 18px; font-size: 15px; line-height: 1.55; }
-  .contact-orbit-one { width: 142px; height: 142px; top: -24px; right: -67px; }
-  .contact-orbit-two { width: 46px; height: 46px; top: 118px; right: 21px; }
-  .contact-orbit-two::after { width: 58px; top: 22px; left: 45px; }
+  .contact-orbit-one { width: 520px; height: 320px; top: -225px; right: -350px; }
+  .contact-orbit-two { width: 620px; height: 390px; top: 115px; right: -535px; }
   .contact-page-panel { margin-top: 38px; gap: 32px; }
   .contact-form-grid { grid-template-columns: 1fr; }
   .contact-form-wide { grid-column: auto; }
@@ -2071,16 +2071,20 @@ img { user-select: none; }
     justify-self: end;
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
+    min-height: 30px;
+    padding: 5px 13px 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(232,211,196,.62), rgba(246,235,226,.78));
     color: #654a3c;
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 650;
-    letter-spacing: .025em;
+    letter-spacing: .018em;
     line-height: 1;
     white-space: nowrap;
   }
-  .header-hotline::before { content: ""; width: 38px; height: 1px; margin-right: 2px; background: rgba(110,77,60,.35); }
-  .header-hotline span { color: #a06f54; font-size: 9px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+  .header-hotline::before { content: ""; width: 22px; height: 1px; margin-right: 1px; background: linear-gradient(90deg, transparent, rgba(110,77,60,.38)); }
+  .header-hotline span { margin-right: 2px; color: #9c6b52; font-family: var(--display); font-size: 14px; font-style: italic; font-weight: 500; letter-spacing: .03em; text-transform: none; }
   .header-hotline a { color: inherit; text-decoration: none; transition: color .2s ease; }
   .header-hotline a:hover { color: #a06f54; }
   .header-hotline i { color: #b99682; font-style: normal; }
