@@ -116,6 +116,9 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, /Chúng tôi cam kết sẽ mang đến những điều tốt nhất/i);
   assert.match(html, /TỎA SÁNG THEO CÁCH CỦA BẠN/i);
   assert.match(html, /Nhận tư vấn riêng/i);
+  assert.match(html, /aria-label="Hotline hato Beauty"/i);
+  assert.match(html, /href="tel:[+]84703214868">0703 214 868/i);
+  assert.match(html, /href="tel:[+]84915860446">0915 860 446/i);
 });
 
 test("renders complete contact details and social links", async () => {

@@ -82,6 +82,7 @@ export function SeoHeader({ lang }: { lang: SeoLang }) {
     <div className="header-tools">
       <div className="language-switch"><Link className={lang === "vi" ? "active" : ""} href="/" hrefLang="vi-VN">VI</Link><span>/</span><Link className={lang === "en" ? "active" : ""} href="/en/" hrefLang="en">EN</Link></div>
       <Link className="header-booking-link" href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<span>↗</span></Link>
+      <div className="header-hotline" aria-label={lang === "vi" ? "Hotline hato Beauty" : "hato Beauty hotline"}><span>Hotline</span><a href="tel:+84703214868">0703 214 868</a><i aria-hidden="true">·</i><a href="tel:+84915860446">0915 860 446</a></div>
     </div>
   </header>;
 }
