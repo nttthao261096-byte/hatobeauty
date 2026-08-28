@@ -4,7 +4,9 @@ import Link from "next/link";
 import { BookingForm } from "./BookingForm";
 import { ContactForm } from "./ContactForm";
 import { ContactDetails, ContactMap } from "./ContactDetails";
-import { journalPath, journalTopics, mediaUrl, primarySeoServices, servicePath, siteUrl, type SeoLang, type SeoService } from "./seo-data";
+import type { ResultContent } from "./content";
+import { IconArrow } from "./icons";
+import { journalPath, journalTopics, mediaUrl, primarySeoServices, seoServices, servicePath, siteUrl, type SeoLang, type SeoService } from "./seo-data";
 import { SiteHeader } from "./SiteHeader";
 
 import { journalIntentFaqs, serviceIntentFaqs } from "./seo-faq-data";
@@ -76,14 +78,14 @@ export function SeoHeader({ lang }: { lang: SeoLang }) {
 
 export function SeoFooter({ lang }: { lang: SeoLang }) {
   const links = lang === "vi"
-    ? [["/ve-hato-beauty/", "Về chúng tôi"], ["/dich-vu/", "Dịch vụ"], ["/kien-thuc/", "Kiến thức"], ["/#results", "Kết quả"]]
-    : [["/en/about/", "About us"], ["/en/services/", "Services"], ["/en/journal/", "Journal"], ["/en/#results", "Results"]];
+    ? [["/ve-hato-beauty/", "Về chúng tôi"], ["/dich-vu/", "Dịch vụ"], ["/kien-thuc/", "Kiến thức"], ["/ket-qua/", "Kết quả"]]
+    : [["/en/about/", "About us"], ["/en/services/", "Services"], ["/en/journal/", "Journal"], ["/en/results/", "Results"]];
   return <footer className="site-footer inner-page-footer">
     <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />
     <div className="footer-intro"><p>{lang === "vi" ? "hato Beauty · Không gian làm đẹp" : "hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
     <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} /></div>
     <div className="footer-links"><h3>{lang === "vi" ? "Khám phá" : "Discover"}</h3>{links.map(([href, label], index) => <Link href={href} key={href}><span>0{index + 1}</span>{label}</Link>)}</div>
-    <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><ContactDetails lang={lang} compact /><Link href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<span>↗</span></Link></div>
+    <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><ContactDetails lang={lang} compact /><Link href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></Link></div>
     <div className="footer-bottom"><span>© 2026 hato Beauty</span><div><Link href={lang === "vi" ? "/" : "/en/"}>{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</Link><Link href={lang === "vi" ? "/chinh-sach-bien-tap/" : "/en/editorial-policy/"}>{lang === "vi" ? "Biên tập" : "Editorial"}</Link><Link href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</Link></div></div>
   </footer>;
 }
@@ -113,7 +115,7 @@ export function KnowledgeIndex({ lang }: { lang: SeoLang }) {
       const articleTitle = lang === "vi" ? `${service.vi.name}: hướng dẫn chuẩn bị và chăm sóc` : `${service.en.name}: preparation and aftercare guide`;
       return <Link className="index-card journal-index-card" href={journalPath(service, lang)} key={topic.id}>
         <div className="index-card-image"><Image src={topic.image} alt={articleTitle} fill sizes="(max-width: 760px) 100vw, 50vw" /></div>
-        <div className="index-card-copy"><div><span>{String(index + 1).padStart(2, "0")}</span><small>{index % 2 === 0 ? (lang === "vi" ? "5 phút đọc" : "5 min read") : (lang === "vi" ? "4 phút đọc" : "4 min read")}</small></div><h2>{articleTitle}</h2><p>{service[lang].description}</p><strong>{lang === "vi" ? "Đọc bài viết" : "Read article"} ↗</strong></div>
+        <div className="index-card-copy"><div><span>{String(index + 1).padStart(2, "0")}</span><small>{index % 2 === 0 ? (lang === "vi" ? "5 phút đọc" : "5 min read") : (lang === "vi" ? "4 phút đọc" : "4 min read")}</small></div><h2>{articleTitle}</h2><p>{service[lang].description}</p><strong>{lang === "vi" ? "Đọc bài viết" : "Read article"} <IconArrow /></strong></div>
       </Link>;
     })}</section>
   </main><SeoFooter lang={lang} /></div>;
@@ -142,7 +144,7 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
   return <div className="seo-page" lang={lang}><JsonLd data={schema} /><SeoHeader lang={lang} />
     <main>
       {detailGroups.length > 0 && <section className={`service-detail-menu service-detail-menu--${service.id}`} id="service-menu">
-        <header className="service-detail-menu-heading"><div className="service-detail-menu-label"><span>{serviceNumber}</span><p>{lang === "vi" ? "DANH MỤC DỊCH VỤ" : "SERVICE MENU"}</p></div><div className="service-detail-menu-summary"><h1>{c.name}</h1><p>{c.description}</p><div className="service-menu-facts"><span><small>{lang === "vi" ? "Thời gian dự kiến" : "Estimated time"}</small><strong>{duration}</strong></span><span><small>{lang === "vi" ? "Khoảng giá tham khảo" : "Guide price"}</small><strong>{price}</strong></span></div><Link href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<span>↗</span></Link></div></header>
+        <header className="service-detail-menu-heading"><div className="service-detail-menu-label"><span>{serviceNumber}</span><p>{lang === "vi" ? "DANH MỤC DỊCH VỤ" : "SERVICE MENU"}</p></div><div className="service-detail-menu-summary"><h1>{c.name}</h1><p>{c.description}</p><div className="service-menu-facts"><span><small>{lang === "vi" ? "Thời gian dự kiến" : "Estimated time"}</small><strong>{duration}</strong></span><span><small>{lang === "vi" ? "Khoảng giá tham khảo" : "Guide price"}</small><strong>{price}</strong></span></div><Link href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></Link></div></header>
         <div className={`service-detail-groups ${detailGroups.length === 1 ? "single" : ""}`}>{detailGroups.map((group, groupIndex) => <article key={group.title}>
           <div className="service-detail-group-title"><span>{serviceNumber}.{groupIndex + 1}</span><h3>{group.title}</h3></div>
           <ol>{group.items.map((item, itemIndex) => <li key={item}><span>{String(itemIndex + 1).padStart(2, "0")}</span><strong>{item}</strong></li>)}</ol>
@@ -163,7 +165,7 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
         <aside className="service-care-card service-care-note"><span>04</span><h2>{lang === "vi" ? "Lưu ý nhẹ nhàng" : "A gentle safety note"}</h2><p>{c.caution}</p></aside>
       </section>
       <section className="seo-faq"><p className="seo-eyebrow">FAQ</p><h2>{lang === "vi" ? "Câu hỏi thường gặp" : "Frequently asked questions"}</h2>{faqs.map(([q, a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
-      <section className="seo-related"><h2>{lang === "vi" ? "Khám phá thêm" : "Explore more"}</h2><div>{primarySeoServices.filter(x => x.id !== service.id).map(x => <Link href={servicePath(x, lang)} key={x.id}>{x[lang].name}<span>↗</span></Link>)}</div><p><Link href={journalPath(service, lang)}>{lang === "vi" ? "Đọc kiến thức liên quan" : "Read the related care guide"} →</Link> · <Link href={pairedPath} hrefLang={lang === "vi" ? "en" : "vi-VN"}>{lang === "vi" ? "Read in English" : "Đọc tiếng Việt"}</Link></p></section>
+      <section className="seo-related"><h2>{lang === "vi" ? "Khám phá thêm" : "Explore more"}</h2><div>{primarySeoServices.filter(x => x.id !== service.id).map(x => <Link href={servicePath(x, lang)} key={x.id}>{x[lang].name}<IconArrow /></Link>)}</div><p><Link href={journalPath(service, lang)}>{lang === "vi" ? "Đọc kiến thức liên quan" : "Read the related care guide"} →</Link> · <Link href={pairedPath} hrefLang={lang === "vi" ? "en" : "vi-VN"}>{lang === "vi" ? "Read in English" : "Đọc tiếng Việt"}</Link></p></section>
     </main><SeoFooter lang={lang} /></div>;
 }
 
@@ -188,7 +190,7 @@ export function JournalLanding({ service, lang }: { service: SeoService; lang: S
       <h2>{lang === "vi" ? "An toàn và kỳ vọng thực tế" : "Safety and realistic expectations"}</h2><p>{c.caution}</p><p>{c.expectations}</p>
       <section className="article-faq"><h2>{lang === "vi" ? "Câu hỏi thường gặp" : "Frequently asked questions"}</h2>{faqs.map(([question, answer]) => <div key={question}><h3>{question}</h3><p>{answer}</p></div>)}</section>
       {service.id === "hair-removal" && <p className="seo-source">{lang === "vi" ? "Nguồn tham khảo y khoa:" : "Medical reference:"} <a href="https://www.aad.org/public/cosmetic/hair-removal/laser-hair-removal-preparation" rel="noopener noreferrer">American Academy of Dermatology</a>.</p>}
-      <div className="article-next"><Link className="seo-cta" href={servicePath(service, lang)}>{lang === "vi" ? "Xem dịch vụ liên quan" : "View related service"} ↗</Link><Link href={lang === "vi" ? "/kien-thuc/" : "/en/journal/"}>{lang === "vi" ? "Xem tất cả bài viết" : "View all articles"} →</Link></div>
+      <div className="article-next"><Link className="seo-cta" href={servicePath(service, lang)}>{lang === "vi" ? "Xem dịch vụ liên quan" : "View related service"} <IconArrow /></Link><Link href={lang === "vi" ? "/kien-thuc/" : "/en/journal/"}>{lang === "vi" ? "Xem tất cả bài viết" : "View all articles"}</Link></div>
     </article>
   </main><SeoFooter lang={lang} /></div>;
 }
@@ -212,5 +214,31 @@ export function TrustPage({ lang, kind }: { lang: SeoLang; kind: "about" | "cont
       editorial: ["Editorial policy", "Journal content helps guests understand cosmetic care and does not replace medical advice. Technical or health claims are phrased carefully and sourced when needed."],
     },
   }[lang][kind];
-  return <div className="seo-page" lang={lang}><SeoHeader lang={lang} /><main className={`seo-trust ${kind === "book" ? "booking-page" : ""}${kind === "contact" ? " contact-page" : ""}`}>{kind === "contact" ? <header className="contact-page-intro"><span className="contact-orbit contact-orbit-one" aria-hidden="true" /><span className="contact-orbit contact-orbit-two" aria-hidden="true" /><h1>{data[0]}</h1><p className="seo-answer">{data[1]}</p></header> : <><p className="seo-eyebrow">hato Beauty</p><h1>{data[0]}</h1><p className="seo-answer">{data[1]}</p></>}{kind === "book" ? <BookingForm lang={lang} /> : kind === "contact" ? <><div className="contact-page-panel"><div className="contact-page-info"><ContactDetails lang={lang} /></div><ContactForm lang={lang} /></div><div className="contact-page-map"><ContactMap lang={lang} /></div></> : <div className="seo-related"><h2>{lang === "vi" ? "Bắt đầu từ dịch vụ phù hợp" : "Start with the right service"}</h2><div>{primarySeoServices.map(s => <Link href={servicePath(s, lang)} key={s.id}>{s[lang].name}<span>↗</span></Link>)}</div></div>}</main><SeoFooter lang={lang} /></div>;
+  return <div className="seo-page" lang={lang}><SeoHeader lang={lang} /><main className={`seo-trust ${kind === "book" ? "booking-page" : ""}${kind === "contact" ? " contact-page" : ""}`}>{kind === "contact" ? <header className="contact-page-intro"><span className="contact-orbit contact-orbit-one" aria-hidden="true" /><span className="contact-orbit contact-orbit-two" aria-hidden="true" /><h1>{data[0]}</h1><p className="seo-answer">{data[1]}</p></header> : <><p className="seo-eyebrow">hato Beauty</p><h1>{data[0]}</h1><p className="seo-answer">{data[1]}</p></>}{kind === "book" ? <BookingForm lang={lang} /> : kind === "contact" ? <><div className="contact-page-panel"><div className="contact-page-info"><ContactDetails lang={lang} /></div><ContactForm lang={lang} /></div><div className="contact-page-map"><ContactMap lang={lang} /></div></> : <div className="seo-related"><h2>{lang === "vi" ? "Bắt đầu từ dịch vụ phù hợp" : "Start with the right service"}</h2><div>{primarySeoServices.map(s => <Link href={servicePath(s, lang)} key={s.id}>{s[lang].name}<IconArrow /></Link>)}</div></div>}</main><SeoFooter lang={lang} /></div>;
+}
+
+export function ResultsIndex({ lang, results }: { lang: SeoLang; results: ResultContent[] }) {
+  const title = lang === "vi" ? "Kết quả khách hàng" : "Client results";
+  const intro = lang === "vi"
+    ? "Hình ảnh trước và sau được chia sẻ với sự đồng ý của khách. Kết quả thực tế phụ thuộc vào tình trạng ban đầu và liệu trình riêng."
+    : "Before-and-after images shared with guest consent. Individual results vary with starting point and personal care plan.";
+  const serviceLinks = [seoServices[0], seoServices[3], seoServices[2]] as const;
+
+  return <div className="seo-page results-page" lang={lang}><SeoHeader lang={lang} /><main className="index-page">
+    <header className="index-hero">
+      <nav className="breadcrumbs" aria-label={lang === "vi" ? "Đường dẫn" : "Breadcrumb"}><Link href={lang === "vi" ? "/" : "/en/"}>{lang === "vi" ? "Trang chủ" : "Home"}</Link><span>/</span><span>{title}</span></nav>
+      <p className="seo-eyebrow">{lang === "vi" ? "TRƯỚC & SAU" : "BEFORE & AFTER"}</p>
+      <h1>{title}</h1>
+      <p>{intro}</p>
+    </header>
+    <section className="result-grid" aria-label={title}>
+      {results.map((result, index) => {
+        const service = serviceLinks[index] ?? seoServices[0];
+        return <Link href={servicePath(service, lang)} key={result.vi[0]}>
+          <div className="result-image"><Image src={result.image} alt={result[lang][0]} fill sizes="(max-width: 720px) 100vw, 33vw" /><div className="comparison-labels"><span>{lang === "vi" ? "Trước" : "Before"}</span><span>{lang === "vi" ? "Sau" : "After"}</span></div></div>
+          <div className="result-copy"><h3>{result[lang][0]}</h3><p>{result[lang][1]}</p><span className="result-link-label">{lang === "vi" ? "Xem dịch vụ" : "View service"} <IconArrow /></span></div>
+        </Link>;
+      })}
+    </section>
+  </main><SeoFooter lang={lang} /></div>;
 }

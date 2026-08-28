@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 
 import type { Lang } from "./content";
+import { IconArrow } from "./icons";
 import { mediaUrl } from "./seo-data";
 
 const navByLang = {
@@ -12,14 +13,14 @@ const navByLang = {
     ["/ve-hato-beauty/", "Về chúng tôi"],
     ["/dich-vu/", "Dịch vụ"],
     ["/kien-thuc/", "Kiến thức"],
-    ["/#results", "Kết quả"],
+    ["/ket-qua/", "Kết quả"],
     ["/lien-he/", "Liên hệ"],
   ],
   en: [
     ["/en/about/", "About"],
     ["/en/services/", "Services"],
     ["/en/journal/", "Journal"],
-    ["/en/#results", "Results"],
+    ["/en/results/", "Results"],
     ["/en/contact/", "Contact"],
   ],
 } as const;
@@ -96,7 +97,7 @@ export function SiteHeader({
             <a href="tel:+84915860446">0915 860 446</a>
           </div>
           <Link className="header-booking-link nav-drawer-book" href={bookHref} onClick={() => setMenuOpen(false)}>
-            <span className="header-book-full">{bookLabel}</span><span>↗</span>
+            <span className="header-book-full">{bookLabel}</span><IconArrow />
           </Link>
         </div>
       </nav>
@@ -109,7 +110,7 @@ export function SiteHeader({
         <Link className="header-booking-link" href={bookHref}>
           <span className="header-book-full">{bookLabel}</span>
           <span className="header-book-short">{lang === "vi" ? "Đặt lịch" : "Book"}</span>
-          <span>↗</span>
+          <IconArrow />
         </Link>
         <button className={menuOpen ? "menu-button is-open" : "menu-button"} aria-label={menuLabel} aria-expanded={menuOpen} aria-controls="site-menu" onClick={() => setMenuOpen(!menuOpen)}>
           <span />

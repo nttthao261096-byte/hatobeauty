@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 
 import { getBookingErrorMessage } from "./booking-errors";
 import { BOOKING_PHONE_PATTERN } from "./booking-validation";
+import { IconArrow } from "./icons";
 import type { SeoLang } from "./seo-data";
 
 export function ContactForm({ lang }: { lang: SeoLang }) {
@@ -75,6 +76,6 @@ export function ContactForm({ lang }: { lang: SeoLang }) {
     <p className="contact-form-note">{lang === "vi" ? "Chi phí, thời gian và chính sách chỉ được xác nhận khi hato liên hệ lại." : "Pricing, timing and policies are confirmed when hato contacts you."}</p>
     <label className="contact-form-consent"><input type="checkbox" required /><span>{lang === "vi" ? "Tôi đồng ý để hato liên hệ lại về yêu cầu này theo " : "I agree that hato may contact me about this request under the "}<Link href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "chính sách bảo mật" : "privacy policy"}</Link>.</span></label>
     {error && <p className="booking-error" role="alert">{error}</p>}
-    <button type="submit" disabled={isSubmitting}>{isSubmitting ? (lang === "vi" ? "Đang gửi..." : "Sending...") : (lang === "vi" ? "Gửi yêu cầu" : "Send request")}<span aria-hidden="true">↗</span></button>
+    <button className="button primary" type="submit" disabled={isSubmitting}>{isSubmitting ? (lang === "vi" ? "Đang gửi..." : "Sending...") : (lang === "vi" ? "Gửi yêu cầu" : "Send request")}<IconArrow /></button>
   </form>;
 }

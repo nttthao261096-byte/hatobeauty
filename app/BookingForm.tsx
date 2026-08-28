@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 
 import { getBookingErrorMessage } from "./booking-errors";
 import { BOOKING_PHONE_PATTERN } from "./booking-validation";
+import { IconArrow } from "./icons";
 import { seoServices, type SeoLang } from "./seo-data";
 import { useMinimumBookingDate } from "./use-minimum-booking-date";
 
@@ -70,6 +71,6 @@ export function BookingForm({ lang }: { lang: SeoLang }) {
     </div>
     <p className="booking-consent">{lang === "vi" ? "Khi gửi yêu cầu, bạn đồng ý để hato liên hệ về lịch hẹn này theo " : "By sending this request, you agree that hato may contact you about this appointment under the "}<Link href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "chính sách bảo mật" : "privacy policy"}</Link>.</p>
     {error && <p className="booking-error" role="alert">{error}</p>}
-    <button className="seo-cta" type="submit" disabled={isSubmitting}>{isSubmitting ? (lang === "vi" ? "Đang gửi..." : "Sending...") : (lang === "vi" ? "Gửi yêu cầu đặt lịch" : "Send booking request")} <span>↗</span></button>
+    <button className="seo-cta button primary" type="submit" disabled={isSubmitting}>{isSubmitting ? (lang === "vi" ? "Đang gửi..." : "Sending...") : (lang === "vi" ? "Gửi yêu cầu đặt lịch" : "Send booking request")} <IconArrow /></button>
   </form>;
 }
