@@ -134,6 +134,9 @@ test("renders complete contact details and social links", async () => {
   assert.match(html, /<iframe[^>]+google\.com\/maps/i);
   assert.match(html, /aria-label="TikTok hato Beauty"[^>]*><span[^>]*><svg/i);
   assert.match(html, /<h1>Liên hệ hato Beauty<[/]h1>/i);
+  assert.doesNotMatch(html, /<p class="seo-eyebrow">hato Beauty<[/]p>/i);
+  assert.match(html, /class="contact-page-intro"/i);
+  assert.match(html, /class="contact-orbit contact-orbit-one"/i);
   assert.match(html, /class="contact-lead-form"/i);
   assert.match(html, /name="name"/i);
   assert.match(html, /name="phone"/i);
