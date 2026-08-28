@@ -88,7 +88,7 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, />Triệt lông</i);
   assert.match(html, />Tẩy lông</i);
   assert.match(html, /Chăm sóc da đầu &amp; Thư giãn/i);
-  assert.match(html, /05<\/span><p>nhóm dịch vụ chăm sóc/i);
+  assert.doesNotMatch(html, /class="hero-proof"/i);
   assert.doesNotMatch(html, />Bảng giá</i);
   assert.match(html, />Kết quả</i);
   assert.doesNotMatch(html, /class="service-card service-card-body"/i);

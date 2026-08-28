@@ -215,7 +215,6 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
           <h1>{t.heroTitle}</h1>
           <p className="hero-lead">{lang === "vi" ? "Hiệu quả đến từ sự thấu hiểu: công nghệ phù hợp, chuyên môn cẩn trọng và một lộ trình được thiết kế theo nhu cầu thật của bạn." : "Results begin with understanding: considered technology, careful expertise and a plan shaped around what you truly need."}</p>
           <div className="hero-actions"><a className="button primary" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{t.explore}<span>↗</span></a><a className="text-link" href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{t.book}<span>↗</span></a></div>
-          <div className="hero-proof"><span>05</span><p>{lang === "vi" ? "nhóm dịch vụ chăm sóc" : "care service groups"}</p><span>VI · EN</span><p>{lang === "vi" ? "tư vấn rõ ràng, dễ tiếp cận" : "clear, accessible guidance"}</p></div>
         </div>
       </section>
 
