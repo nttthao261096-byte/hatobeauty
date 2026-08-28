@@ -130,6 +130,9 @@ test("renders complete contact details and social links", async () => {
   assert.match(html, /href="https:\/\/www\.instagram\.com\/hatobeauty\/"/i);
   assert.match(html, /href="https:\/\/facebook\.com\/hatobeautyy"/i);
   assert.match(html, /Hằng ngày · 08:00–19:30/i);
+  assert.match(html, /127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn, Đà Nẵng/i);
+  assert.match(html, /<iframe[^>]+google\.com\/maps/i);
+  assert.match(html, /aria-label="TikTok hato Beauty"[^>]*><span[^>]*><svg/i);
 });
 test("renders valid URLs for every service breadcrumb item", async () => {
   const cases = [
