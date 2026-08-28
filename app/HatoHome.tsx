@@ -106,6 +106,9 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingError, setBookingError] = useState("");
+  const [loadHeroSequence, setLoadHeroSequence] = useState(false);
+  const [heroSequenceReady, setHeroSequenceReady] = useState(false);
+  const heroReadyVideos = useRef(new Set<number>());
   const dialogRef = useRef<HTMLElement>(null);
   const serviceDialogRef = useRef<HTMLElement>(null);
   const t = copy[lang];
@@ -138,6 +141,17 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
     const timer = window.setInterval(() => setReviewOffset((current) => (current + 4) % testimonials.length), 5200);
     return () => window.clearInterval(timer);
   }, [testimonials.length]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setLoadHeroSequence(true), 12000);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  function markHeroVideoReady(index: number) {
+    if (index === 0) return;
+    heroReadyVideos.current.add(index);
+    if (heroReadyVideos.current.size === 3) setHeroSequenceReady(true);
+  }
 
   function openBooking(serviceId?: unknown) {
     setBookingServiceId(typeof serviceId === "string" ? serviceId : "");
@@ -202,13 +216,13 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       </header>
 
       <section className="hero" id="top">
-        <div className="hero-media" aria-label={lang === "vi" ? "Chuỗi trải nghiệm chăm sóc tại hato Beauty" : "A sequence of care experiences at hato Beauty"}>
+        <div className={`hero-media${heroSequenceReady ? " is-sequence-ready" : ""}`} aria-label={lang === "vi" ? "Chuỗi trải nghiệm chăm sóc tại hato Beauty" : "A sequence of care experiences at hato Beauty"}>
           {[
             [mediaUrl("/video/hero-head-spa.mp4"), "Gội đầu dưỡng sinh", "Head spa"],
             [mediaUrl("/video/hero-hair-removal.mp4"), "Triệt lông", "Hair removal"],
             [mediaUrl("/video/hero-brow-warm.mp4"), "Uốn mi & định hình mày", "Lash & brow"],
             [mediaUrl("/video/hero-care-beige-clinic.mp4"), "Chăm sóc da", "Facial care"],
-          ].map((scene, index) => <video className={`hero-video hero-video-${index + 1}`} autoPlay loop muted playsInline preload={index === 0 ? "metadata" : "none"} poster={index === 0 ? mediaUrl("/images/service-hair-v2.webp") : undefined} aria-hidden="true" key={scene[0]}><source src={scene[0]} type="video/mp4" /></video>)}
+          ].map((scene, index) => <video className={`hero-video hero-video-${index + 1}`} autoPlay={index === 0 || loadHeroSequence} loop muted playsInline preload={index === 0 ? "metadata" : "none"} poster={mediaUrl("/images/service-hair-v2.webp")} src={index === 0 || loadHeroSequence ? scene[0] : undefined} onCanPlay={() => markHeroVideoReady(index)} aria-hidden="true" key={scene[0]} />)}
         </div>
         <div className="hero-overlay" />
         <div className="hero-copy">

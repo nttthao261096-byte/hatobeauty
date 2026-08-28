@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
+import { Be_Vietnam_Pro, Cormorant_Garamond, Lora } from "next/font/google";
 import Script from "next/script";
 import { LanguageSync } from "./LanguageSync";
 import { mediaUrl } from "./seo-data";
 import "./globals.css";
+
+const bodyFont = Be_Vietnam_Pro({ subsets: ["latin", "vietnamese"], weight: ["300", "400", "500", "600"], variable: "--font-body", display: "swap" });
+const brandFont = Cormorant_Garamond({ subsets: ["latin", "vietnamese"], weight: ["400", "500", "600"], variable: "--font-brand", display: "swap" });
+const displayFont = Lora({ subsets: ["latin", "vietnamese"], weight: ["400", "500"], variable: "--font-display", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hatobeauty.com"),
@@ -30,7 +35,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="vi" data-scroll-behavior="smooth" suppressHydrationWarning><body>
+  return <html lang="vi" data-scroll-behavior="smooth" suppressHydrationWarning><body className={`${bodyFont.variable} ${brandFont.variable} ${displayFont.variable}`}>
     <Script id="sync-document-language" strategy="beforeInteractive">{`document.documentElement.lang=location.pathname.startsWith('/en')?'en':'vi'`}</Script>
     <LanguageSync />
     {children}
