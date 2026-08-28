@@ -106,6 +106,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingError, setBookingError] = useState("");
+  const [loadFirstHeroVideo, setLoadFirstHeroVideo] = useState(false);
   const [loadHeroSequence, setLoadHeroSequence] = useState(false);
   const [heroSequenceReady, setHeroSequenceReady] = useState(false);
   const heroReadyVideos = useRef(new Set<number>());
@@ -143,8 +144,9 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
   }, [testimonials.length]);
 
   useEffect(() => {
+    const firstVideoTimer = window.setTimeout(() => setLoadFirstHeroVideo(true), 750);
     const timer = window.setTimeout(() => setLoadHeroSequence(true), 12000);
-    return () => window.clearTimeout(timer);
+    return () => { window.clearTimeout(firstVideoTimer); window.clearTimeout(timer); };
   }, []);
 
   function markHeroVideoReady(index: number) {
@@ -200,7 +202,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       <div className="announcement"><p>{brandText(t.announcement)}</p></div>
 
       <header className="site-header">
-        <a className="brand" href={lang === "vi" ? "/" : "/en/"} aria-label="hato Beauty"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} priority unoptimized /></a>
+        <a className="brand" href={lang === "vi" ? "/" : "/en/"} aria-label="hato Beauty"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} priority /></a>
         <nav className={menuOpen ? "nav is-open" : "nav"} aria-label={lang === "vi" ? "Điều hướng chính" : "Main navigation"}>
           {navItems.map(([href, label]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
           <form className="nav-search" role="search" onSubmit={(event) => { event.preventDefault(); setMenuOpen(false); document.querySelector("#services")?.scrollIntoView(); }}>
@@ -222,7 +224,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
             [mediaUrl("/video/hero-hair-removal.mp4"), "Triệt lông", "Hair removal"],
             [mediaUrl("/video/hero-brow-warm.mp4"), "Uốn mi & định hình mày", "Lash & brow"],
             [mediaUrl("/video/hero-care-beige-clinic.mp4"), "Chăm sóc da", "Facial care"],
-          ].map((scene, index) => <video className={`hero-video hero-video-${index + 1}`} autoPlay={index === 0 || loadHeroSequence} loop muted playsInline preload={index === 0 ? "metadata" : "none"} poster={mediaUrl("/images/service-hair-v2.webp")} src={index === 0 || loadHeroSequence ? scene[0] : undefined} onCanPlay={() => markHeroVideoReady(index)} aria-hidden="true" key={scene[0]} />)}
+          ].map((scene, index) => { const shouldLoad = index === 0 ? loadFirstHeroVideo : loadHeroSequence; return <video className={`hero-video hero-video-${index + 1}`} autoPlay={shouldLoad} loop muted playsInline preload="none" poster={mediaUrl("/images/service-hair-v2.webp")} src={shouldLoad ? scene[0] : undefined} onCanPlay={() => markHeroVideoReady(index)} aria-hidden="true" key={scene[0]} />; })}
         </div>
         <div className="hero-overlay" />
         <div className="hero-copy">
@@ -239,7 +241,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <div className="section-heading"><p className="eyebrow">{t.whyEyebrow}</p><h2>{t.whyTitle}</h2><div className="section-heading-side"><p>{lang === "vi" ? "Chúng tôi xây dựng trải nghiệm làm đẹp từ những điều cụ thể: công nghệ phù hợp, không gian dễ chịu, dịch vụ minh bạch và đội ngũ có chuyên môn." : "We build every beauty experience around concrete values: suitable technology, a calming space, clear services and a capable team."}</p><Link className="section-route-link" href={lang === "vi" ? "/ve-hato-beauty/" : "/en/about/"}>{lang === "vi" ? "Về hato Beauty" : "About hato Beauty"}<span>↗</span></Link></div></div>
         <div className="feature-slider" id="experience">
           <Link className="feature-stage" href={lang === "vi" ? "/ve-hato-beauty/" : "/en/about/"} key={highlights[highlightIndex].number}>
-            <div className="feature-image"><Image src={highlights[highlightIndex].image} alt={highlights[highlightIndex][lang][0]} fill sizes="(max-width: 760px) 100vw, 58vw" unoptimized /></div>
+            <div className="feature-image"><Image src={highlights[highlightIndex].image} alt={highlights[highlightIndex][lang][0]} fill sizes="(max-width: 760px) 100vw, 58vw" /></div>
             <article className="feature-copy"><span>{highlights[highlightIndex].number} / 04</span><h3>{highlights[highlightIndex][lang][0]}</h3><p>{brandText(highlights[highlightIndex][lang][1])}</p></article>
           </Link>
           <div className="feature-controls">
@@ -254,7 +256,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <div className="service-filters" role="group" aria-label={t.servicesEyebrow}>{(Object.keys(t.categories) as Array<keyof typeof t.categories>).map((key) => <button key={key} className={category === key ? "active" : ""} onClick={() => setCategory(key)}>{t.categories[key]}</button>)}</div>
         {serviceQuery && <p className="search-status">{lang === "vi" ? `Kết quả cho “${serviceQuery}”` : `Results for “${serviceQuery}”`} <button onClick={() => setServiceQuery("")}>{lang === "vi" ? "Xóa tìm kiếm" : "Clear search"}</button></p>}
         <div className="service-grid">{filteredServices.map((service) => <button type="button" className={`service-card service-card-${service.id}`} onClick={() => setSelectedServiceId(service.id)} aria-haspopup="dialog" key={service.id}>
-          <div className="service-photo"><Image src={service.image} alt={service[lang].title} fill sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" unoptimized /><span>{service.number}</span></div>
+          <div className="service-photo"><Image src={service.image} alt={service[lang].title} fill sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" /><span>{service.number}</span></div>
           <div className="service-body">{service.id === "skin" && <span className="skin-signature">{lang === "vi" ? "Dịch vụ chủ đạo" : "Signature care"}</span>}<p className="service-summary">{serviceGroupLabels[lang][service.id as keyof typeof serviceGroupLabels.vi]}</p><h3>{service[lang].title}</h3><p className="service-description">{service[lang].description}</p><div className="service-suitable"><strong>{t.suitable}</strong><p>{service[lang].suitable}</p></div><span className="service-discover">{t.choose}<span>↗</span></span></div>
         </button>)}{filteredServices.length === 0 && <p className="service-empty">{lang === "vi" ? "Chưa tìm thấy dịch vụ phù hợp. Hãy thử một từ khóa khác." : "No matching service yet. Try another keyword."}</p>}</div>
       </section>
@@ -263,14 +265,14 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <span className="knowledge-orbit" aria-hidden="true" />
         <div className="knowledge-heading"><div><p className="eyebrow">{lang === "vi" ? "Góc kiến thức · 04 bài nổi bật" : "The journal · 04 featured notes"}</p><h2>{lang === "vi" ? "Hiểu đúng để mỗi lựa chọn chăm sóc đều nhẹ nhàng hơn." : "A little knowledge makes every care choice feel easier."}</h2></div><p>{lang === "vi" ? "Bốn bài nổi bật trên trang chủ và thư viện đầy đủ cho năm nhóm dịch vụ — dễ đọc, dễ áp dụng cho cả khách Việt Nam và quốc tế." : "Four featured reads here, with a complete library covering all five care groups for Vietnamese and international guests."}</p></div>
         <div className="knowledge-grid">
-          {journalArticles.slice(0, 4).map((item, index) => <article className="knowledge-card" key={item.number}><Link href={journalPath(seoServices[index] ?? seoServices[0], lang)}><div className="knowledge-image"><Image src={item.image} alt={item[lang].title} fill sizes="(max-width: 900px) 100vw, 25vw" unoptimized /></div><div className="knowledge-body"><div className="knowledge-meta"><span>{item.number}</span><small>{item[lang].readingTime}</small></div><h3>{item[lang].title}</h3><span className="knowledge-arrow" aria-hidden="true">↗</span></div></Link></article>)}
+          {journalArticles.slice(0, 4).map((item, index) => <article className="knowledge-card" key={item.number}><Link href={journalPath(seoServices[index] ?? seoServices[0], lang)}><div className="knowledge-image"><Image src={item.image} alt={item[lang].title} fill sizes="(max-width: 900px) 100vw, 25vw" /></div><div className="knowledge-body"><div className="knowledge-meta"><span>{item.number}</span><small>{item[lang].readingTime}</small></div><h3>{item[lang].title}</h3><span className="knowledge-arrow" aria-hidden="true">↗</span></div></Link></article>)}
         </div>
         <p className="knowledge-more"><Link className="button primary" href={lang === "vi" ? "/kien-thuc/" : "/en/journal/"}>{lang === "vi" ? "Xem tất cả bài viết" : "View all articles"}<span>↗</span></Link></p>
       </section>
 
       <section className="results section" id="results">
         <div className="results-head"><div><p className="eyebrow">{t.resultEyebrow}</p><h2>{t.resultTitle}</h2></div><p>{t.resultNote}</p></div>
-        <div className="result-grid">{results.map((result, index) => <Link href={servicePath(seoServices[[0, 3, 2][index]] ?? seoServices[0], lang)} key={result.vi[0]}><div className="result-image"><Image src={result.image} alt={result[lang][0]} fill sizes="(max-width: 720px) 100vw, 33vw" unoptimized /><div className="comparison-labels"><span>{lang === "vi" ? "Trước" : "Before"}</span><span>{lang === "vi" ? "Sau" : "After"}</span></div></div><div className="result-copy"><h3>{result[lang][0]}</h3><p>{result[lang][1]}</p><span className="result-link-label">{lang === "vi" ? "Xem dịch vụ" : "View service"} ↗</span></div></Link>)}</div>
+        <div className="result-grid">{results.map((result, index) => <Link href={servicePath(seoServices[[0, 3, 2][index]] ?? seoServices[0], lang)} key={result.vi[0]}><div className="result-image"><Image src={result.image} alt={result[lang][0]} fill sizes="(max-width: 720px) 100vw, 33vw" /><div className="comparison-labels"><span>{lang === "vi" ? "Trước" : "Before"}</span><span>{lang === "vi" ? "Sau" : "After"}</span></div></div><div className="result-copy"><h3>{result[lang][0]}</h3><p>{result[lang][1]}</p><span className="result-link-label">{lang === "vi" ? "Xem dịch vụ" : "View service"} ↗</span></div></Link>)}</div>
       </section>
 
       <section className="testimonials section" id="testimonials">
@@ -286,7 +288,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       <footer className="site-footer">
         <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />
         <div className="footer-intro"><p>{lang === "vi" ? "hato Beauty · Không gian làm đẹp" : "hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
-        <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} unoptimized /></div>
+        <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} /></div>
         <div className="footer-links"><h3>{lang === "vi" ? "Khám phá" : "Discover"}</h3>{navItems.slice(0, 4).map(([href, label], index) => <a href={href} key={href}><span>0{index + 1}</span>{label}</a>)}</div>
         <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><ContactDetails lang={lang} compact /><button onClick={openBooking}>{t.book}<span>↗</span></button></div>
         <div className="footer-bottom"><span>© 2026 hato Beauty</span><div><a href="#top">{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</a><a href={lang === "vi" ? "/chinh-sach-bien-tap/" : "/en/editorial-policy/"}>{lang === "vi" ? "Biên tập" : "Editorial"}</a><a href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</a></div></div>
@@ -297,7 +299,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       {selectedService && selectedServiceDetail && <div className="modal-backdrop service-detail-backdrop" onMouseDown={(event) => event.target === event.currentTarget && setSelectedServiceId(null)}>
         <section className="service-detail-modal" ref={serviceDialogRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="service-detail-title">
           <button className="modal-close" onClick={() => setSelectedServiceId(null)} aria-label={t.close}>×</button>
-          <div className="service-detail-image"><Image src={selectedService.image} alt={selectedService[lang].title} fill sizes="(max-width: 760px) 100vw, 42vw" unoptimized /><span>{selectedService.number}</span></div>
+          <div className="service-detail-image"><Image src={selectedService.image} alt={selectedService[lang].title} fill sizes="(max-width: 760px) 100vw, 42vw" /><span>{selectedService.number}</span></div>
           <div className="service-detail-copy">
             <p className="eyebrow">{lang === "vi" ? "Chi tiết dịch vụ" : "Service details"}</p>
             <h2 id="service-detail-title">{selectedService[lang].title}</h2>

@@ -332,7 +332,8 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.match(dataMigration, /result-body-v2\.webp/i);
   assert.match(styles, /--display: var\(--font-display\)/i);
   assert.match(source, /setLoadHeroSequence\(true\)/i);
-  assert.match(source, /index === 0 \|\| loadHeroSequence/i);
+  assert.match(source, /setLoadFirstHeroVideo\(true\)/i);
+  assert.match(source, /const shouldLoad = index === 0 \? loadFirstHeroVideo : loadHeroSequence/i);
   assert.match(styles, /\.hato-word[^}]*font-size: 1\.78em/is);
   assert.match(styles, /prefers-reduced-motion: reduce/i);
 });
