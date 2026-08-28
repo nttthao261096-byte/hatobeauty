@@ -1928,6 +1928,8 @@ img { user-select: none; }
 
 /* hato contact experience */
 .contact-page-panel { margin-top: 56px; display: grid; grid-template-columns: minmax(0, .92fr) minmax(430px, 1.08fr); gap: clamp(42px, 6vw, 92px); align-items: stretch; }
+.seo-trust.contact-page { padding-top: clamp(40px, 5vw, 72px); }
+.contact-page .contact-page-panel { margin-top: 0; }
 .contact-page-info { padding: 10px 0; display: flex; flex-direction: column; justify-content: center; }
 .contact-details { min-width: 0; }
 .contact-list { border-top: 1px solid rgba(92, 61, 46, .2); }
