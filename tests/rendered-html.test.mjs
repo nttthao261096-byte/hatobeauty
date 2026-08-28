@@ -133,6 +133,84 @@ test("renders complete contact details and social links", async () => {
   assert.match(html, /127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn, Đà Nẵng/i);
   assert.match(html, /<iframe[^>]+google\.com\/maps/i);
   assert.match(html, /aria-label="TikTok hato Beauty"[^>]*><span[^>]*><svg/i);
+  assert.match(html, /<h1>Liên hệ hato Beauty<[/]h1>/i);
+  assert.match(html, /class="contact-lead-form"/i);
+  assert.match(html, /name="name"/i);
+  assert.match(html, /name="phone"/i);
+  assert.match(html, /name="email"/i);
+  assert.match(html, /name="preference"/i);
+  assert.match(html, /name="message"/i);
+  assert.match(html, /class="contact-page-map"/i);
+});
+
+test("validates and stores contact requests through the server API", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("contact-test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+  const context = { waitUntil() {}, passThroughOnException() {} };
+  const assets = { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } };
+
+  const invalidResponse = await worker.fetch(
+    new Request("http://localhost/api/contact", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ name: "A", phone: "abc", preference: "phone" }),
+    }),
+    assets,
+    context,
+  );
+  assert.equal(invalidResponse.status, 400);
+  assert.equal((await invalidResponse.json()).code, "invalid_details");
+
+  const originalFetch = globalThis.fetch;
+  const originalUrl = process.env.SUPABASE_URL;
+  const originalSecret = process.env.SUPABASE_SECRET_KEY;
+  let savedContact;
+
+  process.env.SUPABASE_URL = "https://hato-test.supabase.co";
+  process.env.SUPABASE_SECRET_KEY = "server-only-test-key";
+  globalThis.fetch = async (input, init) => {
+    assert.equal(input, "https://hato-test.supabase.co/rest/v1/contact_requests");
+    assert.equal(init.headers.apikey, "server-only-test-key");
+    assert.equal(init.headers.Authorization, undefined);
+    savedContact = JSON.parse(init.body);
+    return new Response(null, { status: 201 });
+  };
+
+  try {
+    const savedResponse = await worker.fetch(
+      new Request("http://localhost/api/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: "Nguyễn Thảo",
+          phone: "0901234567",
+          email: "Thao@Example.com",
+          preference: "phone",
+          message: "Tư vấn chăm sóc da",
+          locale: "vi",
+        }),
+      }),
+      assets,
+      context,
+    );
+    assert.equal(savedResponse.status, 201);
+    assert.deepEqual(savedContact, {
+      full_name: "Nguyễn Thảo",
+      phone: "0901234567",
+      email: "thao@example.com",
+      subject: "Yêu cầu liên hệ qua Điện thoại",
+      message: "Tư vấn chăm sóc da",
+      status: "new",
+      source: "hato-contact-page",
+    });
+  } finally {
+    globalThis.fetch = originalFetch;
+    if (originalUrl === undefined) delete process.env.SUPABASE_URL;
+    else process.env.SUPABASE_URL = originalUrl;
+    if (originalSecret === undefined) delete process.env.SUPABASE_SECRET_KEY;
+    else process.env.SUPABASE_SECRET_KEY = originalSecret;
+  }
 });
 test("renders valid URLs for every service breadcrumb item", async () => {
   const cases = [
