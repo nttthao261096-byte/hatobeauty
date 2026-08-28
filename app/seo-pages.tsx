@@ -5,6 +5,7 @@ import { BookingForm } from "./BookingForm";
 import { ContactForm } from "./ContactForm";
 import { ContactDetails, ContactMap } from "./ContactDetails";
 import { journalPath, journalTopics, mediaUrl, primarySeoServices, servicePath, siteUrl, type SeoLang, type SeoService } from "./seo-data";
+import { SiteHeader } from "./SiteHeader";
 
 import { journalIntentFaqs, serviceIntentFaqs } from "./seo-faq-data";
 const facts: Record<SeoService["id"], { vi: [string, string]; en: [string, string] }> = {
@@ -70,21 +71,7 @@ export function JsonLd({ data }: { data: unknown }) {
 }
 
 export function SeoHeader({ lang }: { lang: SeoLang }) {
-  return <header className="site-header inner-site-header">
-    <Link className="brand" href={lang === "vi" ? "/" : "/en/"} aria-label="hato Beauty"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} priority /></Link>
-    <nav className="nav" aria-label={lang === "vi" ? "Điều hướng chính" : "Main navigation"}>
-      <Link href={lang === "vi" ? "/ve-hato-beauty/" : "/en/about/"}>{lang === "vi" ? "Về chúng tôi" : "About us"}</Link>
-      <Link href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{lang === "vi" ? "Dịch vụ" : "Services"}</Link>
-      <Link href={lang === "vi" ? "/kien-thuc/" : "/en/journal/"}>{lang === "vi" ? "Kiến thức" : "Journal"}</Link>
-      <Link href={lang === "vi" ? "/#results" : "/en/#results"}>{lang === "vi" ? "Kết quả" : "Results"}</Link>
-      <Link href={lang === "vi" ? "/lien-he/" : "/en/contact/"}>{lang === "vi" ? "Liên hệ" : "Contact"}</Link>
-    </nav>
-    <div className="header-tools">
-      <div className="language-switch"><Link className={lang === "vi" ? "active" : ""} href="/" hrefLang="vi-VN">VI</Link><span>/</span><Link className={lang === "en" ? "active" : ""} href="/en/" hrefLang="en">EN</Link></div>
-      <Link className="header-booking-link" href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<span>↗</span></Link>
-      <div className="header-hotline" aria-label={lang === "vi" ? "Hotline hato Beauty" : "hato Beauty hotline"}><span>Hotline</span><a href="tel:+84703214868">0703 214 868</a><i aria-hidden="true">·</i><a href="tel:+84915860446">0915 860 446</a></div>
-    </div>
-  </header>;
+  return <SiteHeader lang={lang} />;
 }
 
 export function SeoFooter({ lang }: { lang: SeoLang }) {

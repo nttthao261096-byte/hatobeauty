@@ -95,7 +95,7 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, /Tẩy tế bào chết/i);
   assert.match(html, /Định hình chân mày &amp; Uốn mi/i);
   assert.match(html, /Hãy để chúng tôi đánh thức vẻ đẹp trong bạn/i);
-  assert.match(html, /Giải pháp chăm sóc da hiệu quả\./i);
+  assert.match(html, /Tỏa sáng theo cách của bạn\./i);
   assert.match(html, /Hiệu quả đến từ sự thấu hiểu/i);
   assert.match(html, /Thiết bị hiện đại/i);
   assert.match(html, /Không gian thư giãn/i);
@@ -271,7 +271,8 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.doesNotMatch(html, /class="hero-brand">hato</i);
   assert.match(html, /href="\/kien-thuc\/">Kiến thức</i);
   assert.match(html, /role="search"/i);
-  assert.match(html, /<div class="announcement"><p>[^<]+<\/p><\/div>/i);
+  assert.match(html, /class="announcement"/i);
+  assert.match(html, /Hãy để chúng tôi đánh thức vẻ đẹp trong bạn/i);
   assert.match(html, /class="footer-intro"/i);
   assert.match(html, /Hẹn gặp bạn trong một ngày gần nhất/i);
   assert.match(html, /Góc kiến thức/i);

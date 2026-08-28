@@ -10,6 +10,7 @@ import { getBookingErrorMessage } from "./booking-errors";
 import { BOOKING_PHONE_PATTERN } from "./booking-validation";
 import { ContactDetails } from "./ContactDetails";
 import { journalPath, mediaUrl, seoServices, servicePath } from "./seo-data";
+import { SiteHeader } from "./SiteHeader";
 import { useMinimumBookingDate } from "./use-minimum-booking-date";
 
 function brandText(text: string): ReactNode {
@@ -23,8 +24,8 @@ const copy = {
     announcement: "Hãy để chúng tôi đánh thức vẻ đẹp trong bạn.",
     book: "Đặt lịch tư vấn",
     nav: ["Về chúng tôi", "Dịch vụ", "Trải nghiệm", "Kết quả", "Cảm nhận"],
-    heroEyebrow: "TỎA SÁNG THEO CÁCH CỦA BẠN",
-    heroTitle: "Giải pháp chăm sóc da hiệu quả.",
+    heroEyebrow: "CHĂM SÓC THEO NHU CẦU",
+    heroTitle: "Tỏa sáng theo cách của bạn.",
     heroText: "Bởi mỗi người đều có một vẻ đẹp riêng. Tại đây, chúng tôi lắng nghe, thấu hiểu và thiết kế từng trải nghiệm để phù hợp với làn da, nhu cầu và nhịp sống của bạn.",
     explore: "Khám phá dịch vụ",
     learn: "Hiểu về chúng tôi",
@@ -55,8 +56,8 @@ const copy = {
     announcement: "Let us awaken the beauty within you.",
     book: "Book a consultation",
     nav: ["About us", "Services", "Experience", "Results", "Reviews"],
-    heroEyebrow: "SHINE AS YOU ARE",
-    heroTitle: "Effective Skin Solutions.",
+    heroEyebrow: "CARE SHAPED AROUND YOU",
+    heroTitle: "Shine as you are.",
     heroText: "Because everyone has a beauty of their own. Here, we listen, understand and shape every experience around your skin, your needs and the rhythm of your life.",
     explore: "Explore services", learn: "Discover us",
     whyEyebrow: "Why choose us", whyTitle: "Every detail has a purpose.",
@@ -98,7 +99,6 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
   const [category, setCategory] = useState<Category>("all");
   const [highlightIndex, setHighlightIndex] = useState(0);
   const [reviewOffset, setReviewOffset] = useState(0);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [serviceQuery, setServiceQuery] = useState("");
   const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
   const [bookingServiceId, setBookingServiceId] = useState("");
@@ -122,8 +122,8 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
     return matchesCategory && (!normalizedQuery || searchableText.includes(normalizedQuery));
   });
   const navItems = lang === "vi"
-    ? [["/ve-hato-beauty/", "Về chúng tôi"], ["/dich-vu/", "Dịch vụ"], ["/kien-thuc/", "Kiến thức"], ["#results", "Kết quả"], ["/lien-he/", "Liên hệ"]]
-    : [["/en/about/", "About"], ["/en/services/", "Services"], ["/en/journal/", "Journal"], ["#results", "Results"], ["/en/contact/", "Contact"]];
+    ? [["/ve-hato-beauty/", "Về chúng tôi"], ["/dich-vu/", "Dịch vụ"], ["/kien-thuc/", "Kiến thức"], ["/#results", "Kết quả"], ["/lien-he/", "Liên hệ"]]
+    : [["/en/about/", "About"], ["/en/services/", "Services"], ["/en/journal/", "Journal"], ["/en/#results", "Results"], ["/en/contact/", "Contact"]];
   useEffect(() => {
     document.body.style.overflow = bookingOpen || Boolean(selectedService) ? "hidden" : "";
     if (bookingOpen) window.requestAnimationFrame(() => dialogRef.current?.focus());
@@ -196,24 +196,26 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
   }
 
   return (
-    <main lang={lang}>
-      <div className="announcement"><p>{brandText(t.announcement)}</p></div>
+    <main className="home-page" id="main" lang={lang}>
+      <a className="skip-link" href="#services">{lang === "vi" ? "Đến nội dung chính" : "Skip to content"}</a>
+      <div className="announcement">
+        <p className="announcement-meta">{lang === "vi" ? "Đà Nẵng · 08:00–19:30" : "Da Nang · 08:00–19:30"}</p>
+        <p>{brandText(t.announcement)}</p>
+        <p className="announcement-phones" aria-label={lang === "vi" ? "Hotline hato Beauty" : "hato Beauty hotline"}>
+          <a href="tel:+84703214868">0703 214 868</a>
+          <i aria-hidden="true">·</i>
+          <a href="tel:+84915860446">0915 860 446</a>
+        </p>
+      </div>
 
-      <header className="site-header">
-        <a className="brand" href={lang === "vi" ? "/" : "/en/"} aria-label="hato Beauty"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} priority /></a>
-        <nav className={menuOpen ? "nav is-open" : "nav"} aria-label={lang === "vi" ? "Điều hướng chính" : "Main navigation"}>
-          {navItems.map(([href, label]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
-          <form className="nav-search" role="search" onSubmit={(event) => { event.preventDefault(); setMenuOpen(false); document.querySelector("#services")?.scrollIntoView(); }}>
-            <label><span>{lang === "vi" ? "Tìm kiếm" : "Search"}</span><input value={serviceQuery} onChange={(event) => setServiceQuery(event.target.value)} aria-label={lang === "vi" ? "Tìm kiếm dịch vụ" : "Search services"} /><button type="submit" aria-label={lang === "vi" ? "Tìm kiếm" : "Search"}>⌕</button></label>
-          </form>
-        </nav>
-        <div className="header-tools">
-          <div className="language-switch"><Link className={lang === "vi" ? "active" : ""} href="/" hrefLang="vi-VN">VI</Link><span>/</span><Link className={lang === "en" ? "active" : ""} href="/en/" hrefLang="en">EN</Link></div>
-          <Link className="header-booking-link" href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{t.book}<span>↗</span></Link>
-          <div className="header-hotline" aria-label={lang === "vi" ? "Hotline hato Beauty" : "hato Beauty hotline"}><span>Hotline</span><a href="tel:+84703214868">0703 214 868</a><i aria-hidden="true">·</i><a href="tel:+84915860446">0915 860 446</a></div>
-          <button className="menu-button" aria-label={t.menu} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
-        </div>
-      </header>
+      <SiteHeader
+        lang={lang}
+        search={{
+          value: serviceQuery,
+          onChange: setServiceQuery,
+          onSubmit: () => document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" }),
+        }}
+      />
 
       <section className="hero" id="top">
         <div className={`hero-media${heroSequenceReady ? " is-sequence-ready" : ""}`} aria-label={lang === "vi" ? "Chuỗi trải nghiệm chăm sóc tại hato Beauty" : "A sequence of care experiences at hato Beauty"}>
@@ -228,8 +230,16 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <div className="hero-copy">
           <p className="eyebrow hero-eyebrow">{t.heroEyebrow}</p>
           <h1>{t.heroTitle}</h1>
-          <p className="hero-lead">{lang === "vi" ? "Hiệu quả đến từ sự thấu hiểu: công nghệ phù hợp, chuyên môn cẩn trọng và một lộ trình được thiết kế theo nhu cầu thật của bạn." : "Results begin with understanding: considered technology, careful expertise and a plan shaped around what you truly need."}</p>
-          <div className="hero-actions"><a className="button primary" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{t.explore}<span>↗</span></a><a className="text-link" href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{t.book}<span>↗</span></a></div>
+          <p className="hero-lead">{lang === "vi" ? "Hiệu quả đến từ sự thấu hiểu: công nghệ phù hợp, chuyên môn cẩn trọng và một lộ trình cho làn da, mi mày và nhịp sống của bạn." : "Results begin with understanding: considered technology, careful expertise and a plan shaped around what you truly need."}</p>
+          <div className="hero-actions">
+            <a className="button primary" href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{t.book}<span>↗</span></a>
+            <a className="text-link" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{t.explore}<span>↗</span></a>
+          </div>
+          <ul className="hero-trust">
+            <li><strong>05</strong><span>{lang === "vi" ? "nhóm dịch vụ" : "care groups"}</span></li>
+            <li><strong>08:00–19:30</strong><span>{lang === "vi" ? "mỗi ngày" : "every day"}</span></li>
+            <li><strong>{lang === "vi" ? "Đà Nẵng" : "Da Nang"}</strong><span>Ngũ Hành Sơn</span></li>
+          </ul>
         </div>
       </section>
 
@@ -281,7 +291,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <div className="review-pagination" aria-label={lang === "vi" ? "Nhóm đánh giá" : "Review group"}><span>{reviewOffset === 0 ? "01 — 04" : "05 — 08"}<small>/ 08</small></span><div><button className={reviewOffset === 0 ? "active" : ""} onClick={() => setReviewOffset(0)} aria-label={lang === "vi" ? "Xem đánh giá 1 đến 4" : "View reviews 1 to 4"} /><button className={reviewOffset === 4 ? "active" : ""} onClick={() => setReviewOffset(4)} aria-label={lang === "vi" ? "Xem đánh giá 5 đến 8" : "View reviews 5 to 8"} /></div></div>
       </section>
 
-      <section className="booking-banner" id="contact"><div className="banner-orbit" /><article><div className="banner-note"><span className="banner-note-brand"><b>hato</b><em>Beauty</em></span><span className="banner-note-line" aria-hidden="true" /><span className="banner-note-mark" aria-hidden="true"><i>✦</i></span><span className="banner-note-line" aria-hidden="true" /><span className="banner-note-tag"><small>{lang === "vi" ? "TỎA SÁNG THEO CÁCH CỦA BẠN" : "SHINE AS YOU ARE"}</small></span></div><h2>{t.bannerTitle}</h2><p>{brandText(t.bannerText)}</p><button className="button light" onClick={openBooking}><span>{lang === "vi" ? "Nhận tư vấn riêng" : "Request personal guidance"}</span><b>↗</b></button></article></section>
+      <section className="booking-banner" id="contact"><div className="banner-orbit" /><article><div className="banner-note"><span className="banner-note-brand"><b>hato</b><em>Beauty</em></span><span className="banner-note-line" aria-hidden="true" /><span className="banner-note-mark" aria-hidden="true"><i>✦</i></span><span className="banner-note-line" aria-hidden="true" /><span className="banner-note-tag"><small>{lang === "vi" ? "TỎA SÁNG THEO CÁCH CỦA BẠN" : "SHINE AS YOU ARE"}</small></span></div><h2>{t.bannerTitle}</h2><p>{brandText(t.bannerText)}</p><ul className="banner-visit"><li>{lang === "vi" ? "127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn" : "127 Chau Thi Vinh Te, Ngu Hanh Son"}</li><li>{lang === "vi" ? "08:00–19:30 mỗi ngày" : "08:00–19:30 daily"}</li><li><a href="tel:+84703214868">0703 214 868</a></li></ul><button className="button light" onClick={openBooking}><span>{lang === "vi" ? "Nhận tư vấn riêng" : "Request personal guidance"}</span><b>↗</b></button></article></section>
 
       <footer className="site-footer">
         <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />
@@ -292,7 +302,10 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <div className="footer-bottom"><span>© 2026 hato Beauty</span><div><a href="#top">{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</a><a href={lang === "vi" ? "/chinh-sach-bien-tap/" : "/en/editorial-policy/"}>{lang === "vi" ? "Biên tập" : "Editorial"}</a><a href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</a></div></div>
       </footer>
 
-      <button className="floating-book" onClick={openBooking} aria-label={t.book}>↗<span>{t.book}</span></button>
+      <div className="mobile-dock">
+        <a className="mobile-dock-call" href="tel:+84703214868">{lang === "vi" ? "Gọi ngay" : "Call now"}</a>
+        <button className="mobile-dock-book" onClick={openBooking}>{t.book}</button>
+      </div>
 
       {selectedService && selectedServiceDetail && <div className="modal-backdrop service-detail-backdrop" onMouseDown={(event) => event.target === event.currentTarget && setSelectedServiceId(null)}>
         <section className="service-detail-modal" ref={serviceDialogRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="service-detail-title">
