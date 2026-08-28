@@ -16,12 +16,12 @@ const socialLinks = [
 export function ContactDetails({ lang, compact = false }: { lang: ContactLang; compact?: boolean }) {
   return <section className={`contact-details${compact ? " contact-details--compact" : ""}`} aria-label={lang === "vi" ? "Thông tin liên hệ hato Beauty" : "hato Beauty contact details"}>
     <div className="contact-list">
-      <a className="contact-row" href={directionsUrl} target="_blank" rel="noopener noreferrer">
-        <span className="contact-row-icon" aria-hidden="true"><FaLocationDot /></span><span><small>{lang === "vi" ? "Địa chỉ" : "Address"}</small><strong>{hatoAddress}</strong></span>
-      </a>
       <div className="contact-row">
         <span className="contact-row-icon" aria-hidden="true"><FaPhone /></span><span><small>{lang === "vi" ? "Điện thoại" : "Phone"}</small><strong className="contact-phone-links"><a href="tel:+84703214868">0703 214 868</a><i>·</i><a href="tel:+84915860446">0915 860 446</a></strong></span>
       </div>
+      <a className="contact-row" href={directionsUrl} target="_blank" rel="noopener noreferrer">
+        <span className="contact-row-icon" aria-hidden="true"><FaLocationDot /></span><span><small>{lang === "vi" ? "Địa chỉ" : "Address"}</small><strong>{hatoAddress}</strong></span>
+      </a>
       <a className="contact-row" href="mailto:hatobeautydanang@gmail.com">
         <span className="contact-row-icon" aria-hidden="true"><FaEnvelope /></span><span><small>Email</small><strong>hatobeautydanang@gmail.com</strong></span>
       </a>
