@@ -129,7 +129,7 @@ export function SiteHeader({
       </div>
     </header>
     <div className="mobile-dock" aria-label={lang === "vi" ? "Liên hệ nhanh" : "Quick contact"}>
-      <a className="mobile-dock-call" href="tel:+84703214868">0703214868</a>
+      <a className="mobile-dock-call" href="tel:+84703214868"><span>Hotline</span><strong>0703214868</strong></a>
       <a className="mobile-dock-book" href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Tư vấn ngay" : "Consult now"}</a>
     </div>
     </>

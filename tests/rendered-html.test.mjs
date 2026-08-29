@@ -118,7 +118,7 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, /TỎA SÁNG THEO CÁCH CỦA BẠN/i);
   assert.match(html, /Nhận tư vấn riêng/i);
   assert.match(html, /aria-label="Hotline hato Beauty"/i);
-  assert.match(html, /href="tel:[+]84703214868">0703214868/i);
+  assert.match(html, /href="tel:[+]84703214868"><span>Hotline<\/span><strong>0703214868<\/strong>/i);
   assert.doesNotMatch(html, /0915 860 446|[+]84915860446/i);
   assert.match(html, /href="https:\/\/zalo\.me\/0703214868"/i);
   assert.match(html, /href="\/dich-vu\/"[^>]*><strong>05<\/strong>/i);
