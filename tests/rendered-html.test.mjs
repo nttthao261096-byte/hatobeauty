@@ -93,7 +93,8 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, />Kết quả</i);
   assert.doesNotMatch(html, /class="service-card service-card-body"/i);
   assert.match(html, /Tẩy tế bào chết/i);
-  assert.match(html, /Định hình chân mày &amp; Uốn mi/i);
+  assert.match(html, /(?:Mi &amp; Mày|Định hình chân mày &amp; Uốn mi)/i);
+  assert.match(html, /Xem chi tiết/i);
   assert.match(html, /Hãy để chúng tôi đánh thức vẻ đẹp trong bạn/i);
   assert.match(html, /Tỏa sáng theo cách của bạn\./i);
   assert.match(html, /Hiệu quả đến từ sự thấu hiểu/i);
@@ -281,6 +282,8 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.match(source, /href=\{guest\.href\[lang\]\}/i);
   assert.match(headerSource, /hideDesktopConsultation/i);
   assert.match(headerSource, /Tư vấn ngay/i);
+  assert.match(headerSource, /Liên hệ ngay/i);
+  assert.match(seoPagesSource, /className="breadcrumbs page-breadcrumbs"/i);
   assert.doesNotMatch(html, />[^<]*\b(?:Hato|HATO)\b[^<]*</);
   assert.doesNotMatch(seoPagesSource, />Bảng giá</i);
   assert.match(seoPagesSource, /Khoảng giá tham khảo/i);

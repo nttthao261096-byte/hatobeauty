@@ -32,7 +32,7 @@ const copy = {
     heroEyebrow: "CHĂM SÓC THEO NHU CẦU",
     heroTitle: "Tỏa sáng theo cách của bạn.",
     heroText: "Bởi mỗi người đều có một vẻ đẹp riêng. Tại đây, chúng tôi lắng nghe, thấu hiểu và thiết kế từng trải nghiệm để phù hợp với làn da, nhu cầu và nhịp sống của bạn.",
-    explore: "Khám phá dịch vụ",
+    explore: "Xem chi tiết",
     learn: "Hiểu về chúng tôi",
     whyEyebrow: "Vì sao chọn chúng tôi",
     whyTitle: "Mọi chi tiết đều có lý do.",
@@ -41,7 +41,7 @@ const copy = {
     servicesText: "Năm nhóm dịch vụ được sắp xếp rõ ràng, giúp bạn dễ dàng tìm đúng trải nghiệm cho làn da, diện mạo và nhịp sống của mình.",
     categories: { all: "Tất cả", care: "Chăm sóc da", shape: "Mi & Mày", relax: "Da đầu & thư giãn", smooth: "Triệt lông & Tẩy lông" },
     suitable: "Phù hợp với",
-    choose: "Khám phá dịch vụ",
+    choose: "Xem chi tiết",
     experienceEyebrow: "Trải nghiệm dành cho bạn",
     experienceTitle: "Hiện đại trong kỹ thuật, mềm mại trong từng chạm.",
     resultEyebrow: "Kết quả khách hàng",
@@ -64,11 +64,11 @@ const copy = {
     heroEyebrow: "CARE SHAPED AROUND YOU",
     heroTitle: "Shine as you are.",
     heroText: "Because everyone has a beauty of their own. Here, we listen, understand and shape every experience around your skin, your needs and the rhythm of your life.",
-    explore: "Explore services", learn: "Discover us",
+    explore: "View details", learn: "Discover us",
     whyEyebrow: "Why choose us", whyTitle: "Every detail has a purpose.",
     servicesEyebrow: "Our services", servicesTitle: "Five care worlds. One place to feel like yourself.", servicesText: "Five service groups arranged clearly, so every local and international guest can understand the experience before booking.",
     categories: { all: "All", care: "Skin", shape: "Brow & Lash", relax: "Scalp & Relaxation", smooth: "Hair Removal & Waxing" },
-    suitable: "Best suited for", choose: "Choose this service",
+    suitable: "Best suited for", choose: "View details",
     experienceEyebrow: "Your experience", experienceTitle: "Modern in technique, gentle in every touch.",
     resultEyebrow: "Client results", resultTitle: "Become the most beautiful version of yourself.", resultNote: "Individual results vary according to your starting point and personal care plan.",
     testimonialEyebrow: "Client notes", testimonialTitle: "What guests remember after time with us.",
@@ -108,6 +108,33 @@ const testimonialGuests = [
   { initials: "MP", name: "Min-ji Park", country: { vi: "Hàn Quốc", en: "South Korea" }, local: false, href: { vi: "/ve-hato-beauty/", en: "/en/about/" } },
   { initials: "ON", name: "Olivia Nguyen", country: { vi: "Singapore", en: "Singapore" }, local: false, href: { vi: "/", en: "/en/" } },
 ] as const;
+
+const serviceCardCopy = {
+  skin: {
+    vi: { description: "Làm sạch, phục hồi và chăm sóc theo tình trạng da.", suitable: "Da cần sạch khỏe, đủ ẩm hoặc chăm sóc chuyên sâu." },
+    en: { description: "Cleansing and recovery tailored to your skin.", suitable: "Skin needing clarity, hydration or targeted care." },
+  },
+  "brow-lash": {
+    vi: { description: "Uốn mi, tạo dáng mày hài hòa với gương mặt.", suitable: "Muốn gương mặt sáng và đường nét tự nhiên." },
+    en: { description: "Lash and brow shaping balanced to your features.", suitable: "For brighter, naturally defined features." },
+  },
+  scalp: {
+    vi: { description: "Làm sạch da đầu, massage đầu–vai–gáy thư giãn.", suitable: "Căng thẳng, mỏi vai gáy hoặc cần nghỉ ngơi." },
+    en: { description: "Scalp cleansing with a relaxing head and shoulder massage.", suitable: "For tension, tired shoulders or a restorative pause." },
+  },
+  body: {
+    vi: { description: "Làm sạch, tẩy tế bào chết và dưỡng ẩm cơ thể.", suitable: "Da cơ thể khô, sần hoặc cần phục hồi." },
+    en: { description: "Body exfoliation and hydration for softer skin.", suitable: "For dry, rough or tired-looking body skin." },
+  },
+  "hair-removal": {
+    vi: { description: "Giảm lông theo vùng bằng công nghệ phù hợp.", suitable: "Muốn da gọn mịn và chăm sóc kín đáo." },
+    en: { description: "Area-focused hair reduction with suitable technology.", suitable: "For smoother skin with discreet care." },
+  },
+  waxing: {
+    vi: { description: "Tẩy lông nhanh gọn, kết hợp làm dịu da.", suitable: "Cần hiệu quả ngay cho từng vùng." },
+    en: { description: "Efficient waxing with skin-soothing aftercare.", suitable: "For an immediate result in selected areas." },
+  },
+} as const;
 
 export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent; initialLang?: Lang }) {
   const { services, serviceDetails, highlights, results, testimonials, journalArticles } = content;
@@ -279,10 +306,13 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <div className="services-intro"><div><p className="eyebrow">{brandText(t.servicesEyebrow)}</p><h2>{t.servicesTitle}</h2></div><div className="services-intro-side"><p>{t.servicesText}</p><Link className="section-route-link" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{lang === "vi" ? "Xem tất cả dịch vụ" : "View all services"}<IconArrow /></Link></div></div>
         <div className="service-filters" role="group" aria-label={t.servicesEyebrow}>{(Object.keys(t.categories) as Array<keyof typeof t.categories>).map((key) => <button key={key} className={category === key ? "active" : ""} onClick={() => setCategory(key)}>{t.categories[key]}</button>)}</div>
         {serviceQuery && <p className="search-status">{lang === "vi" ? `Kết quả cho “${serviceQuery}”` : `Results for “${serviceQuery}”`} <button onClick={() => setServiceQuery("")}>{lang === "vi" ? "Xóa tìm kiếm" : "Clear search"}</button></p>}
-        <div className="service-grid">{filteredServices.map((service) => <button type="button" className={`service-card service-card-${service.id}`} onClick={() => setSelectedServiceId(service.id)} aria-haspopup="dialog" key={service.id}>
-          <div className="service-photo"><Image src={service.image} alt={service[lang].title} fill sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" /><span>{service.number}</span></div>
-          <div className="service-body">{service.id === "skin" && <span className="skin-signature">{lang === "vi" ? "Dịch vụ chủ đạo" : "Signature care"}</span>}<p className="service-summary">{serviceGroupLabels[lang][service.id as keyof typeof serviceGroupLabels.vi]}</p><h3>{service[lang].title}</h3><p className="service-description">{service[lang].description}</p><div className="service-suitable"><strong>{t.suitable}</strong><p>{service[lang].suitable}</p></div><span className="service-discover">{t.choose}<IconArrow /></span></div>
-        </button>)}{filteredServices.length === 0 && <p className="service-empty">{lang === "vi" ? "Chưa tìm thấy dịch vụ phù hợp. Hãy thử một từ khóa khác." : "No matching service yet. Try another keyword."}</p>}</div>
+        <div className="service-grid">{filteredServices.map((service) => {
+          const conciseCopy = serviceCardCopy[service.id as keyof typeof serviceCardCopy]?.[lang] ?? service[lang];
+          return <button type="button" className={`service-card service-card-${service.id}`} onClick={() => setSelectedServiceId(service.id)} aria-haspopup="dialog" key={service.id}>
+            <div className="service-photo"><Image src={service.image} alt={service[lang].title} fill sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" /><span>{service.number}</span></div>
+            <div className="service-body">{service.id === "skin" && <span className="skin-signature">{lang === "vi" ? "Dịch vụ chủ đạo" : "Signature care"}</span>}<p className="service-summary">{serviceGroupLabels[lang][service.id as keyof typeof serviceGroupLabels.vi]}</p><h3>{service[lang].title}</h3><p className="service-description">{conciseCopy.description}</p><div className="service-suitable"><strong>{t.suitable}</strong><p>{conciseCopy.suitable}</p></div><span className="service-discover">{t.choose}<IconArrow /></span></div>
+          </button>;
+        })}{filteredServices.length === 0 && <p className="service-empty">{lang === "vi" ? "Chưa tìm thấy dịch vụ phù hợp. Hãy thử một từ khóa khác." : "No matching service yet. Try another keyword."}</p>}</div>
       </section>
 
       <section className="knowledge section" id="knowledge">

@@ -107,7 +107,7 @@ export function SiteHeader({
             <a href="tel:+84703214868">0703214868</a>
           </div>
           <a className="header-booking-link nav-drawer-book" href={consultationHref} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
-            <span className="header-book-full">{lang === "vi" ? "Tư vấn ngay" : "Consult now"}</span><IconArrow />
+            <span className="header-book-full">{lang === "vi" ? "Liên hệ ngay" : "Contact now"}</span><IconArrow />
           </a>
         </div>
       </nav>
