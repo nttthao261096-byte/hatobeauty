@@ -10,17 +10,17 @@ import { mediaUrl } from "./seo-data";
 
 const navByLang = {
   vi: [
-    ["/ve-hato-beauty/", "Về chúng tôi"],
     ["/dich-vu/", "Dịch vụ"],
-    ["/kien-thuc/", "Kiến thức"],
     ["/ket-qua/", "Kết quả"],
+    ["/kien-thuc/", "Kiến thức"],
+    ["/ve-hato-beauty/", "Về chúng tôi"],
     ["/lien-he/", "Liên hệ"],
   ],
   en: [
-    ["/en/about/", "About"],
     ["/en/services/", "Services"],
-    ["/en/journal/", "Journal"],
     ["/en/results/", "Results"],
+    ["/en/journal/", "Knowledge"],
+    ["/en/about/", "About us"],
     ["/en/contact/", "Contact"],
   ],
 } as const;
@@ -28,8 +28,10 @@ const navByLang = {
 export function SiteHeader({
   lang,
   search,
+  hideDesktopConsultation = false,
 }: {
   lang: Lang;
+  hideDesktopConsultation?: boolean;
   search?: {
     value: string;
     onChange: (value: string) => void;
@@ -69,8 +71,22 @@ export function SiteHeader({
         <Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} priority />
       </a>
       <nav id="site-menu" className={menuOpen ? "nav is-open" : "nav"} aria-label={lang === "vi" ? "Điều hướng chính" : "Main navigation"}>
+        <div className="nav-drawer-head">
+          <a className="nav-drawer-brand" href={homeHref} aria-label="hato Beauty" onClick={() => setMenuOpen(false)}>
+            <Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} />
+          </a>
+          <button type="button" className="nav-drawer-close" aria-label={lang === "vi" ? "Đóng menu" : "Close menu"} onClick={() => setMenuOpen(false)}>×</button>
+        </div>
+        <div className="nav-drawer-language" aria-label={lang === "vi" ? "Chọn ngôn ngữ" : "Choose language"}>
+          <span>{lang === "vi" ? "Ngôn ngữ" : "Language"}</span>
+          <div className="language-switch">
+            <Link className={lang === "vi" ? "active" : ""} href="/" hrefLang="vi-VN" onClick={() => setMenuOpen(false)}>VI</Link>
+            <span>/</span>
+            <Link className={lang === "en" ? "active" : ""} href="/en/" hrefLang="en" onClick={() => setMenuOpen(false)}>EN</Link>
+          </div>
+        </div>
         {navItems.map(([href, label]) => (
-          <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>
+          <a className={href.includes("lien-he") || href.includes("contact") ? "nav-item nav-item-contact" : "nav-item"} key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>
         ))}
         {search ? (
           <form className="nav-search" role="search" onSubmit={submitSearch}>
@@ -86,17 +102,12 @@ export function SiteHeader({
           </form>
         ) : null}
         <div className="nav-drawer-tools">
-          <div className="language-switch">
-            <Link className={lang === "vi" ? "active" : ""} href="/" hrefLang="vi-VN" onClick={() => setMenuOpen(false)}>VI</Link>
-            <span>/</span>
-            <Link className={lang === "en" ? "active" : ""} href="/en/" hrefLang="en" onClick={() => setMenuOpen(false)}>EN</Link>
-          </div>
           <div className="header-hotline" aria-label={lang === "vi" ? "Hotline hato Beauty" : "hato Beauty hotline"}>
             <span>Hotline</span>
             <a href="tel:+84703214868">0703214868</a>
           </div>
           <a className="header-booking-link nav-drawer-book" href={consultationHref} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
-            <span className="header-book-full">{bookLabel}</span><IconArrow />
+            <span className="header-book-full">{lang === "vi" ? "Tư vấn ngay" : "Consult now"}</span><IconArrow />
           </a>
         </div>
       </nav>
@@ -106,11 +117,11 @@ export function SiteHeader({
           <span>/</span>
           <Link className={lang === "en" ? "active" : ""} href="/en/" hrefLang="en">EN</Link>
         </div>
-        <a className="header-booking-link" href={consultationHref} target="_blank" rel="noopener noreferrer">
+        {!hideDesktopConsultation ? <a className="header-booking-link" href={consultationHref} target="_blank" rel="noopener noreferrer">
           <span className="header-book-full">{bookLabel}</span>
           <span className="header-book-short">{lang === "vi" ? "Đặt lịch" : "Book"}</span>
           <IconArrow />
-        </a>
+        </a> : null}
         <button className={menuOpen ? "menu-button is-open" : "menu-button"} aria-label={menuLabel} aria-expanded={menuOpen} aria-controls="site-menu" onClick={() => setMenuOpen(!menuOpen)}>
           <span />
           <span />

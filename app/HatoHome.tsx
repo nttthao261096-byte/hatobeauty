@@ -98,6 +98,17 @@ const serviceGroupLabels = {
   },
 } as const;
 
+const testimonialGuests = [
+  { initials: "TH", name: "Thu Hà", country: { vi: "Việt Nam", en: "Vietnam" }, local: true, href: { vi: "/", en: "/en/" } },
+  { initials: "EC", name: "Emily Carter", country: { vi: "Úc", en: "Australia" }, local: false, href: { vi: "/dich-vu/", en: "/en/services/" } },
+  { initials: "NM", name: "Ngọc Mai", country: { vi: "Việt Nam", en: "Vietnam" }, local: true, href: { vi: "/ve-hato-beauty/", en: "/en/about/" } },
+  { initials: "SL", name: "Sophie Laurent", country: { vi: "Pháp", en: "France" }, local: false, href: { vi: "/ket-qua/", en: "/en/results/" } },
+  { initials: "YT", name: "Yuki Tanaka", country: { vi: "Nhật Bản", en: "Japan" }, local: false, href: { vi: "/kien-thuc/", en: "/en/journal/" } },
+  { initials: "BA", name: "Bảo Anh", country: { vi: "Việt Nam", en: "Vietnam" }, local: true, href: { vi: "/dich-vu/", en: "/en/services/" } },
+  { initials: "MP", name: "Min-ji Park", country: { vi: "Hàn Quốc", en: "South Korea" }, local: false, href: { vi: "/ve-hato-beauty/", en: "/en/about/" } },
+  { initials: "ON", name: "Olivia Nguyen", country: { vi: "Singapore", en: "Singapore" }, local: false, href: { vi: "/", en: "/en/" } },
+] as const;
+
 export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent; initialLang?: Lang }) {
   const { services, serviceDetails, highlights, results, testimonials, journalArticles } = content;
   const [lang] = useState<Lang>(initialLang);
@@ -215,6 +226,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
 
       <SiteHeader
         lang={lang}
+        hideDesktopConsultation
         search={{
           value: serviceQuery,
           onChange: setServiceQuery,
@@ -290,7 +302,14 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       <section className="testimonials section" id="testimonials">
         <div className="testimonial-heading"><div><p className="eyebrow">{lang === "vi" ? "Khách Việt Nam & quốc tế" : "Vietnamese & international guests"}</p><h2>{lang === "vi" ? "Những điều khách hàng nhớ về hato Beauty." : "What guests remember about hato Beauty."}</h2></div><div className="review-heading-side"><p>{lang === "vi" ? "Những chia sẻ chân thành từ khách Việt Nam và bạn bè quốc tế về không gian, đội ngũ và toàn bộ trải nghiệm tại hato." : "Honest notes from Vietnamese and international guests about the space, the team and the complete hato experience."}</p><div className="review-controls"><button onClick={() => setReviewOffset((reviewOffset + 4) % testimonials.length)} aria-label={lang === "vi" ? "Nhóm đánh giá trước" : "Previous review group"}><IconChevron direction="left" /></button><button onClick={() => setReviewOffset((reviewOffset + 4) % testimonials.length)} aria-label={lang === "vi" ? "Nhóm đánh giá tiếp theo" : "Next review group"}><IconChevron /></button></div></div></div>
         <div className="review-grid" aria-live="polite">
-          {Array.from({ length: 4 }, (_, column) => testimonials[(reviewOffset + column) % testimonials.length]).map((review, index) => <article className={`review-card review-card-${index + 1}`} key={`${reviewOffset}-${review.initials}`}><div className="review-top"><span>0{((reviewOffset + index) % testimonials.length) + 1}</span><b>“</b></div><blockquote>{review.quote[lang]}</blockquote><footer><strong>{review.initials}</strong><div><b>{review.name[lang]}</b><small>{lang === "vi" ? "Khách hàng hato Beauty" : "hato Beauty guest"}</small></div></footer></article>)}
+          {Array.from({ length: 4 }, (_, column) => testimonials[(reviewOffset + column) % testimonials.length]).map((review, index) => {
+            const guestIndex = (reviewOffset + index) % testimonialGuests.length;
+            const guest = testimonialGuests[guestIndex];
+            const guestType = lang === "vi"
+              ? (guest.local ? "Khách Việt Nam" : "Khách quốc tế")
+              : (guest.local ? "Vietnamese guest" : "International guest");
+            return <Link className={`review-card review-card-${index + 1}`} href={guest.href[lang]} aria-label={`${guest.name} · ${guest.country[lang]}`} key={`${reviewOffset}-${guest.name}`}><div className="review-top"><span>0{guestIndex + 1}</span><b>“</b></div><blockquote>{review.quote[lang]}</blockquote><footer><strong>{guest.initials}</strong><div><b>{guest.name}</b><small>{guestType} · {guest.country[lang]}</small></div></footer></Link>;
+          })}
         </div>
         <div className="review-pagination" aria-label={lang === "vi" ? "Nhóm đánh giá" : "Review group"}><span>{reviewOffset === 0 ? "01 — 04" : "05 — 08"}<small>/ 08</small></span><div><button className={reviewOffset === 0 ? "active" : ""} onClick={() => setReviewOffset(0)} aria-label={lang === "vi" ? "Xem đánh giá 1 đến 4" : "View reviews 1 to 4"} /><button className={reviewOffset === 4 ? "active" : ""} onClick={() => setReviewOffset(4)} aria-label={lang === "vi" ? "Xem đánh giá 5 đến 8" : "View reviews 5 to 8"} /></div></div>
       </section>

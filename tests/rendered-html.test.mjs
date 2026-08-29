@@ -267,6 +267,7 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   const response = await render();
   const html = await response.text();
   const source = await readFile(new URL("../app/HatoHome.tsx", import.meta.url), "utf8");
+  const headerSource = await readFile(new URL("../app/SiteHeader.tsx", import.meta.url), "utf8");
   const bookingSource = await readFile(new URL("../app/BookingForm.tsx", import.meta.url), "utf8");
   const bookingErrorSource = await readFile(new URL("../app/booking-errors.ts", import.meta.url), "utf8");
   const bookingValidationSource = await readFile(new URL("../app/booking-validation.ts", import.meta.url), "utf8");
@@ -274,7 +275,12 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   const contentSource = await readFile(new URL("../app/content.ts", import.meta.url), "utf8");
   const dataMigration = await readFile(new URL("../supabase/migrations/20260814114657_create_site_pages.sql", import.meta.url), "utf8");
   const styles = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
-  assert.match(source, /Khách hàng hato Beauty/);
+  assert.match(source, /Khách Việt Nam/);
+  assert.match(source, /Khách quốc tế/);
+  assert.match(source, /International guest/);
+  assert.match(source, /href=\{guest\.href\[lang\]\}/i);
+  assert.match(headerSource, /hideDesktopConsultation/i);
+  assert.match(headerSource, /Tư vấn ngay/i);
   assert.doesNotMatch(html, />[^<]*\b(?:Hato|HATO)\b[^<]*</);
   assert.doesNotMatch(seoPagesSource, />Bảng giá</i);
   assert.match(seoPagesSource, /Khoảng giá tham khảo/i);
