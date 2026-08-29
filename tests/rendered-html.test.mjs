@@ -131,9 +131,12 @@ test("routes English consultation actions to WhatsApp", async () => {
   const response = await render("/en");
   assert.equal(response.status, 200);
   const html = await response.text();
+  const source = await readFile(new URL("../app/HatoHome.tsx", import.meta.url), "utf8");
   assert.match(html, /href="https:\/\/wa\.me\/84703214868"/i);
   assert.match(html, />Consult now</i);
   assert.doesNotMatch(html, /href="https:\/\/zalo\.me\/0703214868"/i);
+  assert.match(source, /const lang = initialLang;/i);
+  assert.doesNotMatch(source, /const \[lang\] = useState<Lang>\(initialLang\)/i);
 });
 
 test("renders complete contact details and social links", async () => {

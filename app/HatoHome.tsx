@@ -138,7 +138,7 @@ const serviceCardCopy = {
 
 export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent; initialLang?: Lang }) {
   const { services, serviceDetails, highlights, results, testimonials, journalArticles } = content;
-  const [lang] = useState<Lang>(initialLang);
+  const lang = initialLang;
   const [category, setCategory] = useState<Category>("all");
   const [highlightIndex, setHighlightIndex] = useState(() => {
     const firstCalm = highlights.findIndex((item) => !isTechHighlight(item));
