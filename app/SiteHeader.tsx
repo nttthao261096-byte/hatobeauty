@@ -39,7 +39,7 @@ export function SiteHeader({
   const [menuOpen, setMenuOpen] = useState(false);
   const navItems = navByLang[lang];
   const homeHref = lang === "vi" ? "/" : "/en/";
-  const bookHref = lang === "vi" ? "/dat-lich/" : "/en/book/";
+  const consultationHref = lang === "vi" ? "https://zalo.me/0703214868" : "https://wa.me/84703214868";
   const bookLabel = lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation";
   const menuLabel = lang === "vi" ? (menuOpen ? "Đóng menu" : "Mở menu") : (menuOpen ? "Close menu" : "Open menu");
 
@@ -63,6 +63,7 @@ export function SiteHeader({
   }
 
   return (
+    <>
     <header className="site-header inner-site-header">
       <a className="brand" href={homeHref} aria-label="hato Beauty">
         <Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} priority />
@@ -92,13 +93,11 @@ export function SiteHeader({
           </div>
           <div className="header-hotline" aria-label={lang === "vi" ? "Hotline hato Beauty" : "hato Beauty hotline"}>
             <span>Hotline</span>
-            <a href="tel:+84703214868">0703 214 868</a>
-            <i aria-hidden="true">·</i>
-            <a href="tel:+84915860446">0915 860 446</a>
+            <a href="tel:+84703214868">0703214868</a>
           </div>
-          <Link className="header-booking-link nav-drawer-book" href={bookHref} onClick={() => setMenuOpen(false)}>
+          <a className="header-booking-link nav-drawer-book" href={consultationHref} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
             <span className="header-book-full">{bookLabel}</span><IconArrow />
-          </Link>
+          </a>
         </div>
       </nav>
       <div className="header-tools">
@@ -107,16 +106,21 @@ export function SiteHeader({
           <span>/</span>
           <Link className={lang === "en" ? "active" : ""} href="/en/" hrefLang="en">EN</Link>
         </div>
-        <Link className="header-booking-link" href={bookHref}>
+        <a className="header-booking-link" href={consultationHref} target="_blank" rel="noopener noreferrer">
           <span className="header-book-full">{bookLabel}</span>
           <span className="header-book-short">{lang === "vi" ? "Đặt lịch" : "Book"}</span>
           <IconArrow />
-        </Link>
+        </a>
         <button className={menuOpen ? "menu-button is-open" : "menu-button"} aria-label={menuLabel} aria-expanded={menuOpen} aria-controls="site-menu" onClick={() => setMenuOpen(!menuOpen)}>
           <span />
           <span />
         </button>
       </div>
     </header>
+    <div className="mobile-dock" aria-label={lang === "vi" ? "Liên hệ nhanh" : "Quick contact"}>
+      <a className="mobile-dock-call" href="tel:+84703214868">0703214868</a>
+      <a className="mobile-dock-book" href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Tư vấn ngay" : "Consult now"}</a>
+    </div>
+    </>
   );
 }

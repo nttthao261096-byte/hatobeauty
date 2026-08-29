@@ -117,8 +117,22 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, /TỎA SÁNG THEO CÁCH CỦA BẠN/i);
   assert.match(html, /Nhận tư vấn riêng/i);
   assert.match(html, /aria-label="Hotline hato Beauty"/i);
-  assert.match(html, /href="tel:[+]84703214868">0703 214 868/i);
-  assert.match(html, /href="tel:[+]84915860446">0915 860 446/i);
+  assert.match(html, /href="tel:[+]84703214868">0703214868/i);
+  assert.doesNotMatch(html, /0915 860 446|[+]84915860446/i);
+  assert.match(html, /href="https:\/\/zalo\.me\/0703214868"/i);
+  assert.match(html, /href="\/dich-vu\/"[^>]*><strong>05<\/strong>/i);
+  assert.match(html, /href="\/dat-lich\/"[^>]*><strong>08:00–19:30<\/strong>/i);
+  assert.match(html, /google\.com\/maps\/dir\/\?api=1&amp;destination=/i);
+  assert.match(html, />Tư vấn ngay</i);
+});
+
+test("routes English consultation actions to WhatsApp", async () => {
+  const response = await render("/en");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /href="https:\/\/wa\.me\/84703214868"/i);
+  assert.match(html, />Consult now</i);
+  assert.doesNotMatch(html, /href="https:\/\/zalo\.me\/0703214868"/i);
 });
 
 test("renders complete contact details and social links", async () => {
@@ -126,7 +140,7 @@ test("renders complete contact details and social links", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /href="tel:\+84703214868"/i);
-  assert.match(html, /href="tel:\+84915860446"/i);
+  assert.doesNotMatch(html, /href="tel:\+84915860446"/i);
   assert.match(html, /href="mailto:hatobeautydanang@gmail\.com"/i);
   assert.match(html, /href="https:\/\/www\.tiktok\.com\/@hatobeauty"/i);
   assert.match(html, /href="https:\/\/wa\.me\/84703214868"/i);

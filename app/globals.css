@@ -2871,6 +2871,104 @@ p .hato-word, li .hato-word, .announcement .hato-word {
 }
 
 /* Visual system 2026: warm tokens, hairline icons, no default blue. */
+.announcement {
+  grid-template-columns: minmax(0, 1fr);
+}
+.announcement > p {
+  text-align: center;
+}
+
+.brand {
+  width: 172px;
+  height: 76px;
+  overflow: visible;
+}
+.brand img {
+  width: 156px;
+  max-height: 72px;
+  object-fit: contain;
+}
+
+.hero-trust li > a {
+  min-height: 50px;
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  border-radius: 10px;
+  transition: color .2s ease, background-color .2s ease;
+}
+.hero-trust li > a:hover,
+.hero-trust li > a:focus-visible {
+  color: var(--accent-strong);
+  background: rgba(255, 250, 246, .46);
+}
+
+.result-image,
+.home-page .result-image {
+  aspect-ratio: 16 / 10;
+}
+.result-grid img {
+  object-fit: cover;
+  object-position: center;
+}
+.comparison-labels {
+  inset: 14px 14px auto;
+}
+.comparison-labels span {
+  width: fit-content;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, .45);
+  border-radius: 999px;
+  background: rgba(58, 38, 29, .68);
+  color: #fff;
+  text-shadow: none;
+  backdrop-filter: blur(8px);
+}
+.comparison-labels span:last-child { justify-self: end; }
+
+.home-page .review-card:not(.review-card-3) {
+  color: #3f2d25;
+}
+.home-page .review-card:not(.review-card-3) .review-top,
+.home-page .review-card:not(.review-card-3) footer small {
+  color: #72584a;
+}
+.home-page .review-card:not(.review-card-3) .review-top b {
+  color: #8a6551;
+}
+.home-page .review-card-3 {
+  background: linear-gradient(150deg, #654434, #845b46 58%, #9e6d52);
+  color: #fffaf6;
+}
+.home-page .review-card-3 .review-top,
+.home-page .review-card-3 footer small {
+  color: #f4dfd1;
+}
+
+.footer-contact .footer-consultation-link {
+  width: fit-content;
+  padding: 7px 0 9px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  border-bottom: 1px solid #c9a992;
+  color: white;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  body { padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
+  .site-header { min-height: 72px; }
+  .brand { width: 136px; height: 68px; }
+  .brand img { width: 132px; max-height: 64px; }
+  .nav { inset: calc(32px + 72px) 0 0; }
+  .result-image,
+  .home-page .result-image { aspect-ratio: 16 / 10; }
+  .mobile-dock { grid-template-columns: 1fr 1.18fr; }
+  .mobile-dock-call,
+  .mobile-dock-book { min-height: 52px; font-size: 13px; }
+}
+
 .icon-arrow,
 .icon-mark {
   display: inline-block;

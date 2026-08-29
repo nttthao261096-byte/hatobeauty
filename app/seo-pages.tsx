@@ -77,6 +77,7 @@ export function SeoHeader({ lang }: { lang: SeoLang }) {
 }
 
 export function SeoFooter({ lang }: { lang: SeoLang }) {
+  const consultationHref = lang === "vi" ? "https://zalo.me/0703214868" : "https://wa.me/84703214868";
   const links = lang === "vi"
     ? [["/ve-hato-beauty/", "Về chúng tôi"], ["/dich-vu/", "Dịch vụ"], ["/kien-thuc/", "Kiến thức"], ["/ket-qua/", "Kết quả"]]
     : [["/en/about/", "About us"], ["/en/services/", "Services"], ["/en/journal/", "Journal"], ["/en/results/", "Results"]];
@@ -85,7 +86,7 @@ export function SeoFooter({ lang }: { lang: SeoLang }) {
     <div className="footer-intro"><p>{lang === "vi" ? "hato Beauty · Không gian làm đẹp" : "hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
     <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} /></div>
     <div className="footer-links"><h3>{lang === "vi" ? "Khám phá" : "Discover"}</h3>{links.map(([href, label], index) => <Link href={href} key={href}><span>0{index + 1}</span>{label}</Link>)}</div>
-    <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><ContactDetails lang={lang} compact /><Link href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></Link></div>
+    <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><ContactDetails lang={lang} compact /><a href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a></div>
     <div className="footer-bottom"><span>© 2026 hato Beauty</span><div><Link href={lang === "vi" ? "/" : "/en/"}>{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</Link><Link href={lang === "vi" ? "/chinh-sach-bien-tap/" : "/en/editorial-policy/"}>{lang === "vi" ? "Biên tập" : "Editorial"}</Link><Link href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</Link></div></div>
   </footer>;
 }
@@ -128,6 +129,7 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
   const serviceNumber = serviceNumbers[service.id];
   const path = servicePath(service, lang);
   const pairedPath = servicePath(service, lang === "vi" ? "en" : "vi");
+  const consultationHref = lang === "vi" ? "https://zalo.me/0703214868" : "https://wa.me/84703214868";
   const faqs = [...c.faq, ...serviceIntentFaqs[service.id][lang]];
   const schema = {
     "@context": "https://schema.org", "@graph": [
@@ -144,7 +146,7 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
   return <div className="seo-page" lang={lang}><JsonLd data={schema} /><SeoHeader lang={lang} />
     <main>
       {detailGroups.length > 0 && <section className={`service-detail-menu service-detail-menu--${service.id}`} id="service-menu">
-        <header className="service-detail-menu-heading"><div className="service-detail-menu-label"><span>{serviceNumber}</span><p>{lang === "vi" ? "DANH MỤC DỊCH VỤ" : "SERVICE MENU"}</p></div><div className="service-detail-menu-summary"><h1>{c.name}</h1><p>{c.description}</p><div className="service-menu-facts"><span><small>{lang === "vi" ? "Thời gian dự kiến" : "Estimated time"}</small><strong>{duration}</strong></span><span><small>{lang === "vi" ? "Khoảng giá tham khảo" : "Guide price"}</small><strong>{price}</strong></span></div><Link href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></Link></div></header>
+        <header className="service-detail-menu-heading"><div className="service-detail-menu-label"><span>{serviceNumber}</span><p>{lang === "vi" ? "DANH MỤC DỊCH VỤ" : "SERVICE MENU"}</p></div><div className="service-detail-menu-summary"><h1>{c.name}</h1><p>{c.description}</p><div className="service-menu-facts"><span><small>{lang === "vi" ? "Thời gian dự kiến" : "Estimated time"}</small><strong>{duration}</strong></span><span><small>{lang === "vi" ? "Khoảng giá tham khảo" : "Guide price"}</small><strong>{price}</strong></span></div><a href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a></div></header>
         <div className={`service-detail-groups ${detailGroups.length === 1 ? "single" : ""}`}>{detailGroups.map((group, groupIndex) => <article key={group.title}>
           <div className="service-detail-group-title"><span>{serviceNumber}.{groupIndex + 1}</span><h3>{group.title}</h3></div>
           <ol>{group.items.map((item, itemIndex) => <li key={item}><span>{String(itemIndex + 1).padStart(2, "0")}</span><strong>{item}</strong></li>)}</ol>

@@ -19,7 +19,7 @@ export function ContactDetails({ lang, compact = false }: { lang: ContactLang; c
   return <section className={`contact-details${compact ? " contact-details--compact" : ""}`} aria-label={lang === "vi" ? "Thông tin liên hệ hato Beauty" : "hato Beauty contact details"}>
     <div className="contact-list">
       <div className="contact-row">
-        <span className="contact-row-icon" aria-hidden="true"><IconPhone /></span><span><small>{lang === "vi" ? "Điện thoại" : "Phone"}</small><strong className="contact-phone-links"><a href="tel:+84703214868">0703 214 868</a><i>·</i><a href="tel:+84915860446">0915 860 446</a></strong></span>
+        <span className="contact-row-icon" aria-hidden="true"><IconPhone /></span><span><small>{lang === "vi" ? "Điện thoại" : "Phone"}</small><strong className="contact-phone-links"><a href="tel:+84703214868">0703214868</a></strong></span>
       </div>
       <a className="contact-row" href={directionsUrl} target="_blank" rel="noopener noreferrer">
         <span className="contact-row-icon" aria-hidden="true"><IconPin /></span><span><small>{lang === "vi" ? "Địa chỉ" : "Address"}</small><strong>{hatoAddress}</strong></span>

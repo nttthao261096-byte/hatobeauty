@@ -10,7 +10,7 @@ export default function NotFound() {
   const pathname = usePathname();
   const lang = pathname.startsWith("/en") ? "en" : "vi";
   const home = lang === "vi" ? "/" : "/en/";
-  const book = lang === "vi" ? "/dat-lich/" : "/en/book/";
+  const consultation = lang === "vi" ? "https://zalo.me/0703214868" : "https://wa.me/84703214868";
 
   return (
     <div className="not-found-page" lang={lang}>
@@ -21,7 +21,7 @@ export default function NotFound() {
         <p>{lang === "vi" ? "Đường dẫn có thể đã thay đổi. Bạn có thể quay lại trang chủ hoặc để lại thông tin để được tư vấn lịch hẹn." : "The link may have changed. Return home or leave your details for a consultation."}</p>
         <div className="not-found-actions">
           <Link className="button primary" href={home}>{lang === "vi" ? "Về trang chủ" : "Back home"}<IconArrow /></Link>
-          <Link className="text-link" href={book}>{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></Link>
+          <a className="text-link" href={consultation} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a>
         </div>
       </main>
     </div>

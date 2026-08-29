@@ -123,6 +123,8 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
   const selectedService = services.find((service) => service.id === selectedServiceId);
   const selectedServiceDetail = selectedService ? serviceDetails[selectedService.id] : undefined;
   const minimumBookingDate = useMinimumBookingDate();
+  const consultationHref = lang === "vi" ? "https://zalo.me/0703214868" : "https://wa.me/84703214868";
+  const directionsHref = "https://www.google.com/maps/dir/?api=1&destination=127%20Ch%C3%A2u%20Th%E1%BB%8B%20V%C4%A9nh%20T%E1%BA%BF%2C%20Ng%C5%A9%20H%C3%A0nh%20S%C6%A1n%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng";
   const normalizedQuery = serviceQuery.trim().toLocaleLowerCase(lang === "vi" ? "vi" : "en");
   const filteredServices = services.filter((service) => {
     const matchesCategory = category === "all" || service.category === category;
@@ -208,13 +210,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
     <main className="home-page" id="main" lang={lang}>
       <a className="skip-link" href="#services">{lang === "vi" ? "Đến nội dung chính" : "Skip to content"}</a>
       <div className="announcement">
-        <p className="announcement-meta">{lang === "vi" ? "Đà Nẵng · 08:00–19:30" : "Da Nang · 08:00–19:30"}</p>
         <p>{brandText(t.announcement)}</p>
-        <p className="announcement-phones" aria-label={lang === "vi" ? "Hotline hato Beauty" : "hato Beauty hotline"}>
-          <a href="tel:+84703214868">0703 214 868</a>
-          <i aria-hidden="true">·</i>
-          <a href="tel:+84915860446">0915 860 446</a>
-        </p>
       </div>
 
       <SiteHeader
@@ -237,17 +233,16 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         </div>
         <div className="hero-overlay" />
         <div className="hero-copy">
-          <p className="eyebrow hero-eyebrow">{t.heroEyebrow}</p>
           <h1>{t.heroTitle}</h1>
           <p className="hero-lead">{lang === "vi" ? "Hiệu quả đến từ sự thấu hiểu: công nghệ phù hợp, chuyên môn cẩn trọng và một lộ trình cho làn da, mi mày và nhịp sống của bạn." : "Results begin with understanding: considered technology, careful expertise and a plan shaped around what you truly need."}</p>
           <div className="hero-actions">
-            <a className="button primary" href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{t.book}<IconArrow /></a>
+            <a className="button primary" href={consultationHref} target="_blank" rel="noopener noreferrer">{t.book}<IconArrow /></a>
             <a className="text-link" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{t.explore}<IconArrow /></a>
           </div>
           <ul className="hero-trust">
-            <li><strong>05</strong><span>{lang === "vi" ? "nhóm dịch vụ" : "care groups"}</span></li>
-            <li><strong>08:00–19:30</strong><span>{lang === "vi" ? "mỗi ngày" : "every day"}</span></li>
-            <li><strong>{lang === "vi" ? "Đà Nẵng" : "Da Nang"}</strong><span>Ngũ Hành Sơn</span></li>
+            <li><Link href={lang === "vi" ? "/dich-vu/" : "/en/services/"}><strong>05</strong><span>{lang === "vi" ? "nhóm dịch vụ" : "care groups"}</span></Link></li>
+            <li><Link href={lang === "vi" ? "/dat-lich/" : "/en/book/"}><strong>08:00–19:30</strong><span>{lang === "vi" ? "mỗi ngày" : "every day"}</span></Link></li>
+            <li><a href={directionsHref} target="_blank" rel="noopener noreferrer"><strong>{lang === "vi" ? "Đà Nẵng" : "Da Nang"}</strong><span>Ngũ Hành Sơn</span></a></li>
           </ul>
         </div>
       </section>
@@ -300,21 +295,16 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <div className="review-pagination" aria-label={lang === "vi" ? "Nhóm đánh giá" : "Review group"}><span>{reviewOffset === 0 ? "01 — 04" : "05 — 08"}<small>/ 08</small></span><div><button className={reviewOffset === 0 ? "active" : ""} onClick={() => setReviewOffset(0)} aria-label={lang === "vi" ? "Xem đánh giá 1 đến 4" : "View reviews 1 to 4"} /><button className={reviewOffset === 4 ? "active" : ""} onClick={() => setReviewOffset(4)} aria-label={lang === "vi" ? "Xem đánh giá 5 đến 8" : "View reviews 5 to 8"} /></div></div>
       </section>
 
-      <section className="booking-banner" id="contact"><div className="banner-orbit" /><article><div className="banner-note"><span className="banner-note-brand"><b>hato</b><em>Beauty</em></span><span className="banner-note-line" aria-hidden="true" /><span className="banner-note-mark" aria-hidden="true"><i>✦</i></span><span className="banner-note-line" aria-hidden="true" /><span className="banner-note-tag"><small>{lang === "vi" ? "TỎA SÁNG THEO CÁCH CỦA BẠN" : "SHINE AS YOU ARE"}</small></span></div><h2>{t.bannerTitle}</h2><p>{brandText(t.bannerText)}</p><ul className="banner-visit"><li>{lang === "vi" ? "127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn" : "127 Chau Thi Vinh Te, Ngu Hanh Son"}</li><li>{lang === "vi" ? "08:00–19:30 mỗi ngày" : "08:00–19:30 daily"}</li><li><a href="tel:+84703214868">0703 214 868</a></li></ul><button className="button light" onClick={openBooking}><span>{lang === "vi" ? "Nhận tư vấn riêng" : "Request personal guidance"}</span><IconArrow /></button></article></section>
+      <section className="booking-banner" id="contact"><div className="banner-orbit" /><article><div className="banner-note"><span className="banner-note-brand"><b>hato</b><em>Beauty</em></span><span className="banner-note-line" aria-hidden="true" /><span className="banner-note-mark" aria-hidden="true"><i>✦</i></span><span className="banner-note-line" aria-hidden="true" /><span className="banner-note-tag"><small>{lang === "vi" ? "TỎA SÁNG THEO CÁCH CỦA BẠN" : "SHINE AS YOU ARE"}</small></span></div><h2>{t.bannerTitle}</h2><p>{brandText(t.bannerText)}</p><ul className="banner-visit"><li>{lang === "vi" ? "127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn" : "127 Chau Thi Vinh Te, Ngu Hanh Son"}</li><li>{lang === "vi" ? "08:00–19:30 mỗi ngày" : "08:00–19:30 daily"}</li><li><a href="tel:+84703214868">0703214868</a></li></ul><a className="button light" href={consultationHref} target="_blank" rel="noopener noreferrer"><span>{lang === "vi" ? "Nhận tư vấn riêng" : "Request personal guidance"}</span><IconArrow /></a></article></section>
 
       <footer className="site-footer">
         <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />
         <div className="footer-intro"><p>{lang === "vi" ? "hato Beauty · Không gian làm đẹp" : "hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
         <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} /></div>
         <div className="footer-links"><h3>{lang === "vi" ? "Khám phá" : "Discover"}</h3>{navItems.slice(0, 4).map(([href, label], index) => <a href={href} key={href}><span>0{index + 1}</span>{label}</a>)}</div>
-        <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><ContactDetails lang={lang} compact /><button onClick={openBooking}>{t.book}<IconArrow /></button></div>
+        <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><ContactDetails lang={lang} compact /><a className="footer-consultation-link" href={consultationHref} target="_blank" rel="noopener noreferrer">{t.book}<IconArrow /></a></div>
         <div className="footer-bottom"><span>© 2026 hato Beauty</span><div><a href="#top">{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</a><a href={lang === "vi" ? "/chinh-sach-bien-tap/" : "/en/editorial-policy/"}>{lang === "vi" ? "Biên tập" : "Editorial"}</a><a href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</a></div></div>
       </footer>
-
-      <div className="mobile-dock">
-        <a className="mobile-dock-call" href="tel:+84703214868">{lang === "vi" ? "Gọi ngay" : "Call now"}</a>
-        <button className="mobile-dock-book" onClick={openBooking}>{t.book}</button>
-      </div>
 
       {selectedService && selectedServiceDetail && <div className="modal-backdrop service-detail-backdrop" onMouseDown={(event) => event.target === event.currentTarget && setSelectedServiceId(null)}>
         <section className="service-detail-modal" ref={serviceDialogRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="service-detail-title">
