@@ -15,14 +15,12 @@ const navByLang = {
     ["/ket-qua/", "Kết quả"],
     ["/kien-thuc/", "Kiến thức"],
     ["/ve-hato-beauty/", "Về Hato Beauty"],
-    ["/lien-he/", "Liên hệ"],
   ],
   en: [
     ["/en/services/", "Services"],
     ["/en/results/", "Results"],
     ["/en/journal/", "Knowledge"],
     ["/en/about/", "About us"],
-    ["/en/contact/", "Contact"],
   ],
 } as const;
 
@@ -87,7 +85,7 @@ export function SiteHeader({
           </div>
         </div>
         {navItems.map(([href, label]) => (
-          <a className={href.includes("lien-he") || href.includes("contact") ? "nav-item nav-item-contact" : "nav-item"} key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>
+          <a className="nav-item" key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>
         ))}
         {search ? (
           <form className="nav-search" role="search" onSubmit={submitSearch}>
