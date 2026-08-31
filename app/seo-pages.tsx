@@ -88,7 +88,7 @@ export function SeoHeader({ lang }: { lang: SeoLang }) {
 export function SeoFooter({ lang }: { lang: SeoLang }) {
   const consultationHref = lang === "vi" ? "https://zalo.me/0703214868" : "https://wa.me/84703214868";
   const links = lang === "vi"
-    ? [["/ve-hato-beauty/", "Về chúng tôi"], ["/dich-vu/", "Dịch vụ"], ["/kien-thuc/", "Kiến thức"], ["/ket-qua/", "Kết quả"]]
+    ? [["/ve-hato-beauty/", "Về Hato Beauty"], ["/dich-vu/", "Dịch vụ"], ["/kien-thuc/", "Kiến thức"], ["/ket-qua/", "Kết quả"]]
     : [["/en/about/", "About us"], ["/en/services/", "Services"], ["/en/journal/", "Journal"], ["/en/results/", "Results"]];
   return <footer className="site-footer inner-page-footer">
     <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />

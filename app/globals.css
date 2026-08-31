@@ -3407,6 +3407,90 @@ a:hover { color: inherit; }
   to { opacity: 1; transform: translateX(0); }
 }
 
+/* Warm, information-rich Hato Beauty mobile navigation drawer. */
+@media (max-width: 900px) {
+  .nav,
+  .site-header .nav {
+    background:
+      radial-gradient(circle at 88% 7%, rgba(207, 168, 139, .2), transparent 27%),
+      #f7eadf;
+  }
+
+  .nav-drawer-tools {
+    margin-top: 18px;
+    padding: 0 0 8px;
+    gap: 16px;
+  }
+
+  .nav-drawer-tools .nav-drawer-book,
+  .site-header .nav-drawer-tools .nav-drawer-book {
+    order: 0;
+    min-height: 56px;
+    border-radius: 16px;
+  }
+
+  .nav-drawer-tools > .contact-details {
+    order: 1;
+    padding: 2px 0 10px;
+  }
+
+  .nav-drawer-tools .contact-list {
+    border-top-color: rgba(92, 61, 46, .17);
+  }
+
+  .nav-drawer-tools .contact-row {
+    min-height: 70px;
+    padding: 12px 0;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 13px;
+    border-bottom-color: rgba(92, 61, 46, .17);
+  }
+
+  .nav-drawer-tools .contact-row-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+  }
+
+  .nav-drawer-tools .contact-row small { font-size: 8px; }
+
+  .nav-drawer-tools .contact-row strong {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .nav-drawer-tools .contact-socials {
+    margin-top: 16px;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .nav-drawer-tools .contact-socials a {
+    width: 48px;
+    min-height: 48px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 250, 246, .72);
+  }
+
+  .nav-drawer-tools .contact-socials a > span {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-drawer-tools .contact-socials a > b {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+
 /* Consistent brand navigation and route context. */
 .page-breadcrumbs {
   width: min(calc(100% - 48px), 1560px);

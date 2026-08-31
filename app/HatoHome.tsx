@@ -28,7 +28,7 @@ const copy = {
   vi: {
     announcement: "Hãy để chúng tôi đánh thức vẻ đẹp trong bạn.",
     book: "Đặt lịch tư vấn",
-    nav: ["Về chúng tôi", "Dịch vụ", "Trải nghiệm", "Kết quả", "Cảm nhận"],
+    nav: ["Về Hato Beauty", "Dịch vụ", "Trải nghiệm", "Kết quả", "Cảm nhận"],
     heroEyebrow: "CHĂM SÓC THEO NHU CẦU",
     heroTitle: "Tỏa sáng theo cách của bạn.",
     heroText: "Bởi mỗi người đều có một vẻ đẹp riêng. Tại đây, chúng tôi lắng nghe, thấu hiểu và thiết kế từng trải nghiệm để phù hợp với làn da, nhu cầu và nhịp sống của bạn.",
@@ -170,7 +170,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
     return matchesCategory && (!normalizedQuery || searchableText.includes(normalizedQuery));
   });
   const navItems = lang === "vi"
-    ? [["/ve-hato-beauty/", "Về chúng tôi"], ["/dich-vu/", "Dịch vụ"], ["/kien-thuc/", "Kiến thức"], ["/ket-qua/", "Kết quả"], ["/lien-he/", "Liên hệ"]]
+    ? [["/ve-hato-beauty/", "Về Hato Beauty"], ["/dich-vu/", "Dịch vụ"], ["/kien-thuc/", "Kiến thức"], ["/ket-qua/", "Kết quả"], ["/lien-he/", "Liên hệ"]]
     : [["/en/about/", "About"], ["/en/services/", "Services"], ["/en/journal/", "Journal"], ["/en/results/", "Results"], ["/en/contact/", "Contact"]];
   const ribbonGroups = ["skin", "brow-lash", "scalp", "hair-removal", "waxing"] as const;
   useEffect(() => {

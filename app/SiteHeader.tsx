@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 
+import { ContactDetails } from "./ContactDetails";
 import type { Lang } from "./content";
 import { IconArrow } from "./icons";
 import { mediaUrl } from "./seo-data";
@@ -13,7 +14,7 @@ const navByLang = {
     ["/dich-vu/", "Dịch vụ"],
     ["/ket-qua/", "Kết quả"],
     ["/kien-thuc/", "Kiến thức"],
-    ["/ve-hato-beauty/", "Về chúng tôi"],
+    ["/ve-hato-beauty/", "Về Hato Beauty"],
     ["/lien-he/", "Liên hệ"],
   ],
   en: [
@@ -102,13 +103,10 @@ export function SiteHeader({
           </form>
         ) : null}
         <div className="nav-drawer-tools">
-          <div className="header-hotline" aria-label={lang === "vi" ? "Hotline hato Beauty" : "hato Beauty hotline"}>
-            <span>Hotline</span>
-            <a href="tel:+84703214868">0703214868</a>
-          </div>
           <a className="header-booking-link nav-drawer-book" href={consultationHref} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
             <span className="header-book-full">{lang === "vi" ? "Liên hệ ngay" : "Contact now"}</span><IconArrow />
           </a>
+          <ContactDetails lang={lang} />
         </div>
       </nav>
       <div className="header-tools">
