@@ -3457,7 +3457,12 @@ a:hover { color: inherit; }
   .site-header .nav > .nav-item::after {
     display: block;
     content: "›";
+    width: auto;
+    height: auto;
+    position: static;
+    background: transparent;
     font-size: 18px;
+    line-height: 1;
   }
   .nav > .nav-item-contact,
   .site-header .nav > .nav-item-contact {
