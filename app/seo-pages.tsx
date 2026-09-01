@@ -68,6 +68,14 @@ const serviceDetailMenus: Partial<Record<SeoService["id"], Record<SeoLang, Servi
   },
 };
 
+const serviceResultGalleries: Partial<Record<SeoService["id"], { image: string; vi: [string, string]; en: [string, string]; viExamples: [string, string][]; enExamples: [string, string][] }>> = {
+  skin: { image: "/images/results-skin-gallery-v1.png", vi: ["Kết quả chăm sóc da tham khảo", "Ba ví dụ trước–sau về độ ẩm, bề mặt và vẻ tươi sáng của da."], en: ["Illustrative skin-care outcomes", "Three before-and-after examples covering hydration, texture and radiance."], viExamples: [["Da dịu và đều màu hơn", "Sau trải nghiệm làm sạch và phục hồi"], ["Bề mặt da trông mịn hơn", "Sau liệu trình cấp ẩm phù hợp"], ["Da tươi sáng tự nhiên", "Sau chăm sóc theo tình trạng da"]], enExamples: [["Calmer, more even-looking skin", "After cleansing and recovery care"], ["A smoother-looking surface", "After suitable hydration care"], ["Naturally refreshed skin", "After condition-led skin care"]] },
+  "brow-lash": { image: "/images/results-brow-lash-gallery-v1.png", vi: ["Kết quả mi & chân mày tham khảo", "Ba ví dụ trước–sau về đường mày tự nhiên và độ cong mềm của mi."], en: ["Illustrative brow & lash outcomes", "Three before-and-after examples of natural brow definition and softly lifted lashes."], viExamples: [["Chân mày cân đối hơn", "Sau tạo hình theo đường nét gương mặt"], ["Hàng mi cong mềm tự nhiên", "Sau uốn và dưỡng mi"], ["Đường mày gọn, thanh thoát", "Sau định hình và nhuộm nhẹ"]], enExamples: [["More balanced brows", "After face-led brow shaping"], ["Softly lifted natural lashes", "After lifting and conditioning"], ["A cleaner, lighter brow line", "After shaping and a soft tint"]] },
+  scalp: { image: "/images/results-scalp-gallery-v1.png", vi: ["Kết quả chăm sóc da đầu tham khảo", "Ba ví dụ trước–sau về chân tóc sạch thoáng và diện mạo thư giãn hơn."], en: ["Illustrative scalp-care outcomes", "Three before-and-after examples of fresher roots and a more relaxed finish."], viExamples: [["Chân tóc sạch thoáng hơn", "Sau làm sạch da đầu nhẹ nhàng"], ["Mái tóc trông tơi hơn", "Sau chăm sóc da đầu chuyên sâu"], ["Diện mạo thư giãn, chỉn chu", "Sau nghi thức head spa"]], enExamples: [["Fresher-looking roots", "After gentle scalp cleansing"], ["Hair appears lighter and cleaner", "After focused scalp care"], ["A relaxed, polished finish", "After a head-spa ritual"]] },
+  "hair-removal": { image: "/images/results-hair-removal-gallery-v1.png", vi: ["Kết quả triệt lông tham khảo", "Ba ví dụ trước–sau theo vùng: nách, cẳng chân và cẳng tay."], en: ["Illustrative hair-removal outcomes", "Three before-and-after examples across underarm, lower-leg and forearm areas."], viExamples: [["Vùng nách trông gọn mịn hơn", "Sau chăm sóc theo lộ trình riêng"], ["Cẳng chân thông thoáng hơn", "Sau triệt lông theo vùng"], ["Cẳng tay trông mịn màng", "Sau liệu trình phù hợp"]], enExamples: [["A smoother-looking underarm", "After a personal care plan"], ["Cleaner-looking lower legs", "After area-focused hair removal"], ["Smoother-looking forearms", "After a suitable treatment plan"]] },
+  waxing: { image: "/images/results-waxing-gallery-v1.png", vi: ["Kết quả waxing tham khảo", "Ba ví dụ trước–sau theo vùng: cẳng chân, cẳng tay và đường chân mày."], en: ["Illustrative waxing outcomes", "Three before-and-after examples across lower-leg, forearm and brow-line areas."], viExamples: [["Cẳng chân gọn mịn hơn", "Sau waxing và làm dịu da"], ["Cẳng tay sạch thoáng", "Sau tẩy lông theo vùng"], ["Đường chân mày sắc nét hơn", "Sau waxing tạo hình nhẹ"]], enExamples: [["Smoother-looking lower legs", "After waxing and soothing care"], ["Cleaner-looking forearms", "After area waxing"], ["A neater brow line", "After gentle shaping wax"]] },
+};
+
 export function JsonLd({ data }: { data: unknown }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }} />;
 }
@@ -137,6 +145,7 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
   const [price, duration] = facts[service.id][lang];
   const detailGroups = serviceDetailMenus[service.id]?.[lang] ?? [];
   const serviceNumber = serviceNumbers[service.id];
+  const resultGallery = serviceResultGalleries[service.id];
   const path = servicePath(service, lang);
   const pairedPath = servicePath(service, lang === "vi" ? "en" : "vi");
   const consultationHref = lang === "vi" ? "https://zalo.me/0703214868" : "https://wa.me/84703214868";
@@ -161,6 +170,13 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
         <div className={`service-detail-groups ${detailGroups.length === 1 ? "single" : ""}`}>{detailGroups.map((group, groupIndex) => <article key={group.title}>
           <div className="service-detail-group-title"><span>{serviceNumber}.{groupIndex + 1}</span><h3>{group.title}</h3></div>
           <ol>{group.items.map((item, itemIndex) => <li key={item}><span>{String(itemIndex + 1).padStart(2, "0")}</span><strong>{item}</strong></li>)}</ol>
+        </article>)}</div>
+      </section>}
+      {resultGallery && <section className="service-result-gallery" aria-labelledby={`service-results-${service.id}`}>
+        <header><div><p className="seo-eyebrow">{lang === "vi" ? "TRƯỚC & SAU" : "BEFORE & AFTER"}</p><h2 id={`service-results-${service.id}`}>{resultGallery[lang][0]}</h2></div><p>{resultGallery[lang][1]} {lang === "vi" ? "Hình ảnh minh hoạ; kết quả thực tế thay đổi theo tình trạng và lộ trình riêng." : "Illustrative imagery; individual results vary by condition and care plan."}</p></header>
+        <div className="service-result-cards">{(lang === "vi" ? resultGallery.viExamples : resultGallery.enExamples).map(([title, caption], index) => <article className="service-result-card" key={title}>
+          <div className={`service-result-card-image service-result-crop-${index + 1}`}><Image src={resultGallery.image} alt={title} fill sizes="(max-width: 760px) 82vw, 30vw" unoptimized /><div className="service-result-legend"><span>{lang === "vi" ? "Trước" : "Before"}</span><span>{lang === "vi" ? "Sau" : "After"}</span></div></div>
+          <div className="service-result-card-copy"><h3>{title}</h3><p>{caption}</p></div>
         </article>)}</div>
       </section>}
       <section className="seo-content service-answer-panel" aria-labelledby="service-answer-title">

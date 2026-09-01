@@ -137,7 +137,7 @@ const serviceCardCopy = {
 } as const;
 
 export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent; initialLang?: Lang }) {
-  const { services, serviceDetails, highlights, results, testimonials, journalArticles } = content;
+  const { services, serviceDetails, highlights, testimonials, journalArticles } = content;
   const lang = initialLang;
   const [category, setCategory] = useState<Category>("all");
   const [highlightIndex, setHighlightIndex] = useState(() => {
@@ -289,7 +289,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
           </div>
           <Link className="hero-trust" href={lang === "vi" ? "/lo-trinh/" : "/en/care-plan/"} aria-label={lang === "vi" ? "4,9 trên 5 từ hơn 5.000 khách hàng" : "4.9 out of 5 from more than 5,000 guests"}>
             <span className="hero-trust-avatars" aria-hidden="true">
-              {[0, 1, 2].map((index) => <span className={`hero-trust-avatar hero-trust-avatar-${index + 1}`} key={index}><Image src="/images/guest-trust-avatars-v1.png" alt="" fill sizes="54px" /></span>)}
+              {[0, 1, 2].map((index) => <span className={`hero-trust-avatar hero-trust-avatar-${index + 1}`} key={index}><Image src="/images/guest-trust-avatars-v1.png" alt="" fill sizes="54px" unoptimized /></span>)}
             </span>
             <span className="hero-trust-copy"><strong><span aria-hidden="true">★★★★★</span> 4.9/5</strong><small>{lang === "vi" ? "5.000+ khách hàng" : "5,000+ guests"}</small></span>
           </Link>
@@ -323,10 +323,6 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
             <div className="service-body">{service.id === "skin" && <span className="skin-signature">{lang === "vi" ? "Dịch vụ chủ đạo" : "Signature care"}</span>}<p className="service-summary">{serviceGroupLabels[lang][service.id as keyof typeof serviceGroupLabels.vi]}</p><h3>{service[lang].title}</h3><p className="service-description">{conciseCopy.description}</p><div className="service-suitable"><strong>{t.suitable}</strong><p>{conciseCopy.suitable}</p></div><span className="service-discover">{t.choose}<IconArrow /></span></div>
           </button>;
         })}{filteredServices.length === 0 && <p className="service-empty">{lang === "vi" ? "Chưa tìm thấy dịch vụ phù hợp. Hãy thử một từ khóa khác." : "No matching service yet. Try another keyword."}</p>}</div>
-        <div className="service-results">
-          <div className="service-results-heading"><div><p className="eyebrow">{t.resultEyebrow}</p><h2>{lang === "vi" ? "Kết quả trước và sau, ngay trong từng nhóm dịch vụ." : "Before and after, alongside each care group."}</h2></div><p>{t.resultNote}</p></div>
-          <div className="result-grid">{results.map((result, index) => <Link href={servicePath(seoServices[[0, 3, 2][index]] ?? seoServices[0], lang)} key={result.vi[0]}><div className="result-image"><Image src={result.image} alt={result[lang][0]} fill sizes="(max-width: 720px) 82vw, 33vw" /><div className="comparison-labels"><span>{lang === "vi" ? "Trước" : "Before"}</span><span>{lang === "vi" ? "Sau" : "After"}</span></div></div><div className="result-copy"><h3>{result[lang][0]}</h3><p>{result[lang][1]}</p><span className="result-link-label">{lang === "vi" ? "Xem dịch vụ" : "View service"} <IconArrow /></span></div></Link>)}</div>
-        </div>
       </section>
 
       <section className="knowledge section" id="knowledge">
