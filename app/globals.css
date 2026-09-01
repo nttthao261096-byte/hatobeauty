@@ -2964,6 +2964,27 @@ p .hato-word, li .hato-word, .announcement .hato-word {
 .care-plan-steps span { color: #a47156; font-size: 12px; letter-spacing: .15em; }
 .care-plan-steps h2 { margin: 62px 0 16px; font-family: var(--display); font-size: 30px; font-weight: 500; }
 .care-plan-steps p { margin: 0; color: #715d51; line-height: 1.75; }
+.trust-visual { width: 100%; aspect-ratio: 16 / 7; margin: 54px 0 0; position: relative; overflow: hidden; border-radius: 42px; background: #ead8ca; box-shadow: 0 24px 64px rgba(74,48,32,.12); }
+.trust-visual img { object-fit: cover; object-position: center; }
+
+/* One soft geometry across all primary surfaces. */
+.home-page .service-card,
+.home-page .knowledge-card,
+.home-page .result-grid > a,
+.home-page .review-card,
+.newsletter-section,
+.trust-visual,
+.care-plan-steps article,
+.seo-trust .seo-related {
+  border-radius: 42px;
+}
+.site-footer {
+  width: calc(100% - 48px);
+  margin-right: 24px;
+  margin-left: 24px;
+  border-radius: 56px 56px 0 0;
+}
+.inner-page-footer { margin-top: 24px; }
 @media (max-width: 900px) {
   .hero-trust { padding: 11px 14px; gap: 10px; }
   .hero-trust-avatar { width: 38px; height: 38px; border-width: 2px; }
@@ -2977,6 +2998,16 @@ p .hato-word, li .hato-word, .announcement .hato-word {
   .care-plan-steps { grid-template-columns: 1fr; margin: 44px 0; }
   .care-plan-steps article { min-height: 0; }
   .care-plan-steps h2 { margin-top: 30px; }
+  .trust-visual { aspect-ratio: 4 / 3; margin-top: 36px; border-radius: 28px; }
+  .home-page .service-card,
+  .home-page .knowledge-card,
+  .home-page .result-grid > a,
+  .home-page .review-card,
+  .newsletter-section,
+  .trust-visual,
+  .care-plan-steps article,
+  .seo-trust .seo-related { border-radius: 28px; }
+  .site-footer { width: calc(100% - 24px); margin-right: 12px; margin-left: 12px; border-radius: 32px 32px 0 0; }
 }
 .comparison-labels {
   inset: 14px 14px auto;
