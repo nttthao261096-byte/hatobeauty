@@ -13,14 +13,14 @@ const navByLang = {
   vi: [
     { href: "/dich-vu/", label: "Dịch vụ" },
     { href: "/san-pham-cham-soc/", label: "Sản phẩm chăm sóc" },
-    { href: "/ket-qua/", label: "Lộ trình" },
+    { href: "/lo-trinh/", label: "Lộ trình" },
     { href: "/kien-thuc/", label: "Kiến thức" },
     { href: "/ve-hato-beauty/", label: "Về Hato Beauty" },
   ],
   en: [
     { href: "/en/services/", label: "Services" },
     { href: "/en/care-products/", label: "Care products" },
-    { href: "/en/results/", label: "Care plan" },
+    { href: "/en/care-plan/", label: "Care plan" },
     { href: "/en/journal/", label: "Knowledge" },
     { href: "/en/about/", label: "About us" },
   ],
