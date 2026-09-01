@@ -12,19 +12,17 @@ import { mediaUrl } from "./seo-data";
 const navByLang = {
   vi: [
     { href: "/dich-vu/", label: "Dịch vụ" },
-    { href: "/ket-qua/", label: "Đánh giá", mobileLabel: "Kết quả" },
+    { href: "/san-pham-cham-soc/", label: "Sản phẩm chăm sóc" },
+    { href: "/ket-qua/", label: "Đánh giá" },
     { href: "/kien-thuc/", label: "Kiến thức" },
     { href: "/ve-hato-beauty/", label: "Về Hato Beauty" },
-    { href: "/san-pham-cham-soc/", label: "Sản phẩm chăm sóc", desktopOnly: true },
-    { href: "/lien-he/", label: "Liên hệ", desktopOnly: true },
   ],
   en: [
     { href: "/en/services/", label: "Services" },
-    { href: "/en/results/", label: "Reviews", mobileLabel: "Results" },
+    { href: "/en/care-products/", label: "Care products" },
+    { href: "/en/results/", label: "Reviews" },
     { href: "/en/journal/", label: "Knowledge" },
     { href: "/en/about/", label: "About us" },
-    { href: "/en/care-products/", label: "Care products", desktopOnly: true },
-    { href: "/en/contact/", label: "Contact", desktopOnly: true },
   ],
 } as const;
 
@@ -88,10 +86,8 @@ export function SiteHeader({
             <Link className={lang === "en" ? "active" : ""} href="/en/" hrefLang="en" onClick={() => setMenuOpen(false)}>EN</Link>
           </div>
         </div>
-        {navItems.map(({ href, label, ...item }) => (
-          <a className={`nav-item${"desktopOnly" in item ? " nav-item-desktop-only" : ""}`} key={href} href={href} onClick={() => setMenuOpen(false)}>
-            {"mobileLabel" in item ? <><span className="nav-label-desktop">{label}</span><span className="nav-label-mobile">{item.mobileLabel}</span></> : label}
-          </a>
+        {navItems.map(({ href, label }) => (
+          <a className="nav-item" key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>
         ))}
         {search ? (
           <form className="nav-search" role="search" onSubmit={submitSearch}>

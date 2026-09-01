@@ -2454,7 +2454,6 @@ p .hato-word, li .hato-word, .announcement .hato-word {
 }
 .header-book-short { display: none; }
 .nav-drawer-tools { display: none; }
-.nav-label-mobile { display: none; }
 .menu-button { flex: 0 0 auto; }
 .home-page h1, .home-page h2, .home-page h3 { overflow-wrap: anywhere; text-wrap: balance; }
 .menu-button span { transition: transform .22s ease, opacity .22s ease; }
@@ -2961,10 +2960,6 @@ p .hato-word, li .hato-word, .announcement .hato-word {
 }
 
 @media (max-width: 900px) {
-  .nav > .nav-item-desktop-only,
-  .site-header .nav > .nav-item-desktop-only { display: none !important; }
-  .nav-label-desktop { display: none; }
-  .nav-label-mobile { display: inline; }
   body { padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
   .site-header { min-height: 72px; }
   .brand { width: 136px; height: 68px; }
