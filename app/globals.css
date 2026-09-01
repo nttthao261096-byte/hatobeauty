@@ -3796,5 +3796,8 @@ a:hover { color: inherit; }
 .home-page > .hero,
 .home-page > .newsletter-section,
 .home-page > .site-footer {
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
   border-radius: 0;
 }
