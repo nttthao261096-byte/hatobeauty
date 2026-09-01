@@ -3792,3 +3792,9 @@ a:hover { color: inherit; }
     -webkit-line-clamp: 2;
   }
 }
+/* The three primary homepage frames use square corners. */
+.home-page > .hero,
+.home-page > .newsletter-section,
+.home-page > .site-footer {
+  border-radius: 0;
+}
