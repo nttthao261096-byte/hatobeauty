@@ -37,6 +37,24 @@ const contentFixtures = {
   ],
 };
 
+const criticalRasterAssets = [
+  "guest-trust-avatars-v1.png",
+  "results-skin-gallery-v1.png",
+  "results-brow-lash-gallery-v1.png",
+  "results-scalp-gallery-v1.png",
+  "results-hair-removal-gallery-v1.png",
+  "results-waxing-gallery-v1.png",
+];
+
+test("ships real PNG data for critical generated imagery", async () => {
+  const pngSignature = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+  for (const filename of criticalRasterAssets) {
+    const file = await readFile(new URL(`../public/images/${filename}`, import.meta.url));
+    assert.ok(file.subarray(0, pngSignature.length).equals(pngSignature), `${filename} must contain PNG data, not a Git LFS pointer`);
+    assert.ok(file.length > 10_000, `${filename} is unexpectedly small`);
+  }
+});
+
 async function render(pathname = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
