@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { BookingForm } from "./BookingForm";
-import { brandText } from "./BrandText";
 import { ContactForm } from "./ContactForm";
 import { ContactDetails, ContactMap } from "./ContactDetails";
 import type { ResultContent } from "./content";
@@ -101,11 +100,11 @@ export function SeoFooter({ lang }: { lang: SeoLang }) {
     : [["/en/services/", "Services"], ["/en/care-products/", "Care products"], ["/en/care-plan/", "Care plan"], ["/en/journal/", "Knowledge"]];
   return <footer className="site-footer inner-page-footer">
     <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />
-    <div className="footer-intro"><p>{brandText(lang === "vi" ? "hato Beauty · Không gian làm đẹp" : "hato Beauty · Beauty Studio")}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
+    <div className="footer-intro"><p>{lang === "vi" ? "hato Beauty · Không gian làm đẹp" : "hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
     <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} /></div>
     <div className="footer-links"><h3>{lang === "vi" ? "Khám phá" : "Discover"}</h3>{links.map(([href, label], index) => <Link href={href} key={href}><span>0{index + 1}</span>{label}</Link>)}</div>
     <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><ContactDetails lang={lang} compact /><a href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a></div>
-    <div className="footer-bottom"><span>© 2026 {brandText("hato Beauty")}</span><div><Link href={lang === "vi" ? "/" : "/en/"}>{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</Link><Link href={lang === "vi" ? "/chinh-sach-bien-tap/" : "/en/editorial-policy/"}>{lang === "vi" ? "Biên tập" : "Editorial"}</Link><Link href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</Link></div></div>
+    <div className="footer-bottom"><span>© 2026 hato Beauty</span><div><Link href={lang === "vi" ? "/" : "/en/"}>{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</Link><Link href={lang === "vi" ? "/chinh-sach-bien-tap/" : "/en/editorial-policy/"}>{lang === "vi" ? "Biên tập" : "Editorial"}</Link><Link href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</Link></div></div>
   </footer>;
 }
 

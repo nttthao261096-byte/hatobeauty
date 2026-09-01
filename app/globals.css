@@ -25,8 +25,6 @@
   --icon-on-dark: #F3EBE2;
   --icon-on-light: #6B4A3B;
   --focus-ring: rgba(169, 132, 103, .45);
-  --section-gutter: 24px;
-  --section-radius: 42px;
   --ivory: var(--bg);
   --cream: var(--bg-soft);
   --sand: var(--cream-200);
@@ -53,9 +51,6 @@ html { accent-color: var(--accent-strong); }
 :focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 4px; box-shadow: 0 0 0 4px var(--focus-ring); }
 
 .hato-word { display: inline-block; margin: 0 .035em; color: var(--cocoa); font-family: var(--brand); font-size: 1.78em; font-style: normal; font-weight: 500; line-height: .6; letter-spacing: -.045em; vertical-align: -.08em; text-transform: lowercase; }
-.hato-brand-name { display: inline-flex; align-items: baseline; gap: .14em; white-space: nowrap; }
-.hato-brand-name .hato-word { margin: 0; color: currentColor; font-size: 1.34em; font-weight: 500; line-height: .72; vertical-align: -.06em; }
-.hato-brand-name .beauty-word { font-family: var(--body); font-size: .62em; font-weight: 600; letter-spacing: .18em; line-height: 1; text-transform: uppercase; }
 .eyebrow { margin: 0 0 24px; color: var(--cocoa); font-size: 13px; font-weight: 600; letter-spacing: .18em; line-height: 1.4; text-transform: uppercase; }
 .section { padding: 126px 7vw; }
 .section h2, .booking-banner h2, .booking-modal h2 { margin: 0; font-family: var(--display); font-size: clamp(48px, 5.5vw, 78px); font-weight: 400; letter-spacing: -.025em; line-height: 1.02; }
@@ -1255,11 +1250,8 @@ html { accent-color: var(--accent-strong); }
 .service-care-card:nth-child(1) { background: #fffaf5; }
 .service-care-card:nth-child(2) { background: #f1dfd1; }
 .service-care-card:nth-child(3) { background: #e7dacb; }
-.service-care-card h2 { color: #4a3329; }
-.service-care-card p, .service-care-card li { color: #5f483c; font-size: 16px; }
 .service-care-note { background: linear-gradient(145deg, #493229, #684838); color: #fffaf6; }
-.service-care-note h2, .service-care-note p { color: #fffaf6; }
-.service-care-note > span { background: #fff7f0; color: #684838; }
+.service-care-card h2 { color: #4a3329; } .service-care-card p, .service-care-card li { color: #5f483c; font-size: 16px; } .service-care-note h2, .service-care-note p { color: #fffaf6; } .service-care-note > span { background: #fff7f0; color: #684838; }
 
 @media (max-width: 1180px) {
   .service-index-grid .index-card { grid-column: span 6; }
@@ -2884,11 +2876,8 @@ p .hato-word, li .hato-word, .announcement .hato-word {
 /* Visual system 2026: warm tokens, hairline icons, no default blue. */
 .announcement {
   grid-template-columns: minmax(0, 1fr);
-  background: linear-gradient(90deg, #4a3329, #6b4a3b 52%, #4a3329);
-  color: #fffaf6;
 }
 .announcement > p {
-  color: #fffaf6;
   text-align: center;
 }
 
@@ -2972,7 +2961,7 @@ p .hato-word, li .hato-word, .announcement .hato-word {
 .service-result-card-copy p { margin: 0; color: #7a6254; font-size: 14px; line-height: 1.7; }
 .service-result-legend { position: absolute; inset: 14px 16px auto; display: flex; justify-content: space-between; pointer-events: none; }
 .service-result-legend span { padding: 8px 13px; border: 1px solid rgba(255,255,255,.6); border-radius: 999px; background: rgba(70,45,34,.68); color: white; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; backdrop-filter: blur(8px); }
-.newsletter-section { margin: var(--section-gutter); padding: clamp(58px, 8vw, 108px) clamp(28px, 7vw, 112px); display: grid; grid-template-columns: 1fr .9fr; align-items: end; gap: 8vw; overflow: hidden; position: relative; border-radius: var(--section-radius); background: radial-gradient(circle at 92% 8%, rgba(232,217,204,.16), transparent 32%), linear-gradient(135deg, #4a3329, #6b4a3b 58%, #8a5e49); color: #fffaf6; }
+.newsletter-section { margin: 24px; padding: clamp(58px, 8vw, 108px) clamp(28px, 7vw, 112px); display: grid; grid-template-columns: 1fr .9fr; align-items: end; gap: 8vw; overflow: hidden; position: relative; border-radius: 42px; background: radial-gradient(circle at 92% 8%, rgba(232,217,204,.16), transparent 32%), linear-gradient(135deg, #4a3329, #6b4a3b 58%, #8a5e49); color: #fffaf6; }
 .newsletter-section h2 { max-width: 12ch; margin: 12px 0 22px; font-family: var(--display); font-size: clamp(40px, 5vw, 68px); font-weight: 400; line-height: 1.05; letter-spacing: -.035em; }
 .newsletter-section > div > p:last-child { max-width: 54ch; color: rgba(255,250,246,.78); line-height: 1.8; }
 .newsletter-section form label { display: block; margin-bottom: 12px; color: #f4dfd1; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
@@ -3006,10 +2995,9 @@ p .hato-word, li .hato-word, .announcement .hato-word {
 }
 .site-footer {
   width: calc(100% - 48px);
-  margin-top: var(--section-gutter);
   margin-right: 24px;
   margin-left: 24px;
-  border-radius: var(--section-radius) var(--section-radius) 0 0;
+  border-radius: 56px 56px 0 0;
 }
 .inner-page-footer { margin-top: 24px; }
 @media (max-width: 900px) {
@@ -3042,15 +3030,6 @@ p .hato-word, li .hato-word, .announcement .hato-word {
   .seo-trust .seo-related { border-radius: 28px; }
   .site-footer { width: calc(100% - 24px); margin-right: 12px; margin-left: 12px; border-radius: 32px 32px 0 0; }
 }
-
-/* Final brand lockup and high-contrast service surfaces. */
-p .hato-brand-name .hato-word,
-li .hato-brand-name .hato-word,
-.announcement .hato-brand-name .hato-word { font-size: 1.34em; line-height: .72; vertical-align: -.06em; }
-.site-footer .hato-brand-name,
-.newsletter-section .hato-brand-name { color: #fffaf6; }
-.footer-bottom { color: rgba(255, 250, 246, .84); }
-.footer-bottom a { color: #fffaf6; }
 .comparison-labels {
   inset: 14px 14px auto;
 }
@@ -3812,37 +3791,4 @@ a:hover { color: inherit; }
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
-}
-
-/* Keep the safety note readable even when generic SEO card styles load later. */
-.seo-content.service-care-grid .service-care-card.service-care-note {
-  border-color: rgba(63, 42, 34, .34);
-  background: linear-gradient(145deg, #493229, #684838) !important;
-  box-shadow: 0 18px 44px rgba(63, 42, 34, .16);
-  color: #fffaf6;
-}
-.seo-content.service-care-grid .service-care-card.service-care-note h2,
-.seo-content.service-care-grid .service-care-card.service-care-note p { color: #fffaf6 !important; }
-.seo-content.service-care-grid .service-care-card.service-care-note > span {
-  background: #fff7f0;
-  color: #684838;
-}
-
-@media (max-width: 520px) {
-  .announcement {
-    min-height: 42px;
-    padding: 6px 12px;
-  }
-  .announcement p {
-    max-width: 100%;
-    font-size: 9px;
-    letter-spacing: .055em;
-    line-height: 1.35;
-    white-space: normal;
-    text-wrap: balance;
-  }
-  .mobile-dock { grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr); }
-  .mobile-dock-call,
-  .mobile-dock-book { min-width: 0; white-space: nowrap; }
-  .mobile-dock-call span { display: none; }
 }

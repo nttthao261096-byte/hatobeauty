@@ -5,7 +5,6 @@ import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 
 import { ContactDetails } from "./ContactDetails";
-import { brandText } from "./BrandText";
 import type { Lang } from "./content";
 import { IconArrow } from "./icons";
 import { mediaUrl } from "./seo-data";
@@ -88,7 +87,7 @@ export function SiteHeader({
           </div>
         </div>
         {navItems.map(({ href, label }) => (
-          <a className="nav-item" key={href} href={href} onClick={() => setMenuOpen(false)}>{brandText(label)}</a>
+          <a className="nav-item" key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>
         ))}
         {search ? (
           <form className="nav-search" role="search" onSubmit={submitSearch}>
