@@ -26,19 +26,19 @@ function brandText(text: string): ReactNode {
 
 const copy = {
   vi: {
-    announcement: "Hãy để chúng tôi đánh thức vẻ đẹp trong bạn.",
-    book: "Đặt lịch tư vấn",
+    announcement: "Soi da khi đặt liệu trình · 08:00–19:30 · 127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn",
+    book: "Đặt lịch soi da",
     nav: ["Về hato Beauty", "Dịch vụ", "Trải nghiệm", "Kết quả", "Cảm nhận"],
-    heroEyebrow: "CHĂM SÓC THEO NHU CẦU",
-    heroTitle: "Tỏa sáng theo cách của bạn.",
-    heroText: "Bởi mỗi người đều có một vẻ đẹp riêng. Tại đây, chúng tôi lắng nghe, thấu hiểu và thiết kế từng trải nghiệm để phù hợp với làn da, nhu cầu và nhịp sống của bạn.",
-    explore: "Khám phá dịch vụ",
+    heroEyebrow: "hato Beauty · Đà Nẵng",
+    heroTitle: "Soi da. Chăm đúng việc. Mang về nhà.",
+    heroText: "Bạn được xem tình trạng da, chọn liệu trình vừa ngân sách, rồi nhận bộ dưỡng dùng sáng/tối. Giá nói trước khi nằm ghế.",
+    explore: "Xem lộ trình da",
     learn: "Hiểu về chúng tôi",
-    whyEyebrow: "Vì sao chọn chúng tôi",
-    whyTitle: "Mọi chi tiết đều có lý do.",
-    servicesEyebrow: "Dịch vụ của chúng tôi",
-    servicesTitle: "Để chúng tôi giúp bạn tỏa sáng theo cách của chính mình.",
-    servicesText: "Năm nhóm dịch vụ được sắp xếp rõ ràng, giúp bạn dễ dàng tìm đúng trải nghiệm cho làn da, diện mạo và nhịp sống của mình.",
+    whyEyebrow: "Vì sao hato",
+    whyTitle: "Nói rõ việc sẽ làm, rồi mới làm.",
+    servicesEyebrow: "Năm nhóm dịch vụ",
+    servicesTitle: "Chọn đúng nhóm trước khi đặt.",
+    servicesText: "Da, mi mày, da đầu, triệt lông hoặc tẩy lông. Mỗi nhóm có thời lượng và giá từ–đến trên trang chi tiết.",
     categories: { all: "Tất cả", care: "Chăm sóc da", shape: "Mi & Mày", relax: "Da đầu & thư giãn", smooth: "Triệt lông & Tẩy lông" },
     suitable: "Phù hợp với",
     choose: "Xem chi tiết",
@@ -58,15 +58,15 @@ const copy = {
     sending: "Đang gửi...", bookingError: "Chưa thể gửi yêu cầu. Vui lòng thử lại sau ít phút.",
   },
   en: {
-    announcement: "Let us awaken the beauty within you.",
-    book: "Book a consultation",
+    announcement: "Skin check with treatment · 08:00–19:30 · 127 Chau Thi Vinh Te, Ngu Hanh Son",
+    book: "Book a skin check",
     nav: ["About us", "Services", "Experience", "Results", "Reviews"],
-    heroEyebrow: "CARE SHAPED AROUND YOU",
-    heroTitle: "Shine as you are.",
-    heroText: "Because everyone has a beauty of their own. Here, we listen, understand and shape every experience around your skin, your needs and the rhythm of your life.",
-    explore: "Explore services", learn: "Discover us",
-    whyEyebrow: "Why choose us", whyTitle: "Every detail has a purpose.",
-    servicesEyebrow: "Our services", servicesTitle: "Five care worlds. One place to feel like yourself.", servicesText: "Five service groups arranged clearly, so every local and international guest can understand the experience before booking.",
+    heroEyebrow: "hato Beauty · Da Nang",
+    heroTitle: "Check the skin. Do the right work. Take it home.",
+    heroText: "You see the skin, pick a treatment that fits the budget, then leave with an AM/PM set. Price is said before you lie down.",
+    explore: "See the skin plan", learn: "Discover us",
+    whyEyebrow: "Why hato", whyTitle: "We say the work, then we do it.",
+    servicesEyebrow: "Five service groups", servicesTitle: "Pick the right group before you book.", servicesText: "Skin, brow and lash, scalp, hair removal or waxing. Time and a from–to price sit on each detail page.",
     categories: { all: "All", care: "Skin", shape: "Brow & Lash", relax: "Scalp & Relaxation", smooth: "Hair Removal & Waxing" },
     suitable: "Best suited for", choose: "View details",
     experienceEyebrow: "Your experience", experienceTitle: "Modern in technique, gentle in every touch.",
@@ -111,28 +111,28 @@ const testimonialGuests = [
 
 const serviceCardCopy = {
   skin: {
-    vi: { description: "Làm sạch, phục hồi và chăm sóc theo tình trạng da.", suitable: "Da cần sạch khỏe, đủ ẩm hoặc chăm sóc chuyên sâu." },
-    en: { description: "Cleansing and recovery tailored to your skin.", suitable: "Skin needing clarity, hydration or targeted care." },
+    vi: { description: "Làm sạch, cấp ẩm, phục hồi theo da vừa soi.", suitable: "Da thiếu ẩm, xỉn, mụn nhẹ — không thay da liễu.", price: "Từ 450.000đ", duration: "60–90 phút" },
+    en: { description: "Cleanse, hydrate and recover the skin we just checked.", suitable: "Dry, dull or mildly blemished skin — not a clinic substitute.", price: "From VND 450,000", duration: "60–90 min" },
   },
   "brow-lash": {
-    vi: { description: "Uốn mi, tạo dáng mày hài hòa với gương mặt.", suitable: "Muốn gương mặt sáng và đường nét tự nhiên." },
-    en: { description: "Lash and brow shaping balanced to your features.", suitable: "For brighter, naturally defined features." },
+    vi: { description: "Uốn mi, nhuộm và tạo dáng mày theo xương mặt.", suitable: "Muốn mi cong, mày gọn, dễ makeup.", price: "Từ 250.000đ", duration: "45–90 phút" },
+    en: { description: "Lift, tint and shape lashes and brows to the face.", suitable: "For a lift and a neater brow line.", price: "From VND 250,000", duration: "45–90 min" },
   },
   scalp: {
-    vi: { description: "Làm sạch da đầu, massage đầu–vai–gáy thư giãn.", suitable: "Căng thẳng, mỏi vai gáy hoặc cần nghỉ ngơi." },
-    en: { description: "Scalp cleansing with a relaxing head and shoulder massage.", suitable: "For tension, tired shoulders or a restorative pause." },
+    vi: { description: "Gội sạch da đầu, massage đầu–vai–gáy.", suitable: "Mỏi vai, da đầu bết, cần một giờ nằm yên.", price: "Từ 180.000đ", duration: "45–75 phút" },
+    en: { description: "Scalp cleanse with a head–shoulder massage.", suitable: "Tired shoulders, a heavy scalp, an hour to lie still.", price: "From VND 180,000", duration: "45–75 min" },
   },
   body: {
-    vi: { description: "Làm sạch, tẩy tế bào chết và dưỡng ẩm cơ thể.", suitable: "Da cơ thể khô, sần hoặc cần phục hồi." },
-    en: { description: "Body exfoliation and hydration for softer skin.", suitable: "For dry, rough or tired-looking body skin." },
+    vi: { description: "Tẩy bề mặt và dưỡng ẩm da cơ thể.", suitable: "Da khô sau biển, sần, cần lớp kem khóa ẩm.", price: "Từ 350.000đ", duration: "60–90 phút" },
+    en: { description: "Exfoliate and hydrate body skin.", suitable: "Dry after the beach, rough, in need of a cream seal.", price: "From VND 350,000", duration: "60–90 min" },
   },
   "hair-removal": {
-    vi: { description: "Giảm lông theo vùng bằng công nghệ phù hợp.", suitable: "Muốn da gọn mịn và chăm sóc kín đáo." },
-    en: { description: "Area-focused hair reduction with suitable technology.", suitable: "For smoother skin with discreet care." },
+    vi: { description: "Giảm lông theo vùng, nói số buổi thật.", suitable: "Nách, chân, mặt — kín đáo, không hứa vĩnh viễn.", price: "Từ 250.000đ/vùng", duration: "20–60 phút" },
+    en: { description: "Area hair reduction with an honest session count.", suitable: "Underarms, legs, face — discreet, no forever claim.", price: "From VND 250,000 / area", duration: "20–60 min" },
   },
   waxing: {
-    vi: { description: "Tẩy lông nhanh gọn, kết hợp làm dịu da.", suitable: "Cần hiệu quả ngay cho từng vùng." },
-    en: { description: "Efficient waxing with skin-soothing aftercare.", suitable: "For an immediate result in selected areas." },
+    vi: { description: "Tẩy sáp từng vùng, làm dịu ngay sau.", suitable: "Mày, môi trên, một vùng cơ thể cần gọn trong buổi.", price: "Từ 120.000đ/vùng", duration: "20–50 phút" },
+    en: { description: "Area waxing, soothed before you leave.", suitable: "Brows, upper lip, one body area that needs to be neat today.", price: "From VND 120,000 / area", duration: "20–50 min" },
   },
 } as const;
 
@@ -171,7 +171,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
     return matchesCategory && (!normalizedQuery || searchableText.includes(normalizedQuery));
   });
   const navItems = lang === "vi"
-    ? [["/dich-vu/", "Dịch vụ"], ["/san-pham-cham-soc/", "Sản phẩm"], ["/lo-trinh/", "Lộ trình"], ["/kien-thuc/", "Kiến thức"], ["/ve-hato-beauty/", "Về hato"]]
+    ? [["/dich-vu/", "Dịch vụ"], ["/san-pham/", "Sản phẩm"], ["/lo-trinh/", "Lộ trình"], ["/kien-thuc/", "Kiến thức"], ["/ve-hato-beauty/", "Về hato"]]
     : [["/en/services/", "Services"], ["/en/care-products/", "Products"], ["/en/care-plan/", "Care plan"], ["/en/journal/", "Journal"], ["/en/about/", "About"]];
   const ribbonGroups = ["skin", "brow-lash", "scalp", "hair-removal", "waxing"] as const;
   useEffect(() => {
@@ -257,7 +257,10 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
     <main className="home-page" id="main" lang={lang}>
       <a className="skip-link" href="#services">{lang === "vi" ? "Đến nội dung chính" : "Skip to content"}</a>
       <div className="announcement">
-        <p>{brandText(t.announcement)}</p>
+        <div className="announcement-track">
+          <p>{t.announcement}</p>
+          <p>{t.announcement}</p>
+        </div>
       </div>
 
       <SiteHeader
@@ -285,7 +288,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
           <p className="hero-lead">{t.heroText}</p>
           <div className="hero-actions">
             <a className="button primary" href={consultationHref} target="_blank" rel="noopener noreferrer">{t.book}<IconArrow /></a>
-            <a className="button ghost" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{t.explore}<IconArrow /></a>
+            <a className="button ghost" href={lang === "vi" ? "/lo-trinh/" : "/en/care-plan/"}>{t.explore}<IconArrow /></a>
           </div>
           <Link className="hero-trust" href={lang === "vi" ? "/lo-trinh/" : "/en/care-plan/"} aria-label={lang === "vi" ? "4,9 trên 5 từ hơn 5.000 khách hàng" : "4.9 out of 5 from more than 5,000 guests"}>
             <span className="hero-trust-avatars" aria-hidden="true">
@@ -299,7 +302,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       <div className="service-ribbon" aria-label={lang === "vi" ? "Năm nhóm dịch vụ" : "Five service groups"}><div className="service-ribbon-track">{[0, 1].flatMap((copy) => ribbonGroups.map((id) => <Link className="ribbon-item" href={id === "waxing" ? (lang === "vi" ? "/dich-vu/" : "/en/services/") : servicePath(seoServices.find(service => service.id === id) ?? seoServices[0], lang)} key={`${copy}-${id}`}><span>{serviceGroupLabels[lang][id]}</span><i aria-hidden="true">✦</i></Link>))}</div></div>
 
       <section className="why section" id="about">
-        <div className="section-heading"><p className="eyebrow">{t.whyEyebrow}</p><h2>{t.whyTitle}</h2><div className="section-heading-side"><p>{lang === "vi" ? "Chúng tôi xây dựng trải nghiệm làm đẹp từ những điều cụ thể: công nghệ phù hợp, không gian dễ chịu, dịch vụ minh bạch và đội ngũ có chuyên môn." : "We build every beauty experience around concrete values: suitable technology, a calming space, clear services and a capable team."}</p><Link className="section-route-link" href={lang === "vi" ? "/ve-hato-beauty/" : "/en/about/"}>{lang === "vi" ? "Về hato Beauty" : "About hato Beauty"}<IconArrow /></Link></div></div>
+        <div className="section-heading"><p className="eyebrow">{t.whyEyebrow}</p><h2>{t.whyTitle}</h2><div className="section-heading-side"><p>{lang === "vi" ? "hato làm chăm sóc thẩm mỹ, không thay phòng khám da. Buổi đầu soi da, nói mục tiêu và khoảng giá, rồi mới làm. Bạn mang về 2–4 món dùng sáng/tối và lịch xem lại sau 4–6 tuần. 127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn, mở 08:00–19:30." : "hato is cosmetic care, not a skin clinic. The first visit checks the skin, names an aim and a price range, then treats. You leave with two to four AM/PM items and a 4–6 week review. 127 Chau Thi Vinh Te, 08:00–19:30."}</p><Link className="section-route-link" href={lang === "vi" ? "/lo-trinh/" : "/en/care-plan/"}>{lang === "vi" ? "Xem lộ trình da" : "See the skin plan"}<IconArrow /></Link></div></div>
         <div className="feature-slider" id="experience">
           <Link className={`feature-stage${isTechHighlight(highlights[highlightIndex]) ? " feature-stage-tech" : ""}`} href={lang === "vi" ? "/ve-hato-beauty/" : "/en/about/"} key={highlights[highlightIndex].number}>
             <div className="feature-image"><Image src={highlights[highlightIndex].image} alt={highlights[highlightIndex][lang][0]} fill sizes="(max-width: 760px) 100vw, 58vw" /></div>
@@ -320,7 +323,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
           const conciseCopy = serviceCardCopy[service.id as keyof typeof serviceCardCopy]?.[lang] ?? service[lang];
           return <button type="button" className={`service-card service-card-${service.id}`} onClick={() => setSelectedServiceId(service.id)} aria-haspopup="dialog" key={service.id}>
             <div className="service-photo"><Image src={service.image} alt={service[lang].title} fill sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" unoptimized /><span>{service.number}</span></div>
-            <div className="service-body">{service.id === "skin" && <span className="skin-signature">{lang === "vi" ? "Dịch vụ chủ đạo" : "Signature care"}</span>}<p className="service-summary">{serviceGroupLabels[lang][service.id as keyof typeof serviceGroupLabels.vi]}</p><h3>{service[lang].title}</h3><p className="service-description">{conciseCopy.description}</p><div className="service-suitable"><strong>{t.suitable}</strong><p>{conciseCopy.suitable}</p></div><span className="service-discover">{t.choose}<IconArrow /></span></div>
+            <div className="service-body">{service.id === "skin" && <span className="skin-signature">{lang === "vi" ? "Dịch vụ chủ đạo" : "Signature care"}</span>}<p className="service-summary">{serviceGroupLabels[lang][service.id as keyof typeof serviceGroupLabels.vi]}</p><h3>{service[lang].title}</h3><p className="service-description">{conciseCopy.description}</p><div className="service-suitable"><strong>{t.suitable}</strong><p>{conciseCopy.suitable}</p></div>{"price" in conciseCopy && <p className="service-price-line"><strong>{conciseCopy.price}</strong><span>{conciseCopy.duration}</span></p>}<span className="service-discover">{t.choose}<IconArrow /></span></div>
           </button>;
         })}{filteredServices.length === 0 && <p className="service-empty">{lang === "vi" ? "Chưa tìm thấy dịch vụ phù hợp. Hãy thử một từ khóa khác." : "No matching service yet. Try another keyword."}</p>}</div>
       </section>

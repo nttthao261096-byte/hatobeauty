@@ -28,7 +28,7 @@ export function ContactDetails({ lang, compact = false }: { lang: ContactLang; c
         <span className="contact-row-icon" aria-hidden="true"><IconMail /></span><span><small>Email</small><strong>hatobeautydanang@gmail.com</strong></span>
       </a>
       <div className="contact-row">
-        <span className="contact-row-icon" aria-hidden="true"><IconClock /></span><span><small>{lang === "vi" ? "Giờ mở cửa" : "Opening hours"}</small><strong>{lang === "vi" ? "Hằng ngày · 08:30–19:30" : "Daily · 8:30 AM–7:30 PM"}</strong></span>
+        <span className="contact-row-icon" aria-hidden="true"><IconClock /></span><span><small>{lang === "vi" ? "Giờ mở cửa" : "Opening hours"}</small><strong>{lang === "vi" ? "Hằng ngày · 08:00–19:30" : "Daily · 8:00 AM–7:30 PM"}</strong></span>
       </div>
     </div>
     <div className="contact-socials" aria-label={lang === "vi" ? "Mạng xã hội" : "Social media"}>{socialLinks.map((social) => { const Icon = social.icon; return <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.label} hato Beauty`} title={social.label} key={social.label}><span aria-hidden="true"><Icon /></span><b>{social.label}</b></a>; })}</div>

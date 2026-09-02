@@ -96,7 +96,7 @@ export function SeoHeader({ lang }: { lang: SeoLang }) {
 export function SeoFooter({ lang }: { lang: SeoLang }) {
   const consultationHref = lang === "vi" ? "https://zalo.me/0703214868" : "https://wa.me/84703214868";
   const links = lang === "vi"
-    ? [["/dich-vu/", "Dịch vụ"], ["/san-pham-cham-soc/", "Sản phẩm"], ["/lo-trinh/", "Lộ trình"], ["/kien-thuc/", "Kiến thức"]]
+    ? [["/dich-vu/", "Dịch vụ"], ["/san-pham/", "Sản phẩm"], ["/lo-trinh/", "Lộ trình"], ["/kien-thuc/", "Kiến thức"]]
     : [["/en/services/", "Services"], ["/en/care-products/", "Products"], ["/en/care-plan/", "Care plan"], ["/en/journal/", "Journal"]];
   return <footer className="site-footer inner-page-footer">
     <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />

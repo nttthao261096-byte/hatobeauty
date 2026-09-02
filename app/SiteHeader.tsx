@@ -13,7 +13,7 @@ import { mediaUrl } from "./seo-data";
 const navByLang = {
   vi: [
     { href: "/dich-vu/", label: "Dịch vụ" },
-    { href: "/san-pham-cham-soc/", label: "Sản phẩm" },
+    { href: "/san-pham/", label: "Sản phẩm" },
     { href: "/lo-trinh/", label: "Lộ trình" },
     { href: "/kien-thuc/", label: "Kiến thức" },
     { href: "/ve-hato-beauty/", label: "Về hato" },

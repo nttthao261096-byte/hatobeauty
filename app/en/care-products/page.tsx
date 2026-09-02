@@ -1,15 +1,15 @@
+import { ProductsPage } from "../../ProductsPage";
 import { createPageMetadata } from "../../seo-metadata";
-import { TrustPage } from "../../seo-pages";
 
 export const metadata = createPageMetadata({
-  title: "Care products",
-  description: "Explore at-home care guidance from hato Beauty, shaped around each guest’s needs and current condition.",
+  title: "Skin care products",
+  description: "Cleanser, toner, serum, cream and SPF that sit with the spa plan at hato Beauty in Da Nang. Price sits under each photo.",
   path: "/en/care-products/",
-  viPath: "/san-pham-cham-soc/",
+  viPath: "/san-pham/",
   enPath: "/en/care-products/",
   lang: "en",
 });
 
 export default function Page() {
-  return <TrustPage lang="en" kind="products" />;
+  return <ProductsPage lang="en" />;
 }
