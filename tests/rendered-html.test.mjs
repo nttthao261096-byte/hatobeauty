@@ -113,7 +113,7 @@ test("server-renders the redesigned Hato Beauty experience", async () => {
   assert.match(html, /Tẩy tế bào chết/i);
   assert.match(html, /(?:Mi &amp; Mày|Định hình chân mày &amp; Uốn mi)/i);
   assert.match(html, /Xem chi tiết/i);
-  assert.match(html, /Tỏa sáng theo cách của riêng bạn\./i);
+  assert.match(html, /Tỏa sáng là chính bạn\./i);
   assert.match(html, /Hiểu làn da trước, chăm đúng điều da cần\./i);
   assert.match(html, /Thiết bị hiện đại/i);
   assert.match(html, /Không gian thư giãn/i);
@@ -147,6 +147,7 @@ test("routes English consultation actions to WhatsApp", async () => {
   const html = await response.text();
   const source = await readFile(new URL("../app/HatoHome.tsx", import.meta.url), "utf8");
   assert.match(html, /href="https:\/\/wa\.me\/84703214868"/i);
+  assert.match(html, /Shine as you are\./i);
   assert.match(html, />Book a consultation</i);
   assert.doesNotMatch(html, /href="https:\/\/zalo\.me\/0703214868"/i);
   assert.match(source, /const lang = initialLang;/i);
@@ -312,7 +313,7 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.match(html, /href="\/kien-thuc\/">Kiến thức</i);
   assert.match(html, /role="search"/i);
   assert.match(html, /class="announcement"/i);
-  assert.match(html, /Tỏa sáng theo cách của riêng bạn/i);
+  assert.match(html, /Tỏa sáng là chính bạn/i);
   assert.match(html, /class="footer-intro"/i);
   assert.match(html, /Hẹn gặp bạn trong một ngày gần nhất/i);
   assert.doesNotMatch(html, /Góc kiến thức · 04 bài nổi bật/i);

@@ -30,7 +30,7 @@ const copy = {
     book: "Đặt lịch soi da",
     nav: ["Về Hato Beauty", "Dịch vụ", "Trải nghiệm", "Kết quả", "Cảm nhận"],
     heroEyebrow: "Hato Beauty · Đà Nẵng",
-    heroTitle: "Tỏa sáng theo cách của riêng bạn.",
+    heroTitle: "Tỏa sáng là chính bạn.",
     heroText: "Bắt đầu bằng bước soi da để hiểu làn da đang cần gì. Từ đó, Hato Beauty cùng bạn chọn dịch vụ và cách chăm sóc tại nhà phù hợp, nhẹ nhàng và dễ duy trì.",
     explore: "Khám phá dịch vụ",
     learn: "Hiểu về chúng tôi",
@@ -62,7 +62,7 @@ const copy = {
     book: "Book a skin check",
     nav: ["About us", "Services", "Experience", "Results", "Reviews"],
     heroEyebrow: "Hato Beauty · Da Nang",
-    heroTitle: "Shine in your own way.",
+    heroTitle: "Shine as you are.",
     heroText: "Begin with a skin check to understand what your skin needs. Hato Beauty then helps you choose suitable services and a gentle, practical home-care routine.",
     explore: "Explore services", learn: "Discover us",
     whyEyebrow: "Why Hato Beauty", whyTitle: "Understand the skin first, then care for what it needs.",
@@ -430,7 +430,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
 
       {bookingOpen && <div className="modal-backdrop" onMouseDown={(event) => event.target === event.currentTarget && setBookingOpen(false)}>
         <section className="booking-modal" ref={dialogRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="booking-title"><button className="modal-close" onClick={() => setBookingOpen(false)} aria-label={t.close}>×</button>
-          {submitted ? <div className="success" role="status"><span>✓</span><p className="eyebrow">{brandText(t.received)}</p><h2>{brandText(t.modalTitle)}</h2><p>{brandText(t.thanks)}</p><button className="button primary" onClick={() => setBookingOpen(false)}>{t.done}</button></div> : <><p className="eyebrow">{lang === "vi" ? "TỎA SÁNG THEO CÁCH CỦA BẠN" : "SHINE AS YOU ARE"}</p><h2 id="booking-title">{brandText(t.modalTitle)}</h2><p>{brandText(t.modalText)}</p><form onSubmit={submitBooking}><label>{t.name}<input name="name" autoComplete="name" minLength={2} maxLength={120} required /></label><label>{t.phone}<input name="phone" type="tel" autoComplete="tel" inputMode="tel" minLength={8} maxLength={30} pattern={BOOKING_PHONE_PATTERN} title={lang === "vi" ? "Nhập số điện thoại gồm 8–15 chữ số." : "Enter a phone number containing 8–15 digits."} required /></label><label>{t.service}<select name="service" defaultValue={bookingServiceId} required><option value="" disabled>{t.chooseService}</option>{services.map((service) => <option value={service.id} key={service.id}>{service[lang].title}</option>)}</select></label><label>{t.date}<input name="date" type="date" min={minimumBookingDate} required /></label>{bookingError && <p className="booking-error" role="alert">{bookingError}</p>}<button className="button primary" type="submit" disabled={isSubmitting}>{isSubmitting ? t.sending : t.submit}<IconArrow /></button></form></>}
+          {submitted ? <div className="success" role="status"><span>✓</span><p className="eyebrow">{brandText(t.received)}</p><h2>{brandText(t.modalTitle)}</h2><p>{brandText(t.thanks)}</p><button className="button primary" onClick={() => setBookingOpen(false)}>{t.done}</button></div> : <><p className="eyebrow">{lang === "vi" ? "TỎA SÁNG LÀ CHÍNH BẠN" : "SHINE AS YOU ARE"}</p><h2 id="booking-title">{brandText(t.modalTitle)}</h2><p>{brandText(t.modalText)}</p><form onSubmit={submitBooking}><label>{t.name}<input name="name" autoComplete="name" minLength={2} maxLength={120} required /></label><label>{t.phone}<input name="phone" type="tel" autoComplete="tel" inputMode="tel" minLength={8} maxLength={30} pattern={BOOKING_PHONE_PATTERN} title={lang === "vi" ? "Nhập số điện thoại gồm 8–15 chữ số." : "Enter a phone number containing 8–15 digits."} required /></label><label>{t.service}<select name="service" defaultValue={bookingServiceId} required><option value="" disabled>{t.chooseService}</option>{services.map((service) => <option value={service.id} key={service.id}>{service[lang].title}</option>)}</select></label><label>{t.date}<input name="date" type="date" min={minimumBookingDate} required /></label>{bookingError && <p className="booking-error" role="alert">{bookingError}</p>}<button className="button primary" type="submit" disabled={isSubmitting}>{isSubmitting ? t.sending : t.submit}<IconArrow /></button></form></>}
         </section>
       </div>}
     </main>
