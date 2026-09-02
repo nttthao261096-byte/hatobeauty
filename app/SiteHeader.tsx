@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
 import { ContactDetails } from "./ContactDetails";
@@ -12,17 +13,17 @@ import { mediaUrl } from "./seo-data";
 const navByLang = {
   vi: [
     { href: "/dich-vu/", label: "Dịch vụ" },
-    { href: "/san-pham-cham-soc/", label: "Sản phẩm chăm sóc" },
+    { href: "/san-pham-cham-soc/", label: "Sản phẩm" },
     { href: "/lo-trinh/", label: "Lộ trình" },
     { href: "/kien-thuc/", label: "Kiến thức" },
-    { href: "/ve-hato-beauty/", label: "Về hato Beauty" },
+    { href: "/ve-hato-beauty/", label: "Về hato" },
   ],
   en: [
     { href: "/en/services/", label: "Services" },
-    { href: "/en/care-products/", label: "Care products" },
+    { href: "/en/care-products/", label: "Products" },
     { href: "/en/care-plan/", label: "Care plan" },
-    { href: "/en/journal/", label: "Knowledge" },
-    { href: "/en/about/", label: "About us" },
+    { href: "/en/journal/", label: "Journal" },
+    { href: "/en/about/", label: "About" },
   ],
 } as const;
 
@@ -40,8 +41,12 @@ export function SiteHeader({
   };
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname() ?? "";
   const navItems = navByLang[lang];
   const homeHref = lang === "vi" ? "/" : "/en/";
+  function isActive(href: string) {
+    return pathname === href || pathname.startsWith(href);
+  }
   const consultationHref = lang === "vi" ? "https://zalo.me/0703214868" : "https://wa.me/84703214868";
   const bookLabel = lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation";
   const menuLabel = lang === "vi" ? (menuOpen ? "Đóng menu" : "Mở menu") : (menuOpen ? "Close menu" : "Open menu");
@@ -87,7 +92,7 @@ export function SiteHeader({
           </div>
         </div>
         {navItems.map(({ href, label }) => (
-          <a className="nav-item" key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>
+          <a className={`nav-item${isActive(href) ? " is-active" : ""}`} key={href} href={href} aria-current={isActive(href) ? "page" : undefined} onClick={() => setMenuOpen(false)}>{label}</a>
         ))}
         {search ? (
           <form className="nav-search" role="search" onSubmit={submitSearch}>
@@ -127,8 +132,8 @@ export function SiteHeader({
       </div>
     </header>
     <div className="mobile-dock" aria-label={lang === "vi" ? "Liên hệ nhanh" : "Quick contact"}>
-      <a className="mobile-dock-call" href="tel:+84703214868"><span>Hotline</span><strong>0703214868</strong></a>
-      <a className="mobile-dock-book" href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Tư vấn ngay" : "Consult now"}</a>
+      <a className="mobile-dock-call" href="tel:+84703214868"><span>{lang === "vi" ? "Gọi" : "Call"}</span><strong>0703 214 868</strong></a>
+      <a className="mobile-dock-book" href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch" : "Book now"}</a>
     </div>
     </>
   );

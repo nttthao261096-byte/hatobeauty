@@ -277,7 +277,7 @@ function fallbackHomeContent(): HomeContent {
   if (skin) {
     skin.vi.title = "Chăm sóc da";
     skin.en.title = "Skin Care";
-    skin.image = "/images/service-skin-signature-v3.png";
+    skin.image = "/images/service-skin-v2.webp";
   }
   const browLash = services.find((service) => service.id === "brow-lash");
   if (browLash) {

@@ -96,8 +96,8 @@ export function SeoHeader({ lang }: { lang: SeoLang }) {
 export function SeoFooter({ lang }: { lang: SeoLang }) {
   const consultationHref = lang === "vi" ? "https://zalo.me/0703214868" : "https://wa.me/84703214868";
   const links = lang === "vi"
-    ? [["/dich-vu/", "Dịch vụ"], ["/san-pham-cham-soc/", "Sản phẩm chăm sóc"], ["/lo-trinh/", "Lộ trình"], ["/kien-thuc/", "Kiến thức"]]
-    : [["/en/services/", "Services"], ["/en/care-products/", "Care products"], ["/en/care-plan/", "Care plan"], ["/en/journal/", "Knowledge"]];
+    ? [["/dich-vu/", "Dịch vụ"], ["/san-pham-cham-soc/", "Sản phẩm"], ["/lo-trinh/", "Lộ trình"], ["/kien-thuc/", "Kiến thức"]]
+    : [["/en/services/", "Services"], ["/en/care-products/", "Products"], ["/en/care-plan/", "Care plan"], ["/en/journal/", "Journal"]];
   return <footer className="site-footer inner-page-footer">
     <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />
     <div className="footer-intro"><p>{lang === "vi" ? "hato Beauty · Không gian làm đẹp" : "hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
@@ -115,7 +115,7 @@ export function ServiceIndex({ lang }: { lang: SeoLang }) {
     <PageBreadcrumb lang={lang} label={lang === "vi" ? "Dịch vụ" : "Services"} />
     <header className="service-index-compact-intro"><div><p>{lang === "vi" ? <>DỊCH VỤ <span className="compact-hato-kicker">hato</span></> : <>SERVICES BY <span className="compact-hato-kicker">hato</span></>}</p><h1>{lang === "vi" ? <>Chăm sóc tại <span className="hato-heading-word">hato</span> Beauty</> : <>Care at <span className="hato-heading-word">hato</span> Beauty</>}</h1></div><p><span>{lang === "vi" ? "05 nhóm dịch vụ" : "05 service groups"}</span>{lang === "vi" ? "Chạm vào từng khung để xem chi tiết." : "Select a card to view the details."}<i aria-hidden="true">↓</i></p></header>
     <section className="index-grid service-index-grid" aria-label={title}>{primarySeoServices.map((service, index) => <Link className={`index-card index-card--${service.id}`} href={`${servicePath(service, lang)}#service-menu`} key={service.id}>
-      <div className="index-card-image"><Image src={service.image} alt={service[lang].name} fill priority={index === 0} sizes="(max-width: 760px) 100vw, 50vw" /></div>
+      <div className="index-card-image"><Image src={service.image} alt={service[lang].name} fill priority={index === 0} sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div>
       <div className="index-card-copy"><span>{String(index + 1).padStart(2, "0")}{index === 0 && <small>{lang === "vi" ? "Đặc biệt" : "Signature"}</small>}</span><div className="service-card-title"><h2>{service[lang].name}</h2><p>{serviceCardTaglines[service.id]?.[lang]}</p></div></div>
     </Link>)}</section>
   </main><SeoFooter lang={lang} /></div>;
@@ -133,7 +133,7 @@ export function KnowledgeIndex({ lang }: { lang: SeoLang }) {
       const service = topic.service;
       const articleTitle = lang === "vi" ? `${service.vi.name}: hướng dẫn chuẩn bị và chăm sóc` : `${service.en.name}: preparation and aftercare guide`;
       return <Link className="index-card journal-index-card" href={journalPath(service, lang)} key={topic.id}>
-        <div className="index-card-image"><Image src={topic.image} alt={articleTitle} fill sizes="(max-width: 760px) 100vw, 50vw" /></div>
+        <div className="index-card-image"><Image src={topic.image} alt={articleTitle} fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div>
         <div className="index-card-copy"><div><span>{String(index + 1).padStart(2, "0")}</span><small>{index % 2 === 0 ? (lang === "vi" ? "5 phút đọc" : "5 min read") : (lang === "vi" ? "4 phút đọc" : "4 min read")}</small></div><h2>{articleTitle}</h2><p>{service[lang].description}</p><strong>{lang === "vi" ? "Đọc bài viết" : "Read article"} <IconArrow /></strong></div>
       </Link>;
     })}</section>
@@ -255,7 +255,21 @@ export function TrustPage({ lang, kind }: { lang: SeoLang; kind: "about" | "cont
     : kind === "products"
       ? { src: "/images/service-skin-v2.webp", alt: lang === "vi" ? "Sản phẩm và trải nghiệm chăm sóc tại hato Beauty" : "Care products and experience at hato Beauty" }
       : null;
-  return <div className="seo-page" lang={lang}><SeoHeader lang={lang} /><main className={`seo-trust ${kind === "book" ? "booking-page" : ""}${kind === "contact" ? " contact-page" : ""}${kind === "carePlan" ? " care-plan-page" : ""}${kind === "products" ? " products-page" : ""}`}><PageBreadcrumb lang={lang} label={data[0]} />{kind === "contact" ? <header className="contact-page-intro"><span className="contact-orbit contact-orbit-one" aria-hidden="true" /><span className="contact-orbit contact-orbit-two" aria-hidden="true" /><h1>{data[0]}</h1><p className="seo-answer">{data[1]}</p></header> : <><p className="seo-eyebrow">hato Beauty</p><h1>{data[0]}</h1><p className="seo-answer">{data[1]}</p></>}{visual && <div className="trust-visual"><Image src={visual.src} alt={visual.alt} fill priority sizes="(max-width: 900px) 100vw, 80vw" /></div>}{kind === "book" ? <BookingForm lang={lang} /> : kind === "contact" ? <><div className="contact-page-panel"><div className="contact-page-info"><ContactDetails lang={lang} /></div><ContactForm lang={lang} /></div><div className="contact-page-map"><ContactMap lang={lang} /></div></> : <>{kind === "carePlan" && <section className="care-plan-steps" aria-label={data[0]}>{planSteps.map(([number, title, text]) => <article key={number}><span>{number}</span><h2>{title}</h2><p>{text}</p></article>)}</section>}<div className="seo-related"><h2>{lang === "vi" ? "Bắt đầu từ dịch vụ phù hợp" : "Start with the right service"}</h2><div>{primarySeoServices.map(s => <Link href={servicePath(s, lang)} key={s.id}>{s[lang].name}<IconArrow /></Link>)}</div></div></>}</main><SeoFooter lang={lang} /></div>;
+  const aboutValues = lang === "vi"
+    ? [
+        ["/images/feature-equipment-v2.webp", "Công nghệ phù hợp", "Thiết bị được lựa chọn theo nhu cầu thật, không chạy theo lời hứa quá mức."],
+        ["/images/feature-space-v2.webp", "Không gian dễ chịu", "Một nhịp chăm sóc riêng tư, sạch sẽ và đủ chậm để bạn thư giãn."],
+        ["/images/feature-personalized-v2.webp", "Thông tin minh bạch", "Quy trình, chi phí và kỳ vọng được trao đổi trước khi bắt đầu."],
+        ["/images/feature-team-v2.webp", "Lắng nghe cẩn trọng", "Đội ngũ bắt đầu từ câu hỏi và điều chỉnh theo cảm nhận của bạn."],
+      ]
+    : [
+        ["/images/feature-equipment-v2.webp", "Suitable technology", "Technology chosen around real needs, without inflated promises."],
+        ["/images/feature-space-v2.webp", "A calming space", "A private, clean and unhurried rhythm of care."],
+        ["/images/feature-personalized-v2.webp", "Clear information", "Process, price and expectations are discussed before care begins."],
+        ["/images/feature-team-v2.webp", "Careful listening", "The team starts with questions and adapts to your comfort."],
+      ] as const;
+  const consultationHref = lang === "vi" ? "https://zalo.me/0703214868" : "https://wa.me/84703214868";
+  return <div className="seo-page" lang={lang}><SeoHeader lang={lang} /><main className={`seo-trust ${kind === "book" ? "booking-page" : ""}${kind === "contact" ? " contact-page" : ""}${kind === "carePlan" ? " care-plan-page" : ""}${kind === "products" ? " products-page" : ""}${kind === "about" ? " about-page" : ""}`}><PageBreadcrumb lang={lang} label={data[0]} />{kind === "contact" ? <header className="contact-page-intro"><span className="contact-orbit contact-orbit-one" aria-hidden="true" /><span className="contact-orbit contact-orbit-two" aria-hidden="true" /><h1>{data[0]}</h1><p className="seo-answer">{data[1]}</p></header> : <><p className="seo-eyebrow">hato Beauty</p><h1>{data[0]}</h1><p className="seo-answer">{data[1]}</p></>}{visual && <div className="trust-visual"><Image src={visual.src} alt={visual.alt} fill priority sizes="(max-width: 900px) 100vw, 80vw" unoptimized /></div>}{kind === "about" && <section className="about-values" aria-label={lang === "vi" ? "Giá trị của hato Beauty" : "What hato Beauty stands for"}>{aboutValues.map(([image, title, text], index) => <article key={title}><div className="about-value-image"><Image src={image} alt={title} fill sizes="(max-width: 900px) 100vw, 25vw" unoptimized /></div><span>{String(index + 1).padStart(2, "0")}</span><h2>{title}</h2><p>{text}</p></article>)}</section>}{kind === "about" && <div className="about-actions"><a className="button primary" href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a><Link className="button ghost" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{lang === "vi" ? "Khám phá dịch vụ" : "Explore services"}<IconArrow /></Link></div>}{kind === "book" ? <BookingForm lang={lang} /> : kind === "contact" ? <><div className="contact-page-panel"><div className="contact-page-info"><ContactDetails lang={lang} /></div><ContactForm lang={lang} /></div><div className="contact-page-map"><ContactMap lang={lang} /></div></> : <>{kind === "carePlan" && <section className="care-plan-steps" aria-label={data[0]}>{planSteps.map(([number, title, text]) => <article key={number}><span>{number}</span><h2>{title}</h2><p>{text}</p></article>)}</section>}<div className="seo-related"><h2>{lang === "vi" ? "Bắt đầu từ dịch vụ phù hợp" : "Start with the right service"}</h2><div>{primarySeoServices.map(s => <Link href={servicePath(s, lang)} key={s.id}>{s[lang].name}<IconArrow /></Link>)}</div></div></>}</main><SeoFooter lang={lang} /></div>;
 }
 
 export function ResultsIndex({ lang, results }: { lang: SeoLang; results: ResultContent[] }) {
@@ -276,7 +290,7 @@ export function ResultsIndex({ lang, results }: { lang: SeoLang; results: Result
       {results.map((result, index) => {
         const service = serviceLinks[index] ?? seoServices[0];
         return <Link href={servicePath(service, lang)} key={result.vi[0]}>
-          <div className="result-image"><Image src={result.image} alt={result[lang][0]} fill sizes="(max-width: 720px) 100vw, 33vw" /><div className="comparison-labels"><span>{lang === "vi" ? "Trước" : "Before"}</span><span>{lang === "vi" ? "Sau" : "After"}</span></div></div>
+          <div className="result-image"><Image src={result.image} alt={result[lang][0]} fill sizes="(max-width: 720px) 100vw, 33vw" unoptimized /><div className="comparison-labels"><span>{lang === "vi" ? "Trước" : "Before"}</span><span>{lang === "vi" ? "Sau" : "After"}</span></div></div>
           <div className="result-copy"><h3>{result[lang][0]}</h3><p>{result[lang][1]}</p><span className="result-link-label">{lang === "vi" ? "Xem dịch vụ" : "View service"} <IconArrow /></span></div>
         </Link>;
       })}

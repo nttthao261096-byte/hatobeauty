@@ -32,7 +32,7 @@ const copy = {
     heroEyebrow: "CHĂM SÓC THEO NHU CẦU",
     heroTitle: "Tỏa sáng theo cách của bạn.",
     heroText: "Bởi mỗi người đều có một vẻ đẹp riêng. Tại đây, chúng tôi lắng nghe, thấu hiểu và thiết kế từng trải nghiệm để phù hợp với làn da, nhu cầu và nhịp sống của bạn.",
-    explore: "Xem chi tiết",
+    explore: "Khám phá dịch vụ",
     learn: "Hiểu về chúng tôi",
     whyEyebrow: "Vì sao chọn chúng tôi",
     whyTitle: "Mọi chi tiết đều có lý do.",
@@ -64,7 +64,7 @@ const copy = {
     heroEyebrow: "CARE SHAPED AROUND YOU",
     heroTitle: "Shine as you are.",
     heroText: "Because everyone has a beauty of their own. Here, we listen, understand and shape every experience around your skin, your needs and the rhythm of your life.",
-    explore: "View details", learn: "Discover us",
+    explore: "Explore services", learn: "Discover us",
     whyEyebrow: "Why choose us", whyTitle: "Every detail has a purpose.",
     servicesEyebrow: "Our services", servicesTitle: "Five care worlds. One place to feel like yourself.", servicesText: "Five service groups arranged clearly, so every local and international guest can understand the experience before booking.",
     categories: { all: "All", care: "Skin", shape: "Brow & Lash", relax: "Scalp & Relaxation", smooth: "Hair Removal & Waxing" },
@@ -84,7 +84,7 @@ const serviceGroupLabels = {
     skin: "Chăm sóc da",
     scalp: "Chăm sóc da đầu & Thư giãn",
     body: "Chăm sóc cơ thể",
-    "brow-lash": "Mi & chân mày",
+    "brow-lash": "Mi & Mày",
     waxing: "Tẩy lông",
     "hair-removal": "Triệt lông",
   },
@@ -99,14 +99,14 @@ const serviceGroupLabels = {
 } as const;
 
 const testimonialGuests = [
-  { initials: "TH", name: "Thu Hà", country: { vi: "Việt Nam", en: "Vietnam" }, local: true, href: { vi: "/", en: "/en/" } },
-  { initials: "EC", name: "Emily Carter", country: { vi: "Úc", en: "Australia" }, local: false, href: { vi: "/dich-vu/", en: "/en/services/" } },
-  { initials: "NM", name: "Ngọc Mai", country: { vi: "Việt Nam", en: "Vietnam" }, local: true, href: { vi: "/ve-hato-beauty/", en: "/en/about/" } },
-  { initials: "SL", name: "Sophie Laurent", country: { vi: "Pháp", en: "France" }, local: false, href: { vi: "/ket-qua/", en: "/en/results/" } },
-  { initials: "YT", name: "Yuki Tanaka", country: { vi: "Nhật Bản", en: "Japan" }, local: false, href: { vi: "/kien-thuc/", en: "/en/journal/" } },
-  { initials: "BA", name: "Bảo Anh", country: { vi: "Việt Nam", en: "Vietnam" }, local: true, href: { vi: "/dich-vu/", en: "/en/services/" } },
-  { initials: "MP", name: "Min-ji Park", country: { vi: "Hàn Quốc", en: "South Korea" }, local: false, href: { vi: "/ve-hato-beauty/", en: "/en/about/" } },
-  { initials: "ON", name: "Olivia Nguyen", country: { vi: "Singapore", en: "Singapore" }, local: false, href: { vi: "/", en: "/en/" } },
+  { initials: "TH", name: "Thu Hà", country: { vi: "Việt Nam", en: "Vietnam" }, local: true },
+  { initials: "EC", name: "Emily Carter", country: { vi: "Úc", en: "Australia" }, local: false },
+  { initials: "NM", name: "Ngọc Mai", country: { vi: "Việt Nam", en: "Vietnam" }, local: true },
+  { initials: "SL", name: "Sophie Laurent", country: { vi: "Pháp", en: "France" }, local: false },
+  { initials: "YT", name: "Yuki Tanaka", country: { vi: "Nhật Bản", en: "Japan" }, local: false },
+  { initials: "BA", name: "Bảo Anh", country: { vi: "Việt Nam", en: "Vietnam" }, local: true },
+  { initials: "MP", name: "Min-ji Park", country: { vi: "Hàn Quốc", en: "South Korea" }, local: false },
+  { initials: "ON", name: "Olivia Nguyen", country: { vi: "Singapore", en: "Singapore" }, local: false },
 ] as const;
 
 const serviceCardCopy = {
@@ -137,7 +137,7 @@ const serviceCardCopy = {
 } as const;
 
 export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent; initialLang?: Lang }) {
-  const { services, serviceDetails, highlights, testimonials, journalArticles } = content;
+  const { services, serviceDetails, highlights, results, testimonials, journalArticles } = content;
   const lang = initialLang;
   const [category, setCategory] = useState<Category>("all");
   const [highlightIndex, setHighlightIndex] = useState(() => {
@@ -171,8 +171,8 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
     return matchesCategory && (!normalizedQuery || searchableText.includes(normalizedQuery));
   });
   const navItems = lang === "vi"
-    ? [["/dich-vu/", "Dịch vụ"], ["/san-pham-cham-soc/", "Sản phẩm chăm sóc"], ["/lo-trinh/", "Lộ trình"], ["/kien-thuc/", "Kiến thức"], ["/ve-hato-beauty/", "Về hato Beauty"]]
-    : [["/en/services/", "Services"], ["/en/care-products/", "Care products"], ["/en/care-plan/", "Care plan"], ["/en/journal/", "Knowledge"], ["/en/about/", "About"]];
+    ? [["/dich-vu/", "Dịch vụ"], ["/san-pham-cham-soc/", "Sản phẩm"], ["/lo-trinh/", "Lộ trình"], ["/kien-thuc/", "Kiến thức"], ["/ve-hato-beauty/", "Về hato"]]
+    : [["/en/services/", "Services"], ["/en/care-products/", "Products"], ["/en/care-plan/", "Care plan"], ["/en/journal/", "Journal"], ["/en/about/", "About"]];
   const ribbonGroups = ["skin", "brow-lash", "scalp", "hair-removal", "waxing"] as const;
   useEffect(() => {
     document.body.style.overflow = bookingOpen || Boolean(selectedService) ? "hidden" : "";
@@ -262,7 +262,6 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
 
       <SiteHeader
         lang={lang}
-        hideDesktopConsultation
         search={{
           value: serviceQuery,
           onChange: setServiceQuery,
@@ -281,11 +280,12 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         </div>
         <div className="hero-overlay" />
         <div className="hero-copy">
+          <p className="eyebrow hero-eyebrow">{t.heroEyebrow}</p>
           <h1>{t.heroTitle}</h1>
-          <p className="hero-lead">{lang === "vi" ? "Hiệu quả đến từ sự thấu hiểu: công nghệ phù hợp, chuyên môn cẩn trọng và một lộ trình cho làn da, mi mày và nhịp sống của bạn." : "Results begin with understanding: considered technology, careful expertise and a plan shaped around what you truly need."}</p>
+          <p className="hero-lead">{t.heroText}</p>
           <div className="hero-actions">
             <a className="button primary" href={consultationHref} target="_blank" rel="noopener noreferrer">{t.book}<IconArrow /></a>
-            <a className="text-link" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{t.explore}<IconArrow /></a>
+            <a className="button ghost" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{t.explore}<IconArrow /></a>
           </div>
           <Link className="hero-trust" href={lang === "vi" ? "/lo-trinh/" : "/en/care-plan/"} aria-label={lang === "vi" ? "4,9 trên 5 từ hơn 5.000 khách hàng" : "4.9 out of 5 from more than 5,000 guests"}>
             <span className="hero-trust-avatars" aria-hidden="true">
@@ -319,23 +319,51 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <div className="service-grid">{filteredServices.map((service) => {
           const conciseCopy = serviceCardCopy[service.id as keyof typeof serviceCardCopy]?.[lang] ?? service[lang];
           return <button type="button" className={`service-card service-card-${service.id}`} onClick={() => setSelectedServiceId(service.id)} aria-haspopup="dialog" key={service.id}>
-            <div className="service-photo"><Image src={service.image} alt={service[lang].title} fill sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" /><span>{service.number}</span></div>
+            <div className="service-photo"><Image src={service.image} alt={service[lang].title} fill sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" unoptimized /><span>{service.number}</span></div>
             <div className="service-body">{service.id === "skin" && <span className="skin-signature">{lang === "vi" ? "Dịch vụ chủ đạo" : "Signature care"}</span>}<p className="service-summary">{serviceGroupLabels[lang][service.id as keyof typeof serviceGroupLabels.vi]}</p><h3>{service[lang].title}</h3><p className="service-description">{conciseCopy.description}</p><div className="service-suitable"><strong>{t.suitable}</strong><p>{conciseCopy.suitable}</p></div><span className="service-discover">{t.choose}<IconArrow /></span></div>
           </button>;
         })}{filteredServices.length === 0 && <p className="service-empty">{lang === "vi" ? "Chưa tìm thấy dịch vụ phù hợp. Hãy thử một từ khóa khác." : "No matching service yet. Try another keyword."}</p>}</div>
       </section>
 
+      {results.length > 0 ? <section className="results section" id="results">
+        <div className="results-head">
+          <div>
+            <p className="eyebrow">{t.resultEyebrow}</p>
+            <h2>{t.resultTitle}</h2>
+          </div>
+          <div className="section-heading-side">
+            <p>{t.resultNote}</p>
+            <Link className="section-route-link" href={lang === "vi" ? "/ket-qua/" : "/en/results/"}>{lang === "vi" ? "Xem tất cả kết quả" : "View all results"}<IconArrow /></Link>
+          </div>
+        </div>
+        <div className="result-grid">
+          {results.slice(0, 3).map((item) => (
+            <Link href={lang === "vi" ? "/ket-qua/" : "/en/results/"} key={item.image}>
+              <div className="result-image">
+                <Image src={item.image} alt={item[lang][0]} fill sizes="(max-width: 720px) 80vw, 33vw" />
+                <em>{item[lang][2]}</em>
+              </div>
+              <div className="result-copy">
+                <h3>{item[lang][0]}</h3>
+                <p>{item[lang][1]}</p>
+                <span className="result-link-label">{lang === "vi" ? "Xem kết quả" : "View results"}<IconArrow /></span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section> : null}
+
       <section className="knowledge section" id="knowledge">
         <span className="knowledge-orbit" aria-hidden="true" />
         <div className="knowledge-heading"><div><h2>{lang === "vi" ? "Hiểu đúng để mỗi lựa chọn chăm sóc đều nhẹ nhàng hơn." : "A little knowledge makes every care choice feel easier."}</h2></div><p>{lang === "vi" ? "Đây là nơi hato chia sẻ toàn bộ kiến thức chăm sóc da, mi mày, da đầu và cơ thể — giúp bạn hiểu đúng, lựa chọn phù hợp và duy trì kết quả nhẹ nhàng tại nhà." : "This is where hato shares its complete care knowledge across skin, brow, lash, scalp and body, helping you make informed choices and maintain results at home."}</p></div>
         <div className="knowledge-grid">
-          {journalArticles.slice(0, 4).map((item, index) => <article className="knowledge-card" key={item.number}><Link href={journalPath(seoServices[index] ?? seoServices[0], lang)}><div className="knowledge-image"><Image src={item.image} alt={item[lang].title} fill sizes="(max-width: 900px) 100vw, 25vw" /></div><div className="knowledge-body"><div className="knowledge-meta"><span>{item.number}</span><small>{item[lang].readingTime}</small></div><h3>{item[lang].title}</h3><span className="knowledge-arrow" aria-hidden="true"><IconArrow /></span></div></Link></article>)}
+          {journalArticles.slice(0, 4).map((item, index) => <article className="knowledge-card" key={item.number}><Link href={journalPath(seoServices[index] ?? seoServices[0], lang)}><div className="knowledge-image"><Image src={item.image} alt={item[lang].title} fill sizes="(max-width: 900px) 82vw, 50vw" /></div><div className="knowledge-body"><div className="knowledge-meta"><span>{item.number}</span><small>{item[lang].readingTime}</small></div><h3>{item[lang].title}</h3><span className="knowledge-arrow" aria-hidden="true"><IconArrow /></span></div></Link></article>)}
         </div>
         <p className="knowledge-more"><Link className="button primary" href={lang === "vi" ? "/kien-thuc/" : "/en/journal/"}>{lang === "vi" ? "Xem tất cả bài viết" : "View all articles"}<IconArrow /></Link></p>
       </section>
 
       <section className="testimonials section" id="testimonials">
-        <div className="testimonial-heading"><div><p className="eyebrow">{lang === "vi" ? "Khách Việt Nam & quốc tế" : "Vietnamese & international guests"}</p><h2>{lang === "vi" ? "Những điều khách hàng nhớ về hato Beauty." : "What guests remember about hato Beauty."}</h2></div><div className="review-heading-side"><p>{lang === "vi" ? "Những chia sẻ chân thành từ khách Việt Nam và bạn bè quốc tế về không gian, đội ngũ và toàn bộ trải nghiệm tại hato." : "Honest notes from Vietnamese and international guests about the space, the team and the complete hato experience."}</p><div className="review-controls"><button onClick={() => setReviewOffset((reviewOffset + 4) % testimonials.length)} aria-label={lang === "vi" ? "Nhóm đánh giá trước" : "Previous review group"}><IconChevron direction="left" /></button><button onClick={() => setReviewOffset((reviewOffset + 4) % testimonials.length)} aria-label={lang === "vi" ? "Nhóm đánh giá tiếp theo" : "Next review group"}><IconChevron /></button></div></div></div>
+        <div className="testimonial-heading"><div><p className="eyebrow">{lang === "vi" ? "Khách Việt Nam & quốc tế" : "Vietnamese & international guests"}</p><h2>{lang === "vi" ? "Những điều khách hàng nhớ về hato Beauty." : "What guests remember about hato Beauty."}</h2></div><div className="review-heading-side"><p>{lang === "vi" ? "Những chia sẻ chân thành từ khách Việt Nam và bạn bè quốc tế về không gian, đội ngũ và toàn bộ trải nghiệm tại hato." : "Honest notes from Vietnamese and international guests about the space, the team and the complete hato experience."}</p><div className="review-controls"><button onClick={() => setReviewOffset((reviewOffset - 4 + testimonials.length) % testimonials.length)} aria-label={lang === "vi" ? "Nhóm đánh giá trước" : "Previous review group"}><IconChevron direction="left" /></button><button onClick={() => setReviewOffset((reviewOffset + 4) % testimonials.length)} aria-label={lang === "vi" ? "Nhóm đánh giá tiếp theo" : "Next review group"}><IconChevron /></button></div></div></div>
         <div className="review-grid" aria-live="polite">
           {Array.from({ length: 4 }, (_, column) => testimonials[(reviewOffset + column) % testimonials.length]).map((review, index) => {
             const guestIndex = (reviewOffset + index) % testimonialGuests.length;
@@ -343,7 +371,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
             const guestType = lang === "vi"
               ? (guest.local ? "Khách Việt Nam" : "Khách quốc tế")
               : (guest.local ? "Vietnamese guest" : "International guest");
-            return <Link className={`review-card review-card-${index + 1}`} href={guest.href[lang]} aria-label={`${guest.name} · ${guest.country[lang]}`} key={`${reviewOffset}-${guest.name}`}><div className="review-top"><span>0{guestIndex + 1}</span><b>“</b></div><blockquote>{review.quote[lang]}</blockquote><footer><strong>{guest.initials}</strong><div><b>{guest.name}</b><small>{guestType} · {guest.country[lang]}</small></div></footer></Link>;
+            return <article className={`review-card review-card-${index + 1}`} aria-label={`${guest.name} · ${guest.country[lang]}`} key={`${reviewOffset}-${guest.name}`}><div className="review-top"><span>0{guestIndex + 1}</span><b>“</b></div><blockquote>{review.quote[lang]}</blockquote><footer><strong>{guest.initials}</strong><div><b>{guest.name}</b><small>{guestType} · {guest.country[lang]}</small></div></footer></article>;
           })}
         </div>
         <div className="review-pagination" aria-label={lang === "vi" ? "Nhóm đánh giá" : "Review group"}><span>{reviewOffset === 0 ? "01 — 04" : "05 — 08"}<small>/ 08</small></span><div><button className={reviewOffset === 0 ? "active" : ""} onClick={() => setReviewOffset(0)} aria-label={lang === "vi" ? "Xem đánh giá 1 đến 4" : "View reviews 1 to 4"} /><button className={reviewOffset === 4 ? "active" : ""} onClick={() => setReviewOffset(4)} aria-label={lang === "vi" ? "Xem đánh giá 5 đến 8" : "View reviews 5 to 8"} /></div></div>
