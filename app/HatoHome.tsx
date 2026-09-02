@@ -26,16 +26,16 @@ function brandText(text: string): ReactNode {
 
 const copy = {
   vi: {
-    announcement: "Soi da khi đặt liệu trình · 08:00–19:30 · 127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn",
+    announcement: "Soi da khi đặt liệu trình · 08:30–19:30 · 127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn",
     book: "Đặt lịch soi da",
-    nav: ["Về hato Beauty", "Dịch vụ", "Trải nghiệm", "Kết quả", "Cảm nhận"],
-    heroEyebrow: "hato Beauty · Đà Nẵng",
-    heroTitle: "Soi da. Chăm đúng việc. Mang về nhà.",
-    heroText: "Bạn được xem tình trạng da, chọn liệu trình vừa ngân sách, rồi nhận bộ dưỡng dùng sáng/tối. Giá nói trước khi nằm ghế.",
-    explore: "Xem lộ trình da",
+    nav: ["Về Hato Beauty", "Dịch vụ", "Trải nghiệm", "Kết quả", "Cảm nhận"],
+    heroEyebrow: "Hato Beauty · Đà Nẵng",
+    heroTitle: "Tỏa sáng theo cách của riêng bạn.",
+    heroText: "Bắt đầu bằng bước soi da để hiểu làn da đang cần gì. Từ đó, Hato Beauty cùng bạn chọn dịch vụ và cách chăm sóc tại nhà phù hợp, nhẹ nhàng và dễ duy trì.",
+    explore: "Khám phá dịch vụ",
     learn: "Hiểu về chúng tôi",
-    whyEyebrow: "Vì sao hato",
-    whyTitle: "Nói rõ việc sẽ làm, rồi mới làm.",
+    whyEyebrow: "Vì sao Hato Beauty",
+    whyTitle: "Hiểu làn da trước, chăm đúng điều da cần.",
     servicesEyebrow: "Năm nhóm dịch vụ",
     servicesTitle: "Chọn đúng nhóm trước khi đặt.",
     servicesText: "Da, mi mày, da đầu, triệt lông hoặc tẩy lông. Mỗi nhóm có thời lượng và giá từ–đến trên trang chi tiết.",
@@ -58,14 +58,14 @@ const copy = {
     sending: "Đang gửi...", bookingError: "Chưa thể gửi yêu cầu. Vui lòng thử lại sau ít phút.",
   },
   en: {
-    announcement: "Skin check with treatment · 08:00–19:30 · 127 Chau Thi Vinh Te, Ngu Hanh Son",
+    announcement: "Skin check with treatment · 08:30–19:30 · 127 Chau Thi Vinh Te, Ngu Hanh Son",
     book: "Book a skin check",
     nav: ["About us", "Services", "Experience", "Results", "Reviews"],
-    heroEyebrow: "hato Beauty · Da Nang",
-    heroTitle: "Check the skin. Do the right work. Take it home.",
-    heroText: "You see the skin, pick a treatment that fits the budget, then leave with an AM/PM set. Price is said before you lie down.",
-    explore: "See the skin plan", learn: "Discover us",
-    whyEyebrow: "Why hato", whyTitle: "We say the work, then we do it.",
+    heroEyebrow: "Hato Beauty · Da Nang",
+    heroTitle: "Shine in your own way.",
+    heroText: "Begin with a skin check to understand what your skin needs. Hato Beauty then helps you choose suitable services and a gentle, practical home-care routine.",
+    explore: "Explore services", learn: "Discover us",
+    whyEyebrow: "Why Hato Beauty", whyTitle: "Understand the skin first, then care for what it needs.",
     servicesEyebrow: "Five service groups", servicesTitle: "Pick the right group before you book.", servicesText: "Skin, brow and lash, scalp, hair removal or waxing. Time and a from–to price sit on each detail page.",
     categories: { all: "All", care: "Skin", shape: "Brow & Lash", relax: "Scalp & Relaxation", smooth: "Hair Removal & Waxing" },
     suitable: "Best suited for", choose: "View details",
@@ -248,7 +248,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
   function submitNewsletter(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const subject = lang === "vi" ? "Đăng ký nhận ưu đãi hằng tháng" : "Monthly offer subscription";
-    const body = lang === "vi" ? `Tôi đồng ý đăng ký nhận thông tin ưu đãi hằng tháng từ hato Beauty qua email: ${newsletterEmail}` : `I agree to receive monthly hato Beauty offers at: ${newsletterEmail}`;
+    const body = lang === "vi" ? `Tôi đồng ý đăng ký nhận thông tin ưu đãi hằng tháng từ Hato Beauty qua email: ${newsletterEmail}` : `I agree to receive monthly Hato Beauty offers at: ${newsletterEmail}`;
     window.location.href = `mailto:hatobeautydanang@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setNewsletterStatus("success");
   }
@@ -273,7 +273,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       />
 
       <section className="hero" id="top">
-        <div className={`hero-media${heroSequenceReady ? " is-sequence-ready" : ""}`} aria-label={lang === "vi" ? "Chuỗi trải nghiệm chăm sóc tại hato Beauty" : "A sequence of care experiences at hato Beauty"}>
+        <div className={`hero-media${heroSequenceReady ? " is-sequence-ready" : ""}`} aria-label={lang === "vi" ? "Chuỗi trải nghiệm chăm sóc tại Hato Beauty" : "A sequence of care experiences at Hato Beauty"}>
           {[
             [mediaUrl("/video/hero-head-spa.mp4"), "Gội đầu dưỡng sinh", "Head spa"],
             [mediaUrl("/video/hero-hair-removal.mp4"), "Triệt lông", "Hair removal"],
@@ -288,7 +288,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
           <p className="hero-lead">{t.heroText}</p>
           <div className="hero-actions">
             <a className="button primary" href={consultationHref} target="_blank" rel="noopener noreferrer">{t.book}<IconArrow /></a>
-            <a className="button ghost" href={lang === "vi" ? "/lo-trinh/" : "/en/care-plan/"}>{t.explore}<IconArrow /></a>
+            <a className="button ghost" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{t.explore}<IconArrow /></a>
           </div>
           <Link className="hero-trust" href={lang === "vi" ? "/lo-trinh/" : "/en/care-plan/"} aria-label={lang === "vi" ? "4,9 trên 5 từ hơn 5.000 khách hàng" : "4.9 out of 5 from more than 5,000 guests"}>
             <span className="hero-trust-avatars" aria-hidden="true">
@@ -302,7 +302,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       <div className="service-ribbon" aria-label={lang === "vi" ? "Năm nhóm dịch vụ" : "Five service groups"}><div className="service-ribbon-track">{[0, 1].flatMap((copy) => ribbonGroups.map((id) => <Link className="ribbon-item" href={id === "waxing" ? (lang === "vi" ? "/dich-vu/" : "/en/services/") : servicePath(seoServices.find(service => service.id === id) ?? seoServices[0], lang)} key={`${copy}-${id}`}><span>{serviceGroupLabels[lang][id]}</span><i aria-hidden="true">✦</i></Link>))}</div></div>
 
       <section className="why section" id="about">
-        <div className="section-heading"><p className="eyebrow">{t.whyEyebrow}</p><h2>{t.whyTitle}</h2><div className="section-heading-side"><p>{lang === "vi" ? "hato làm chăm sóc thẩm mỹ, không thay phòng khám da. Buổi đầu soi da, nói mục tiêu và khoảng giá, rồi mới làm. Bạn mang về 2–4 món dùng sáng/tối và lịch xem lại sau 4–6 tuần. 127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn, mở 08:00–19:30." : "hato is cosmetic care, not a skin clinic. The first visit checks the skin, names an aim and a price range, then treats. You leave with two to four AM/PM items and a 4–6 week review. 127 Chau Thi Vinh Te, 08:00–19:30."}</p><Link className="section-route-link" href={lang === "vi" ? "/lo-trinh/" : "/en/care-plan/"}>{lang === "vi" ? "Xem lộ trình da" : "See the skin plan"}<IconArrow /></Link></div></div>
+        <div className="section-heading"><p className="eyebrow">{t.whyEyebrow}</p><h2>{t.whyTitle}</h2><div className="section-heading-side"><p>{lang === "vi" ? "Mỗi buổi chăm sóc tại Hato Beauty bắt đầu bằng lắng nghe và soi da để hiểu tình trạng hiện tại. Chúng tôi cùng bạn xác định mục tiêu, ngân sách và dịch vụ phù hợp trước khi thực hiện; sau đó hướng dẫn cách chăm sóc tại nhà và thời điểm nên soi lại. Hato Beauty là không gian chăm sóc thẩm mỹ, không thay thế thăm khám da liễu. Mở cửa hằng ngày 08:30–19:30 tại 127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn." : "Every Hato Beauty visit begins with listening and a skin check. We agree on the goal, budget and suitable service before care, then guide your home routine and review timing. Hato Beauty provides cosmetic care and does not replace dermatology. Open daily 08:30–19:30 at 127 Chau Thi Vinh Te."}</p><Link className="section-route-link" href={lang === "vi" ? "/lo-trinh/" : "/en/care-plan/"}>{lang === "vi" ? "Xem lộ trình da" : "See the skin plan"}<IconArrow /></Link></div></div>
         <div className="feature-slider" id="experience">
           <Link className={`feature-stage${isTechHighlight(highlights[highlightIndex]) ? " feature-stage-tech" : ""}`} href={lang === "vi" ? "/ve-hato-beauty/" : "/en/about/"} key={highlights[highlightIndex].number}>
             <div className="feature-image"><Image src={highlights[highlightIndex].image} alt={highlights[highlightIndex][lang][0]} fill sizes="(max-width: 760px) 100vw, 58vw" /></div>
@@ -358,7 +358,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
 
       <section className="knowledge section" id="knowledge">
         <span className="knowledge-orbit" aria-hidden="true" />
-        <div className="knowledge-heading"><div><h2>{lang === "vi" ? "Hiểu đúng để mỗi lựa chọn chăm sóc đều nhẹ nhàng hơn." : "A little knowledge makes every care choice feel easier."}</h2></div><p>{lang === "vi" ? "Đây là nơi hato chia sẻ toàn bộ kiến thức chăm sóc da, mi mày, da đầu và cơ thể — giúp bạn hiểu đúng, lựa chọn phù hợp và duy trì kết quả nhẹ nhàng tại nhà." : "This is where hato shares its complete care knowledge across skin, brow, lash, scalp and body, helping you make informed choices and maintain results at home."}</p></div>
+        <div className="knowledge-heading"><div><h2>{lang === "vi" ? "Hiểu đúng để mỗi lựa chọn chăm sóc đều nhẹ nhàng hơn." : "A little knowledge makes every care choice feel easier."}</h2></div><p>{lang === "vi" ? "Đây là nơi Hato Beauty chia sẻ kiến thức chăm sóc da, mi mày, da đầu và cơ thể — giúp bạn hiểu đúng, lựa chọn phù hợp và duy trì kết quả nhẹ nhàng tại nhà." : "This is where Hato Beauty shares care knowledge across skin, brow, lash, scalp and body, helping you make informed choices and maintain results at home."}</p></div>
         <div className="knowledge-grid">
           {journalArticles.slice(0, 4).map((item, index) => <article className="knowledge-card" key={item.number}><Link href={journalPath(seoServices[index] ?? seoServices[0], lang)}><div className="knowledge-image"><Image src={item.image} alt={item[lang].title} fill sizes="(max-width: 900px) 82vw, 50vw" /></div><div className="knowledge-body"><div className="knowledge-meta"><span>{item.number}</span><small>{item[lang].readingTime}</small></div><h3>{item[lang].title}</h3><span className="knowledge-arrow" aria-hidden="true"><IconArrow /></span></div></Link></article>)}
         </div>
@@ -366,7 +366,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       </section>
 
       <section className="testimonials section" id="testimonials">
-        <div className="testimonial-heading"><div><p className="eyebrow">{lang === "vi" ? "Khách Việt Nam & quốc tế" : "Vietnamese & international guests"}</p><h2>{lang === "vi" ? "Những điều khách hàng nhớ về hato Beauty." : "What guests remember about hato Beauty."}</h2></div><div className="review-heading-side"><p>{lang === "vi" ? "Những chia sẻ chân thành từ khách Việt Nam và bạn bè quốc tế về không gian, đội ngũ và toàn bộ trải nghiệm tại hato." : "Honest notes from Vietnamese and international guests about the space, the team and the complete hato experience."}</p><div className="review-controls"><button onClick={() => setReviewOffset((reviewOffset - 4 + testimonials.length) % testimonials.length)} aria-label={lang === "vi" ? "Nhóm đánh giá trước" : "Previous review group"}><IconChevron direction="left" /></button><button onClick={() => setReviewOffset((reviewOffset + 4) % testimonials.length)} aria-label={lang === "vi" ? "Nhóm đánh giá tiếp theo" : "Next review group"}><IconChevron /></button></div></div></div>
+        <div className="testimonial-heading"><div><h2>{lang === "vi" ? "Những điều khách hàng nhớ về Hato Beauty." : "What guests remember about Hato Beauty."}</h2></div><div className="review-heading-side"><p>{lang === "vi" ? "Những chia sẻ chân thành về không gian, đội ngũ và trải nghiệm chăm sóc tại Hato Beauty." : "Honest notes about the space, the team and the complete Hato Beauty experience."}</p><div className="review-controls"><button onClick={() => setReviewOffset((reviewOffset - 4 + testimonials.length) % testimonials.length)} aria-label={lang === "vi" ? "Nhóm đánh giá trước" : "Previous review group"}><IconChevron direction="left" /></button><button onClick={() => setReviewOffset((reviewOffset + 4) % testimonials.length)} aria-label={lang === "vi" ? "Nhóm đánh giá tiếp theo" : "Next review group"}><IconChevron /></button></div></div></div>
         <div className="review-grid" aria-live="polite">
           {Array.from({ length: 4 }, (_, column) => testimonials[(reviewOffset + column) % testimonials.length]).map((review, index) => {
             const guestIndex = (reviewOffset + index) % testimonialGuests.length;
@@ -381,7 +381,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       </section>
 
       <section className="newsletter-section" id="contact">
-        <div><p className="eyebrow">{lang === "vi" ? "Ưu đãi dành riêng cho bạn" : "A thoughtful note for you"}</p><h2>{lang === "vi" ? "Nhận thông tin ưu đãi của hato Beauty hằng tháng" : "Receive hato Beauty offers each month"}</h2><p>{lang === "vi" ? "Ưu đãi mới, gợi ý chăm sóc theo mùa và những cập nhật nhẹ nhàng từ hato Beauty." : "New offers, seasonal care ideas and thoughtful updates from hato Beauty."}</p></div>
+        <div><p className="eyebrow">{lang === "vi" ? "Ưu đãi dành riêng cho bạn" : "A thoughtful note for you"}</p><h2>{lang === "vi" ? "Nhận thông tin ưu đãi của Hato Beauty hằng tháng" : "Receive Hato Beauty offers each month"}</h2><p>{lang === "vi" ? "Ưu đãi mới, gợi ý chăm sóc theo mùa và những cập nhật nhẹ nhàng từ Hato Beauty." : "New offers, seasonal care ideas and thoughtful updates from Hato Beauty."}</p></div>
         <form onSubmit={submitNewsletter}>
           <label htmlFor={`newsletter-email-${lang}`}>{lang === "vi" ? "Email của bạn" : "Your email"}</label>
           <div><input id={`newsletter-email-${lang}`} type="email" inputMode="email" autoComplete="email" required maxLength={254} placeholder={lang === "vi" ? "Email của bạn" : "Your email"} value={newsletterEmail} onChange={(event) => { setNewsletterEmail(event.target.value); setNewsletterStatus("idle"); }} /><button type="submit" disabled={newsletterStatus === "sending"}>{newsletterStatus === "sending" ? (lang === "vi" ? "Đang gửi..." : "Sending...") : (lang === "vi" ? "Đăng ký" : "Subscribe")}<IconArrow /></button></div>
@@ -391,11 +391,11 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
 
       <footer className="site-footer">
         <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />
-        <div className="footer-intro"><p>{lang === "vi" ? "hato Beauty · Không gian làm đẹp" : "hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
-        <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} /></div>
+        <div className="footer-intro"><p>{lang === "vi" ? "Hato Beauty · Không gian làm đẹp" : "Hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
+        <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="Hato Beauty" width={1016} height={638} /></div>
         <div className="footer-links"><h3>{lang === "vi" ? "Khám phá" : "Discover"}</h3>{navItems.slice(0, 4).map(([href, label], index) => <a href={href} key={href}><span>0{index + 1}</span>{label}</a>)}</div>
         <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><ContactDetails lang={lang} compact /><a className="footer-consultation-link" href={consultationHref} target="_blank" rel="noopener noreferrer">{t.book}<IconArrow /></a></div>
-        <div className="footer-bottom"><span>© 2026 hato Beauty</span><div><a href="#top">{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</a><a href={lang === "vi" ? "/chinh-sach-bien-tap/" : "/en/editorial-policy/"}>{lang === "vi" ? "Biên tập" : "Editorial"}</a><a href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</a></div></div>
+        <div className="footer-bottom"><span>© 2026 Hato Beauty</span><div><a href="#top">{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</a><a href={lang === "vi" ? "/chinh-sach-bien-tap/" : "/en/editorial-policy/"}>{lang === "vi" ? "Biên tập" : "Editorial"}</a><a href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</a></div></div>
       </footer>
 
       {selectedService && selectedServiceDetail && <div className="modal-backdrop service-detail-backdrop" onMouseDown={(event) => event.target === event.currentTarget && setSelectedServiceId(null)}>

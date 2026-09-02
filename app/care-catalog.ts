@@ -86,6 +86,26 @@ export const careProducts = [
     vi: { name: "Tẩy da chết hóa học nhẹ", concern: "Bề mặt sần, lỗ chân lông", use: "Dùng thưa; không dùng đêm vừa soi da hoặc vừa peel." },
     en: { name: "Gentle liquid exfoliant", concern: "Rough texture and visible pores", use: "Use sparingly; skip the night of a facial or peel." },
   },
+  {
+    id: "cleansing-balm",
+    image: "/images/product-cleansing-balm-v1.png",
+    size: "80 g",
+    price: 390000,
+    filters: ["dry", "sensitive", "sun"],
+    when: { vi: "Tối", en: "PM" },
+    vi: { name: "Sáp tẩy trang dịu nhẹ", concern: "Da có kem chống nắng hoặc trang điểm", use: "Hòa tan lớp chống nắng và trang điểm trước bước sữa rửa mặt." },
+    en: { name: "Gentle cleansing balm", concern: "Skin wearing sunscreen or makeup", use: "Melts sunscreen and makeup before your water-based cleanser." },
+  },
+  {
+    id: "soothing-gel",
+    image: "/images/product-soothing-gel-v1.png",
+    size: "50 ml",
+    price: 460000,
+    filters: ["oily", "sensitive", "acne", "aftercare"],
+    when: { vi: "Sáng / Tối", en: "AM / PM" },
+    vi: { name: "Gel serum làm dịu", concern: "Da nóng, dễ đỏ hoặc thiếu nước", use: "Bổ sung lớp ẩm mỏng nhẹ để da dễ chịu hơn, không gây nặng mặt." },
+    en: { name: "Soothing gel serum", concern: "Warm, redness-prone or dehydrated skin", use: "Adds a light layer of hydration without a heavy finish." },
+  },
 ] as const;
 
 export type ProductId = (typeof careProducts)[number]["id"];

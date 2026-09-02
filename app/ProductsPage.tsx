@@ -17,11 +17,11 @@ export function ProductsPage({ lang }: { lang: CareLang }) {
         </nav>
         <header className="products-intro">
           <p className="eyebrow">{lang === "vi" ? "Chăm sóc da tại nhà" : "Skin care at home"}</p>
-          <h1>{lang === "vi" ? "Tám món mang về nhà, đúng phiếu lộ trình." : "Eight take-home items, as the plan note says."}</h1>
+          <h1>{lang === "vi" ? "Những sản phẩm chăm sóc da bạn nên có tại nhà." : "At-home skincare essentials worth keeping close."}</h1>
           <p>
             {lang === "vi"
-              ? "Tám món cho da khô, dầu, nhạy cảm, mụn nhẹ và ngày nắng Đà Nẵng. Dùng theo phiếu lộ trình: sáng, tối, hoặc sau spa."
-              : "Eight items for dry, oily, sensitive, mildly blemished skin and Da Nang sun. Use them as the plan note says: morning, night, or after spa."}
+              ? "Từ làm sạch, cấp ẩm, phục hồi đến chống nắng, đây là những gợi ý giúp bạn xây dựng chu trình gọn nhẹ và dễ duy trì. Hãy soi da trước để chọn đúng món, đúng thời điểm và tránh dùng quá nhiều hoạt chất cùng lúc."
+              : "From cleansing and hydration to barrier support and sunscreen, these suggestions help you build a simple routine you can maintain. Start with a skin check to choose the right item and timing without stacking too many actives."}
           </p>
         </header>
         <ProductCatalog lang={lang} />

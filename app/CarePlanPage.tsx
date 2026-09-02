@@ -37,7 +37,7 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
 
         <section className="plan-hero">
           <div className="plan-hero-copy">
-            <p className="eyebrow">{lang === "vi" ? "hato Beauty · Đà Nẵng" : "hato Beauty · Da Nang"}</p>
+            <p className="eyebrow">{lang === "vi" ? "Hato Beauty · Đà Nẵng" : "Hato Beauty · Da Nang"}</p>
             <h1>{lang === "vi" ? "Soi da. Chăm đúng việc. Mang về nhà." : "Check the skin. Do the right work. Take it home."}</h1>
             <p className="plan-lead">
               {lang === "vi"
@@ -51,11 +51,11 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
             <ul className="plan-trust">
               <li><strong>4.9/5</strong><span>{lang === "vi" ? "điểm khách" : "guest score"}</span></li>
               <li><strong>5.000+</strong><span>{lang === "vi" ? "khách đã đến" : "guests"}</span></li>
-              <li><strong>08:00–19:30</strong><span>Đà Nẵng</span></li>
+              <li><strong>08:30–19:30</strong><span>Đà Nẵng</span></li>
             </ul>
           </div>
           <div className="plan-hero-media">
-            <Image src="/images/lifestyle-skin-assess-v1.jpg" alt={lang === "vi" ? "Soi da tại hato Beauty" : "Skin check at hato Beauty"} fill sizes="(max-width: 900px) 100vw, 48vw" unoptimized />
+            <Image src="/images/lifestyle-skin-assess-v1.jpg" alt={lang === "vi" ? "Soi da tại Hato Beauty" : "Skin check at Hato Beauty"} fill sizes="(max-width: 900px) 100vw, 48vw" unoptimized />
           </div>
         </section>
 
@@ -220,7 +220,7 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
 
         <section className="plan-close" id="book">
           <h2>{lang === "vi" ? "Sẵn sàng soi da?" : "Ready for a skin check?"}</h2>
-          <p>{lang === "vi" ? "Nhắn Zalo hoặc để số. Chúng tôi gọi lại trong giờ 08:00–19:30." : "Message WhatsApp or leave a number. We call back between 08:00 and 19:30."}</p>
+          <p>{lang === "vi" ? "Nhắn Zalo hoặc để số. Chúng tôi gọi lại trong giờ 08:30–19:30." : "Message WhatsApp or leave a number. We call back between 08:30 and 19:30."}</p>
           <div className="plan-hero-actions">
             <a className="button primary" href={consult} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Nhắn Zalo 0703 214 868" : "WhatsApp +84 703 214 868"}<IconArrow /></a>
             <Link className="button ghost" href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{lang === "vi" ? "Đặt lịch trên web" : "Book on the site"}<IconArrow /></Link>

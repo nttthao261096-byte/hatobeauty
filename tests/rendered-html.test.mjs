@@ -95,14 +95,14 @@ async function render(pathname = "/") {
   }
 }
 
-test("server-renders the redesigned hato Beauty experience", async () => {
+test("server-renders the redesigned Hato Beauty experience", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
   assert.match(html, /<html lang="vi"[^>]*>/i);
   assert.match(html, /data-scroll-behavior="smooth"/i);
-  assert.match(html, /hato Beauty Đà Nẵng \| Chăm sóc da, Mi Mày &amp; Tẩy lông/);
+  assert.match(html, /Hato Beauty Đà Nẵng \| Chăm sóc da, Mi Mày &amp; Tẩy lông/);
   assert.match(html, />Triệt lông</i);
   assert.match(html, />Tẩy lông</i);
   assert.match(html, /Chăm sóc da đầu &amp; Thư giãn/i);
@@ -113,9 +113,8 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.match(html, /Tẩy tế bào chết/i);
   assert.match(html, /(?:Mi &amp; Mày|Định hình chân mày &amp; Uốn mi)/i);
   assert.match(html, /Xem chi tiết/i);
-  assert.match(html, /Hãy để chúng tôi đánh thức vẻ đẹp trong bạn/i);
-  assert.match(html, /Tỏa sáng theo cách của bạn\./i);
-  assert.match(html, /Hiệu quả đến từ sự thấu hiểu/i);
+  assert.match(html, /Tỏa sáng theo cách của riêng bạn\./i);
+  assert.match(html, /Hiểu làn da trước, chăm đúng điều da cần\./i);
   assert.match(html, /Thiết bị hiện đại/i);
   assert.match(html, /Không gian thư giãn/i);
   assert.match(html, /Đội ngũ chuyên nghiệp/i);
@@ -128,18 +127,18 @@ test("server-renders the redesigned hato Beauty experience", async () => {
   assert.doesNotMatch(html, />Da body/i);
   assert.doesNotMatch(html, /Kết quả trước và sau, ngay trong từng nhóm dịch vụ/i);
   assert.doesNotMatch(html, /Giảm giá 10% ngay hôm nay/i);
-  assert.match(html, /Nhận thông tin ưu đãi của Hato hằng tháng/i);
-  assert.match(html, /Khách Việt Nam &amp; quốc tế/i);
+  assert.match(html, /Nhận thông tin ưu đãi của Hato Beauty hằng tháng/i);
+  assert.doesNotMatch(html, /Khách Việt Nam &amp; quốc tế/i);
   assert.match(html, /Nguyễn Thảo/i);
   assert.doesNotMatch(html, /Cảm ơn bạn đã tin tưởng và lựa chọn chúng tôi/i);
-  assert.match(html, /aria-label="Thông tin liên hệ hato Beauty"/i);
+  assert.match(html, /aria-label="Thông tin liên hệ Hato Beauty"/i);
   assert.match(html, /href="tel:[+]84703214868"/i);
   assert.doesNotMatch(html, /0915 860 446|[+]84915860446/i);
   assert.match(html, /href="https:\/\/zalo\.me\/0703214868"/i);
   assert.match(html, /5\.000\+ khách hàng/i);
   assert.match(html, /4\.9\/5/i);
   assert.match(html, /google\.com\/maps\/dir\/\?api=1&amp;destination=/i);
-  assert.match(html, />Tư vấn ngay</i);
+  assert.match(html, />Đặt lịch tư vấn</i);
 });
 
 test("routes English consultation actions to WhatsApp", async () => {
@@ -148,7 +147,7 @@ test("routes English consultation actions to WhatsApp", async () => {
   const html = await response.text();
   const source = await readFile(new URL("../app/HatoHome.tsx", import.meta.url), "utf8");
   assert.match(html, /href="https:\/\/wa\.me\/84703214868"/i);
-  assert.match(html, />Consult now</i);
+  assert.match(html, />Book a consultation</i);
   assert.doesNotMatch(html, /href="https:\/\/zalo\.me\/0703214868"/i);
   assert.match(source, /const lang = initialLang;/i);
   assert.doesNotMatch(source, /const \[lang\] = useState<Lang>\(initialLang\)/i);
@@ -168,9 +167,9 @@ test("renders complete contact details and social links", async () => {
   assert.match(html, /Hằng ngày · 08:30–19:30/i);
   assert.match(html, /127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn, Đà Nẵng/i);
   assert.match(html, /<iframe[^>]+google\.com\/maps/i);
-  assert.match(html, /aria-label="TikTok hato Beauty"[^>]*><span[^>]*><svg/i);
-  assert.match(html, /<h1>Liên hệ hato Beauty<[/]h1>/i);
-  assert.doesNotMatch(html, /<p class="seo-eyebrow">hato Beauty<[/]p>/i);
+  assert.match(html, /aria-label="TikTok Hato Beauty"[^>]*><span[^>]*><svg/i);
+  assert.match(html, /<h1>Liên hệ Hato Beauty<[/]h1>/i);
+  assert.doesNotMatch(html, /<p class="seo-eyebrow">Hato Beauty<[/]p>/i);
   assert.match(html, /class="contact-page-intro"/i);
   assert.match(html, /class="contact-orbit contact-orbit-one"/i);
   assert.match(html, /class="contact-lead-form"/i);
@@ -297,12 +296,12 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.match(source, /Khách Việt Nam/);
   assert.match(source, /Khách quốc tế/);
   assert.match(source, /International guest/);
-  assert.match(source, /href=\{guest\.href\[lang\]\}/i);
+  assert.match(source, /testimonialGuests/i);
   assert.match(headerSource, /hideDesktopConsultation/i);
-  assert.match(headerSource, /Tư vấn ngay/i);
+  assert.match(headerSource, /Đặt lịch tư vấn/i);
   assert.match(headerSource, /Liên hệ ngay/i);
   assert.match(seoPagesSource, /className="breadcrumbs page-breadcrumbs"/i);
-  assert.match(html, /Nhận thông tin ưu đãi của Hato hằng tháng/i);
+  assert.match(html, /Nhận thông tin ưu đãi của Hato Beauty hằng tháng/i);
   assert.doesNotMatch(seoPagesSource, />Bảng giá</i);
   assert.match(seoPagesSource, /Khoảng giá tham khảo/i);
   assert.match(seoPagesSource, /DANH MỤC DỊCH VỤ/i);
@@ -313,7 +312,7 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.match(html, /href="\/kien-thuc\/">Kiến thức</i);
   assert.match(html, /role="search"/i);
   assert.match(html, /class="announcement"/i);
-  assert.match(html, /Hãy để chúng tôi đánh thức vẻ đẹp trong bạn/i);
+  assert.match(html, /Tỏa sáng theo cách của riêng bạn/i);
   assert.match(html, /class="footer-intro"/i);
   assert.match(html, /Hẹn gặp bạn trong một ngày gần nhất/i);
   assert.doesNotMatch(html, /Góc kiến thức · 04 bài nổi bật/i);

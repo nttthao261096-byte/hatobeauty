@@ -73,13 +73,13 @@ export function SiteHeader({
   return (
     <>
     <header className="site-header inner-site-header">
-      <a className="brand" href={homeHref} aria-label="hato Beauty">
-        <Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} priority />
+      <a className="brand" href={homeHref} aria-label="Hato Beauty">
+        <Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="Hato Beauty" width={1016} height={638} priority />
       </a>
       <nav id="site-menu" className={menuOpen ? "nav is-open" : "nav"} aria-label={lang === "vi" ? "Điều hướng chính" : "Main navigation"}>
         <div className="nav-drawer-head">
-          <a className="nav-drawer-brand" href={homeHref} aria-label="hato Beauty" onClick={() => setMenuOpen(false)}>
-            <Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} />
+          <a className="nav-drawer-brand" href={homeHref} aria-label="Hato Beauty" onClick={() => setMenuOpen(false)}>
+            <Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="Hato Beauty" width={1016} height={638} />
           </a>
           <button type="button" className="nav-drawer-close" aria-label={lang === "vi" ? "Đóng menu" : "Close menu"} onClick={() => setMenuOpen(false)}>×</button>
         </div>

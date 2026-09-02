@@ -100,16 +100,16 @@ export function SeoFooter({ lang }: { lang: SeoLang }) {
     : [["/en/services/", "Services"], ["/en/care-products/", "Products"], ["/en/care-plan/", "Care plan"], ["/en/journal/", "Journal"]];
   return <footer className="site-footer inner-page-footer">
     <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />
-    <div className="footer-intro"><p>{lang === "vi" ? "hato Beauty · Không gian làm đẹp" : "hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
-    <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="hato Beauty" width={1016} height={638} /></div>
+    <div className="footer-intro"><p>{lang === "vi" ? "Hato Beauty · Không gian làm đẹp" : "Hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
+    <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="Hato Beauty" width={1016} height={638} /></div>
     <div className="footer-links"><h3>{lang === "vi" ? "Khám phá" : "Discover"}</h3>{links.map(([href, label], index) => <Link href={href} key={href}><span>0{index + 1}</span>{label}</Link>)}</div>
     <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><ContactDetails lang={lang} compact /><a href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a></div>
-    <div className="footer-bottom"><span>© 2026 hato Beauty</span><div><Link href={lang === "vi" ? "/" : "/en/"}>{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</Link><Link href={lang === "vi" ? "/chinh-sach-bien-tap/" : "/en/editorial-policy/"}>{lang === "vi" ? "Biên tập" : "Editorial"}</Link><Link href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</Link></div></div>
+    <div className="footer-bottom"><span>© 2026 Hato Beauty</span><div><Link href={lang === "vi" ? "/" : "/en/"}>{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</Link><Link href={lang === "vi" ? "/chinh-sach-bien-tap/" : "/en/editorial-policy/"}>{lang === "vi" ? "Biên tập" : "Editorial"}</Link><Link href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</Link></div></div>
   </footer>;
 }
 
 export function ServiceIndex({ lang }: { lang: SeoLang }) {
-  const title = lang === "vi" ? "Dịch vụ chăm sóc tại hato Beauty" : "Care services at hato Beauty";
+  const title = lang === "vi" ? "Dịch vụ chăm sóc tại Hato Beauty" : "Care services at Hato Beauty";
 
   return <div className="seo-page" lang={lang}><SeoHeader lang={lang} /><main className="index-page service-index-page">
     <PageBreadcrumb lang={lang} label={lang === "vi" ? "Dịch vụ" : "Services"} />
@@ -124,8 +124,8 @@ export function ServiceIndex({ lang }: { lang: SeoLang }) {
 export function KnowledgeIndex({ lang }: { lang: SeoLang }) {
   const title = lang === "vi" ? "Kiến thức để chăm sóc nhẹ nhàng và đúng lúc" : "Knowledge for gentler, better-timed care";
   const intro = lang === "vi"
-    ? "Thư viện bài viết từ đội ngũ biên tập hato Beauty, giúp bạn hiểu dịch vụ, chuẩn bị trước buổi hẹn và đặt kỳ vọng thực tế."
-    : "Editorial guides from hato Beauty to help you understand each service, prepare well and set realistic expectations.";
+    ? "Thư viện bài viết từ đội ngũ biên tập Hato Beauty, giúp bạn hiểu dịch vụ, chuẩn bị trước buổi hẹn và đặt kỳ vọng thực tế."
+    : "Editorial guides from Hato Beauty to help you understand each service, prepare well and set realistic expectations.";
 
   return <div className="seo-page" lang={lang}><SeoHeader lang={lang} /><main className="index-page knowledge-index">
     <header className="index-hero"><nav className="breadcrumbs" aria-label={lang === "vi" ? "Đường dẫn" : "Breadcrumb"}><Link href={lang === "vi" ? "/" : "/en/"}>{lang === "vi" ? "Trang chủ" : "Home"}</Link><span>/</span><span>{lang === "vi" ? "Kiến thức" : "Journal"}</span></nav><p className="seo-eyebrow">{lang === "vi" ? "THƯ VIỆN HATO" : "HATO JOURNAL"}</p><h1>{title}</h1><p>{intro}</p></header>
@@ -207,7 +207,7 @@ export function JournalLanding({ service, lang }: { service: SeoService; lang: S
     <nav className="breadcrumbs" aria-label={lang === "vi" ? "Đường dẫn" : "Breadcrumb"}><Link href={lang === "vi" ? "/" : "/en/"}>{lang === "vi" ? "Trang chủ" : "Home"}</Link><span>/</span><Link href={lang === "vi" ? "/kien-thuc/" : "/en/journal/"}>{lang === "vi" ? "Kiến thức" : "Journal"}</Link><span>/</span><span>{c.name}</span></nav>
     <div className="article-tags"><span>{c.name}</span><span>{lang === "vi" ? "Hướng dẫn thực tế" : "Practical guide"}</span></div>
     <h1>{title}</h1><p className="seo-answer">{c.answer}</p>
-    <div className="article-meta"><span className="article-avatar" aria-hidden="true">HB</span><p><strong>{lang === "vi" ? "Ban biên tập hato Beauty" : "hato Beauty editorial team"}</strong><small>{lang === "vi" ? "Chăm sóc & trải nghiệm · Cập nhật 18/08/2026 · 5 phút đọc" : "Care & experience · Updated 18 Aug 2026 · 5 min read"}</small></p></div>
+    <div className="article-meta"><span className="article-avatar" aria-hidden="true">HB</span><p><strong>{lang === "vi" ? "Ban biên tập Hato Beauty" : "Hato Beauty editorial team"}</strong><small>{lang === "vi" ? "Chăm sóc & trải nghiệm · Cập nhật 18/08/2026 · 5 phút đọc" : "Care & experience · Updated 18 Aug 2026 · 5 min read"}</small></p></div>
     <Image src={service.image} alt={c.name} width={1400} height={900} priority />
     <article className="seo-article-body">
       <p className="article-lead">{c.description}</p>
@@ -227,23 +227,23 @@ export function JournalLanding({ service, lang }: { service: SeoService; lang: S
 export function TrustPage({ lang, kind }: { lang: SeoLang; kind: "about" | "contact" | "prices" | "book" | "privacy" | "editorial" | "products" | "carePlan" }) {
   const data = {
     vi: {
-      about: ["Về hato Beauty", "hato Beauty xây dựng trải nghiệm chăm sóc dựa trên lắng nghe, thông tin rõ ràng và kỳ vọng thực tế. Năm nhóm dịch vụ gồm Chăm sóc da, Mi & Mày, Chăm sóc da đầu & Thư giãn, Triệt lông và Tẩy lông."],
-      contact: ["Liên hệ hato Beauty", "Gửi yêu cầu đặt lịch để đội ngũ liên hệ, trao đổi nhu cầu và xác nhận thông tin địa điểm, thời gian phù hợp trước buổi hẹn."],
+      about: ["Về Hato Beauty", "Hato Beauty xây dựng trải nghiệm chăm sóc dựa trên lắng nghe, thông tin rõ ràng và kỳ vọng thực tế. Năm nhóm dịch vụ gồm Chăm sóc da, Mi & Mày, Chăm sóc da đầu & Thư giãn, Triệt lông và Tẩy lông."],
+      contact: ["Liên hệ Hato Beauty", "Gửi yêu cầu đặt lịch để đội ngũ liên hệ, trao đổi nhu cầu và xác nhận thông tin địa điểm, thời gian phù hợp trước buổi hẹn."],
       prices: ["Bảng giá tham khảo", "Giá cuối cùng phụ thuộc vùng thực hiện, thời lượng và lựa chọn được xác nhận sau tư vấn. Mỗi trang dịch vụ hiển thị khoảng giá để bạn chủ động dự trù."],
       book: ["Đặt lịch tư vấn", "Chọn dịch vụ phù hợp trên trang chủ và gửi biểu mẫu. hato sẽ liên hệ để lắng nghe nhu cầu, xác nhận thời gian và các lưu ý trước buổi hẹn."],
       privacy: ["Chính sách bảo mật", "Thông tin bạn gửi qua biểu mẫu chỉ được dùng để tư vấn, xác nhận lịch và hỗ trợ liên quan đến yêu cầu của bạn. hato không công khai dữ liệu liên hệ của khách hàng."],
       editorial: ["Chính sách biên tập", "Nội dung kiến thức nhằm giúp khách hiểu dịch vụ thẩm mỹ, không thay thế tư vấn y khoa. Các tuyên bố kỹ thuật hoặc sức khỏe được diễn đạt thận trọng và dẫn nguồn khi cần."],
-      products: ["Sản phẩm chăm sóc", "hato Beauty chọn sản phẩm chăm sóc tại nhà dựa trên nhu cầu và tình trạng thực tế của từng khách. Hãy liên hệ để được gợi ý cách chăm sóc phù hợp, rõ ràng và dễ duy trì."],
+      products: ["Sản phẩm chăm sóc", "Hato Beauty chọn sản phẩm chăm sóc tại nhà dựa trên nhu cầu và tình trạng thực tế của từng khách. Hãy liên hệ để được gợi ý cách chăm sóc phù hợp, rõ ràng và dễ duy trì."],
       carePlan: ["Lộ trình chăm sóc dành riêng cho bạn", "Mỗi lộ trình tại hato bắt đầu từ việc lắng nghe và đánh giá nhu cầu, sau đó được điều chỉnh theo phản hồi thực tế của làn da, cơ thể và nhịp sống của bạn."],
     },
     en: {
-      about: ["About hato Beauty", "hato Beauty shapes care around listening, clear information and realistic expectations across Skin, Brow & Lash, Head Spa, Hair Removal and Waxing."],
-      contact: ["Contact hato Beauty", "Send a booking request so the team can discuss your needs and confirm the location and a suitable time before your visit."],
+      about: ["About Hato Beauty", "Hato Beauty shapes care around listening, clear information and realistic expectations across Skin, Brow & Lash, Head Spa, Hair Removal and Waxing."],
+      contact: ["Contact Hato Beauty", "Send a booking request so the team can discuss your needs and confirm the location and a suitable time before your visit."],
       prices: ["Guide prices", "Final pricing depends on the area, duration and options confirmed after consultation. Each service page provides a range for planning."],
       book: ["Book a consultation", "Choose a service on the home page and send the form. hato will contact you to discuss your needs, timing and preparation."],
       privacy: ["Privacy policy", "Details sent through the form are used only to discuss and confirm your appointment and support your request. hato does not publish guest contact details."],
       editorial: ["Editorial policy", "Journal content helps guests understand cosmetic care and does not replace medical advice. Technical or health claims are phrased carefully and sourced when needed."],
-      products: ["Care products", "hato Beauty recommends at-home care products around each guest’s needs and current condition. Contact us for clear, practical guidance that fits your routine."],
+      products: ["Care products", "Hato Beauty recommends at-home care products around each guest’s needs and current condition. Contact us for clear, practical guidance that fits your routine."],
       carePlan: ["A care plan shaped around you", "Every hato plan begins with listening and an assessment, then evolves around the real response of your skin, body and everyday rhythm."],
     },
   }[lang][kind];
@@ -251,9 +251,9 @@ export function TrustPage({ lang, kind }: { lang: SeoLang; kind: "about" | "cont
     ? [["01", "Lắng nghe", "Hiểu nhu cầu, thói quen và điều bạn mong muốn."], ["02", "Đánh giá", "Quan sát tình trạng hiện tại và thống nhất kỳ vọng thực tế."], ["03", "Thiết kế lộ trình", "Chọn dịch vụ, tần suất và chăm sóc tại nhà phù hợp."], ["04", "Theo dõi & điều chỉnh", "Ghi nhận phản hồi để duy trì kết quả an toàn, nhẹ nhàng."]]
     : [["01", "Listen", "Understand your needs, habits and desired outcome."], ["02", "Assess", "Review your current condition and agree realistic expectations."], ["03", "Shape the plan", "Select services, timing and practical at-home care."], ["04", "Review & refine", "Track responses and adjust for gentle, sustainable results."]];
   const visual = kind === "carePlan"
-    ? { src: "/images/feature-personalized-v2.webp", alt: lang === "vi" ? "Chuyên viên hato Beauty tư vấn lộ trình chăm sóc cá nhân" : "A hato Beauty specialist discussing a personal care plan" }
+    ? { src: "/images/feature-personalized-v2.webp", alt: lang === "vi" ? "Chuyên viên Hato Beauty tư vấn lộ trình chăm sóc cá nhân" : "A Hato Beauty specialist discussing a personal care plan" }
     : kind === "products"
-      ? { src: "/images/service-skin-v2.webp", alt: lang === "vi" ? "Sản phẩm và trải nghiệm chăm sóc tại hato Beauty" : "Care products and experience at hato Beauty" }
+      ? { src: "/images/service-skin-v2.webp", alt: lang === "vi" ? "Sản phẩm và trải nghiệm chăm sóc tại Hato Beauty" : "Care products and experience at Hato Beauty" }
       : null;
   const aboutValues = lang === "vi"
     ? [
@@ -269,7 +269,7 @@ export function TrustPage({ lang, kind }: { lang: SeoLang; kind: "about" | "cont
         ["/images/feature-team-v2.webp", "Careful listening", "The team starts with questions and adapts to your comfort."],
       ] as const;
   const consultationHref = lang === "vi" ? "https://zalo.me/0703214868" : "https://wa.me/84703214868";
-  return <div className="seo-page" lang={lang}><SeoHeader lang={lang} /><main className={`seo-trust ${kind === "book" ? "booking-page" : ""}${kind === "contact" ? " contact-page" : ""}${kind === "carePlan" ? " care-plan-page" : ""}${kind === "products" ? " products-page" : ""}${kind === "about" ? " about-page" : ""}`}><PageBreadcrumb lang={lang} label={data[0]} />{kind === "contact" ? <header className="contact-page-intro"><span className="contact-orbit contact-orbit-one" aria-hidden="true" /><span className="contact-orbit contact-orbit-two" aria-hidden="true" /><h1>{data[0]}</h1><p className="seo-answer">{data[1]}</p></header> : <><p className="seo-eyebrow">hato Beauty</p><h1>{data[0]}</h1><p className="seo-answer">{data[1]}</p></>}{visual && <div className="trust-visual"><Image src={visual.src} alt={visual.alt} fill priority sizes="(max-width: 900px) 100vw, 80vw" unoptimized /></div>}{kind === "about" && <section className="about-values" aria-label={lang === "vi" ? "Giá trị của hato Beauty" : "What hato Beauty stands for"}>{aboutValues.map(([image, title, text], index) => <article key={title}><div className="about-value-image"><Image src={image} alt={title} fill sizes="(max-width: 900px) 100vw, 25vw" unoptimized /></div><span>{String(index + 1).padStart(2, "0")}</span><h2>{title}</h2><p>{text}</p></article>)}</section>}{kind === "about" && <div className="about-actions"><a className="button primary" href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a><Link className="button ghost" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{lang === "vi" ? "Khám phá dịch vụ" : "Explore services"}<IconArrow /></Link></div>}{kind === "book" ? <BookingForm lang={lang} /> : kind === "contact" ? <><div className="contact-page-panel"><div className="contact-page-info"><ContactDetails lang={lang} /></div><ContactForm lang={lang} /></div><div className="contact-page-map"><ContactMap lang={lang} /></div></> : <>{kind === "carePlan" && <section className="care-plan-steps" aria-label={data[0]}>{planSteps.map(([number, title, text]) => <article key={number}><span>{number}</span><h2>{title}</h2><p>{text}</p></article>)}</section>}<div className="seo-related"><h2>{lang === "vi" ? "Bắt đầu từ dịch vụ phù hợp" : "Start with the right service"}</h2><div>{primarySeoServices.map(s => <Link href={servicePath(s, lang)} key={s.id}>{s[lang].name}<IconArrow /></Link>)}</div></div></>}</main><SeoFooter lang={lang} /></div>;
+  return <div className="seo-page" lang={lang}><SeoHeader lang={lang} /><main className={`seo-trust ${kind === "book" ? "booking-page" : ""}${kind === "contact" ? " contact-page" : ""}${kind === "carePlan" ? " care-plan-page" : ""}${kind === "products" ? " products-page" : ""}${kind === "about" ? " about-page" : ""}`}><PageBreadcrumb lang={lang} label={data[0]} />{kind === "contact" ? <header className="contact-page-intro"><span className="contact-orbit contact-orbit-one" aria-hidden="true" /><span className="contact-orbit contact-orbit-two" aria-hidden="true" /><h1>{data[0]}</h1><p className="seo-answer">{data[1]}</p></header> : <><p className="seo-eyebrow">Hato Beauty</p><h1>{data[0]}</h1><p className="seo-answer">{data[1]}</p></>}{visual && <div className="trust-visual"><Image src={visual.src} alt={visual.alt} fill priority sizes="(max-width: 900px) 100vw, 80vw" unoptimized /></div>}{kind === "about" && <section className="about-values" aria-label={lang === "vi" ? "Giá trị của Hato Beauty" : "What Hato Beauty stands for"}>{aboutValues.map(([image, title, text], index) => <article key={title}><div className="about-value-image"><Image src={image} alt={title} fill sizes="(max-width: 900px) 100vw, 25vw" unoptimized /></div><span>{String(index + 1).padStart(2, "0")}</span><h2>{title}</h2><p>{text}</p></article>)}</section>}{kind === "about" && <div className="about-actions"><a className="button primary" href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a><Link className="button ghost" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{lang === "vi" ? "Khám phá dịch vụ" : "Explore services"}<IconArrow /></Link></div>}{kind === "book" ? <BookingForm lang={lang} /> : kind === "contact" ? <><div className="contact-page-panel"><div className="contact-page-info"><ContactDetails lang={lang} /></div><ContactForm lang={lang} /></div><div className="contact-page-map"><ContactMap lang={lang} /></div></> : <>{kind === "carePlan" && <section className="care-plan-steps" aria-label={data[0]}>{planSteps.map(([number, title, text]) => <article key={number}><span>{number}</span><h2>{title}</h2><p>{text}</p></article>)}</section>}<div className="seo-related"><h2>{lang === "vi" ? "Bắt đầu từ dịch vụ phù hợp" : "Start with the right service"}</h2><div>{primarySeoServices.map(s => <Link href={servicePath(s, lang)} key={s.id}>{s[lang].name}<IconArrow /></Link>)}</div></div></>}</main><SeoFooter lang={lang} /></div>;
 }
 
 export function ResultsIndex({ lang, results }: { lang: SeoLang; results: ResultContent[] }) {

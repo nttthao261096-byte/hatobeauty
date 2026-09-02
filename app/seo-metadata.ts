@@ -38,7 +38,7 @@ export function createPageMetadata({
       locale: lang === "vi" ? "vi_VN" : "en_US",
       alternateLocale: lang === "vi" ? "en_US" : "vi_VN",
       url,
-      siteName: "hato Beauty",
+      siteName: "Hato Beauty",
       title,
       description,
       images: [
@@ -46,7 +46,7 @@ export function createPageMetadata({
           url: image,
           width: 1731,
           height: 909,
-          alt: "hato Beauty — Shine as you are",
+          alt: "Hato Beauty — Shine as you are",
         },
       ],
     },

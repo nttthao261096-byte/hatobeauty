@@ -4111,7 +4111,7 @@ a:hover { color: inherit; }
 
   .mobile-dock {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) max-content;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
     padding: 8px;
     overflow: hidden;
@@ -4143,7 +4143,8 @@ a:hover { color: inherit; }
     white-space: nowrap;
   }
   .mobile-dock-book {
-    padding: 0 22px;
+    width: 100%;
+    padding: 0 14px;
     font-size: 14px;
     font-weight: 650;
     white-space: nowrap;
@@ -4159,6 +4160,12 @@ a:hover { color: inherit; }
     margin: 0;
     border-radius: 0;
   }
+}
+
+.seo-trust > .page-breadcrumbs {
+  width: 100%;
+  margin: 0 0 18px;
+  padding: 0;
 }
 
 @media (max-width: 680px) {

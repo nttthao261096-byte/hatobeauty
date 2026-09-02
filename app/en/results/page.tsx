@@ -4,7 +4,7 @@ import { ResultsIndex } from "../../seo-pages";
 
 export const metadata = createPageMetadata({
   title: "Client results",
-  description: "Before-and-after care results at hato Beauty in Da Nang, shared with guest consent.",
+  description: "Before-and-after care results at Hato Beauty in Da Nang, shared with guest consent.",
   path: "/en/results/",
   viPath: "/ket-qua/",
   enPath: "/en/results/",
