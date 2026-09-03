@@ -162,13 +162,13 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
       { "@type": "FAQPage", mainEntity: faqs.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) },
     ],
   };
-  return <div className="seo-page" lang={lang}><JsonLd data={schema} /><SeoHeader lang={lang} />
+  return <div className="seo-page service-landing-page" lang={lang}><JsonLd data={schema} /><SeoHeader lang={lang} />
     <main>
       <PageBreadcrumb lang={lang} label={c.name} parent={{ href: lang === "vi" ? "/dich-vu/" : "/en/services/", label: lang === "vi" ? "Dịch vụ" : "Services" }} />
       {detailGroups.length > 0 && <section className={`service-detail-menu service-detail-menu--${service.id}`} id="service-menu">
         <header className="service-detail-menu-heading"><div className="service-detail-menu-label"><span>{serviceNumber}</span><p>{lang === "vi" ? "DANH MỤC DỊCH VỤ" : "SERVICE MENU"}</p></div><div className="service-detail-menu-summary"><h1>{c.name}</h1><p>{c.description}</p><div className="service-menu-facts"><span><small>{lang === "vi" ? "Thời gian dự kiến" : "Estimated time"}</small><strong>{duration}</strong></span><span><small>{lang === "vi" ? "Khoảng giá tham khảo" : "Guide price"}</small><strong>{price}</strong></span></div><a href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a></div></header>
-        <div className={`service-detail-groups ${detailGroups.length === 1 ? "single" : ""}`}>{detailGroups.map((group, groupIndex) => <article key={group.title}>
-          <div className="service-detail-group-title"><span>{serviceNumber}.{groupIndex + 1}</span><h3>{group.title}</h3></div>
+        <div className={`service-detail-groups ${detailGroups.length === 1 ? "single" : ""}`}>{detailGroups.map((group) => <article key={group.title}>
+          <div className="service-detail-group-title"><h3>{group.title}</h3></div>
           <ol>{group.items.map((item, itemIndex) => <li key={item}><span>{String(itemIndex + 1).padStart(2, "0")}</span><strong>{item}</strong></li>)}</ol>
         </article>)}</div>
       </section>}

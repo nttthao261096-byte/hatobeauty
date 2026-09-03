@@ -322,7 +322,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <div className="service-grid">{filteredServices.map((service) => {
           const conciseCopy = serviceCardCopy[service.id as keyof typeof serviceCardCopy]?.[lang] ?? service[lang];
           return <button type="button" className={`service-card service-card-${service.id}`} onClick={() => setSelectedServiceId(service.id)} aria-haspopup="dialog" key={service.id}>
-            <div className="service-photo"><Image src={service.image} alt={service[lang].title} fill sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" unoptimized /><span>{service.number}</span></div>
+            <div className="service-photo"><Image src={service.image} alt={service[lang].title} fill sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" unoptimized /></div>
             <div className="service-body">{service.id === "skin" && <span className="skin-signature">{lang === "vi" ? "Dịch vụ chủ đạo" : "Signature care"}</span>}<p className="service-summary">{serviceGroupLabels[lang][service.id as keyof typeof serviceGroupLabels.vi]}</p><h3>{service[lang].title}</h3><p className="service-description">{conciseCopy.description}</p><div className="service-suitable"><strong>{t.suitable}</strong><p>{conciseCopy.suitable}</p></div>{"price" in conciseCopy && <p className="service-price-line"><strong>{conciseCopy.price}</strong><span>{conciseCopy.duration}</span></p>}<span className="service-discover">{t.choose}<IconArrow /></span></div>
           </button>;
         })}{filteredServices.length === 0 && <p className="service-empty">{lang === "vi" ? "Chưa tìm thấy dịch vụ phù hợp. Hãy thử một từ khóa khác." : "No matching service yet. Try another keyword."}</p>}</div>
