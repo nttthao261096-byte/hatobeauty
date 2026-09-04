@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "./OptimizedImage";
 import Link from "next/link";
 
 import { careProducts, formatVnd, type CareLang } from "./care-catalog";
@@ -21,7 +21,7 @@ export function ProductCard({
   return (
     <article className={`product-card${compact ? " is-compact" : ""}`} id={`product-${product.id}`}>
       <div className="product-photo">
-        <Image src={product.image} alt={copy.name} fill sizes="(max-width: 720px) 50vw, 25vw" unoptimized />
+        <Image src={product.image} alt={copy.name} fill sizes="(max-width: 720px) 50vw, 25vw" />
       </div>
       <div className="product-card-copy">
         <p className="product-price">{formatVnd(product.price)}</p>

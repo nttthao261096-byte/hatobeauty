@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "./OptimizedImage";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { FormEvent, useEffect, useRef, useState } from "react";
@@ -12,6 +12,7 @@ import { ContactDetails } from "./ContactDetails";
 import { IconArrow, IconChevron } from "./icons";
 import { journalPath, mediaUrl, seoServices, servicePath } from "./seo-data";
 import { SiteHeader } from "./SiteHeader";
+import { HeroMedia } from "./HeroMedia";
 import { useMinimumBookingDate } from "./use-minimum-booking-date";
 
 function isTechHighlight(item: { image: string; vi: [string, string]; en: [string, string] }) {
@@ -154,9 +155,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
   const [bookingError, setBookingError] = useState("");
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [loadHeroSequence, setLoadHeroSequence] = useState(false);
-  const [heroSequenceReady, setHeroSequenceReady] = useState(false);
-  const heroReadyVideos = useRef(new Set<number>());
+  const reviewsRef = useRef<HTMLElement>(null);
   const dialogRef = useRef<HTMLElement>(null);
   const serviceDialogRef = useRef<HTMLElement>(null);
   const t = copy[lang];
@@ -188,20 +187,19 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
   }, [bookingOpen, selectedService]);
 
   useEffect(() => {
-    const timer = window.setInterval(() => setReviewOffset((current) => (current + 4) % testimonials.length), 5200);
-    return () => window.clearInterval(timer);
+    const element = reviewsRef.current;
+    if (!element || testimonials.length < 2 || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let timer: number | undefined;
+    let visible = false;
+    const sync = () => {
+      window.clearInterval(timer);
+      if (visible && !document.hidden) timer = window.setInterval(() => setReviewOffset((current) => (current + 4) % testimonials.length), 5200);
+    };
+    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); });
+    observer.observe(element);
+    document.addEventListener("visibilitychange", sync);
+    return () => { window.clearInterval(timer); observer.disconnect(); document.removeEventListener("visibilitychange", sync); };
   }, [testimonials.length]);
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => setLoadHeroSequence(true), 12000);
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  function markHeroVideoReady(index: number) {
-    if (index === 0) return;
-    heroReadyVideos.current.add(index);
-    if (heroReadyVideos.current.size === 3) setHeroSequenceReady(true);
-  }
 
   function openBooking(serviceId?: unknown) {
     setBookingServiceId(typeof serviceId === "string" ? serviceId : "");
@@ -273,14 +271,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       />
 
       <section className="hero" id="top">
-        <div className={`hero-media${heroSequenceReady ? " is-sequence-ready" : ""}`} aria-label={lang === "vi" ? "Chuỗi trải nghiệm chăm sóc tại Hato Beauty" : "A sequence of care experiences at Hato Beauty"}>
-          {[
-            [mediaUrl("/video/hero-head-spa.mp4"), "Gội đầu dưỡng sinh", "Head spa"],
-            [mediaUrl("/video/hero-hair-removal.mp4"), "Triệt lông", "Hair removal"],
-            [mediaUrl("/video/hero-brow-warm.mp4"), "Uốn mi & định hình mày", "Lash & brow"],
-            [mediaUrl("/video/hero-care-beige-clinic.mp4"), "Chăm sóc da", "Facial care"],
-          ].map((scene, index) => { const shouldLoad = index === 0 || loadHeroSequence; return <video className={`hero-video hero-video-${index + 1}`} autoPlay={shouldLoad} loop muted playsInline preload={index === 0 ? "auto" : "none"} poster={mediaUrl("/images/service-hair-v2.webp")} src={shouldLoad ? scene[0] : undefined} onCanPlay={() => markHeroVideoReady(index)} aria-hidden="true" key={scene[0]} />; })}
-        </div>
+        <HeroMedia lang={lang} />
         <div className="hero-overlay" />
         <div className="hero-copy">
           <p className="eyebrow hero-eyebrow">{t.heroEyebrow}</p>
@@ -290,9 +281,9 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
             <a className="button primary" href={consultationHref} target="_blank" rel="noopener noreferrer">{t.book}<IconArrow /></a>
             <a className="button ghost" href={lang === "vi" ? "/dich-vu/" : "/en/services/"}>{t.explore}<IconArrow /></a>
           </div>
-          <Link className="hero-trust" href={lang === "vi" ? "/lo-trinh/" : "/en/care-plan/"} aria-label={lang === "vi" ? "4,9 trên 5 từ hơn 5.000 khách hàng" : "4.9 out of 5 from more than 5,000 guests"}>
+          <Link className="hero-trust" href={lang === "vi" ? "/lo-trinh/" : "/en/care-plan/"} >
             <span className="hero-trust-avatars" aria-hidden="true">
-              {[0, 1, 2].map((index) => <span className={`hero-trust-avatar hero-trust-avatar-${index + 1}`} key={index}><Image src="/images/guest-trust-avatars-v1.png" alt="" fill sizes="54px" unoptimized /></span>)}
+              {[0, 1, 2].map((index) => <span className={`hero-trust-avatar hero-trust-avatar-${index + 1}`} key={index}><Image src="/images/guest-trust-avatars-v1.png" alt="" fill sizes="54px" /></span>)}
             </span>
             <span className="hero-trust-copy"><strong><span aria-hidden="true">★★★★★</span> 4.9/5</strong><small>{lang === "vi" ? "5.000+ khách hàng" : "5,000+ guests"}</small></span>
           </Link>
@@ -309,7 +300,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
             <article className="feature-copy"><span>{highlights[highlightIndex].number} / 04</span><h3>{highlights[highlightIndex][lang][0]}</h3><p>{brandText(highlights[highlightIndex][lang][1])}</p></article>
           </Link>
           <div className="feature-controls">
-            <div>{highlights.map((item, index) => <button key={item.number} className={highlightIndex === index ? "active" : ""} onClick={() => setHighlightIndex(index)} aria-label={`${lang === "vi" ? "Xem" : "View"} ${item[lang][0]}`}><span>{item.number}</span>{item[lang][0]}</button>)}</div>
+            <div>{highlights.map((item, index) => <button key={item.number} className={highlightIndex === index ? "active" : ""} onClick={() => setHighlightIndex(index)}><span>{item.number}</span>{item[lang][0]}</button>)}</div>
             <div className="feature-arrows"><button onClick={() => setHighlightIndex((highlightIndex + highlights.length - 1) % highlights.length)} aria-label={lang === "vi" ? "Slide trước" : "Previous slide"}><IconChevron direction="left" /></button><button onClick={() => setHighlightIndex((highlightIndex + 1) % highlights.length)} aria-label={lang === "vi" ? "Slide sau" : "Next slide"}><IconChevron /></button></div>
           </div>
         </div>
@@ -322,7 +313,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <div className="service-grid">{filteredServices.map((service) => {
           const conciseCopy = serviceCardCopy[service.id as keyof typeof serviceCardCopy]?.[lang] ?? service[lang];
           return <button type="button" className={`service-card service-card-${service.id}`} onClick={() => setSelectedServiceId(service.id)} aria-haspopup="dialog" key={service.id}>
-            <div className="service-photo"><Image src={service.image} alt={service[lang].title} fill sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" unoptimized /></div>
+            <div className="service-photo"><Image src={service.image} alt={service[lang].title} fill sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" /></div>
             <div className="service-body">{service.id === "skin" && <span className="skin-signature">{lang === "vi" ? "Dịch vụ chủ đạo" : "Signature care"}</span>}<p className="service-summary">{serviceGroupLabels[lang][service.id as keyof typeof serviceGroupLabels.vi]}</p><h3>{service[lang].title}</h3><p className="service-description">{conciseCopy.description}</p><div className="service-suitable"><strong>{t.suitable}</strong><p>{conciseCopy.suitable}</p></div>{"price" in conciseCopy && <p className="service-price-line"><strong>{conciseCopy.price}</strong><span>{conciseCopy.duration}</span></p>}<span className="service-discover">{t.choose}<IconArrow /></span></div>
           </button>;
         })}{filteredServices.length === 0 && <p className="service-empty">{lang === "vi" ? "Chưa tìm thấy dịch vụ phù hợp. Hãy thử một từ khóa khác." : "No matching service yet. Try another keyword."}</p>}</div>
@@ -365,7 +356,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <p className="knowledge-more"><Link className="button primary" href={lang === "vi" ? "/kien-thuc/" : "/en/journal/"}>{lang === "vi" ? "Xem tất cả bài viết" : "View all articles"}<IconArrow /></Link></p>
       </section>
 
-      <section className="testimonials section" id="testimonials">
+      <section ref={reviewsRef} className="testimonials section" id="testimonials">
         <div className="testimonial-heading"><div><h2>{lang === "vi" ? "Những điều khách hàng nhớ về Hato Beauty." : "What guests remember about Hato Beauty."}</h2></div><div className="review-heading-side"><p>{lang === "vi" ? "Những chia sẻ chân thành về không gian, đội ngũ và trải nghiệm chăm sóc tại Hato Beauty." : "Honest notes about the space, the team and the complete Hato Beauty experience."}</p><div className="review-controls"><button onClick={() => setReviewOffset((reviewOffset - 4 + testimonials.length) % testimonials.length)} aria-label={lang === "vi" ? "Nhóm đánh giá trước" : "Previous review group"}><IconChevron direction="left" /></button><button onClick={() => setReviewOffset((reviewOffset + 4) % testimonials.length)} aria-label={lang === "vi" ? "Nhóm đánh giá tiếp theo" : "Next review group"}><IconChevron /></button></div></div></div>
         <div className="review-grid" aria-live="polite">
           {Array.from({ length: 4 }, (_, column) => testimonials[(reviewOffset + column) % testimonials.length]).map((review, index) => {
@@ -392,7 +383,7 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
       <footer className="site-footer">
         <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />
         <div className="footer-intro"><p>{lang === "vi" ? "Hato Beauty · Không gian làm đẹp" : "Hato Beauty · Beauty Studio"}</p><h2>{lang === "vi" ? "Hẹn gặp bạn trong một ngày gần nhất." : "We hope to see you very soon."}</h2></div>
-        <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="Hato Beauty" width={1016} height={638} /></div>
+        <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="Hato Beauty" width={1016} height={638} sizes="(max-width: 760px) 132px, 180px" /></div>
         <div className="footer-links"><h3>{lang === "vi" ? "Khám phá" : "Discover"}</h3>{navItems.slice(0, 4).map(([href, label], index) => <a href={href} key={href}><span>0{index + 1}</span>{label}</a>)}</div>
         <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><ContactDetails lang={lang} compact /><a className="footer-consultation-link" href={consultationHref} target="_blank" rel="noopener noreferrer">{t.book}<IconArrow /></a></div>
         <div className="footer-bottom"><span>© 2026 Hato Beauty</span><div><a href="#top">{lang === "vi" ? "Về đầu trang" : "Back to top"} ↑</a><a href={lang === "vi" ? "/chinh-sach-bien-tap/" : "/en/editorial-policy/"}>{lang === "vi" ? "Biên tập" : "Editorial"}</a><a href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "Bảo mật" : "Privacy"}</a></div></div>

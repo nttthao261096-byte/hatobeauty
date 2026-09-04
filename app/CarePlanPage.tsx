@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "./OptimizedImage";
 import Link from "next/link";
 
 import {
@@ -55,7 +55,7 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
             </ul>
           </div>
           <div className="plan-hero-media">
-            <Image src="/images/lifestyle-skin-assess-v1.jpg" alt={lang === "vi" ? "Soi da tại Hato Beauty" : "Skin check at Hato Beauty"} fill sizes="(max-width: 900px) 100vw, 48vw" unoptimized />
+            <Image priority src="/images/lifestyle-skin-assess-v1.jpg" alt={lang === "vi" ? "Soi da tại Hato Beauty" : "Skin check at Hato Beauty"} fill sizes="(max-width: 900px) 100vw, 48vw" />
           </div>
         </section>
 
@@ -87,7 +87,7 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
             {skinJourneys.map((journey) => (
               <article className="plan-journey-card" key={journey.id} id={`journey-${journey.id}`}>
                 <div className="plan-journey-photo">
-                  <Image src={journey.image} alt={journey[lang].name} fill sizes="(max-width: 900px) 100vw, 50vw" unoptimized />
+                  <Image src={journey.image} alt={journey[lang].name} fill sizes="(max-width: 900px) 100vw, 50vw" />
                 </div>
                 <div className="plan-journey-copy">
                   <h3>{journey[lang].name}</h3>
@@ -106,7 +106,7 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
                       if (!item) return null;
                       return (
                         <li key={id}>
-                          <Image src={item.image} alt="" width={56} height={70} unoptimized />
+                          <Image src={item.image} alt="" width={56} height={70} />
                           <span>
                             <b>{item[lang].name}</b>
                             <small>{item.size} · {item.when[lang]} · {formatVnd(item.price)}</small>
@@ -148,7 +148,7 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
               return (
                 <article className="plan-combo-card" key={combo.id}>
                   <div className="plan-combo-photo">
-                    <Image src={combo.image} alt={combo[lang].name} fill sizes="(max-width: 900px) 100vw, 33vw" unoptimized />
+                    <Image src={combo.image} alt={combo[lang].name} fill sizes="(max-width: 900px) 100vw, 33vw" />
                   </div>
                   <h3>{combo[lang].name}</h3>
                   <p className="product-price">{formatVnd(setPrice)}</p>

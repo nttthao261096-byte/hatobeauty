@@ -13,3 +13,8 @@
 /hato-beauty-*.png
 /1785489271646_5520658941331250930_5520658941331250930_h.jpg
 /logo.png
+
+/.codex-release/
+/.tools/
+/dev-server.log
+/.codex-dev*.log

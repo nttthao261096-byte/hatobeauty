@@ -3,11 +3,12 @@ import { Be_Vietnam_Pro, Cormorant_Garamond, Lora } from "next/font/google";
 import Script from "next/script";
 import { LanguageSync } from "./LanguageSync";
 import { mediaUrl } from "./seo-data";
+import { imageVariant } from "./image-variants";
 import "./globals.css";
 
-const bodyFont = Be_Vietnam_Pro({ subsets: ["latin", "vietnamese"], weight: ["300", "400", "500", "600"], variable: "--font-body", display: "swap" });
-const brandFont = Cormorant_Garamond({ subsets: ["latin", "vietnamese"], weight: ["400", "500", "600"], variable: "--font-brand", display: "swap" });
-const displayFont = Lora({ subsets: ["latin", "vietnamese"], weight: ["400", "500"], variable: "--font-display", display: "swap" });
+const bodyFont = Be_Vietnam_Pro({ subsets: ["latin", "vietnamese"], weight: ["300", "400", "500", "600"], variable: "--font-body", display: "swap", preload: false });
+const brandFont = Cormorant_Garamond({ subsets: ["latin", "vietnamese"], variable: "--font-brand", display: "swap", preload: false });
+const displayFont = Lora({ subsets: ["latin", "vietnamese"], variable: "--font-display", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hatobeauty.com"),
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   },
   description: "Chăm sóc da, Mi & Mày, Chăm sóc da đầu & Thư giãn, Triệt lông và Tẩy lông tại Hato Beauty Đà Nẵng.",
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
-  icons: { icon: mediaUrl("/brand/hato-logo-transparent-v3.png"), shortcut: mediaUrl("/brand/hato-logo-transparent-v3.png") },
+  icons: { icon: imageVariant({ src: "/brand/hato-logo-transparent-v3.png", width: 96 }), shortcut: imageVariant({ src: "/brand/hato-logo-transparent-v3.png", width: 96 }) },
   openGraph: {
     type: "website",
     locale: "vi_VN",

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" source("./");
 
 @theme {
   --color-blue-50: #F3EBE2; --color-blue-100: #E8D9CC; --color-blue-200: #C4A484; --color-blue-300: #A98467; --color-blue-400: #8A5E49; --color-blue-500: #6B4A3B; --color-blue-600: #5C3D32; --color-blue-700: #5C3D32; --color-blue-800: #3F2A22; --color-blue-900: #3F2A22; --color-blue-950: #3F2A22;
@@ -4967,3 +4967,10 @@ a:hover { color: inherit; }
   .service-landing-page .service-care-card { padding: 30px 26px; }
   .service-landing-page .service-care-note h2 { font-size: clamp(32px, 9vw, 42px); }
 }
+
+/* Stable first paint, with one video decoded only after interaction. */
+.hero-media-optimized .hero-poster { object-fit: cover; object-position: 48% center; filter: saturate(.94) contrast(.98) brightness(1.03); }
+.hero-media.hero-media-optimized .hero-video { display: block; animation: none; opacity: 1; transform: none; }
+.hero-playback { position: absolute; right: 20px; bottom: 18px; z-index: 4; min-height: 44px; padding: 8px 14px; border: 1px solid rgba(255,255,255,.6); border-radius: 24px; background: #3f2a22; color: #fff9f4; font: 500 12px var(--body); cursor: pointer; }
+
+@media (max-width: 760px) { .hero-playback { top: 16px; bottom: auto; right: 16px; } }

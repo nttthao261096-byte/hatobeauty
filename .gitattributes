@@ -13,3 +13,6 @@ public/video/hero-head-spa.mp4 -filter -diff -merge -text
 public/video/hero-hair-removal.mp4 -filter -diff -merge -text
 public/video/hero-brow-warm.mp4 -filter -diff -merge -text
 public/video/hero-care-beige-clinic.mp4 -filter -diff -merge -text
+
+public/media/** -filter -diff -merge -text
+public/images/** -filter -diff -merge -text

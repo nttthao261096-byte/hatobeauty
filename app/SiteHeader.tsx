@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "./OptimizedImage";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
@@ -74,12 +74,12 @@ export function SiteHeader({
     <>
     <header className="site-header inner-site-header">
       <a className="brand" href={homeHref} aria-label="Hato Beauty">
-        <Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="Hato Beauty" width={1016} height={638} priority />
+        <Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="Hato Beauty" width={1016} height={638} sizes="(max-width: 760px) 132px, 180px" priority />
       </a>
       <nav id="site-menu" className={menuOpen ? "nav is-open" : "nav"} aria-label={lang === "vi" ? "Điều hướng chính" : "Main navigation"}>
         <div className="nav-drawer-head">
           <a className="nav-drawer-brand" href={homeHref} aria-label="Hato Beauty" onClick={() => setMenuOpen(false)}>
-            <Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="Hato Beauty" width={1016} height={638} />
+            <Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="Hato Beauty" width={192} height={121} sizes="(max-width: 760px) 132px, 180px" />
           </a>
           <button type="button" className="nav-drawer-close" aria-label={lang === "vi" ? "Đóng menu" : "Close menu"} onClick={() => setMenuOpen(false)}>×</button>
         </div>

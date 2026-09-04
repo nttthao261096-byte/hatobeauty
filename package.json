@@ -7,10 +7,12 @@
   },
   "scripts": {
     "dev": "vinext dev",
-    "build": "vinext build",
+    "build": "node scripts/optimize-images.mjs && vinext build",
     "start": "node scripts/start-local.mjs",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern .codex-release --ignore-pattern build"
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern .codex-release --ignore-pattern build",
+    "images:optimize": "node scripts/optimize-images.mjs",
+    "build:vercel": "node scripts/optimize-images.mjs && next build"
   },
   "dependencies": {
     "next": "16.2.6",
@@ -29,6 +31,7 @@
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
     "react-server-dom-webpack": "19.2.6",
+    "sharp": "0.34.5",
     "tailwindcss": "4.2.1",
     "typescript": "5.9.3",
     "vinext": "0.0.50",
