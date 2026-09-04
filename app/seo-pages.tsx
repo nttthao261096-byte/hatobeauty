@@ -1,3 +1,4 @@
+import { articlePath, loadPublishedArticles } from "./journal-content";
 import Image from "./OptimizedImage";
 import Link from "next/link";
 
@@ -121,7 +122,8 @@ export function ServiceIndex({ lang }: { lang: SeoLang }) {
   </main><SeoFooter lang={lang} /></div>;
 }
 
-export function KnowledgeIndex({ lang }: { lang: SeoLang }) {
+export async function KnowledgeIndex({ lang }: { lang: SeoLang }) {
+  const published = await loadPublishedArticles();
   const title = lang === "vi" ? "Kiến thức để chăm sóc nhẹ nhàng và đúng lúc" : "Knowledge for gentler, better-timed care";
   const intro = lang === "vi"
     ? "Thư viện bài viết từ đội ngũ biên tập Hato Beauty, giúp bạn hiểu dịch vụ, chuẩn bị trước buổi hẹn và đặt kỳ vọng thực tế."
@@ -129,7 +131,7 @@ export function KnowledgeIndex({ lang }: { lang: SeoLang }) {
 
   return <div className="seo-page" lang={lang}><SeoHeader lang={lang} /><main className="index-page knowledge-index">
     <header className="index-hero"><nav className="breadcrumbs" aria-label={lang === "vi" ? "Đường dẫn" : "Breadcrumb"}><Link href={lang === "vi" ? "/" : "/en/"}>{lang === "vi" ? "Trang chủ" : "Home"}</Link><span>/</span><span>{lang === "vi" ? "Kiến thức" : "Journal"}</span></nav><p className="seo-eyebrow">{lang === "vi" ? "THƯ VIỆN HATO" : "HATO JOURNAL"}</p><h1>{title}</h1><p>{intro}</p></header>
-    <section className="index-grid knowledge-index-grid" aria-label={title}>{journalTopics.map((topic, index) => {
+    <section className="index-grid knowledge-index-grid" aria-label={title}>{published.map(article => <Link className="index-card journal-index-card" href={articlePath(article,lang)} key={article.id}><div className="index-card-copy"><small>{article[`reading_time_${lang}`]}</small><h2>{article[`title_${lang}`]}</h2><p>{article[`excerpt_${lang}`]}</p><strong>{lang==="vi"?"Đọc bài viết":"Read article"} <IconArrow/></strong></div></Link>)}{journalTopics.map((topic, index) => {
       const service = topic.service;
       const articleTitle = lang === "vi" ? `${service.vi.name}: hướng dẫn chuẩn bị và chăm sóc` : `${service.en.name}: preparation and aftercare guide`;
       return <Link className="index-card journal-index-card" href={journalPath(service, lang)} key={topic.id}>

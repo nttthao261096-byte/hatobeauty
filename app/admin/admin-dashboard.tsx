@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ArticleAiPanel } from "./article-ai-panel";
 import { FormEvent, useCallback, useMemo, useState } from "react";
 
 type Row = Record<string, unknown> & { id: number };
@@ -20,7 +21,7 @@ const statusLabels: Record<string, string> = {
   pending: "Chờ xử lý", confirmed: "Đã xác nhận", completed: "Hoàn thành", cancelled: "Đã hủy",
 };
 
-const blankArticle = { display_number: "", image_path: "", title_vi: "", title_en: "", slug_vi: "", slug_en: "", excerpt_vi: "", excerpt_en: "", content_vi: "", content_en: "", reading_time_vi: "3 phút đọc", reading_time_en: "3 min read", sort_order: 1, is_published: true };
+const blankArticle = { display_number: "", image_path: "", title_vi: "", title_en: "", slug_vi: "", slug_en: "", excerpt_vi: "", excerpt_en: "", content_vi: "", content_en: "", reading_time_vi: "3 phút đọc", reading_time_en: "3 min read", sort_order: 1, is_published: false };
 const blankCustomer = { full_name: "", phone: "", email: "", status: "potential", notes: "", last_contacted_at: "" };
 const blankContact = { full_name: "", phone: "", email: "", subject: "", message: "", status: "new", source: "manual" };
 
@@ -121,6 +122,9 @@ function ResourcePanel({ resource, rows, onCreate, onEdit, onDelete, onStatus }:
 
 function Editor({ editor, onClose, onSaved }: { editor: { resource: Exclude<Resource, "bookings">; row: Record<string, unknown> }; onClose: () => void; onSaved: () => void }) {
   const [pending, setPending] = useState(false); const [error, setError] = useState("");
+  const [articleRow, setArticleRow] = useState(editor.row);
+  const [generation, setGeneration] = useState(0);
+  const [aiBusy, setAiBusy] = useState(false);
   const isEdit = Boolean(editor.row.id);
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); setPending(true); setError("");
@@ -134,8 +138,8 @@ function Editor({ editor, onClose, onSaved }: { editor: { resource: Exclude<Reso
     onSaved();
   }
   return <div className="admin-modal-backdrop" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="admin-modal" role="dialog" aria-modal="true" aria-labelledby="editor-title"><div className="admin-modal-head"><div><p className="admin-eyebrow">{isEdit ? "Chỉnh sửa" : "Tạo mới"}</p><h2 id="editor-title">{resourceLabels[editor.resource]}</h2></div><button aria-label="Đóng" onClick={onClose}>×</button></div><form className="admin-editor-form" onSubmit={submit}>
-    {editor.resource === "articles" && <ArticleFields row={editor.row} />}{editor.resource === "customers" && <CustomerFields row={editor.row} />}{editor.resource === "contacts" && <ContactFields row={editor.row} />}
-    {error && <p className="admin-alert" role="alert">{error}</p>}<div className="admin-form-actions"><button type="button" onClick={onClose}>Hủy</button><button className="admin-primary-button" disabled={pending}>{pending ? "Đang lưu…" : "Lưu thay đổi"}</button></div>
+    {editor.resource === "articles" && <>{!isEdit && <ArticleAiPanel onBusy={setAiBusy} onGenerated={(draft) => { setArticleRow(draft); setGeneration(x => x + 1); }} />}<fieldset className="admin-article-fields" disabled={aiBusy}><ArticleFields key={generation} row={articleRow} /></fieldset></>}{editor.resource === "customers" && <CustomerFields row={editor.row} />}{editor.resource === "contacts" && <ContactFields row={editor.row} />}
+    {error && <p className="admin-alert" role="alert">{error}</p>}<div className="admin-form-actions"><button type="button" onClick={onClose}>Hủy</button><button className="admin-primary-button" disabled={pending || aiBusy}>{pending ? "Đang lưu…" : "Lưu thay đổi"}</button></div>
   </form></section></div>;
 }
 

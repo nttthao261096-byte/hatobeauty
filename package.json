@@ -12,7 +12,8 @@
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern .codex-release --ignore-pattern build",
     "images:optimize": "node scripts/optimize-images.mjs",
-    "build:vercel": "node scripts/optimize-images.mjs && next build"
+    "build:vercel": "node scripts/optimize-images.mjs && next build",
+    "test:articles": "npm run build:vercel && node --experimental-strip-types --test tests/article-ai.test.mjs tests/article-workflow.test.mjs"
   },
   "dependencies": {
     "next": "16.2.6",

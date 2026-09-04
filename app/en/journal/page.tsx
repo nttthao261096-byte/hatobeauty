@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { createPageMetadata } from "../../seo-metadata";
 import { KnowledgeIndex } from "../../seo-pages";
 
