@@ -12,6 +12,8 @@ export const fixture = {
     "Câu trả lời trực tiếp.\n\n## Chăm sóc da\n- Làm sạch nhẹ\n- Dưỡng ẩm\n\n## Câu hỏi thường gặp\n### Khi nào cần tư vấn?\nKhi da khó chịu.",
   content_en:
     "A direct answer.\n\n## Skin care\n- Cleanse gently\n- Moisturise\n\n## FAQ\n### When to seek advice?\nWhen skin feels uncomfortable.",
+  tags_vi: "chăm sóc da, phục hồi da",
+  tags_en: "skin care, skin recovery",
 };
 export async function startTestServer(port = 3041) {
   const rows = [];

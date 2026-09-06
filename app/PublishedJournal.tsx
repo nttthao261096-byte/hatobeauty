@@ -5,6 +5,7 @@ import { ArticleMarkdown } from "./ArticleMarkdown";
 import { articlePath, type PublishedArticle } from "./journal-content";
 import { SeoFooter, SeoHeader } from "./seo-pages";
 import { siteUrl, type SeoLang } from "./seo-data";
+import { parseTags } from "./admin/_lib/seo-checklist";
 function cover(article: PublishedArticle) {
   return /^\/(?!\/)/.test(article.image_path) &&
     !article.image_path.includes("\\")
@@ -54,7 +55,8 @@ export function PublishedJournal({
 }) {
   const title = article[`title_${lang}`],
     path = articlePath(article, lang),
-    index = lang === "vi" ? "/kien-thuc/" : "/en/journal/";
+    index = lang === "vi" ? "/kien-thuc/" : "/en/journal/",
+    tags = parseTags(article[`tags_${lang}`]);
   const schema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -106,6 +108,7 @@ export function PublishedJournal({
           />
         </div>
         <ArticleMarkdown content={article[`content_${lang}`]} />
+        {tags.length > 0 && <div className="article-tags" aria-label={lang === "vi" ? "Chủ đề bài viết" : "Article topics"}>{tags.map((tag) => <span key={tag}>{tag}</span>)}</div>}
         <div className="article-next">
           <Link href={index}>
             {lang === "vi" ? "Xem tất cả bài viết" : "View all articles"}

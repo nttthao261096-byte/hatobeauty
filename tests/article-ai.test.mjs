@@ -16,6 +16,8 @@ const draft = {
   excerpt_en: "Description",
   content_vi: "Trả lời.\n\n## Chăm sóc\nNội dung.",
   content_en: "Answer.\n\n## Care\nContent.",
+  tags_vi: "chăm sóc da, da khỏe",
+  tags_en: "skin care, healthy skin",
 };
 test("input rejects invalid payloads and bounds editorial notes", () => {
   for (const x of [

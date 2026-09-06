@@ -3,7 +3,7 @@ import { adminRest, getAdminSession, isSameOrigin } from "../../../../admin/_lib
 
 type Resource = "articles" | "customers" | "contacts" | "bookings";
 const resources: Record<Resource, { table: string; fields: string[]; deletable: boolean }> = {
-  articles: { table: "journal_articles", deletable: true, fields: ["display_number", "image_path", "title_vi", "title_en", "slug_vi", "slug_en", "excerpt_vi", "excerpt_en", "content_vi", "content_en", "reading_time_vi", "reading_time_en", "sort_order", "is_published"] },
+  articles: { table: "journal_articles", deletable: true, fields: ["display_number", "image_path", "title_vi", "title_en", "slug_vi", "slug_en", "excerpt_vi", "excerpt_en", "content_vi", "content_en", "tags_vi", "tags_en", "reading_time_vi", "reading_time_en", "sort_order", "is_published"] },
   customers: { table: "customers", deletable: true, fields: ["full_name", "phone", "email", "status", "notes", "last_contacted_at"] },
   contacts: { table: "contact_requests", deletable: true, fields: ["full_name", "phone", "email", "subject", "message", "status", "source"] },
   bookings: { table: "booking_requests", deletable: false, fields: ["status"] },

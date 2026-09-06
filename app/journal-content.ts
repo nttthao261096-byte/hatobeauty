@@ -10,6 +10,8 @@ export type PublishedArticle = {
   excerpt_en: string;
   content_vi: string;
   content_en: string;
+  tags_vi: string;
+  tags_en: string;
   image_path: string;
   reading_time_vi: string;
   reading_time_en: string;
@@ -28,7 +30,7 @@ export const loadPublishedArticles = cache(
     if (!base || !key) return [];
     const query = new URLSearchParams({
       select:
-        "id,title_vi,title_en,slug_vi,slug_en,excerpt_vi,excerpt_en,content_vi,content_en,image_path,reading_time_vi,reading_time_en,created_at,updated_at,is_published",
+        "id,title_vi,title_en,slug_vi,slug_en,excerpt_vi,excerpt_en,content_vi,content_en,tags_vi,tags_en,image_path,reading_time_vi,reading_time_en,created_at,updated_at,is_published",
       is_published: "eq.true",
       order: "sort_order.asc",
       limit: "1000",

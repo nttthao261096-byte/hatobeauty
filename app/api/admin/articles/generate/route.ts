@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     }));
     const draft = await callArticleAI(
       input,
-      { brand: "Hato Beauty", city: "Đà Nẵng", services },
+      { brand: "Hato Beauty", city: "Đà Nẵng", services, booking: { vi: "/dat-lich/", en: "/en/book/" } },
       request.signal,
     );
     for (const lang of ["vi", "en"] as const)

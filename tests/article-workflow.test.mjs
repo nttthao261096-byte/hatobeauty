@@ -46,7 +46,7 @@ test("authenticated generation, draft isolation, publishing, metadata, sitemap a
     assert.equal(generated.status, 200);
     const { data } = await generated.json();
     assert.equal(data.is_published, false);
-    assert.equal(Object.keys(data).length, 14);
+    assert.equal(Object.keys(data).length, 16);
     assert.equal(data.title_vi, fixture.title_vi);
     const saved = await request("/api/admin/articles", data);
     assert.equal(saved.status, 201);

@@ -8,7 +8,7 @@ const resources: Record<Resource, { table: string; order: string; creatable: boo
     table: "journal_articles",
     order: "sort_order.asc",
     creatable: true,
-    fields: ["display_number", "image_path", "title_vi", "title_en", "slug_vi", "slug_en", "excerpt_vi", "excerpt_en", "content_vi", "content_en", "reading_time_vi", "reading_time_en", "sort_order", "is_published"],
+    fields: ["display_number", "image_path", "title_vi", "title_en", "slug_vi", "slug_en", "excerpt_vi", "excerpt_en", "content_vi", "content_en", "tags_vi", "tags_en", "reading_time_vi", "reading_time_en", "sort_order", "is_published"],
   },
   customers: {
     table: "customers",
