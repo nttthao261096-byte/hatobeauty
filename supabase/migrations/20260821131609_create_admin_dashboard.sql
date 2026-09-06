@@ -110,4 +110,4 @@ grant usage, select on all sequences in schema public to service_role;
 
 comment on table public.admin_users is 'Server-side allowlist for the Hato Beauty admin dashboard.';
 comment on table public.customers is 'Customer relationship records; accessible only through authenticated server APIs.';
-comment on table public.contact_requests is 'Website and manual contact requests; accessible only through authenticated server APIs.';
+comment on table public.contact_requests is 'Website and manual contact requests; accessible only through authenticated server APIs.';;
