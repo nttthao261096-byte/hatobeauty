@@ -30,7 +30,6 @@ const copy = {
     announcement: "Soi da khi đặt liệu trình · 08:30–19:30 · 127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn",
     book: "Đặt lịch soi da",
     nav: ["Về Hato Beauty", "Dịch vụ", "Trải nghiệm", "Kết quả", "Cảm nhận"],
-    heroEyebrow: "Hato Beauty · Đà Nẵng",
     heroTitle: "Tỏa sáng là chính bạn.",
     heroText: "Bắt đầu bằng bước soi da để hiểu làn da đang cần gì. Từ đó, Hato Beauty cùng bạn chọn dịch vụ và cách chăm sóc tại nhà phù hợp, nhẹ nhàng và dễ duy trì.",
     explore: "Khám phá dịch vụ",
@@ -62,7 +61,6 @@ const copy = {
     announcement: "Skin check with treatment · 08:30–19:30 · 127 Chau Thi Vinh Te, Ngu Hanh Son",
     book: "Book a skin check",
     nav: ["About us", "Services", "Experience", "Results", "Reviews"],
-    heroEyebrow: "Hato Beauty · Da Nang",
     heroTitle: "Shine as you are.",
     heroText: "Begin with a skin check to understand what your skin needs. Hato Beauty then helps you choose suitable services and a gentle, practical home-care routine.",
     explore: "Explore services", learn: "Discover us",
@@ -274,7 +272,6 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <HeroMedia lang={lang} />
         <div className="hero-overlay" />
         <div className="hero-copy">
-          <p className="eyebrow hero-eyebrow">{t.heroEyebrow}</p>
           <h1>{t.heroTitle}</h1>
           <p className="hero-lead">{t.heroText}</p>
           <div className="hero-actions">

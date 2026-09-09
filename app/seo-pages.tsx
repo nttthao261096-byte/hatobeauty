@@ -168,7 +168,7 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
     <main>
       <PageBreadcrumb lang={lang} label={c.name} parent={{ href: lang === "vi" ? "/dich-vu/" : "/en/services/", label: lang === "vi" ? "Dịch vụ" : "Services" }} />
       {detailGroups.length > 0 && <section className={`service-detail-menu service-detail-menu--${service.id}`} id="service-menu">
-        <header className="service-detail-menu-heading"><div className="service-detail-menu-label"><span>{serviceNumber}</span><p>{lang === "vi" ? "DANH MỤC DỊCH VỤ" : "SERVICE MENU"}</p></div><div className="service-detail-menu-summary"><h1>{c.name}</h1><p>{c.description}</p><div className="service-menu-facts"><span><small>{lang === "vi" ? "Thời gian dự kiến" : "Estimated time"}</small><strong>{duration}</strong></span><span><small>{lang === "vi" ? "Khoảng giá tham khảo" : "Guide price"}</small><strong>{price}</strong></span></div><a href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a></div></header>
+        <header className="service-detail-menu-heading"><div className="service-detail-menu-label"><span>{serviceNumber}</span><p>{lang === "vi" ? "DANH MỤC DỊCH VỤ" : "SERVICE MENU"}</p></div><div className="service-detail-menu-summary"><p className="service-intro-kicker">{lang === "vi" ? "Chọn đúng chăm sóc cho nhu cầu hiện tại" : "Choose care for what you need now"}</p><h1>{c.name}</h1><p>{c.description}</p><div className="service-assurance" aria-label={lang === "vi" ? "Cam kết tư vấn" : "Consultation principles"}><span>{lang === "vi" ? "Rõ nhu cầu" : "Clear needs"}</span><span>{lang === "vi" ? "Rõ chi phí" : "Clear pricing"}</span><span>{lang === "vi" ? "Rõ kỳ vọng" : "Clear expectations"}</span></div><div className="service-menu-actions"><div className="service-menu-facts"><span><small>{lang === "vi" ? "Thời gian dự kiến" : "Estimated time"}</small><strong>{duration}</strong></span><span><small>{lang === "vi" ? "Khoảng giá tham khảo" : "Guide price"}</small><strong>{price}</strong></span></div><a href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a></div></div></header>
         <div className={`service-detail-groups ${detailGroups.length === 1 ? "single" : ""}`}>{detailGroups.map((group) => <article key={group.title}>
           <div className="service-detail-group-title"><h3>{group.title}</h3></div>
           <ol>{group.items.map((item, itemIndex) => <li key={item}><span>{String(itemIndex + 1).padStart(2, "0")}</span><strong>{item}</strong></li>)}</ol>
@@ -196,7 +196,7 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
         <aside className="service-care-card service-care-note"><span>04</span><h2>{lang === "vi" ? "Lưu ý nhẹ nhàng" : "A gentle safety note"}</h2><p>{c.caution}</p></aside>
       </section>
       <section className="seo-faq"><p className="seo-eyebrow">FAQ</p><h2>{lang === "vi" ? "Câu hỏi thường gặp" : "Frequently asked questions"}</h2>{faqs.map(([q, a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
-      <section className="seo-related"><h2>{lang === "vi" ? "Khám phá thêm" : "Explore more"}</h2><div>{primarySeoServices.filter(x => x.id !== service.id).map(x => <Link href={servicePath(x, lang)} key={x.id}>{x[lang].name}<IconArrow /></Link>)}</div><p><Link href={journalPath(service, lang)}>{lang === "vi" ? "Đọc kiến thức liên quan" : "Read the related care guide"} →</Link> · <Link href={pairedPath} hrefLang={lang === "vi" ? "en" : "vi-VN"}>{lang === "vi" ? "Read in English" : "Đọc tiếng Việt"}</Link></p></section>
+      <section className="seo-related service-related"><header><p className="seo-eyebrow">{lang === "vi" ? "CHĂM SÓC THEO NHU CẦU" : "CARE BY NEED"}</p><h2>{lang === "vi" ? "Khám phá thêm" : "Explore more"}</h2><p>{lang === "vi" ? "Chọn một nhóm dịch vụ gần với điều bạn đang quan tâm. Mỗi trang đều có thời gian, mức giá và lưu ý rõ ràng trước khi đặt lịch." : "Choose the service group closest to your current concern. Each page explains timing, guide pricing and what to know before booking."}</p></header><div>{primarySeoServices.filter(x => x.id !== service.id).map((x, index) => <Link href={servicePath(x, lang)} key={x.id}><span><small>{String(index + 1).padStart(2, "0")}</small>{x[lang].name}</span><IconArrow /></Link>)}</div><p className="service-related-footer"><Link href={journalPath(service, lang)}>{lang === "vi" ? "Đọc hướng dẫn chăm sóc liên quan" : "Read the related care guide"}<IconArrow /></Link><Link href={pairedPath} hrefLang={lang === "vi" ? "en" : "vi-VN"}>{lang === "vi" ? "Read in English" : "Đọc tiếng Việt"}</Link></p></section>
     </main><SeoFooter lang={lang} /></div>;
 }
 
@@ -279,7 +279,17 @@ export function ResultsIndex({ lang, results }: { lang: SeoLang; results: Result
   const intro = lang === "vi"
     ? "Hình ảnh trước và sau được chia sẻ với sự đồng ý của khách. Kết quả thực tế phụ thuộc vào tình trạng ban đầu và liệu trình riêng."
     : "Before-and-after images shared with guest consent. Individual results vary with starting point and personal care plan.";
-  const serviceLinks = [seoServices[0], seoServices[3], seoServices[2]] as const;
+  const resultGuides = lang === "vi"
+    ? [
+        { title: "Da trông tươi và đủ ẩm hơn", summary: "Điều dễ nhận thấy là bề mặt da mềm, căng khỏe và bắt sáng tự nhiên hơn — không phải cảm giác trắng bật tông thiếu thực tế.", label: "Khách hàng thường quan tâm", detail: "Da bớt khô căng, lớp nền nhìn mượt hơn và cảm giác dễ chịu được duy trì khi chăm sóc tại nhà đúng cách." },
+        { title: "Đường nét gọn nhưng vẫn là bạn", summary: "Dáng mày và độ cong của mi được điều chỉnh theo gương mặt, giúp tổng thể sáng và có thần hơn mà không tạo cảm giác quá sắc.", label: "Khách hàng thường quan tâm", detail: "Ít thời gian chỉnh sửa mỗi sáng, đường nét cân đối hơn và kết quả vẫn hài hòa với sợi tự nhiên." },
+        { title: "Làn da cơ thể mềm và sáng khỏe", summary: "Bề mặt da được làm sạch nhẹ nhàng và bổ sung độ ẩm, vì vậy nhìn mịn màng, đều màu và có sức sống hơn sau chăm sóc.", label: "Khách hàng thường quan tâm", detail: "Vùng da khô ráp trở nên dễ chịu hơn; độ mịn và vẻ rạng rỡ phụ thuộc tình trạng da cùng thói quen dưỡng tại nhà." },
+      ]
+    : [
+        { title: "Fresher, comfortably hydrated skin", summary: "The most visible change is a softer, naturally luminous surface — not an unrealistic overnight transformation.", label: "What guests care about", detail: "Less tightness, smoother-looking makeup and comfort that lasts longer with suitable home care." },
+        { title: "Defined features that still feel like you", summary: "Brow shape and lash lift are balanced to the face, creating a brighter look without making the features feel overly sharp.", label: "What guests care about", detail: "Less styling time in the morning, more balanced definition and a result that works with your natural hair." },
+        { title: "Softer, healthier-looking body skin", summary: "Gentle surface cleansing and hydration help the skin look smoother, more even and visibly refreshed after care.", label: "What guests care about", detail: "Dry texture can feel more comfortable; smoothness and radiance still depend on your skin and home routine." },
+      ];
 
   return <div className="seo-page results-page" lang={lang}><SeoHeader lang={lang} /><main className="index-page">
     <header className="index-hero">
@@ -290,11 +300,11 @@ export function ResultsIndex({ lang, results }: { lang: SeoLang; results: Result
     </header>
     <section className="result-grid" aria-label={title}>
       {results.map((result, index) => {
-        const service = serviceLinks[index] ?? seoServices[0];
-        return <Link href={servicePath(service, lang)} key={result.vi[0]}>
+        const guide = resultGuides[index] ?? { title: result[lang][0], summary: result[lang][1], label: lang === "vi" ? "Kết quả có thể quan sát" : "What you may notice", detail: lang === "vi" ? "Kết quả thực tế được trao đổi theo tình trạng ban đầu và cách chăm sóc phù hợp với từng người." : "Your expected result is discussed around your starting point and suitable individual care." };
+        return <article className="result-story-card" key={result.vi[0]}>
           <div className="result-image"><Image src={result.image} alt={result[lang][0]} fill sizes="(max-width: 720px) 100vw, 33vw" /><div className="comparison-labels"><span>{lang === "vi" ? "Trước" : "Before"}</span><span>{lang === "vi" ? "Sau" : "After"}</span></div></div>
-          <div className="result-copy"><h3>{result[lang][0]}</h3><p>{result[lang][1]}</p><span className="result-link-label">{lang === "vi" ? "Xem dịch vụ" : "View service"} <IconArrow /></span></div>
-        </Link>;
+          <div className="result-copy"><h3>{guide.title}</h3><p>{guide.summary}</p><div className="result-expectation"><span>{guide.label}</span><p>{guide.detail}</p></div></div>
+        </article>;
       })}
     </section>
   </main><SeoFooter lang={lang} /></div>;
