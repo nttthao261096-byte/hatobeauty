@@ -22,10 +22,6 @@ const facts: Record<SeoService["id"], { vi: [string, string]; en: [string, strin
 
 type ServiceDetailGroup = { title: string; items: string[] };
 
-const serviceNumbers: Partial<Record<SeoService["id"], string>> = {
-  skin: "01", "brow-lash": "02", scalp: "03", "hair-removal": "04", waxing: "05",
-};
-
 const serviceCardTaglines: Partial<Record<SeoService["id"], Record<SeoLang, string>>> = {
   skin: { vi: "Chăm sóc da mặt và cơ thể với liệu trình làm sạch, phục hồi theo nhu cầu riêng.", en: "Face and body care with cleansing and recovery tailored to individual needs." },
   "brow-lash": { vi: "Uốn, nhuộm và định hình mi mày hài hòa, giúp đường nét gương mặt tự nhiên hơn.", en: "Lifting, tinting and shaping for naturally balanced lashes, brows and facial features." },
@@ -114,10 +110,10 @@ export function ServiceIndex({ lang }: { lang: SeoLang }) {
 
   return <div className="seo-page" lang={lang}><SeoHeader lang={lang} /><main className="index-page service-index-page">
     <PageBreadcrumb lang={lang} label={lang === "vi" ? "Dịch vụ" : "Services"} />
-    <header className="service-index-compact-intro"><div><p>{lang === "vi" ? <>DỊCH VỤ <span className="compact-hato-kicker">hato</span></> : <>SERVICES BY <span className="compact-hato-kicker">hato</span></>}</p><h1>{lang === "vi" ? <>Chăm sóc tại <span className="hato-heading-word">hato</span> Beauty</> : <>Care at <span className="hato-heading-word">hato</span> Beauty</>}</h1></div><p><span>{lang === "vi" ? "05 nhóm dịch vụ" : "05 service groups"}</span>{lang === "vi" ? "Chạm vào từng khung để xem chi tiết." : "Select a card to view the details."}<i aria-hidden="true">↓</i></p></header>
-    <section className="index-grid service-index-grid" aria-label={title}>{primarySeoServices.map((service, index) => <Link className={`index-card index-card--${service.id}`} href={`${servicePath(service, lang)}#service-menu`} key={service.id}>
+    <header className="service-index-compact-intro"><div className="service-index-heading"><p>{lang === "vi" ? "CHĂM SÓC CÁ NHÂN" : "PERSONAL CARE"}</p><h1>{lang === "vi" ? "Dịch vụ tại Hato Beauty" : "Services at Hato Beauty"}</h1></div><div className="service-index-welcome"><p>{lang === "vi" ? "Năm nhóm dịch vụ được lựa chọn theo nhu cầu riêng, giúp bạn thư giãn và chăm sóc vẻ đẹp tự nhiên." : "Five care groups selected around your needs, helping you relax and care for your natural beauty."}</p><a href="#service-collections">{lang === "vi" ? "Khám phá dịch vụ" : "Explore services"}<IconArrow /></a></div></header>
+    <section className="index-grid service-index-grid" id="service-collections" aria-label={title}>{primarySeoServices.map((service, index) => <Link className={`index-card index-card--${service.id}`} href={`${servicePath(service, lang)}#service-menu`} key={service.id}>
       <div className="index-card-image"><Image src={service.image} alt={service[lang].name} fill priority={index === 0} sizes="(max-width: 760px) 100vw, 50vw" /></div>
-      <div className="index-card-copy"><span>{String(index + 1).padStart(2, "0")}{index === 0 && <small>{lang === "vi" ? "Đặc biệt" : "Signature"}</small>}</span><div className="service-card-title"><h2>{service[lang].name}</h2><p>{serviceCardTaglines[service.id]?.[lang]}</p></div></div>
+      <div className="index-card-copy">{index === 0 && <span className="service-card-badge">{lang === "vi" ? "Đặc biệt" : "Signature"}</span>}<div className="service-card-title"><h2>{service[lang].name}</h2><p>{serviceCardTaglines[service.id]?.[lang]}</p></div></div>
     </Link>)}</section>
   </main><SeoFooter lang={lang} /></div>;
 }
@@ -146,7 +142,6 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
   const c = service[lang];
   const [price, duration] = facts[service.id][lang];
   const detailGroups = serviceDetailMenus[service.id]?.[lang] ?? [];
-  const serviceNumber = serviceNumbers[service.id];
   const resultGallery = serviceResultGalleries[service.id];
   const path = servicePath(service, lang);
   const pairedPath = servicePath(service, lang === "vi" ? "en" : "vi");
@@ -164,11 +159,11 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
       { "@type": "FAQPage", mainEntity: faqs.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) },
     ],
   };
-  return <div className="seo-page service-landing-page" lang={lang}><JsonLd data={schema} /><SeoHeader lang={lang} />
+  return <div className={`seo-page service-landing-page service-landing-page--${service.id}`} lang={lang}><JsonLd data={schema} /><SeoHeader lang={lang} />
     <main>
       <PageBreadcrumb lang={lang} label={c.name} parent={{ href: lang === "vi" ? "/dich-vu/" : "/en/services/", label: lang === "vi" ? "Dịch vụ" : "Services" }} />
       {detailGroups.length > 0 && <section className={`service-detail-menu service-detail-menu--${service.id}`} id="service-menu">
-        <header className="service-detail-menu-heading"><div className="service-detail-menu-label"><span>{serviceNumber}</span><p>{lang === "vi" ? "DANH MỤC DỊCH VỤ" : "SERVICE MENU"}</p></div><div className="service-detail-menu-summary"><p className="service-intro-kicker">{lang === "vi" ? "Chọn đúng chăm sóc cho nhu cầu hiện tại" : "Choose care for what you need now"}</p><h1>{c.name}</h1><p>{c.description}</p><div className="service-assurance" aria-label={lang === "vi" ? "Cam kết tư vấn" : "Consultation principles"}><span>{lang === "vi" ? "Rõ nhu cầu" : "Clear needs"}</span><span>{lang === "vi" ? "Rõ chi phí" : "Clear pricing"}</span><span>{lang === "vi" ? "Rõ kỳ vọng" : "Clear expectations"}</span></div><div className="service-menu-actions"><div className="service-menu-facts"><span><small>{lang === "vi" ? "Thời gian dự kiến" : "Estimated time"}</small><strong>{duration}</strong></span><span><small>{lang === "vi" ? "Khoảng giá tham khảo" : "Guide price"}</small><strong>{price}</strong></span></div><a href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a></div></div></header>
+        <header className="service-detail-menu-heading"><div className="service-detail-menu-label"><Image src={service.image} alt={c.name} fill priority sizes="(max-width: 900px) 100vw, 32vw" /><p>{lang === "vi" ? "DANH MỤC DỊCH VỤ" : "SERVICE MENU"}</p></div><div className="service-detail-menu-summary"><p className="service-intro-kicker">{lang === "vi" ? "Chọn đúng chăm sóc cho nhu cầu hiện tại" : "Choose care for what you need now"}</p><h1>{c.name}</h1><p>{c.description}</p><div className="service-assurance" aria-label={lang === "vi" ? "Cam kết tư vấn" : "Consultation principles"}><span>{lang === "vi" ? "Rõ nhu cầu" : "Clear needs"}</span><span>{lang === "vi" ? "Rõ chi phí" : "Clear pricing"}</span><span>{lang === "vi" ? "Rõ kỳ vọng" : "Clear expectations"}</span></div><div className="service-menu-actions"><div className="service-menu-facts"><span><small>{lang === "vi" ? "Thời gian dự kiến" : "Estimated time"}</small><strong>{duration}</strong></span><span><small>{lang === "vi" ? "Khoảng giá tham khảo" : "Guide price"}</small><strong>{price}</strong></span></div><a href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a></div></div></header>
         <div className={`service-detail-groups ${detailGroups.length === 1 ? "single" : ""}`}>{detailGroups.map((group) => <article key={group.title}>
           <div className="service-detail-group-title"><h3>{group.title}</h3></div>
           <ol>{group.items.map((item, itemIndex) => <li key={item}><span>{String(itemIndex + 1).padStart(2, "0")}</span><strong>{item}</strong></li>)}</ol>
@@ -177,17 +172,15 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
       {resultGallery && <section className="service-result-gallery" aria-labelledby={`service-results-${service.id}`}>
         <header><div><p className="seo-eyebrow">{lang === "vi" ? "TRƯỚC & SAU" : "BEFORE & AFTER"}</p><h2 id={`service-results-${service.id}`}>{resultGallery[lang][0]}</h2></div><p>{resultGallery[lang][1]} {lang === "vi" ? "Hình ảnh minh hoạ; kết quả thực tế thay đổi theo tình trạng và lộ trình riêng." : "Illustrative imagery; individual results vary by condition and care plan."}</p></header>
         <div className="service-result-cards">{(lang === "vi" ? resultGallery.viExamples : resultGallery.enExamples).map(([title, caption], index) => <article className="service-result-card" key={title}>
-          <div className={`service-result-card-image service-result-crop-${index + 1}`}><Image src={resultGallery.image} alt={title} fill sizes="(max-width: 760px) 82vw, 30vw" /><div className="service-result-legend"><span>{lang === "vi" ? "Trước" : "Before"}</span><span>{lang === "vi" ? "Sau" : "After"}</span></div></div>
+          <div className={`service-result-card-image service-result-crop-${index + 1}`}><Image src={resultGallery.image} alt={title} fill sizes="(max-width: 760px) 246vw, 90vw" /><div className="service-result-legend"><span>{lang === "vi" ? "Trước" : "Before"}</span><span>{lang === "vi" ? "Sau" : "After"}</span></div></div>
           <div className="service-result-card-copy"><h3>{title}</h3><p>{caption}</p></div>
         </article>)}</div>
       </section>}
       <section className="seo-content service-answer-panel" aria-labelledby="service-answer-title">
-        <p className="seo-eyebrow">{lang === "vi" ? "CÂU TRẢ LỜI NHANH" : "QUICK ANSWER"}</p>
-        {detailGroups.length === 0
+        <div className="service-answer-heading"><p className="seo-eyebrow">{lang === "vi" ? "LẮNG NGHE NHU CẦU" : "LISTEN TO YOUR NEEDS"}</p>{detailGroups.length === 0
           ? <h1 id="service-answer-title">{lang === "vi" ? `${c.name} phù hợp khi nào?` : `When is ${c.name} a good fit?`}</h1>
-          : <h2 id="service-answer-title">{lang === "vi" ? `${c.name} phù hợp khi nào?` : `When is ${c.name} a good fit?`}</h2>}
-        <p className="seo-answer">{c.answer}</p>
-        <p>{c.expectations}</p>
+          : <h2 id="service-answer-title">{lang === "vi" ? `${c.name} phù hợp khi nào?` : `When is ${c.name} a good fit?`}</h2>}</div>
+        <div className="service-answer-copy"><p className="seo-answer">{c.answer}</p><p>{c.expectations}</p></div>
       </section>
       <section className="seo-content service-care-grid">
         <article className="service-care-card"><span>01</span><h2>{lang === "vi" ? "Phù hợp với bạn khi" : "A good fit when"}</h2><p>{c.suitable}</p></article>
@@ -195,7 +188,7 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
         <article className="service-care-card"><span>03</span><h2>{lang === "vi" ? "Sau buổi chăm sóc" : "Aftercare"}</h2><ul>{c.aftercare.map(x => <li key={x}>{x}</li>)}</ul></article>
         <aside className="service-care-card service-care-note"><span>04</span><h2>{lang === "vi" ? "Lưu ý nhẹ nhàng" : "A gentle safety note"}</h2><p>{c.caution}</p></aside>
       </section>
-      <section className="seo-faq"><p className="seo-eyebrow">FAQ</p><h2>{lang === "vi" ? "Câu hỏi thường gặp" : "Frequently asked questions"}</h2>{faqs.map(([q, a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
+      <section className="seo-faq"><h2>{lang === "vi" ? "Câu hỏi thường gặp" : "Frequently asked questions"}</h2>{faqs.map(([q, a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
       <section className="seo-related service-related"><header><p className="seo-eyebrow">{lang === "vi" ? "CHĂM SÓC THEO NHU CẦU" : "CARE BY NEED"}</p><h2>{lang === "vi" ? "Khám phá thêm" : "Explore more"}</h2><p>{lang === "vi" ? "Chọn một nhóm dịch vụ gần với điều bạn đang quan tâm. Mỗi trang đều có thời gian, mức giá và lưu ý rõ ràng trước khi đặt lịch." : "Choose the service group closest to your current concern. Each page explains timing, guide pricing and what to know before booking."}</p></header><div>{primarySeoServices.filter(x => x.id !== service.id).map((x, index) => <Link href={servicePath(x, lang)} key={x.id}><span><small>{String(index + 1).padStart(2, "0")}</small>{x[lang].name}</span><IconArrow /></Link>)}</div><p className="service-related-footer"><Link href={journalPath(service, lang)}>{lang === "vi" ? "Đọc hướng dẫn chăm sóc liên quan" : "Read the related care guide"}<IconArrow /></Link><Link href={pairedPath} hrefLang={lang === "vi" ? "en" : "vi-VN"}>{lang === "vi" ? "Read in English" : "Đọc tiếng Việt"}</Link></p></section>
     </main><SeoFooter lang={lang} /></div>;
 }
