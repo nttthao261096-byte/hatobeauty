@@ -18,12 +18,14 @@ export function ProductCard({
 }) {
   const copy = product[lang];
   const consult = lang === "vi" ? zalo : wa;
+  const provenance = "brand" in product ? `${product.brand} · ${product.origin}` : null;
   return (
-    <article className={`product-card${compact ? " is-compact" : ""}`} id={`product-${product.id}`}>
+    <article className={`product-card product-card--${product.id}${compact ? " is-compact" : ""}`} id={`product-${product.id}`}>
       <div className="product-photo">
         <Image src={product.image} alt={copy.name} fill sizes="(max-width: 720px) 50vw, 25vw" />
       </div>
       <div className="product-card-copy">
+        {provenance && <p className="product-brand">{provenance}</p>}
         <p className="product-price">{formatVnd(product.price)}</p>
         <h3>{copy.name}</h3>
         <p className="product-use">{copy.use}</p>
