@@ -5798,3 +5798,282 @@ a:hover { color: inherit; }
   background: rgba(255, 248, 241, .08);
 }
 .service-landing-page--skin .service-related > div a:hover { background: rgba(255, 248, 241, .15); }
+
+/* Mi & May: a softer editorial composition inspired by shell, rosewood and cocoa. */
+.service-landing-page--brow-lash {
+  --service-ink: #40302d;
+  --service-cocoa: #57403b;
+  --service-terracotta: #80635c;
+  --service-coral: #aa8a80;
+  --service-blush: #eadbd5;
+  --service-sand: #d9c6be;
+  --service-ivory: #fff9f5;
+  background: #f1e7e2;
+}
+.service-landing-page--brow-lash .inner-site-header { background: rgba(250, 246, 243, .96); }
+.service-landing-page--brow-lash .service-detail-menu {
+  border-color: rgba(87, 64, 59, .12);
+  background: #f9f1ed;
+}
+.service-landing-page--brow-lash .service-detail-menu-heading {
+  grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr);
+}
+.service-landing-page--brow-lash .service-detail-menu-label {
+  order: 2;
+  border-radius: 76px 26px 76px 26px;
+  background: #674c45;
+}
+.service-landing-page--brow-lash .service-detail-menu-summary { order: 1; }
+.service-landing-page--brow-lash .service-detail-menu-summary h1 { max-width: 9ch; }
+.service-landing-page--brow-lash .service-detail-group-title,
+.service-landing-page--brow-lash .service-detail-groups > article:nth-child(2) .service-detail-group-title {
+  background: #72564f;
+}
+.service-landing-page--brow-lash .service-detail-groups > article:nth-child(2) .service-detail-group-title { background: #9a776d; }
+.service-landing-page--brow-lash .service-result-gallery { background: #e5d5cf; }
+.service-landing-page--brow-lash .service-result-cards > article:nth-child(2) { transform: translateY(22px); }
+.service-landing-page--brow-lash .service-answer-panel { background: #59413c; }
+.service-landing-page--brow-lash .service-answer-heading { order: 2; }
+.service-landing-page--brow-lash .service-answer-copy {
+  order: 1;
+  padding-right: clamp(28px, 4vw, 56px);
+  padding-left: 0;
+  border-right: 1px solid rgba(255, 255, 255, .22);
+  border-left: 0;
+}
+.service-landing-page--brow-lash .service-care-grid .service-care-card:nth-child(1) { background: #fff9f5; }
+.service-landing-page--brow-lash .service-care-grid .service-care-card:nth-child(2) { background: #f0e1dc; }
+.service-landing-page--brow-lash .service-care-grid .service-care-card:nth-child(3) { background: #e4d0c9; }
+.service-landing-page--brow-lash .service-care-grid .service-care-card:nth-child(4) {
+  border-left: 4px solid #7b5d55;
+  background: #d6bdb4;
+}
+.service-landing-page--brow-lash .seo-related { background: #80635b; }
+
+@media (max-width: 900px) {
+  .service-landing-page--brow-lash .service-detail-menu-label,
+  .service-landing-page--brow-lash .service-detail-menu-summary,
+  .service-landing-page--brow-lash .service-answer-heading,
+  .service-landing-page--brow-lash .service-answer-copy { order: initial; }
+  .service-landing-page--brow-lash .service-answer-copy {
+    padding: 28px 0 0;
+    border-top: 1px solid rgba(255, 255, 255, .22);
+    border-right: 0;
+  }
+  .service-landing-page--brow-lash .service-result-cards > article:nth-child(2) { transform: none; }
+}
+
+@media (max-width: 600px) {
+  .service-landing-page--brow-lash .service-detail-menu-label { border-radius: 42px 20px 42px 20px; }
+}
+
+/* Head spa: calm oat and mushroom tones with a slower, horizontal rhythm. */
+.service-landing-page--scalp {
+  --service-ink: #3f352e;
+  --service-cocoa: #51473e;
+  --service-terracotta: #73675b;
+  --service-coral: #9a8d7e;
+  --service-blush: #e4ddd3;
+  --service-sand: #d5ccbe;
+  --service-ivory: #fdfaf5;
+  background: #ede8df;
+}
+.service-landing-page--scalp .inner-site-header { background: rgba(248, 246, 240, .96); }
+.service-landing-page--scalp .service-detail-menu {
+  border-color: rgba(81, 71, 62, .12);
+  background: #f7f3ec;
+}
+.service-landing-page--scalp .service-detail-menu-heading {
+  grid-template-columns: minmax(340px, 1.14fr) minmax(0, .86fr);
+}
+.service-landing-page--scalp .service-detail-menu-label {
+  border-radius: 28px 96px 28px 96px;
+  background: #62584c;
+}
+.service-landing-page--scalp .service-detail-menu-summary h1 {
+  max-width: 10ch;
+  font-size: clamp(48px, 5vw, 78px);
+}
+.service-landing-page--scalp .service-detail-groups.single > article {
+  display: grid;
+  grid-template-columns: minmax(250px, .42fr) minmax(0, 1fr);
+}
+.service-landing-page--scalp .service-detail-groups.single .service-detail-group-title {
+  min-height: 100%;
+  background: #645a4f;
+}
+.service-landing-page--scalp .service-detail-groups.single ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: center;
+  gap: 5px 12px;
+}
+.service-landing-page--scalp .service-result-gallery { background: #dcd5c9; }
+.service-landing-page--scalp .service-answer-panel {
+  border-color: rgba(81, 71, 62, .13);
+  background: #ddd5c8;
+  box-shadow: 0 20px 54px rgba(66, 56, 47, .1);
+}
+.service-landing-page--scalp .service-answer-panel .seo-eyebrow { color: #6f6257; }
+.service-landing-page--scalp .service-answer-panel h1,
+.service-landing-page--scalp .service-answer-panel h2 { color: #3f352e; }
+.service-landing-page--scalp .service-answer-panel .service-answer-copy { border-left-color: rgba(63, 53, 46, .2); }
+.service-landing-page--scalp .service-answer-panel .service-answer-copy > p,
+.service-landing-page--scalp .service-answer-panel .service-answer-copy > .seo-answer { color: #574b42; }
+.service-landing-page--scalp .service-care-grid .service-care-card:nth-child(1) { background: #fdfaf5; }
+.service-landing-page--scalp .service-care-grid .service-care-card:nth-child(2) { background: #eee8df; }
+.service-landing-page--scalp .service-care-grid .service-care-card:nth-child(3) { background: #dfd7ca; }
+.service-landing-page--scalp .service-care-grid .service-care-card:nth-child(4) {
+  border-left: 4px solid #71665a;
+  background: #cec3b4;
+}
+.service-landing-page--scalp .seo-related { background: #685d51; }
+
+/* Technology hair removal: a cleaner grid with restrained taupe contrast. */
+.service-landing-page--hair-removal {
+  --service-ink: #3e302b;
+  --service-cocoa: #4d3b35;
+  --service-terracotta: #735e55;
+  --service-coral: #9d887d;
+  --service-blush: #e5d9d2;
+  --service-sand: #d4c5bc;
+  --service-ivory: #fffaf6;
+  background: #f0e8e2;
+}
+.service-landing-page--hair-removal .inner-site-header { background: rgba(249, 246, 243, .96); }
+.service-landing-page--hair-removal .service-detail-menu {
+  border-color: rgba(77, 59, 53, .12);
+  background: #f8f2ee;
+}
+.service-landing-page--hair-removal .service-detail-menu-heading {
+  grid-template-columns: minmax(0, 1.16fr) minmax(290px, .84fr);
+}
+.service-landing-page--hair-removal .service-detail-menu-label {
+  order: 2;
+  min-height: 420px;
+  border-radius: 30px;
+  background: #59463f;
+}
+.service-landing-page--hair-removal .service-detail-menu-summary { order: 1; }
+.service-landing-page--hair-removal .service-detail-groups.single .service-detail-group-title { background: #5f4a43; }
+.service-landing-page--hair-removal .service-detail-groups.single ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 20px;
+}
+.service-landing-page--hair-removal .service-detail-groups.single li {
+  min-height: 112px;
+  margin: 0;
+  padding: 18px;
+  align-content: center;
+  border-radius: 20px;
+  background: #f8f1ec;
+}
+.service-landing-page--hair-removal .service-result-gallery { background: #ddd0c8; }
+.service-landing-page--hair-removal .service-result-card { border-radius: 24px; }
+.service-landing-page--hair-removal .service-answer-panel { background: #463631; }
+.service-landing-page--hair-removal .service-care-grid .service-care-card:nth-child(1) { background: #fffaf6; }
+.service-landing-page--hair-removal .service-care-grid .service-care-card:nth-child(2) { background: #ede1da; }
+.service-landing-page--hair-removal .service-care-grid .service-care-card:nth-child(3) { background: #dfcfc6; }
+.service-landing-page--hair-removal .service-care-grid .service-care-card:nth-child(4) {
+  border-left: 4px solid #685149;
+  background: #cdb8ad;
+}
+.service-landing-page--hair-removal .seo-related { background: #67534b; }
+
+/* Waxing: warm almond surfaces with rounded, tactile framing. */
+.service-landing-page--waxing {
+  --service-ink: #413128;
+  --service-cocoa: #563f33;
+  --service-terracotta: #7b604f;
+  --service-coral: #aa8a73;
+  --service-blush: #eadccf;
+  --service-sand: #d9c5b4;
+  --service-ivory: #fffaf4;
+  background: #f4ece4;
+}
+.service-landing-page--waxing .inner-site-header { background: rgba(250, 247, 243, .96); }
+.service-landing-page--waxing .service-detail-menu {
+  border-color: rgba(86, 63, 51, .12);
+  background: #faf3ec;
+}
+.service-landing-page--waxing .service-detail-menu-heading {
+  grid-template-columns: minmax(310px, .82fr) minmax(0, 1.18fr);
+}
+.service-landing-page--waxing .service-detail-menu-label {
+  border-radius: 112px 28px 112px 28px;
+  background: #6b5142;
+}
+.service-landing-page--waxing .service-detail-groups.single > article {
+  max-width: 1080px;
+  margin-inline: auto;
+}
+.service-landing-page--waxing .service-detail-groups.single .service-detail-group-title { background: #765a49; }
+.service-landing-page--waxing .service-detail-groups.single ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 20px;
+}
+.service-landing-page--waxing .service-detail-groups.single li {
+  min-height: 96px;
+  margin: 0;
+  padding: 18px;
+  border-radius: 22px;
+}
+.service-landing-page--waxing .service-result-gallery { background: #e7d6c7; }
+.service-landing-page--waxing .service-result-cards > article:nth-child(1),
+.service-landing-page--waxing .service-result-cards > article:nth-child(3) { transform: translateY(18px); }
+.service-landing-page--waxing .service-answer-panel {
+  border-color: rgba(86, 63, 51, .14);
+  background: #d7bfaa;
+  box-shadow: 0 20px 54px rgba(75, 52, 40, .11);
+}
+.service-landing-page--waxing .service-answer-panel .seo-eyebrow { color: #6f5142; }
+.service-landing-page--waxing .service-answer-panel h1,
+.service-landing-page--waxing .service-answer-panel h2 { color: #413128; }
+.service-landing-page--waxing .service-answer-panel .service-answer-copy { border-left-color: rgba(65, 49, 40, .2); }
+.service-landing-page--waxing .service-answer-panel .service-answer-copy > p,
+.service-landing-page--waxing .service-answer-panel .service-answer-copy > .seo-answer { color: #594236; }
+.service-landing-page--waxing .service-care-grid .service-care-card:nth-child(1) { background: #fffaf4; }
+.service-landing-page--waxing .service-care-grid .service-care-card:nth-child(2) { background: #f0e2d5; }
+.service-landing-page--waxing .service-care-grid .service-care-card:nth-child(3) { background: #e4d0bd; }
+.service-landing-page--waxing .service-care-grid .service-care-card:nth-child(4) {
+  border-left: 4px solid #765a49;
+  background: #d2b69f;
+}
+.service-landing-page--waxing .seo-related { background: #806350; }
+
+/* Shared readability and responsive resets for the four service variations. */
+.service-landing-page--brow-lash .service-care-card p,
+.service-landing-page--brow-lash .service-care-card li,
+.service-landing-page--scalp .service-care-card p,
+.service-landing-page--scalp .service-care-card li,
+.service-landing-page--hair-removal .service-care-card p,
+.service-landing-page--hair-removal .service-care-card li,
+.service-landing-page--waxing .service-care-card p,
+.service-landing-page--waxing .service-care-card li { font-size: 16px; line-height: 1.72; }
+
+@media (max-width: 900px) {
+  .service-landing-page--scalp .service-detail-groups.single > article { display: block; }
+  .service-landing-page--scalp .service-detail-groups.single .service-detail-group-title { min-height: 96px; }
+  .service-landing-page--hair-removal .service-detail-menu-label,
+  .service-landing-page--hair-removal .service-detail-menu-summary { order: initial; }
+  .service-landing-page--hair-removal .service-detail-menu-label { min-height: 0; }
+}
+
+@media (max-width: 760px) {
+  .service-landing-page--scalp .service-detail-groups.single ol,
+  .service-landing-page--hair-removal .service-detail-groups.single ol,
+  .service-landing-page--waxing .service-detail-groups.single ol { grid-template-columns: 1fr; }
+  .service-landing-page--hair-removal .service-detail-groups.single li,
+  .service-landing-page--waxing .service-detail-groups.single li { min-height: 64px; }
+  .service-landing-page--waxing .service-result-cards > article:nth-child(1),
+  .service-landing-page--waxing .service-result-cards > article:nth-child(3) { transform: none; }
+}
+
+@media (max-width: 600px) {
+  .service-landing-page--scalp .service-detail-menu-label { border-radius: 24px 54px 24px 54px; }
+  .service-landing-page--waxing .service-detail-menu-label { border-radius: 58px 22px 58px 22px; }
+}

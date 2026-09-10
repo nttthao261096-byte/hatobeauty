@@ -22,6 +22,27 @@ const facts: Record<SeoService["id"], { vi: [string, string]; en: [string, strin
 
 type ServiceDetailGroup = { title: string; items: string[] };
 
+type ServiceExperienceCopy = { introKicker: string; answerKicker: string };
+
+const serviceExperienceCopy: Partial<Record<SeoService["id"], Record<SeoLang, ServiceExperienceCopy>>> = {
+  "brow-lash": {
+    vi: { introKicker: "Tôn đường nét tự nhiên", answerKicker: "Cân đối theo gương mặt" },
+    en: { introKicker: "Natural definition", answerKicker: "Balanced for your features" },
+  },
+  scalp: {
+    vi: { introKicker: "Thả lỏng từ da đầu", answerKicker: "Một khoảng nghỉ nhẹ nhàng" },
+    en: { introKicker: "Unwind from the scalp", answerKicker: "A gentler pause" },
+  },
+  "hair-removal": {
+    vi: { introKicker: "Lộ trình theo từng vùng", answerKicker: "Đều đặn và rõ ràng" },
+    en: { introKicker: "A plan for each area", answerKicker: "Consistent and considered" },
+  },
+  waxing: {
+    vi: { introKicker: "Nhanh gọn theo vùng", answerKicker: "Êm dịu cho bề mặt da" },
+    en: { introKicker: "Efficient area care", answerKicker: "A softer skin finish" },
+  },
+};
+
 const serviceCardTaglines: Partial<Record<SeoService["id"], Record<SeoLang, string>>> = {
   skin: { vi: "Chăm sóc da mặt và cơ thể với liệu trình làm sạch, phục hồi theo nhu cầu riêng.", en: "Face and body care with cleansing and recovery tailored to individual needs." },
   "brow-lash": { vi: "Uốn, nhuộm và định hình mi mày hài hòa, giúp đường nét gương mặt tự nhiên hơn.", en: "Lifting, tinting and shaping for naturally balanced lashes, brows and facial features." },
@@ -143,6 +164,7 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
   const [price, duration] = facts[service.id][lang];
   const detailGroups = serviceDetailMenus[service.id]?.[lang] ?? [];
   const resultGallery = serviceResultGalleries[service.id];
+  const experienceCopy = serviceExperienceCopy[service.id]?.[lang];
   const path = servicePath(service, lang);
   const pairedPath = servicePath(service, lang === "vi" ? "en" : "vi");
   const consultationHref = lang === "vi" ? "https://zalo.me/0703214868" : "https://wa.me/84703214868";
@@ -163,7 +185,7 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
     <main>
       <PageBreadcrumb lang={lang} label={c.name} parent={{ href: lang === "vi" ? "/dich-vu/" : "/en/services/", label: lang === "vi" ? "Dịch vụ" : "Services" }} />
       {detailGroups.length > 0 && <section className={`service-detail-menu service-detail-menu--${service.id}`} id="service-menu">
-        <header className="service-detail-menu-heading"><div className="service-detail-menu-label"><Image src={service.image} alt={c.name} fill priority sizes="(max-width: 900px) 100vw, 32vw" /><p>{lang === "vi" ? "DANH MỤC DỊCH VỤ" : "SERVICE MENU"}</p></div><div className="service-detail-menu-summary"><p className="service-intro-kicker">{lang === "vi" ? "Chọn đúng chăm sóc cho nhu cầu hiện tại" : "Choose care for what you need now"}</p><h1>{c.name}</h1><p>{c.description}</p><div className="service-assurance" aria-label={lang === "vi" ? "Cam kết tư vấn" : "Consultation principles"}><span>{lang === "vi" ? "Rõ nhu cầu" : "Clear needs"}</span><span>{lang === "vi" ? "Rõ chi phí" : "Clear pricing"}</span><span>{lang === "vi" ? "Rõ kỳ vọng" : "Clear expectations"}</span></div><div className="service-menu-actions"><div className="service-menu-facts"><span><small>{lang === "vi" ? "Thời gian dự kiến" : "Estimated time"}</small><strong>{duration}</strong></span><span><small>{lang === "vi" ? "Khoảng giá tham khảo" : "Guide price"}</small><strong>{price}</strong></span></div><a href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a></div></div></header>
+        <header className="service-detail-menu-heading"><div className="service-detail-menu-label"><Image src={service.image} alt={c.name} fill priority sizes="(max-width: 900px) 100vw, 32vw" /><p>{lang === "vi" ? "DANH MỤC DỊCH VỤ" : "SERVICE MENU"}</p></div><div className="service-detail-menu-summary"><p className="service-intro-kicker">{experienceCopy?.introKicker ?? (lang === "vi" ? "Chọn đúng chăm sóc cho nhu cầu hiện tại" : "Choose care for what you need now")}</p><h1>{c.name}</h1><p>{c.description}</p><div className="service-assurance" aria-label={lang === "vi" ? "Cam kết tư vấn" : "Consultation principles"}><span>{lang === "vi" ? "Rõ nhu cầu" : "Clear needs"}</span><span>{lang === "vi" ? "Rõ chi phí" : "Clear pricing"}</span><span>{lang === "vi" ? "Rõ kỳ vọng" : "Clear expectations"}</span></div><div className="service-menu-actions"><div className="service-menu-facts"><span><small>{lang === "vi" ? "Thời gian dự kiến" : "Estimated time"}</small><strong>{duration}</strong></span><span><small>{lang === "vi" ? "Khoảng giá tham khảo" : "Guide price"}</small><strong>{price}</strong></span></div><a href={consultationHref} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch tư vấn" : "Book a consultation"}<IconArrow /></a></div></div></header>
         <div className={`service-detail-groups ${detailGroups.length === 1 ? "single" : ""}`}>{detailGroups.map((group) => <article key={group.title}>
           <div className="service-detail-group-title"><h3>{group.title}</h3></div>
           <ol>{group.items.map((item, itemIndex) => <li key={item}><span>{String(itemIndex + 1).padStart(2, "0")}</span><strong>{item}</strong></li>)}</ol>
@@ -177,7 +199,7 @@ export function ServiceLanding({ service, lang }: { service: SeoService; lang: S
         </article>)}</div>
       </section>}
       <section className="seo-content service-answer-panel" aria-labelledby="service-answer-title">
-        <div className="service-answer-heading"><p className="seo-eyebrow">{lang === "vi" ? "LẮNG NGHE NHU CẦU" : "LISTEN TO YOUR NEEDS"}</p>{detailGroups.length === 0
+        <div className="service-answer-heading"><p className="seo-eyebrow">{experienceCopy?.answerKicker ?? (lang === "vi" ? "LẮNG NGHE NHU CẦU" : "LISTEN TO YOUR NEEDS")}</p>{detailGroups.length === 0
           ? <h1 id="service-answer-title">{lang === "vi" ? `${c.name} phù hợp khi nào?` : `When is ${c.name} a good fit?`}</h1>
           : <h2 id="service-answer-title">{lang === "vi" ? `${c.name} phù hợp khi nào?` : `When is ${c.name} a good fit?`}</h2>}</div>
         <div className="service-answer-copy"><p className="seo-answer">{c.answer}</p><p>{c.expectations}</p></div>
