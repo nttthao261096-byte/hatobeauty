@@ -1,29 +1,99 @@
 import Image from "./OptimizedImage";
 import Link from "next/link";
 
-import {
-  SAMPLE_PRICE_NOTE,
-  careCombos,
-  careFaqs,
-  careProducts,
-  careSteps,
-  formatVnd,
-  productById,
-  skinJourneys,
-  spaSkinPrices,
-  visitNotes,
-  type CareLang,
-} from "./care-catalog";
-import { ProductCard } from "./ProductCard";
+import type { CareLang } from "./care-catalog";
 import { IconArrow } from "./icons";
 import { SeoFooter, SeoHeader } from "./seo-pages";
 
 const zalo = "https://zalo.me/0703214868";
 const wa = "https://wa.me/84703214868";
 
+const journeySteps = [
+  {
+    id: "01",
+    minutes: { vi: "10 phút", en: "10 min" },
+    output: { vi: "Nhu cầu và điều cần lưu ý được ghi nhận rõ ràng.", en: "Your needs and important notes are clearly recorded." },
+    vi: { title: "Tiếp nhận & lắng nghe", body: "Bạn chia sẻ điều đang quan tâm, quỹ thời gian, mong muốn và những trải nghiệm trước đây. Hato lắng nghe trước khi đưa ra bất kỳ gợi ý nào." },
+    en: { title: "Welcome & listen", body: "Share what matters to you, your available time, expectations and previous experiences. Hato listens before making any suggestion." },
+  },
+  {
+    id: "02",
+    minutes: { vi: "10–15 phút", en: "10–15 min" },
+    output: { vi: "Một định hướng ngắn gọn, dễ hiểu và phù hợp.", en: "A concise, easy-to-understand direction that fits you." },
+    vi: { title: "Tư vấn & định hướng", body: "Chúng tôi cùng bạn làm rõ ưu tiên hiện tại, điều nên thực hiện trước và những gì có thể để dành cho lần sau." },
+    en: { title: "Discuss & orient", body: "Together, we clarify your current priority, what should happen first and what can comfortably wait until later." },
+  },
+  {
+    id: "03",
+    minutes: { vi: "5–10 phút", en: "5–10 min" },
+    output: { vi: "Mục tiêu, thời gian và ngân sách được thống nhất.", en: "Goals, timing and budget are agreed." },
+    vi: { title: "Thống nhất kế hoạch", body: "Lộ trình được chốt theo mục tiêu thực tế, thời gian bạn có và mức ngân sách phù hợp. Mọi thay đổi đều được trao đổi trước." },
+    en: { title: "Agree the plan", body: "The journey is shaped around realistic goals, your available time and a suitable budget. Any change is discussed first." },
+  },
+  {
+    id: "04",
+    minutes: { vi: "Theo thời lượng đã hẹn", en: "As scheduled" },
+    output: { vi: "Tiến trình trong buổi được ghi nhận để theo dõi.", en: "The session progress is noted for follow-up." },
+    vi: { title: "Trải nghiệm theo kế hoạch", body: "Mọi bước diễn ra đúng nội dung đã thống nhất, với nhịp độ thoải mái. Bạn luôn có thể phản hồi để Hato điều chỉnh ngay trong buổi." },
+    en: { title: "Follow the plan", body: "Everything follows the agreed plan at a comfortable pace. You can always share feedback so Hato can adjust during the visit." },
+  },
+  {
+    id: "05",
+    minutes: { vi: "10 phút", en: "10 min" },
+    output: { vi: "Dặn dò sau buổi và lịch tái khám phù hợp.", en: "Clear after-visit notes and a suitable follow-up date." },
+    vi: { title: "Dặn dò & tái khám", body: "Cuối buổi, Hato nhắc lại những điều nên làm, dấu hiệu cần lưu ý và thời điểm tái khám. Lần sau, chúng tôi cùng bạn xem lại tiến trình rồi mới quyết định bước tiếp theo." },
+    en: { title: "Aftercare & follow-up", body: "At the end, Hato reviews what to do, what to notice and when to return. At the next visit, we look at your progress together before deciding the next step." },
+  },
+] as const;
+
+const journeyPrinciples = [
+  {
+    vi: ["Rõ ràng từ đầu", "Bạn biết trước mục tiêu, thời lượng, ngân sách và điều sẽ diễn ra trong từng chặng."],
+    en: ["Clear from the start", "You know the goal, timing, budget and what will happen at every stage."],
+  },
+  {
+    vi: ["Linh hoạt theo bạn", "Lộ trình có thể rút gọn, tạm dừng hoặc điều chỉnh theo phản hồi và lịch cá nhân."],
+    en: ["Flexible around you", "The journey can be shortened, paused or adjusted around your feedback and schedule."],
+  },
+  {
+    vi: ["Có theo dõi sau buổi", "Dặn dò được ghi lại rõ ràng và Hato chủ động hẹn thời điểm phù hợp để xem lại tiến trình."],
+    en: ["Thoughtful follow-up", "After-visit notes are clear, with a suitable time agreed to review your progress."],
+  },
+] as const;
+
+const journeyNotes = {
+  vi: {
+    before: ["Đến đúng giờ để có đủ thời gian trao đổi.", "Chia sẻ các thay đổi gần đây hoặc điều khiến bạn băn khoăn.", "Nói trước nếu bạn muốn giới hạn thời gian hoặc ngân sách."],
+    after: ["Làm theo phần dặn dò đã thống nhất cuối buổi.", "Ghi lại phản hồi để trao đổi trong lần tái khám.", "Liên hệ Hato sớm nếu có cảm giác khó chịu kéo dài."],
+  },
+  en: {
+    before: ["Arrive on time so there is space for a proper conversation.", "Share any recent changes or concerns.", "Tell us if you need to keep within a time or budget limit."],
+    after: ["Follow the notes agreed at the end of your visit.", "Keep track of feedback to discuss at follow-up.", "Contact Hato early if discomfort continues."],
+  },
+} as const;
+
+const journeyFaqs = [
+  {
+    vi: ["Tôi cần chuẩn bị gì trước buổi hẹn?", "Bạn chỉ cần đến đúng giờ và chia sẻ trung thực điều đang quan tâm, trải nghiệm trước đây cùng giới hạn thời gian hoặc ngân sách nếu có."],
+    en: ["What should I prepare before the appointment?", "Arrive on time and openly share your concerns, previous experiences and any time or budget limits."],
+  },
+  {
+    vi: ["Lộ trình có bắt buộc phải theo gói không?", "Không. Mỗi chặng được thống nhất riêng. Bạn có thể tiếp tục, điều chỉnh hoặc tạm dừng sau khi trao đổi với Hato."],
+    en: ["Do I have to commit to a package?", "No. Each stage is agreed separately. You can continue, adjust or pause after speaking with Hato."],
+  },
+  {
+    vi: ["Nếu tôi muốn thay đổi kế hoạch thì sao?", "Bạn có thể phản hồi bất cứ lúc nào. Hato sẽ cùng bạn xem lại mục tiêu, lịch cá nhân và ngân sách trước khi điều chỉnh."],
+    en: ["What if I want to change the plan?", "You can share feedback at any time. Hato will review your goals, schedule and budget with you before adjusting it."],
+  },
+  {
+    vi: ["Khi nào tôi nên tái khám?", "Thời điểm tái khám được hẹn ở cuối buổi dựa trên tiến trình thực tế. Nếu có điều bất thường hoặc khó chịu kéo dài, hãy liên hệ Hato sớm hơn."],
+    en: ["When should I return for follow-up?", "The follow-up date is agreed at the end of your visit based on your progress. Contact Hato sooner if anything unusual or uncomfortable continues."],
+  },
+] as const;
+
 export function CarePlanPage({ lang }: { lang: CareLang }) {
   const consult = lang === "vi" ? zalo : wa;
-  const notes = visitNotes[lang];
+  const notes = journeyNotes[lang];
 
   return (
     <div className="seo-page care-plan-page" lang={lang}>
@@ -32,43 +102,43 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
         <nav className="plan-crumbs" aria-label={lang === "vi" ? "Đường dẫn" : "Breadcrumb"}>
           <Link href={lang === "vi" ? "/" : "/en/"}>{lang === "vi" ? "Trang chủ" : "Home"}</Link>
           <span>/</span>
-          <span>{lang === "vi" ? "Lộ trình da" : "Skin plan"}</span>
+          <span>{lang === "vi" ? "Lộ trình" : "Journey"}</span>
         </nav>
 
         <section className="plan-hero">
           <div className="plan-hero-copy">
-            <p className="eyebrow">{lang === "vi" ? "Hato Beauty · Đà Nẵng" : "Hato Beauty · Da Nang"}</p>
-            <h1>{lang === "vi" ? "Soi da. Chăm đúng việc. Mang về nhà." : "Check the skin. Do the right work. Take it home."}</h1>
+            <p className="eyebrow">{lang === "vi" ? "Đồng hành cùng Hato" : "Your journey with Hato"}</p>
+            <h1>{lang === "vi" ? "Một lộ trình rõ ràng, nhẹ nhàng và vừa đủ." : "A clear, thoughtful journey shaped around you."}</h1>
             <p className="plan-lead">
               {lang === "vi"
-                ? "Lộ trình ở hato gồm bốn phần nối nhau: soi da, liệu trình tại spa, bộ dưỡng dùng sáng/tối, rồi hẹn tái đánh giá sau 4–6 tuần. Giá và mục tiêu nói trước khi nằm ghế."
-                : "A hato plan has four linked parts: a skin check, treatment in the room, an AM/PM home set, then a review in 4–6 weeks. Price and aim are said before you lie down."}
+                ? "Từ lần đầu gặp gỡ đến buổi tái khám, mỗi chặng đều được trao đổi trước để bạn luôn biết mình đang ở đâu, điều gì sẽ diễn ra và khi nào nên bước tiếp."
+                : "From the first conversation to follow-up, every stage is discussed in advance so you know where you are, what happens next and when to continue."}
             </p>
             <div className="plan-hero-actions">
-              <a className="button primary" href={consult} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch soi da" : "Book a skin check"}<IconArrow /></a>
-              <a className="button ghost" href="#products">{lang === "vi" ? "Xem sản phẩm theo lộ trình" : "See products in the plan"}<IconArrow /></a>
+              <a className="button primary" href={consult} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Trao đổi cùng Hato" : "Talk with Hato"}<IconArrow /></a>
+              <a className="button ghost" href="#journey-steps">{lang === "vi" ? "Xem năm bước" : "See the five steps"}<IconArrow /></a>
             </div>
             <ul className="plan-trust">
-              <li><strong>4.9/5</strong><span>{lang === "vi" ? "điểm khách" : "guest score"}</span></li>
-              <li><strong>5.000+</strong><span>{lang === "vi" ? "khách đã đến" : "guests"}</span></li>
-              <li><strong>08:30–19:30</strong><span>Đà Nẵng</span></li>
+              <li><strong>{lang === "vi" ? "Rõ mục tiêu" : "Clear goals"}</strong><span>{lang === "vi" ? "trao đổi trước" : "agreed first"}</span></li>
+              <li><strong>{lang === "vi" ? "Đúng nhịp" : "Your pace"}</strong><span>{lang === "vi" ? "linh hoạt theo bạn" : "flexible for you"}</span></li>
+              <li><strong>{lang === "vi" ? "Có theo dõi" : "Follow-up"}</strong><span>{lang === "vi" ? "sau mỗi buổi" : "after each visit"}</span></li>
             </ul>
           </div>
           <div className="plan-hero-media">
-            <Image priority src="/images/lifestyle-skin-assess-v1.jpg" alt={lang === "vi" ? "Soi da tại Hato Beauty" : "Skin check at Hato Beauty"} fill sizes="(max-width: 900px) 100vw, 48vw" />
+            <Image priority src="/images/feature-space-v2.webp" alt={lang === "vi" ? "Không gian đón tiếp tại Hato Beauty" : "The welcoming space at Hato Beauty"} fill sizes="(max-width: 900px) 100vw, 48vw" />
           </div>
         </section>
 
-        <section className="plan-steps" id="steps" aria-labelledby="steps-title">
+        <section className="plan-steps" id="journey-steps" aria-labelledby="steps-title">
           <header className="plan-section-head">
-            <p className="eyebrow">{lang === "vi" ? "Năm bước" : "Five steps"}</p>
-            <h2 id="steps-title">{lang === "vi" ? "Buổi đầu diễn ra như thế nào" : "How the first visit runs"}</h2>
-            <p>{lang === "vi" ? "Mỗi bước có việc cụ thể và thứ bạn mang về. Không thêm gói cho đủ checklist." : "Each step has a job and something you leave with. No extra package to fill a checklist."}</p>
+            <p className="eyebrow">{lang === "vi" ? "Năm chặng đồng hành" : "Five stages"}</p>
+            <h2 id="steps-title">{lang === "vi" ? "Từ lắng nghe đến tái khám" : "From listening to follow-up"}</h2>
+            <p>{lang === "vi" ? "Một quy trình liền mạch, đủ rõ để bạn chủ động và đủ linh hoạt để thay đổi khi cần." : "A connected process that keeps you informed and remains flexible when things change."}</p>
           </header>
           <ol className="plan-stepper">
-            {careSteps.map((step) => (
+            {journeySteps.map((step) => (
               <li key={step.id}>
-                <span className="plan-step-num">{step.id}</span>
+                <span className="plan-step-num">{(lang === "vi" ? "Bước " : "Step ") + step.id}</span>
                 <h3>{step[lang].title}</h3>
                 <p>{step[lang].body}</p>
                 <p className="plan-step-meta"><strong>{step.minutes[lang]}</strong><span>{step.output[lang]}</span></p>
@@ -77,121 +147,26 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
           </ol>
         </section>
 
-        <section className="plan-journeys" id="journeys" aria-labelledby="journeys-title">
+        <section className="plan-principles" aria-labelledby="principles-title">
           <header className="plan-section-head">
-            <p className="eyebrow">{lang === "vi" ? "Theo tình trạng da" : "By skin need"}</p>
-            <h2 id="journeys-title">{lang === "vi" ? "Bốn lộ trình da hay gặp" : "Four plans we see most"}</h2>
-            <p>{lang === "vi" ? "Chọn hướng gần nhất. Soi da sẽ chỉnh số buổi và món mang về." : "Pick the nearest match. The skin check will trim sessions and take-home items."}</p>
+            <p className="eyebrow">{lang === "vi" ? "Cách Hato đồng hành" : "How Hato supports you"}</p>
+            <h2 id="principles-title">{lang === "vi" ? "Lộ trình được xây quanh bạn" : "A journey built around you"}</h2>
+            <p>{lang === "vi" ? "Không khuôn mẫu cứng, không tạo áp lực phải tiếp tục. Mỗi quyết định được đưa ra sau khi hai bên cùng trao đổi." : "No rigid template and no pressure to continue. Every decision follows a conversation together."}</p>
           </header>
-          <div className="plan-journey-grid">
-            {skinJourneys.map((journey) => (
-              <article className="plan-journey-card" key={journey.id} id={`journey-${journey.id}`}>
-                <div className="plan-journey-photo">
-                  <Image src={journey.image} alt={journey[lang].name} fill sizes="(max-width: 900px) 100vw, 50vw" />
-                </div>
-                <div className="plan-journey-copy">
-                  <h3>{journey[lang].name}</h3>
-                  <p className="plan-fit"><strong>{lang === "vi" ? "Phù hợp với" : "Best for"}</strong> {journey[lang].fit}</p>
-                  <table>
-                    <caption>{lang === "vi" ? "Buổi spa gợi ý" : "Suggested spa visits"}</caption>
-                    <tbody>
-                      {journey[lang].sessions.map(([name, freq, price]) => (
-                        <tr key={name}><th>{name}</th><td>{freq}</td><td>{price}</td></tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  <ul className="plan-journey-products">
-                    {journey.products.map((id) => {
-                      const item = productById(id);
-                      if (!item) return null;
-                      return (
-                        <li key={id}>
-                          <Image src={item.image} alt="" width={56} height={70} />
-                          <span>
-                            <b>{item[lang].name}</b>
-                            <small>{item.size} · {item.when[lang]} · {formatVnd(item.price)}</small>
-                          </span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                  <p className="plan-result">{journey[lang].result}</p>
-                  <a className="button ghost" href={consult} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Đặt lịch soi da cho lộ trình này" : "Book a check for this plan"}<IconArrow /></a>
-                </div>
+          <div className="plan-principle-grid">
+            {journeyPrinciples.map((item) => (
+              <article className="plan-principle-card" key={item[lang][0]}>
+                <h3>{item[lang][0]}</h3>
+                <p>{item[lang][1]}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="plan-products" id="products" aria-labelledby="products-title">
-          <header className="plan-section-head">
-            <p className="eyebrow">{lang === "vi" ? "Mang về nhà" : "Take home"}</p>
-            <h2 id="products-title">{lang === "vi" ? "Sản phẩm chăm sóc da dùng cùng lộ trình" : "Skin products that sit with the plan"}</h2>
-            <p>{SAMPLE_PRICE_NOTE[lang]}</p>
-          </header>
-          <div className="product-grid">
-            {careProducts.map((product) => <ProductCard product={product} lang={lang} key={product.id} />)}
-          </div>
-          <p className="plan-products-more"><Link className="button ghost" href={lang === "vi" ? "/san-pham/" : "/en/care-products/"}>{lang === "vi" ? "Xem tất cả sản phẩm" : "View all products"}<IconArrow /></Link></p>
-        </section>
-
-        <section className="plan-combos" id="combos" aria-labelledby="combos-title">
-          <header className="plan-section-head">
-            <p className="eyebrow">{lang === "vi" ? "Bộ theo lộ trình" : "Plan sets"}</p>
-            <h2 id="combos-title">{lang === "vi" ? "Ba bộ tiết kiệm nếu dùng đủ món" : "Three sets that save if you use every item"}</h2>
-          </header>
-          <div className="plan-combo-grid">
-            {careCombos.map((combo) => {
-              const items = combo.items.map((id) => productById(id)).filter(Boolean);
-              const retail = items.reduce((sum, item) => sum + (item?.price ?? 0), 0);
-              const setPrice = retail - combo.save;
-              return (
-                <article className="plan-combo-card" key={combo.id}>
-                  <div className="plan-combo-photo">
-                    <Image src={combo.image} alt={combo[lang].name} fill sizes="(max-width: 900px) 100vw, 33vw" />
-                  </div>
-                  <h3>{combo[lang].name}</h3>
-                  <p className="product-price">{formatVnd(setPrice)}</p>
-                  <p className="plan-combo-save">{lang === "vi" ? `Lẻ ${formatVnd(retail)} · tiết kiệm ${formatVnd(combo.save)}` : `Singly ${formatVnd(retail)} · save ${formatVnd(combo.save)}`}</p>
-                  <p>{combo[lang].fit}</p>
-                  <ul>{items.map((item) => item && <li key={item.id}>{item[lang].name} · {item.size}</li>)}</ul>
-                  <a href={consult} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Hỏi chuyên viên về bộ này" : "Ask about this set"}<IconArrow /></a>
-                </article>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="plan-pricing" id="pricing" aria-labelledby="pricing-title">
-          <header className="plan-section-head">
-            <p className="eyebrow">{lang === "vi" ? "Giá spa" : "Spa prices"}</p>
-            <h2 id="pricing-title">{lang === "vi" ? "Thời lượng và giá từ–đến cho da" : "Time and from–to prices for skin"}</h2>
-            <p>{lang === "vi" ? "Giá chốt sau khi soi da. Không phát sinh bước nếu bạn không đồng ý." : "Final price after the skin check. No extra step unless you agree."}</p>
-          </header>
-          <table className="plan-price-table">
-            <thead>
-              <tr>
-                <th>{lang === "vi" ? "Dịch vụ" : "Service"}</th>
-                <th>{lang === "vi" ? "Phút" : "Minutes"}</th>
-                <th>{lang === "vi" ? "Giá" : "Price"}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {spaSkinPrices.map((row) => (
-                <tr key={row.vi}>
-                  <th>{row[lang]}</th>
-                  <td>{row.minutes}</td>
-                  <td>{row.from === 0 ? (lang === "vi" ? "Trong buổi liệu trình / nhắn trước" : "Inside a treatment / message first") : `${formatVnd(row.from)} – ${formatVnd(row.to)}`}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-
         <section className="plan-visit" aria-labelledby="visit-title">
           <header className="plan-section-head">
-            <p className="eyebrow">{lang === "vi" ? "Trước & sau buổi" : "Before & after"}</p>
-            <h2 id="visit-title">{lang === "vi" ? "Việc nhỏ giúp da chịu buổi tốt hơn" : "Small habits that help the visit land"}</h2>
+            <p className="eyebrow">{lang === "vi" ? "Trước & sau buổi hẹn" : "Before & after"}</p>
+            <h2 id="visit-title">{lang === "vi" ? "Chuẩn bị ít, an tâm nhiều hơn" : "A little preparation, much more ease"}</h2>
           </header>
           <div className="plan-visit-grid">
             <article>
@@ -199,7 +174,7 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
               <ul>{notes.before.map((item) => <li key={item}>{item}</li>)}</ul>
             </article>
             <article>
-              <h3>{lang === "vi" ? "48 giờ sau" : "The next 48 hours"}</h3>
+              <h3>{lang === "vi" ? "Sau buổi hẹn" : "After your visit"}</h3>
               <ul>{notes.after.map((item) => <li key={item}>{item}</li>)}</ul>
             </article>
           </div>
@@ -208,9 +183,9 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
         <section className="plan-faq" aria-labelledby="faq-title">
           <header className="plan-section-head">
             <p className="eyebrow">FAQ</p>
-            <h2 id="faq-title">{lang === "vi" ? "Câu hỏi trước khi đặt" : "Questions before you book"}</h2>
+            <h2 id="faq-title">{lang === "vi" ? "Câu hỏi thường gặp về lộ trình" : "Questions about the journey"}</h2>
           </header>
-          {careFaqs.map((item) => (
+          {journeyFaqs.map((item) => (
             <details key={item[lang][0]}>
               <summary>{item[lang][0]}</summary>
               <p>{item[lang][1]}</p>
@@ -219,8 +194,9 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
         </section>
 
         <section className="plan-close" id="book">
-          <h2>{lang === "vi" ? "Sẵn sàng soi da?" : "Ready for a skin check?"}</h2>
-          <p>{lang === "vi" ? "Nhắn Zalo hoặc để số. Chúng tôi gọi lại trong giờ 08:30–19:30." : "Message WhatsApp or leave a number. We call back between 08:30 and 19:30."}</p>
+          <p className="eyebrow">{lang === "vi" ? "Bắt đầu thật nhẹ nhàng" : "Start gently"}</p>
+          <h2>{lang === "vi" ? "Trước hết, hãy để Hato lắng nghe bạn." : "First, let Hato listen."}</h2>
+          <p>{lang === "vi" ? "Nhắn cho chúng tôi điều bạn đang quan tâm. Hato sẽ cùng bạn chọn bước bắt đầu phù hợp." : "Tell us what is on your mind. Hato will help you choose a comfortable first step."}</p>
           <div className="plan-hero-actions">
             <a className="button primary" href={consult} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Nhắn Zalo 0703 214 868" : "WhatsApp +84 703 214 868"}<IconArrow /></a>
             <Link className="button ghost" href={lang === "vi" ? "/dat-lich/" : "/en/book/"}>{lang === "vi" ? "Đặt lịch trên web" : "Book on the site"}<IconArrow /></Link>

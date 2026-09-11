@@ -6128,3 +6128,556 @@ a:hover { color: inherit; }
   .service-landing-page--scalp .service-detail-menu-label { border-radius: 24px 54px 24px 54px; }
   .service-landing-page--waxing .service-detail-menu-label { border-radius: 58px 22px 58px 22px; }
 }
+
+/* Refined knowledge cards: balanced typography and number-free metadata. */
+.knowledge-index-grid {
+  align-items: stretch;
+}
+.knowledge-index-grid .journal-index-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(92, 61, 46, .14);
+  background: linear-gradient(145deg, #fffaf6, #f1e6dc) !important;
+  color: #3f2d25 !important;
+  box-shadow: 0 14px 34px rgba(73, 50, 39, .07);
+}
+.knowledge-index-grid .journal-index-card:nth-child(even) {
+  background: linear-gradient(145deg, #f3e8df, #e8d8cc) !important;
+}
+.knowledge-index-grid .journal-index-card .index-card-image {
+  height: 210px;
+  flex: 0 0 auto;
+}
+.knowledge-index-grid .journal-index-card .index-card-copy {
+  height: auto;
+  min-height: 270px;
+  padding: 26px 28px 28px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.knowledge-index-grid .journal-index-card--article .index-card-copy {
+  min-height: 310px;
+  justify-content: flex-start;
+}
+.knowledge-index-grid .journal-index-card .journal-card-meta,
+.knowledge-index-grid .journal-index-card .index-card-copy > small {
+  min-height: 20px;
+  color: #896e5f !important;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.knowledge-index-grid .journal-index-card .journal-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.knowledge-index-grid .journal-index-card .index-card-copy h2 {
+  margin: 18px 0 14px;
+  display: block;
+  overflow: visible;
+  color: #3f2d25;
+  font-size: clamp(27px, 1.9vw, 34px);
+  line-height: 1.16;
+  letter-spacing: -.025em;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+  -webkit-line-clamp: initial;
+}
+.knowledge-index-grid .journal-index-card .index-card-copy p {
+  margin: 0 0 22px;
+  display: -webkit-box;
+  overflow: hidden;
+  color: #715d51 !important;
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.knowledge-index-grid .journal-index-card .index-card-copy strong {
+  margin-top: auto;
+  color: #5c3d2e !important;
+  font-size: 13px;
+  letter-spacing: .08em;
+}
+.knowledge-index-grid .journal-index-card:hover {
+  border-color: rgba(92, 61, 46, .28);
+  box-shadow: 0 18px 42px rgba(73, 50, 39, .11);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 720px) {
+  .knowledge-index-grid .journal-index-card .index-card-image {
+    height: 190px;
+  }
+  .knowledge-index-grid .journal-index-card .index-card-copy,
+  .knowledge-index-grid .journal-index-card--article .index-card-copy {
+    min-height: 0;
+    padding: 24px 22px 26px;
+  }
+  .knowledge-index-grid .journal-index-card .index-card-copy h2 {
+    font-size: clamp(27px, 8vw, 34px);
+    line-height: 1.18;
+  }
+  .knowledge-index-grid .journal-index-card .index-card-copy p {
+    font-size: 15px;
+    -webkit-line-clamp: 4;
+  }
+}
+
+/* Journey page redesign: a general Hato experience, not a service catalogue. */
+.care-plan-page .plan-page {
+  max-width: 1260px;
+}
+.care-plan-page .plan-hero {
+  gap: clamp(30px, 5vw, 68px);
+  padding: clamp(28px, 4vw, 54px);
+  border: 1px solid rgba(92, 61, 46, .12);
+  border-radius: 34px;
+  background: linear-gradient(135deg, #fffaf6 0%, #f1e5dc 100%);
+  box-shadow: 0 22px 54px rgba(72, 48, 37, .08);
+}
+.care-plan-page .plan-hero-copy h1 {
+  max-width: 15ch;
+  font-size: clamp(43px, 5vw, 68px);
+  line-height: 1.02;
+}
+.care-plan-page .plan-hero-media {
+  min-height: 480px;
+  border-radius: 28px 72px 28px 72px;
+  box-shadow: 0 18px 42px rgba(63, 43, 33, .14);
+}
+.care-plan-page .plan-hero-media img {
+  object-position: center;
+}
+.care-plan-page .plan-steps,
+.care-plan-page .plan-principles,
+.care-plan-page .plan-visit,
+.care-plan-page .plan-faq {
+  margin-bottom: 88px;
+}
+.care-plan-page .plan-section-head {
+  max-width: 720px;
+  margin-bottom: 34px;
+}
+.care-plan-page .plan-section-head p {
+  font-size: 16px;
+}
+.care-plan-page .plan-stepper {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+}
+.care-plan-page .plan-stepper li {
+  grid-column: span 2;
+  min-height: 310px;
+  padding: 28px 26px 26px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px;
+  background: linear-gradient(155deg, #fffdf9, #f7eee7);
+  box-shadow: 0 14px 36px rgba(73, 50, 39, .06);
+}
+.care-plan-page .plan-stepper li:nth-child(4),
+.care-plan-page .plan-stepper li:nth-child(5) {
+  grid-column: span 3;
+  min-height: 280px;
+}
+.care-plan-page .plan-stepper li:nth-child(5) {
+  border-color: #70503f;
+  background: linear-gradient(145deg, #5c4034, #795746);
+  color: #fffaf6;
+}
+.care-plan-page .plan-step-num {
+  width: max-content;
+  margin-bottom: 34px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: #eee0d4;
+  color: #76513e;
+  font-size: 11px;
+}
+.care-plan-page .plan-stepper h3 {
+  max-width: 13ch;
+  margin-bottom: 14px;
+  font-size: clamp(27px, 2.3vw, 34px);
+  letter-spacing: -.025em;
+}
+.care-plan-page .plan-stepper > li > p:not(.plan-step-meta) {
+  color: #6b574c;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.care-plan-page .plan-step-meta {
+  margin-top: auto !important;
+}
+.care-plan-page .plan-step-meta span {
+  color: #78675d;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.care-plan-page .plan-stepper li:nth-child(5) .plan-step-num {
+  background: rgba(255, 255, 255, .13);
+  color: #f6e6db;
+}
+.care-plan-page .plan-stepper li:nth-child(5) h3,
+.care-plan-page .plan-stepper li:nth-child(5) p,
+.care-plan-page .plan-stepper li:nth-child(5) .plan-step-meta strong,
+.care-plan-page .plan-stepper li:nth-child(5) .plan-step-meta span {
+  color: #fffaf6;
+}
+.care-plan-page .plan-stepper li:nth-child(5) .plan-step-meta {
+  border-color: rgba(255, 255, 255, .2);
+}
+.plan-principle-grid {
+  display: grid;
+  grid-template-columns: 1.15fr .9fr 1.05fr;
+  gap: 18px;
+}
+.plan-principle-card {
+  min-height: 260px;
+  padding: 34px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: 1px solid rgba(92, 61, 46, .13);
+  border-radius: 30px;
+  background: #fffaf6;
+}
+.plan-principle-card:nth-child(2) {
+  background: linear-gradient(145deg, #eadbce, #ddc9ba);
+}
+.plan-principle-card:nth-child(3) {
+  background: linear-gradient(145deg, #6f5041, #52392f);
+  color: #fffaf6;
+}
+.plan-principle-card h3 {
+  max-width: 12ch;
+  margin: 0 0 14px;
+  font-family: var(--display);
+  font-size: clamp(31px, 3vw, 42px);
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1.05;
+}
+.plan-principle-card p {
+  max-width: 34ch;
+  margin: 0;
+  color: #6b574c;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.plan-principle-card:nth-child(3) p {
+  color: rgba(255, 250, 246, .82);
+}
+.care-plan-page .plan-visit-grid {
+  gap: 18px;
+}
+.care-plan-page .plan-visit-grid article {
+  min-height: 240px;
+  padding: 34px;
+  border-radius: 30px;
+  background: linear-gradient(150deg, #fffdf9, #f3e7de);
+}
+.care-plan-page .plan-visit-grid article:last-child {
+  background: linear-gradient(150deg, #ead8ca, #dfc9ba);
+}
+.care-plan-page .plan-visit-grid h3 {
+  margin-bottom: 20px;
+  font-size: 36px;
+}
+.care-plan-page .plan-visit-grid ul {
+  padding-left: 20px;
+  font-size: 16px;
+}
+.care-plan-page .plan-visit-grid li + li {
+  margin-top: 10px;
+}
+.care-plan-page .plan-faq {
+  max-width: 900px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.care-plan-page .plan-faq details {
+  margin-bottom: 12px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(92, 61, 46, .14);
+  border-radius: 20px;
+  background: #fffdf9;
+}
+.care-plan-page .plan-faq summary {
+  padding: 21px 58px 21px 24px;
+  position: relative;
+  list-style: none;
+  font-size: 18px;
+}
+.care-plan-page .plan-faq summary::-webkit-details-marker {
+  display: none;
+}
+.care-plan-page .plan-faq summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  color: #7b5846;
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 400;
+  transform: translateY(-50%);
+}
+.care-plan-page .plan-faq details[open] summary::after {
+  content: "−";
+}
+.care-plan-page .plan-faq details p {
+  margin: 0;
+  padding: 0 58px 22px 24px;
+  color: #6b574c;
+  font-size: 16px;
+}
+.care-plan-page .plan-close .eyebrow {
+  margin-bottom: 12px;
+  color: #f2d8c8;
+}
+.care-plan-page .plan-close .plan-hero-actions {
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .care-plan-page .plan-hero {
+    padding: 26px;
+    border-radius: 26px;
+  }
+  .care-plan-page .plan-hero-media {
+    min-height: 310px;
+    border-radius: 22px 48px 22px 48px;
+  }
+  .care-plan-page .plan-stepper {
+    grid-template-columns: 1fr;
+  }
+  .care-plan-page .plan-stepper li,
+  .care-plan-page .plan-stepper li:nth-child(4),
+  .care-plan-page .plan-stepper li:nth-child(5) {
+    grid-column: auto;
+    min-height: 0;
+  }
+  .plan-principle-grid {
+    grid-template-columns: 1fr;
+  }
+  .plan-principle-card {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .care-plan-page .plan-hero {
+    padding: 22px 18px;
+  }
+  .care-plan-page .plan-hero-copy h1 {
+    font-size: clamp(39px, 12vw, 52px);
+  }
+  .care-plan-page .plan-stepper li {
+    padding: 25px 22px;
+    border-radius: 24px;
+  }
+  .care-plan-page .plan-step-num {
+    margin-bottom: 24px;
+  }
+  .plan-principle-card,
+  .care-plan-page .plan-visit-grid article {
+    padding: 28px 24px;
+    border-radius: 24px;
+  }
+  .care-plan-page .plan-faq summary {
+    padding: 19px 52px 19px 20px;
+  }
+  .care-plan-page .plan-faq summary::after {
+    right: 20px;
+  }
+  .care-plan-page .plan-faq details p {
+    padding: 0 20px 20px;
+  }
+}
+/* Compact editorial timeline for the five-stage journey. */
+.care-plan-page .plan-steps {
+  padding: clamp(30px, 4vw, 54px);
+  border: 1px solid rgba(92, 61, 46, .12);
+  border-radius: 36px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 255, 255, .62), transparent 30%),
+    linear-gradient(145deg, #eee3da, #f7f0ea);
+}
+.care-plan-page .plan-steps .plan-section-head {
+  max-width: 760px;
+  margin-bottom: 38px;
+}
+.care-plan-page .plan-stepper {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.care-plan-page .plan-stepper li,
+.care-plan-page .plan-stepper li:nth-child(4) {
+  grid-column: auto;
+  min-height: 248px;
+  padding: 26px 28px 24px;
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(92, 61, 46, .12);
+  border-radius: 24px;
+  background: rgba(255, 253, 249, .82);
+  box-shadow: none;
+}
+.care-plan-page .plan-stepper li:nth-child(2),
+.care-plan-page .plan-stepper li:nth-child(4) {
+  background: rgba(239, 226, 216, .88);
+}
+.care-plan-page .plan-stepper li::before {
+  content: "";
+  width: 78px;
+  height: 3px;
+  position: absolute;
+  top: 0;
+  left: 28px;
+  border-radius: 0 0 999px 999px;
+  background: #a87961;
+}
+.care-plan-page .plan-step-num {
+  margin-bottom: 24px;
+  padding: 0;
+  background: transparent;
+  color: #8a5d46;
+  font-size: 12px;
+  letter-spacing: .16em;
+}
+.care-plan-page .plan-stepper h3 {
+  max-width: none;
+  margin-bottom: 12px;
+  font-size: clamp(28px, 2.2vw, 34px);
+  line-height: 1.1;
+}
+.care-plan-page .plan-stepper > li > p:not(.plan-step-meta) {
+  max-width: 48ch;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.care-plan-page .plan-step-meta {
+  margin-top: auto !important;
+  padding-top: 13px;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 18px;
+}
+.care-plan-page .plan-step-meta strong {
+  white-space: nowrap;
+}
+.care-plan-page .plan-step-meta span {
+  font-size: 13px;
+}
+.care-plan-page .plan-stepper li:nth-child(5) {
+  grid-column: 1 / -1;
+  min-height: 214px;
+  padding: 34px 38px;
+  display: grid;
+  grid-template-columns: minmax(240px, .75fr) minmax(0, 1.25fr);
+  grid-template-rows: auto auto 1fr;
+  column-gap: clamp(36px, 6vw, 86px);
+  align-items: start;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 255, 255, .09), transparent 34%),
+    linear-gradient(135deg, #553b31, #765545);
+}
+.care-plan-page .plan-stepper li:nth-child(5)::before {
+  width: 110px;
+  left: 38px;
+  background: #e4c5b3;
+}
+.care-plan-page .plan-stepper li:nth-child(5) .plan-step-num {
+  grid-column: 1;
+  grid-row: 1;
+  margin-bottom: 18px;
+  padding: 0;
+  background: transparent;
+}
+.care-plan-page .plan-stepper li:nth-child(5) h3 {
+  grid-column: 1;
+  grid-row: 2 / span 2;
+  max-width: 9ch;
+  margin: 0;
+  font-size: clamp(34px, 3.4vw, 48px);
+}
+.care-plan-page .plan-stepper li:nth-child(5) > p:not(.plan-step-meta) {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  max-width: 56ch;
+  margin-top: 4px;
+  font-size: 16px;
+}
+.care-plan-page .plan-stepper li:nth-child(5) .plan-step-meta {
+  grid-column: 2;
+  grid-row: 3;
+  width: 100%;
+  margin-top: 22px !important;
+  align-self: end;
+}
+
+@media (max-width: 900px) {
+  .care-plan-page .plan-steps {
+    padding: 28px 22px;
+    border-radius: 28px;
+  }
+  .care-plan-page .plan-stepper {
+    grid-template-columns: 1fr;
+  }
+  .care-plan-page .plan-stepper li,
+  .care-plan-page .plan-stepper li:nth-child(4),
+  .care-plan-page .plan-stepper li:nth-child(5) {
+    grid-column: auto;
+    min-height: 0;
+    padding: 26px 24px 24px;
+    display: flex;
+    border-radius: 22px;
+  }
+  .care-plan-page .plan-stepper li:nth-child(5)::before {
+    left: 24px;
+  }
+  .care-plan-page .plan-stepper li:nth-child(5) h3,
+  .care-plan-page .plan-stepper li:nth-child(5) > p:not(.plan-step-meta),
+  .care-plan-page .plan-stepper li:nth-child(5) .plan-step-meta,
+  .care-plan-page .plan-stepper li:nth-child(5) .plan-step-num {
+    width: auto;
+    max-width: none;
+  }
+  .care-plan-page .plan-stepper li:nth-child(5) h3 {
+    margin-bottom: 12px;
+    font-size: clamp(31px, 8vw, 40px);
+  }
+  .care-plan-page .plan-step-meta {
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .care-plan-page .plan-steps {
+    padding: 24px 14px;
+  }
+  .care-plan-page .plan-steps .plan-section-head {
+    padding: 0 6px;
+  }
+  .care-plan-page .plan-stepper li,
+  .care-plan-page .plan-stepper li:nth-child(5) {
+    padding: 24px 20px 22px;
+  }
+  .care-plan-page .plan-stepper li::before,
+  .care-plan-page .plan-stepper li:nth-child(5)::before {
+    left: 20px;
+  }
+  .care-plan-page .plan-step-meta {
+    grid-template-columns: 1fr;
+    row-gap: 6px;
+  }
+}

@@ -148,12 +148,12 @@ export async function KnowledgeIndex({ lang }: { lang: SeoLang }) {
 
   return <div className="seo-page" lang={lang}><SeoHeader lang={lang} /><main className="index-page knowledge-index">
     <header className="index-hero"><nav className="breadcrumbs" aria-label={lang === "vi" ? "Đường dẫn" : "Breadcrumb"}><Link href={lang === "vi" ? "/" : "/en/"}>{lang === "vi" ? "Trang chủ" : "Home"}</Link><span>/</span><span>{lang === "vi" ? "Kiến thức" : "Journal"}</span></nav><p className="seo-eyebrow">{lang === "vi" ? "THƯ VIỆN HATO" : "HATO JOURNAL"}</p><h1>{title}</h1><p>{intro}</p></header>
-    <section className="index-grid knowledge-index-grid" aria-label={title}>{published.map(article => <Link className="index-card journal-index-card" href={articlePath(article,lang)} key={article.id}><div className="index-card-copy"><small>{article[`reading_time_${lang}`]}</small><h2>{article[`title_${lang}`]}</h2><p>{article[`excerpt_${lang}`]}</p><strong>{lang==="vi"?"Đọc bài viết":"Read article"} <IconArrow/></strong></div></Link>)}{journalTopics.map((topic, index) => {
+    <section className="index-grid knowledge-index-grid" aria-label={title}>{published.map(article => <Link className="index-card journal-index-card journal-index-card--article" href={articlePath(article,lang)} key={article.id}><div className="index-card-copy"><small>{article[`reading_time_${lang}`]}</small><h2>{article[`title_${lang}`]}</h2><p>{article[`excerpt_${lang}`]}</p><strong>{lang==="vi"?"Đọc bài viết":"Read article"} <IconArrow/></strong></div></Link>)}{journalTopics.map((topic, index) => {
       const service = topic.service;
       const articleTitle = lang === "vi" ? `${service.vi.name}: hướng dẫn chuẩn bị và chăm sóc` : `${service.en.name}: preparation and aftercare guide`;
       return <Link className="index-card journal-index-card" href={journalPath(service, lang)} key={topic.id}>
         <div className="index-card-image"><Image src={topic.image} alt={articleTitle} fill sizes="(max-width: 760px) 100vw, 50vw" /></div>
-        <div className="index-card-copy"><div><span>{String(index + 1).padStart(2, "0")}</span><small>{index % 2 === 0 ? (lang === "vi" ? "5 phút đọc" : "5 min read") : (lang === "vi" ? "4 phút đọc" : "4 min read")}</small></div><h2>{articleTitle}</h2><p>{service[lang].description}</p><strong>{lang === "vi" ? "Đọc bài viết" : "Read article"} <IconArrow /></strong></div>
+        <div className="index-card-copy"><div className="journal-card-meta"><small>{index % 2 === 0 ? (lang === "vi" ? "5 phút đọc" : "5 min read") : (lang === "vi" ? "4 phút đọc" : "4 min read")}</small></div><h2>{articleTitle}</h2><p>{service[lang].description}</p><strong>{lang === "vi" ? "Đọc bài viết" : "Read article"} <IconArrow /></strong></div>
       </Link>;
     })}</section>
   </main><SeoFooter lang={lang} /></div>;

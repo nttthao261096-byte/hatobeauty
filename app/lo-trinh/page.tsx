@@ -2,8 +2,8 @@ import { CarePlanPage } from "../CarePlanPage";
 import { createPageMetadata } from "../seo-metadata";
 
 export const metadata = createPageMetadata({
-  title: "Lộ trình da tại Hato Beauty Đà Nẵng",
-  description: "Soi da, liệu trình spa, bộ dưỡng tại nhà và tái đánh giá sau 4–6 tuần. Xem giá tham khảo và sản phẩm chăm sóc da tại Hato Beauty, Ngũ Hành Sơn.",
+  title: "Lộ trình đồng hành tại Hato Beauty Đà Nẵng",
+  description: "Khám phá hành trình năm bước tại Hato Beauty: lắng nghe, định hướng, thống nhất kế hoạch, trải nghiệm, dặn dò và tái khám.",
   path: "/lo-trinh/",
   viPath: "/lo-trinh/",
   enPath: "/en/care-plan/",
