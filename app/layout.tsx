@@ -38,6 +38,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="vi" data-scroll-behavior="smooth" suppressHydrationWarning><body className={`${bodyFont.variable} ${brandFont.variable} ${displayFont.variable}`}>
     <Script id="sync-document-language" strategy="beforeInteractive">{`document.documentElement.lang=location.pathname.startsWith('/en')?'en':'vi'`}</Script>
+    <Script src="https://www.googletagmanager.com/gtag/js?id=G-LSXM2LTGJF" strategy="afterInteractive" />
+    <Script id="google-analytics" strategy="afterInteractive">{`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-LSXM2LTGJF');
+    `}</Script>
     <LanguageSync />
     {children}
   </body></html>;
