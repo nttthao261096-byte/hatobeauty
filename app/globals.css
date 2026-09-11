@@ -6681,3 +6681,43 @@ a:hover { color: inherit; }
     row-gap: 6px;
   }
 }
+/* Waxing mobile hero: compact image crop. */
+@media (max-width: 900px) {
+  .service-landing-page--waxing .service-detail-menu-heading {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .service-landing-page--waxing .service-detail-menu-label {
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+    align-self: auto;
+    border-radius: 46px 20px 46px 20px;
+  }
+
+  .service-landing-page--waxing .service-detail-menu-label img {
+    object-position: center 46%;
+  }
+}
+
+@media (max-width: 600px) {
+  .service-landing-page--waxing .service-detail-menu {
+    margin: 10px 8px 24px;
+    padding: 14px 14px 24px;
+  }
+
+  .service-landing-page--waxing .service-detail-menu-heading { gap: 24px; }
+
+  .service-landing-page--waxing .service-detail-menu-label {
+    height: clamp(250px, 72vw, 320px);
+    aspect-ratio: auto;
+    border-radius: 32px 16px 32px 16px;
+  }
+
+  .service-landing-page--waxing .service-detail-menu-label > p {
+    padding: 22px;
+    font-size: 12px;
+    letter-spacing: .14em;
+  }
+}
