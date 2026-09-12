@@ -1,30 +1,44 @@
 import type { Metadata } from "next";
+import { Be_Vietnam_Pro, Cormorant_Garamond, Lora } from "next/font/google";
+import Script from "next/script";
+import { LanguageSync } from "./LanguageSync";
+import { mediaUrl } from "./seo-data";
+import { imageVariant } from "./image-variants";
 import "./globals.css";
 
+const bodyFont = Be_Vietnam_Pro({ subsets: ["latin", "vietnamese"], weight: ["300", "400", "500", "600"], variable: "--font-body", display: "swap", preload: false });
+const brandFont = Cormorant_Garamond({ subsets: ["latin", "vietnamese"], variable: "--font-brand", display: "swap", preload: false });
+const displayFont = Lora({ subsets: ["latin", "vietnamese"], variable: "--font-display", display: "swap", preload: false });
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://hatobeauty.vercel.app"),
+  metadataBase: new URL("https://hatobeauty.com"),
   title: {
-    default: "hato Beauty | Shine as you are",
-    template: "%s | hato Beauty",
+    default: "Hato Beauty — Shine as you are",
+    template: "%s | Hato Beauty",
   },
-  description: "Chăm sóc da, gội đầu dưỡng sinh, định hình chân mày, uốn mi, triệt lông và waxing trong không gian riêng tư tại hato Beauty.",
-  icons: { icon: "/brand/hato-logo-transparent-v3.png", shortcut: "/brand/hato-logo-transparent-v3.png" },
+  description: "Chăm sóc da, Mi & Mày, Chăm sóc da đầu & Thư giãn, Triệt lông và Tẩy lông tại Hato Beauty Đà Nẵng.",
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
+  icons: { icon: imageVariant({ src: "/brand/hato-logo-transparent-v3.png", width: 96 }), shortcut: imageVariant({ src: "/brand/hato-logo-transparent-v3.png", width: 96 }) },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    alternateLocale: "vi_VN",
-    title: "hato Beauty | Shine as you are",
-    description: "Beauty rituals designed around you: facial care, herbal scalp therapy, brow shaping, lash lift, hair removal and waxing.",
-    images: [{ url: "/og-v2.png", width: 1736, height: 907, alt: "hato Beauty — Shine as you are" }],
+    locale: "vi_VN",
+    alternateLocale: "en_US",
+    title: "Hato Beauty — Shine as you are",
+    description: "Five care groups in Da Nang: Skin, Brow & Lash, Scalp Care & Relaxation, Hair Removal and Waxing.",
+    images: [{ url: mediaUrl("/og-shine.png"), width: 1731, height: 909, alt: "Hato Beauty — SHINE AS YOU ARE" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "hato Beauty | Shine as you are",
-    description: "Facial care, herbal scalp therapy, brow shaping, lash lift, hair removal and waxing — designed around you.",
-    images: ["/og-v2.png"],
+    title: "Hato Beauty — Shine as you are",
+    description: "Skin, Brow & Lash, Scalp Care & Relaxation, Hair Removal and Waxing in Da Nang.",
+    images: [mediaUrl("/og-shine.png")],
   },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="vi"><body>{children}</body></html>;
+  return <html lang="vi" data-scroll-behavior="smooth" suppressHydrationWarning><body className={`${bodyFont.variable} ${brandFont.variable} ${displayFont.variable}`}>
+    <Script id="sync-document-language" strategy="beforeInteractive">{`document.documentElement.lang=location.pathname.startsWith('/en')?'en':'vi'`}</Script>
+    <LanguageSync />
+    {children}
+  </body></html>;
 }

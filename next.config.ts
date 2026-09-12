@@ -1,8 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async headers() {
+    return [{ source: "/media/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] }];
+  },
   images: {
-    unoptimized: true,
+    remotePatterns: [{ protocol: "https", hostname: "hatobeauty.com" }],
   },
   typescript: {
     tsconfigPath: "tsconfig.vercel.json",

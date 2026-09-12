@@ -1,0 +1,507 @@
+{
+  "/images/feature-equipment-v2.webp": {
+    "prefix": "feature-equipment-v2-73aad4465961",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1829
+    ]
+  },
+  "/images/feature-personalized-v2.webp": {
+    "prefix": "feature-personalized-v2-ac6f1521fe55",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1641
+    ]
+  },
+  "/images/feature-space-v2.webp": {
+    "prefix": "feature-space-v2-9b735042bdda",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1716
+    ]
+  },
+  "/images/feature-team-v2.webp": {
+    "prefix": "feature-team-v2-d83c18761929",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1827
+    ]
+  },
+  "/images/guest-trust-avatars-v1.png": {
+    "prefix": "guest-trust-avatars-v1-4c45a36a5202",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1920
+    ]
+  },
+  "/images/journal-aftercare-v2.webp": {
+    "prefix": "journal-aftercare-v2-164a358a5c28",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1536
+    ]
+  },
+  "/images/journal-body-v2.webp": {
+    "prefix": "journal-body-v2-e185fd6a3607",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1536
+    ]
+  },
+  "/images/journal-brow-v2.webp": {
+    "prefix": "journal-brow-v2-b01c3496ca01",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1536
+    ]
+  },
+  "/images/journal-scalp-v2.webp": {
+    "prefix": "journal-scalp-v2-e034b052a43c",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1536
+    ]
+  },
+  "/images/journal-skin-v2.webp": {
+    "prefix": "journal-skin-v2-2a803f74259f",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1536
+    ]
+  },
+  "/images/journal-technology-v2.webp": {
+    "prefix": "journal-technology-v2-7bc0177e2633",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1536
+    ]
+  },
+  "/images/lifestyle-aftercare-v1.jpg": {
+    "prefix": "lifestyle-aftercare-v1-19cadd6387a8",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280
+    ]
+  },
+  "/images/lifestyle-skin-assess-v1.jpg": {
+    "prefix": "lifestyle-skin-assess-v1-102d6aa48347",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280
+    ]
+  },
+  "/images/lifestyle-treatment-v1.jpg": {
+    "prefix": "lifestyle-treatment-v1-fa63db18f706",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280
+    ]
+  },
+  "/images/product-cleanser-v1.jpg": {
+    "prefix": "product-cleanser-v1-073dce14e565",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      864
+    ]
+  },
+  "/images/product-cleansing-balm-v1.png": {
+    "prefix": "product-cleansing-balm-v1-c895249b77d2",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1122
+    ]
+  },
+  "/images/product-cream-barrier-v1.jpg": {
+    "prefix": "product-cream-barrier-v1-c57e4a43953c",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      864
+    ]
+  },
+  "/images/product-exfoliant-v1.jpg": {
+    "prefix": "product-exfoliant-v1-59ce7c04e986",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      864
+    ]
+  },
+  "/images/product-mask-v1.jpg": {
+    "prefix": "product-mask-v1-1236fe617624",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      864
+    ]
+  },
+  "/images/product-serum-ha-v1.jpg": {
+    "prefix": "product-serum-ha-v1-16337d3f1594",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      864
+    ]
+  },
+  "/images/product-serum-niacinamide-v1.jpg": {
+    "prefix": "product-serum-niacinamide-v1-fde822d2258a",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      864
+    ]
+  },
+  "/images/product-soothing-gel-v1.png": {
+    "prefix": "product-soothing-gel-v1-e89fe153bbae",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1122
+    ]
+  },
+  "/images/product-sunscreen-v1.jpg": {
+    "prefix": "product-sunscreen-v1-d8d37bf7ded5",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      864
+    ]
+  },
+  "/images/product-toner-v1.jpg": {
+    "prefix": "product-toner-v1-259fab16eff9",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      864
+    ]
+  },
+  "/images/result-body-v2.webp": {
+    "prefix": "result-body-v2-5efd5490ece0",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1536
+    ]
+  },
+  "/images/result-brow-lash-v2.webp": {
+    "prefix": "result-brow-lash-v2-945d9041ba27",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1536
+    ]
+  },
+  "/images/result-skin-v2.webp": {
+    "prefix": "result-skin-v2-7d735d5e6d8c",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1536
+    ]
+  },
+  "/images/results-brow-lash-gallery-v1.png": {
+    "prefix": "results-brow-lash-gallery-v1-2354a54656f5",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1920
+    ]
+  },
+  "/images/results-hair-removal-gallery-v1.png": {
+    "prefix": "results-hair-removal-gallery-v1-9c370a1ebcf0",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1920
+    ]
+  },
+  "/images/results-scalp-gallery-v1.png": {
+    "prefix": "results-scalp-gallery-v1-7ea9027853f2",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1920
+    ]
+  },
+  "/images/results-skin-gallery-v1.png": {
+    "prefix": "results-skin-gallery-v1-167c57cbaccf",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1920
+    ]
+  },
+  "/images/results-waxing-gallery-v1.png": {
+    "prefix": "results-waxing-gallery-v1-a197b04df468",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1920
+    ]
+  },
+  "/images/service-body-scrub-v2.webp": {
+    "prefix": "service-body-scrub-v2-f08bc88134a4",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1023
+    ]
+  },
+  "/images/service-brow-v2.webp": {
+    "prefix": "service-brow-v2-9885e8a016d0",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1122
+    ]
+  },
+  "/images/service-hair-removal-v2.webp": {
+    "prefix": "service-hair-removal-v2-e0a132d6c94f",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1122
+    ]
+  },
+  "/images/service-hair-v2.webp": {
+    "prefix": "service-hair-v2-626f5d1eaa3f",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1003
+    ],
+    "avif": true
+  },
+  "/images/service-skin-signature-v3.png": {
+    "prefix": "service-skin-signature-v3-3eb64e5364ee",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1727
+    ]
+  },
+  "/images/service-skin-v2.webp": {
+    "prefix": "service-skin-v2-129924ecefd5",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1122
+    ]
+  },
+  "/images/service-waxing-v2.webp": {
+    "prefix": "service-waxing-v2-1b3d966b27a2",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1060
+    ]
+  },
+  "/brand/hato-logo-transparent-v3.png": {
+    "prefix": "hato-logo-transparent-v3-fb2e6cd0af39",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1016
+    ]
+  },
+  "/brand/hato-logo.png": {
+    "prefix": "hato-logo-86744f288fe5",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1254
+    ]
+  }
+}

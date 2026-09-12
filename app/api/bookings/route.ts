@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+import { isValidBookingDate, isValidBookingPhone } from "../../booking-validation";
+
 interface BookingPayload {
   name?: unknown;
   phone?: unknown;
@@ -18,7 +20,7 @@ export async function POST(request: Request) {
   try {
     payload = (await request.json()) as BookingPayload;
   } catch {
-    return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid JSON body.", code: "invalid_json" }, { status: 400 });
   }
 
   const name = cleanText(payload.name);
@@ -30,12 +32,17 @@ export async function POST(request: Request) {
   if (
     name.length < 2 ||
     name.length > 120 ||
-    phone.length < 8 ||
-    phone.length > 30 ||
-    !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(service) ||
-    !/^\d{4}-\d{2}-\d{2}$/.test(date)
+    !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(service)
   ) {
-    return NextResponse.json({ error: "Invalid booking details." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid booking details.", code: "invalid_details" }, { status: 400 });
+  }
+
+  if (!isValidBookingPhone(phone)) {
+    return NextResponse.json({ error: "Invalid phone number.", code: "invalid_phone" }, { status: 400 });
+  }
+
+  if (!isValidBookingDate(date)) {
+    return NextResponse.json({ error: "Invalid booking date.", code: "invalid_date" }, { status: 400 });
   }
 
   const supabaseUrl = process.env.SUPABASE_URL?.replace(/\/$/, "");
@@ -43,7 +50,7 @@ export async function POST(request: Request) {
 
   if (!supabaseUrl || !secretKey) {
     console.error("Supabase runtime environment is not configured.");
-    return NextResponse.json({ error: "Booking service is unavailable." }, { status: 503 });
+    return NextResponse.json({ error: "Booking service is unavailable.", code: "unavailable" }, { status: 503 });
   }
 
   try {
@@ -58,12 +65,12 @@ export async function POST(request: Request) {
 
     if (!serviceResponse.ok) {
       console.error("Supabase service validation failed.", serviceResponse.status);
-      return NextResponse.json({ error: "Could not validate service." }, { status: 502 });
+      return NextResponse.json({ error: "Could not validate service.", code: "service_validation_failed" }, { status: 502 });
     }
 
     const matchingServices = (await serviceResponse.json()) as Array<{ slug?: string }>;
     if (matchingServices.length !== 1 || matchingServices[0]?.slug !== service) {
-      return NextResponse.json({ error: "Unknown service." }, { status: 400 });
+      return NextResponse.json({ error: "Unknown service.", code: "unknown_service" }, { status: 400 });
     }
 
     const response = await fetch(`${supabaseUrl}/rest/v1/booking_requests`, {
@@ -86,12 +93,12 @@ export async function POST(request: Request) {
     if (!response.ok) {
       const details = await response.text();
       console.error("Supabase booking insert failed.", response.status, details);
-      return NextResponse.json({ error: "Could not save booking." }, { status: 502 });
+      return NextResponse.json({ error: "Could not save booking.", code: "save_failed" }, { status: 502 });
     }
 
     return NextResponse.json({ ok: true }, { status: 201 });
   } catch (error) {
     console.error("Supabase booking request failed.", error);
-    return NextResponse.json({ error: "Could not reach booking service." }, { status: 502 });
+    return NextResponse.json({ error: "Could not reach booking service.", code: "unreachable" }, { status: 502 });
   }
 }

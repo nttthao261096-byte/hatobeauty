@@ -1,0 +1,2 @@
+import { createPageMetadata } from "../../seo-metadata"; import { TrustPage } from "../../seo-pages";
+export const metadata=createPageMetadata({title:"Hato Beauty guide prices",description:"View guide prices for five Hato Beauty care categories; final pricing is confirmed for the treatment area, duration and individual needs.",path:"/en/prices/",viPath:"/bang-gia/",enPath:"/en/prices/",lang:"en"}); export default function Page(){return <TrustPage lang="en" kind="prices"/>}

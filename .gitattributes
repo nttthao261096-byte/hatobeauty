@@ -1,0 +1,18 @@
+*.mp4 -filter -diff -merge -text
+*.png -filter -diff -merge -text
+*.jpg -filter -diff -merge -text
+*.webp -filter -diff -merge -text
+public/images/service-skin-signature-v3.png -filter -diff -merge -text
+public/images/guest-trust-avatars-v1.png -filter -diff -merge -text
+public/images/results-skin-gallery-v1.png -filter -diff -merge -text
+public/images/results-brow-lash-gallery-v1.png -filter -diff -merge -text
+public/images/results-scalp-gallery-v1.png -filter -diff -merge -text
+public/images/results-hair-removal-gallery-v1.png -filter -diff -merge -text
+public/images/results-waxing-gallery-v1.png -filter -diff -merge -text
+public/video/hero-head-spa.mp4 -filter -diff -merge -text
+public/video/hero-hair-removal.mp4 -filter -diff -merge -text
+public/video/hero-brow-warm.mp4 -filter -diff -merge -text
+public/video/hero-care-beige-clinic.mp4 -filter -diff -merge -text
+
+public/media/** -filter -diff -merge -text
+public/images/** -filter -diff -merge -text

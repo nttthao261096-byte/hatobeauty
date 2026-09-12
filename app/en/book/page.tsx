@@ -1,0 +1,2 @@
+import { createPageMetadata } from "../../seo-metadata"; import { TrustPage } from "../../seo-pages";
+export const metadata=createPageMetadata({title:"Book Hato Beauty",description:"Share your contact details, preferred service and time; the Hato Beauty team will call to consult and confirm your appointment.",path:"/en/book/",viPath:"/dat-lich/",enPath:"/en/book/",lang:"en"}); export default function Page(){return <TrustPage lang="en" kind="book"/>}

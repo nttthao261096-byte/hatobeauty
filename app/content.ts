@@ -1,3 +1,5 @@
+import { mediaUrl, seoServices } from "./seo-data";
+
 export type Lang = "vi" | "en";
 export type Category = "all" | "care" | "relax" | "shape" | "smooth" | "body";
 
@@ -26,6 +28,149 @@ export interface ServiceDetailContent {
   plan: string;
   vi: string[];
   en: string[];
+  options?: {
+    vi: string[];
+    en: string[];
+  };
+  result?: {
+    vi: string;
+    en: string;
+  };
+  groups?: Array<{
+    viTitle: string;
+    enTitle: string;
+    image: string;
+    vi: string[];
+    en: string[];
+  }>;
+}
+
+const curatedServiceChoices: Partial<Record<string, Pick<ServiceDetailContent, "options" | "groups" | "result">>> = {
+  skin: {
+    result: {
+      vi: "Làn da sạch thoáng, đủ ẩm và được chăm sóc đúng trọng tâm theo tình trạng thực tế.",
+      en: "Skin that feels cleansed, replenished and cared for around its current needs.",
+    },
+    groups: [
+      {
+        viTitle: "Chăm sóc da mặt",
+        enTitle: "Facial care",
+        image: "/images/service-skin-v2.webp",
+        vi: [
+          "Trị liệu làm sạch da chuyên sâu",
+          "Trị liệu phục hồi da chuyên sâu",
+          "Trị liệu căng bóng & trẻ hóa da",
+          "Trị liệu chăm sóc da mụn",
+          "Trị liệu tăng sắc tố và nám",
+          "Trị liệu Mesotherapy",
+          "Trị liệu phục hồi hàng rào bảo vệ & da nhạy cảm",
+          "Trị liệu chăm sóc da cá nhân hóa",
+        ],
+        en: [
+          "Deep-cleansing facial",
+          "Intensive skin recovery",
+          "Glow & rejuvenation facial",
+          "Acne-prone skin care",
+          "Pigmentation & melasma care",
+          "Mesotherapy treatment",
+          "Skin-barrier recovery & sensitive-skin care",
+          "Personalized facial care",
+        ],
+      },
+      {
+        viTitle: "Chăm sóc da cơ thể",
+        enTitle: "Body skin care",
+        image: "/images/service-body-scrub-v2.webp",
+        vi: [
+          "Tẩy tế bào chết & dưỡng ẩm chuyên sâu",
+          "Phục hồi da cháy nắng",
+          "Chăm sóc & điều trị mụn lưng",
+        ],
+        en: [
+          "Intensive exfoliation & hydration",
+          "Sun-exposed skin recovery",
+          "Back acne care & treatment",
+        ],
+      },
+    ],
+  },
+  "brow-lash": {
+    result: {
+      vi: "Hàng mi và chân mày gọn nét, cân đối, vẫn giữ vẻ mềm mại tự nhiên của gương mặt.",
+      en: "Neater, balanced lashes and brows that preserve a naturally soft expression.",
+    },
+    groups: [
+      {
+        viTitle: "Dịch vụ Mi",
+        enTitle: "Lash services",
+        image: "/images/result-brow-lash-v2.webp",
+        vi: ["Uốn mi", "Nhuộm mi", "Uốn mi kiểu Hàn + nhuộm mi"],
+        en: ["Lash lift", "Lash tint", "Korean lash lift + tint"],
+      },
+      {
+        viTitle: "Dịch vụ Mày",
+        enTitle: "Brow services",
+        image: "/images/service-brow-v2.webp",
+        vi: ["Nhuộm chân mày", "Nhuộm + tạo hình chân mày", "Định hình + nhuộm mày"],
+        en: ["Brow tint", "Brow tint + shaping", "Brow definition + tint"],
+      },
+    ],
+  },
+  scalp: {
+    result: {
+      vi: "Da đầu sạch thoáng hơn, tóc được chăm sóc và cơ thể có một khoảng nghỉ thư giãn.",
+      en: "A fresher-feeling scalp, cared-for hair and a restorative pause.",
+    },
+    options: {
+      vi: [
+        "Gội đầu chăm sóc da đầu cơ bản",
+        "Gội đầu thư giãn",
+        "Gội đầu chăm sóc da đầu chuyên sâu",
+        "Gội đầu & Massage mặt chuyên sâu",
+        "Gội đầu thư giãn cao cấp",
+      ],
+      en: [
+        "Essential scalp-care wash",
+        "Relaxing hair wash",
+        "Intensive scalp-care wash",
+        "Hair wash & intensive facial massage",
+        "Premium relaxing hair wash",
+      ],
+    },
+  },
+  "hair-removal": {
+    result: {
+      vi: "Vùng da gọn gàng hơn theo lộ trình phù hợp với vùng, sợi lông và phản ứng cá nhân.",
+      en: "A smoother-looking area through a plan suited to the zone, hair and individual response.",
+    },
+    options: {
+      vi: ["Triệt vùng mặt", "Triệt vùng nách", "Triệt vùng tay", "Triệt vùng chân", "Triệt bikini", "Triệt full body"],
+      en: ["Face", "Underarms", "Arms", "Legs", "Bikini", "Full body"],
+    },
+  },
+  waxing: {
+    result: {
+      vi: "Bề mặt da gọn gàng ngay sau buổi chăm sóc, với quy trình kín đáo và chú trọng làm dịu.",
+      en: "An immediately smoother finish with discreet, skin-aware aftercare.",
+    },
+    options: {
+      vi: ["Tẩy lông mày", "Tẩy môi trên", "Tẩy theo vùng cơ thể"],
+      en: ["Brow waxing", "Upper-lip waxing", "Body-area waxing"],
+    },
+  },
+  body: {
+    result: {
+      vi: "Bề mặt da cơ thể sạch thoáng, mềm mại và đủ ẩm hơn sau buổi chăm sóc.",
+      en: "Body skin that feels fresher, softer and more replenished after care.",
+    },
+  },
+};
+
+function applyCuratedServiceChoices(details: Record<string, ServiceDetailContent>) {
+  Object.entries(curatedServiceChoices).forEach(([serviceId, choices]) => {
+    if (details[serviceId]) details[serviceId] = { ...details[serviceId], ...choices };
+  });
+  return details;
 }
 
 export interface HighlightContent {
@@ -65,84 +210,35 @@ export interface HomeContent {
 
 type JsonRow = Record<string, unknown>;
 
-const serviceEditorial: Record<string, {
-  vi: { description: string; suitable: string };
-  en: { description: string; suitable: string };
-}> = {
-  skin: {
-    vi: { description: "Làm sạch, cấp ẩm và phục hồi theo tình trạng da sau khi soi.", suitable: "Da thiếu ẩm, xỉn màu hoặc cần phục hồi." },
-    en: { description: "Cleanse, hydrate and restore according to your skin assessment.", suitable: "Dehydrated, dull or recovery-focused skin." },
-  },
-  scalp: {
-    vi: { description: "Làm sạch da đầu, massage đầu–vai–gáy để cơ thể thả lỏng.", suitable: "Da đầu bết, vai gáy căng hoặc cần thư giãn." },
-    en: { description: "Cleanse the scalp and release tension through head, neck and shoulder massage.", suitable: "Oily scalp, tense shoulders or a need to unwind." },
-  },
-  "brow-lash": {
-    vi: { description: "Tạo dáng mày và độ cong mi hài hòa với gương mặt.", suitable: "Muốn đường nét sáng, tự nhiên và dễ chăm sóc." },
-    en: { description: "Shape brows and lift lashes to suit your natural features.", suitable: "A brighter, balanced look that is easy to maintain." },
-  },
-  "hair-removal": {
-    vi: { description: "Điều chỉnh thông số theo từng vùng da, trong không gian riêng tư.", suitable: "Tay, chân, nách và vùng cần chăm sóc riêng." },
-    en: { description: "Tailored settings for each area, delivered in complete privacy.", suitable: "Arms, legs, underarms and personally assessed areas." },
-  },
-  waxing: {
-    vi: { description: "Waxing cẩn trọng, kết hợp làm dịu da trước và sau dịch vụ.", suitable: "Cần làn da gọn mịn ngay, với quy trình kín đáo." },
-    en: { description: "Careful waxing with soothing care before and after.", suitable: "An immediate smooth result with discreet care." },
-  },
-  body: {
-    vi: { description: "Tẩy tế bào chết, dưỡng ẩm và thư giãn cho da cơ thể.", suitable: "Da khô ráp hoặc cần chăm sóc định kỳ." },
-    en: { description: "Exfoliate, hydrate and relax with a complete body ritual.", suitable: "Dry, rough skin or regular restorative care." },
-  },
-};
-
-const highlightEditorial: Record<string, { vi: string; en: string }> = {
-  "01": { vi: "Thiết bị được chọn và điều chỉnh theo từng vùng da, sau bước đánh giá rõ ràng.", en: "Technology is selected and adjusted for each area after a clear assessment." },
-  "02": { vi: "Thao tác cẩn trọng, tư vấn chân thành và luôn tôn trọng cảm nhận của bạn.", en: "Careful technique, honest guidance and respect for your comfort." },
-  "03": { vi: "Mỗi liệu trình bắt đầu từ nhu cầu thật và mục tiêu đã thống nhất.", en: "Every plan begins with your real needs and an agreed goal." },
-  "04": { vi: "Không gian ấm, riêng tư và đủ yên để bạn thực sự thả lỏng.", en: "A warm, private space designed for genuine relaxation." },
-};
-
-const resultEditorial: Record<string, { vi: string; en: string }> = {
-  "1": { vi: "Da sáng khỏe, ẩm mượt", en: "Brighter, replenished skin" },
-  "2": { vi: "Chân mày thanh, mi cong nhẹ", en: "Refined brows, softly lifted lashes" },
-  "3": { vi: "Da cơ thể mịn màng hơn", en: "Smoother body skin" },
-};
-
-const testimonialEditorial: Record<string, { vi: string; en: string }> = {
-  "1": { vi: "Không gian dịu, sạch và tư vấn vừa đủ — không hề bị thúc ép.", en: "Calm, immaculate and thoughtfully guided, without any pressure." },
-  "2": { vi: "Mọi bước rõ ràng, chuyên nghiệp mà vẫn gần gũi, riêng tư.", en: "Every step was clear, professional, welcoming and private." },
-  "3": { vi: "Đội ngũ nhẹ nhàng và luôn hỏi lại mức độ thoải mái.", en: "The team was gentle and always checked my comfort." },
-  "4": { vi: "Tư vấn thực tế; sau buổi hẹn, mình biết cách chăm sóc tiếp.", en: "Practical advice left me knowing exactly what to do next." },
-  "5": { vi: "Chỉn chu từ đặt lịch đến khi ra về. Mình muốn quay lại.", en: "Thoughtful from booking to goodbye. I would gladly return." },
-  "6": { vi: "Mình được chăm đúng nhu cầu, không theo công thức chung.", en: "The care matched my needs, never a one-size-fits-all formula." },
-  "7": { vi: "Không gian, mùi hương và nhịp phục vụ đều rất dễ chịu.", en: "The space, scent and pace all felt genuinely soothing." },
-  "8": { vi: "Sự cẩn thận trong từng chi tiết khiến mình an tâm ngay lần đầu.", en: "Care in every detail reassured me from my first visit." },
-};
-
-const journalEditorial: Record<string, { vi: string; en: string }> = {
-  "01": { vi: "Làm sạch sâu hay ưu tiên phục hồi?", en: "Deep cleanse or restore first?" },
-  "02": { vi: "Vì sao nên thư giãn đầu, vai và gáy cùng lúc?", en: "Why relax the scalp, neck and shoulders together?" },
-  "03": { vi: "Đường nét nào giữ gương mặt tự nhiên?", en: "Which shape keeps your features natural?" },
-  "04": { vi: "Chuẩn bị gì trước liệu trình công nghệ cao?", en: "How should you prepare for advanced care?" },
-  "05": { vi: "Cách làm dịu da sau liệu trình", en: "How to calm skin after a treatment" },
-  "06": { vi: "Khi nào nên làm mới bề mặt da?", en: "When should you refresh the skin's surface?" },
-  "07": { vi: "Uốn mi giữ được bao lâu?", en: "How long does a lash lift last?" },
-};
-
 function text(value: unknown): string {
   return typeof value === "string" ? value : "";
 }
 
-function key(value: unknown): string {
-  return typeof value === "string" || typeof value === "number" ? String(value) : "";
+function lowercaseHato(value: string): string {
+  return value.replace(/hato/gi, "hato");
+}
+
+function withMediaOrigin(content: HomeContent): HomeContent {
+  const resolve = (path: string) => path === "/images/service-skin-signature-v3.png" ? path : path.startsWith("/") ? mediaUrl(path) : path;
+  return {
+    ...content,
+    services: content.services.map((item) => ({ ...item, image: resolve(item.image) })),
+    highlights: content.highlights.map((item) => ({ ...item, image: resolve(item.image) })),
+    results: content.results.map((item) => ({ ...item, image: resolve(item.image) })),
+    journalArticles: content.journalArticles.map((item) => ({ ...item, image: resolve(item.image) })),
+  };
 }
 
 function textArray(value: unknown): string[] {
-  return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
+  return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string").map(lowercaseHato) : [];
+}
+
+function vietnamizeBody(value: string): string {
+  return value.replace(/\bbody\b/gi, "cơ thể");
 }
 
 function localized(row: JsonRow, field: string, lang: Lang): string {
-  return text(row[`${field}_${lang}`]);
+  return lowercaseHato(text(row[`${field}_${lang}`]));
 }
 
 async function fetchRows(baseUrl: string, apiKey: string, table: string): Promise<JsonRow[]> {
@@ -161,6 +257,98 @@ async function fetchRows(baseUrl: string, apiKey: string, table: string): Promis
   return (await response.json()) as JsonRow[];
 }
 
+function fallbackHomeContent(): HomeContent {
+  const categories: Record<string, ServiceContent["category"]> = { skin: "care", scalp: "relax", body: "body", "brow-lash": "shape", "hair-removal": "smooth" };
+  const serviceOrder = ["skin", "brow-lash", "scalp", "hair-removal"];
+  const services: ServiceContent[] = seoServices.filter((service) => serviceOrder.includes(service.id)).sort((a, b) => serviceOrder.indexOf(a.id) - serviceOrder.indexOf(b.id)).map((service, index) => ({
+    id: service.id,
+    category: categories[service.id],
+    number: String(index + 1).padStart(2, "0"),
+    image: service.image,
+    vi: { title: service.vi.name, summary: service.vi.title, description: service.vi.description, suitable: service.vi.suitable },
+    en: { title: service.en.name, summary: service.en.title, description: service.en.description, suitable: service.en.suitable },
+  }));
+  const scalp = services.find((service) => service.id === "scalp");
+  if (scalp) {
+    scalp.vi.title = "Chăm sóc da đầu & Thư giãn";
+    scalp.en.title = "Scalp Care & Relaxation";
+  }
+  const skin = services.find((service) => service.id === "skin");
+  if (skin) {
+    skin.vi.title = "Chăm sóc da";
+    skin.en.title = "Skin Care";
+    skin.image = "/images/service-skin-v2.webp";
+  }
+  const browLash = services.find((service) => service.id === "brow-lash");
+  if (browLash) {
+    browLash.vi.title = "Mi & Mày";
+    browLash.en.title = "Lashes & Brows";
+  }
+  const hairRemoval = services.find((service) => service.id === "hair-removal");
+  if (hairRemoval) {
+    hairRemoval.vi.title = "Triệt lông";
+    hairRemoval.en.title = "Advanced hair removal";
+  }
+  services.push({
+    id: "waxing",
+    category: "smooth",
+    number: "05",
+    image: mediaUrl("/images/service-waxing-v2.webp"),
+    vi: {
+      title: "Tẩy lông",
+      summary: "Gọn gàng · Nhanh chóng · Chăm da",
+      description: "Kỹ thuật waxing cẩn trọng, lựa chọn sản phẩm phù hợp và chăm sóc da trước–sau dịch vụ để hạn chế cảm giác khó chịu.",
+      suitable: "Khách hàng cần hiệu quả gọn gàng ngay và một quy trình chăm sóc kín đáo.",
+    },
+    en: {
+      title: "Gentle waxing",
+      summary: "Smooth · Efficient · Skin-aware",
+      description: "Careful waxing techniques, considered product selection and before–after skin care for a more comfortable experience.",
+      suitable: "For an immediate smooth result delivered with discretion and care.",
+    },
+  });
+  services.forEach((service, index) => { service.number = String(index + 1).padStart(2, "0"); });
+  const serviceDetails = Object.fromEntries(seoServices.map((service) => [service.id, {
+    price: service.id === "skin" ? "450.000 – 1.200.000đ" : service.id === "hair-removal" ? "250.000 – 1.500.000đ/vùng" : "Tư vấn theo nhu cầu",
+    duration: service.id === "hair-removal" ? "20 – 60 phút" : "45 – 90 phút",
+    plan: "Cá nhân hóa sau tư vấn",
+    vi: ["Trao đổi nhu cầu", ...service.vi.preparation.slice(0, 2), "Thực hiện và hướng dẫn chăm sóc"],
+    en: ["Discuss your needs", ...service.en.preparation.slice(0, 2), "Care and aftercare guidance"],
+  }]));
+  serviceDetails.waxing = {
+    price: "120.000 – 650.000đ/vùng",
+    duration: "20 – 50 phút",
+    plan: "Lặp lại sau 3 – 6 tuần",
+    vi: ["Kiểm tra tình trạng da", "Làm sạch và chuẩn bị vùng wax", "Wax theo hướng phù hợp", "Làm dịu và dưỡng ẩm"],
+    en: ["Check skin condition", "Cleanse and prepare", "Wax with suitable technique", "Soothe and moisturize"],
+  };
+  applyCuratedServiceChoices(serviceDetails);
+  const journalArticles: JournalArticleContent[] = [
+    { number: "01", image: "/images/journal-skin-v2.webp", vi: { title: "Chăm sóc da: Làm sạch sâu hay ưu tiên phục hồi?", readingTime: "3 phút đọc" }, en: { title: "Skin: Deep cleansing or recovery first?", readingTime: "3 min read" } },
+    { number: "02", image: "/images/journal-scalp-v2.webp", vi: { title: "Gội đầu dưỡng sinh: Vì sao da đầu và vai gáy nên thả lỏng cùng nhau?", readingTime: "4 phút đọc" }, en: { title: "Head Spa: Why should the scalp, neck and shoulders unwind together?", readingTime: "4 min read" } },
+    { number: "03", image: "/images/journal-body-v2.webp", vi: { title: "Chăm sóc cơ thể: Khi nào là lúc phù hợp để làm mới bề mặt da?", readingTime: "4 phút đọc" }, en: { title: "Body: When is the right time to refresh your skin?", readingTime: "4 min read" } },
+    { number: "04", image: "/images/journal-brow-v2.webp", vi: { title: "Mi & chân mày: Giữ đường nét tự nhiên bằng cách nào?", readingTime: "3 phút đọc" }, en: { title: "Brow & Lash: How do you keep the result naturally yours?", readingTime: "3 min read" } },
+    { number: "05", image: "/images/journal-technology-v2.webp", vi: { title: "Triệt lông: Cần chuẩn bị gì trước khi thực hiện?", readingTime: "3 phút đọc" }, en: { title: "Hair Removal: How should you prepare?", readingTime: "3 min read" } },
+  ];
+  return withMediaOrigin({
+    services,
+    serviceDetails,
+    highlights: [
+      { number: "01", image: "/images/feature-equipment-v2.webp", vi: ["Công nghệ phù hợp", "Thiết bị được lựa chọn theo nhu cầu thật, không chạy theo lời hứa quá mức."], en: ["Suitable technology", "Technology chosen around real needs, without inflated promises."] },
+      { number: "02", image: "/images/feature-space-v2.webp", vi: ["Không gian dễ chịu", "Một nhịp chăm sóc riêng tư, sạch sẽ và đủ chậm để bạn thư giãn."], en: ["A calming space", "A private, clean and unhurried rhythm of care."] },
+      { number: "03", image: "/images/feature-personalized-v2.webp", vi: ["Thông tin minh bạch", "Quy trình, chi phí và kỳ vọng được trao đổi trước khi bắt đầu."], en: ["Clear information", "Process, price and expectations are discussed before care begins."] },
+      { number: "04", image: "/images/feature-team-v2.webp", vi: ["Lắng nghe cẩn trọng", "Đội ngũ bắt đầu từ câu hỏi và điều chỉnh theo cảm nhận của bạn."], en: ["Careful listening", "The team starts with questions and adapts to your comfort."] },
+    ],
+    results: [
+      { image: "/images/result-skin-v2.webp", vi: ["Làn da đủ ẩm", "Bề mặt da mềm mại và dễ chịu hơn sau chăm sóc.", "Chăm sóc da"], en: ["Replenished skin", "A softer, more comfortable surface after care.", "Skin"] },
+      { image: "/images/result-brow-lash-v2.webp", vi: ["Đường nét tự nhiên", "Mi và chân mày được định hình hài hòa với gương mặt.", "Mi & chân mày"], en: ["Natural definition", "Lashes and brows shaped around your face.", "Brow & Lash"] },
+      { image: "/images/result-body-v2.webp", vi: ["Cảm giác nhẹ nhàng", "Chăm sóc cơ thể hướng đến bề mặt sạch và mềm hơn.", "Cơ thể"], en: ["A lighter feeling", "Body care for a cleaner, softer-feeling surface.", "Body"] },
+    ],
+    testimonials: Array.from({ length: 8 }, (_, index) => ({ initials: `H${index + 1}`, name: { vi: `Khách hàng ${index + 1}`, en: `Guest ${index + 1}` }, quote: { vi: "Không gian ấm áp, đội ngũ lắng nghe kỹ và giải thích rõ từng bước trước khi thực hiện.", en: "A warm space, attentive team and a clear explanation before every step." } })),
+    journalArticles,
+  });
+}
+
 export async function loadHomeContent(): Promise<HomeContent> {
   const baseUrl = (process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL)?.replace(/\/$/, "");
   const apiKey =
@@ -169,40 +357,114 @@ export async function loadHomeContent(): Promise<HomeContent> {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
     process.env.SUPABASE_SECRET_KEY;
 
-  if (!baseUrl || !apiKey) {
-    throw new Error("Supabase public content environment is not configured.");
+  if (!baseUrl || !apiKey) return fallbackHomeContent();
+
+  let serviceRows: JsonRow[]; let highlightRows: JsonRow[]; let resultRows: JsonRow[]; let testimonialRows: JsonRow[];
+  try {
+    [serviceRows, highlightRows, resultRows, testimonialRows] = await Promise.all([
+      fetchRows(baseUrl, apiKey, "services"),
+      fetchRows(baseUrl, apiKey, "highlights"),
+      fetchRows(baseUrl, apiKey, "results"),
+      fetchRows(baseUrl, apiKey, "testimonials"),
+    ]);
+  } catch (error) {
+    console.error("Falling back to bundled homepage content.", error);
+    return fallbackHomeContent();
   }
 
-  const [serviceRows, highlightRows, resultRows, testimonialRows, journalRows] = await Promise.all([
-    fetchRows(baseUrl, apiKey, "services"),
-    fetchRows(baseUrl, apiKey, "highlights"),
-    fetchRows(baseUrl, apiKey, "results"),
-    fetchRows(baseUrl, apiKey, "testimonials"),
-    fetchRows(baseUrl, apiKey, "journal_articles"),
-  ]);
+  const serviceOrder = ["skin", "brow-lash", "scalp", "hair-removal", "waxing"];
+  const services = serviceRows.map((row) => ({
+    id: text(row.slug),
+    category: text(row.category) as ServiceContent["category"],
+    number: text(row.display_number),
+    image: text(row.image_path),
+    vi: {
+      title: localized(row, "title", "vi"),
+      summary: localized(row, "summary", "vi"),
+      description: localized(row, "description", "vi"),
+      suitable: localized(row, "suitable", "vi"),
+    },
+    en: {
+      title: localized(row, "title", "en"),
+      summary: localized(row, "summary", "en"),
+      description: localized(row, "description", "en"),
+      suitable: localized(row, "suitable", "en"),
+    },
+  })).filter((service) => serviceOrder.includes(service.id))
+    .map((service) => {
+      const number = String(serviceOrder.indexOf(service.id) + 1).padStart(2, "0");
+      if (service.id === "body") {
+        return {
+          ...service,
+          number,
+          vi: {
+            title: vietnamizeBody(service.vi.title),
+            summary: vietnamizeBody(service.vi.summary),
+            description: vietnamizeBody(service.vi.description),
+            suitable: vietnamizeBody(service.vi.suitable),
+          },
+        };
+      }
 
-  const services = serviceRows.map((row) => {
-    const id = text(row.slug);
-    const editorial = serviceEditorial[id];
-    return {
-      id,
-      category: text(row.category) as ServiceContent["category"],
-      number: text(row.display_number),
-      image: text(row.image_path),
-      vi: {
-        title: localized(row, "title", "vi"),
-        summary: localized(row, "summary", "vi"),
-        description: editorial?.vi.description ?? localized(row, "description", "vi"),
-        suitable: editorial?.vi.suitable ?? localized(row, "suitable", "vi"),
-      },
-      en: {
-        title: localized(row, "title", "en"),
-        summary: localized(row, "summary", "en"),
-        description: editorial?.en.description ?? localized(row, "description", "en"),
-        suitable: editorial?.en.suitable ?? localized(row, "suitable", "en"),
-      },
-    };
-  });
+      if (service.id === "scalp") {
+        return {
+          ...service,
+          number,
+          vi: { ...service.vi, title: "Chăm sóc da đầu & Thư giãn" },
+          en: { ...service.en, title: "Scalp Care & Relaxation" },
+        };
+      }
+
+      if (service.id === "skin") {
+        return {
+          ...service,
+          number,
+          image: "/images/service-skin-signature-v3.png",
+          vi: { ...service.vi, title: "Chăm sóc da" },
+          en: { ...service.en, title: "Skin Care" },
+        };
+      }
+
+      if (service.id === "brow-lash") {
+        return {
+          ...service,
+          number,
+          vi: { ...service.vi, title: "Mi & Mày" },
+          en: { ...service.en, title: "Lashes & Brows" },
+        };
+      }
+
+      if (service.id === "waxing") {
+        return {
+          ...service,
+          number,
+          vi: { ...service.vi, title: "Tẩy lông" },
+          en: { ...service.en, title: "Waxing" },
+        };
+      }
+
+      if (service.id !== "hair-removal") return { ...service, number };
+
+      return {
+        ...service,
+        number,
+        vi: {
+          ...service.vi,
+          title: "Triệt lông",
+          summary: "Công nghệ · Êm dịu · Riêng tư",
+          description: "Giải pháp giảm lông bằng công nghệ được lựa chọn theo vùng da, nhu cầu và mức độ thoải mái của riêng bạn.",
+          suitable: "Các vùng mặt, tay, chân, nách hoặc cơ thể cần chăm sóc kín đáo và phù hợp với tình trạng da.",
+        },
+        en: {
+          ...service.en,
+          title: "Advanced hair removal",
+          summary: "Technology · Gentle · Private",
+          description: "Technology-led hair removal selected around the treatment area, your skin and your preferred level of comfort.",
+          suitable: "For the face, arms, legs, underarms or body areas that benefit from discreet, skin-aware care.",
+        },
+      };
+    })
+    .sort((a, b) => serviceOrder.indexOf(a.id) - serviceOrder.indexOf(b.id));
 
   const serviceDetails = Object.fromEntries(
     serviceRows.map((row) => [
@@ -216,43 +478,42 @@ export async function loadHomeContent(): Promise<HomeContent> {
       },
     ]),
   );
+  applyCuratedServiceChoices(serviceDetails);
 
-  return {
+  const journalOrder = ["01", "02", "06", "03", "04"];
+  const journalOverrides: Record<string, JournalArticleContent> = {
+    "01": { number: "01", image: "/images/journal-skin-v2.webp", vi: { title: "Chăm sóc da: Làm sạch sâu hay ưu tiên phục hồi?", readingTime: "3 phút đọc" }, en: { title: "Skin: Deep cleansing or recovery first?", readingTime: "3 min read" } },
+    "02": { number: "02", image: "/images/journal-scalp-v2.webp", vi: { title: "Gội đầu dưỡng sinh: Vì sao da đầu và vai gáy nên thả lỏng cùng nhau?", readingTime: "4 phút đọc" }, en: { title: "Head Spa: Why should the scalp, neck and shoulders unwind together?", readingTime: "4 min read" } },
+    "06": { number: "03", image: "/images/journal-body-v2.webp", vi: { title: "Chăm sóc cơ thể: Khi nào là lúc phù hợp để làm mới bề mặt da?", readingTime: "4 phút đọc" }, en: { title: "Body: When is the right time to refresh your skin?", readingTime: "4 min read" } },
+    "03": { number: "04", image: "/images/journal-brow-v2.webp", vi: { title: "Mi & chân mày: Giữ đường nét tự nhiên bằng cách nào?", readingTime: "3 phút đọc" }, en: { title: "Brow & Lash: How do you keep the result naturally yours?", readingTime: "3 min read" } },
+    "04": { number: "05", image: "/images/journal-technology-v2.webp", vi: { title: "Triệt lông: Cần chuẩn bị gì trước khi thực hiện?", readingTime: "3 phút đọc" }, en: { title: "Hair Removal: How should you prepare for technology or waxing?", readingTime: "3 min read" } },
+  };
+
+  return withMediaOrigin({
     services,
     serviceDetails,
-    highlights: highlightRows.map((row) => {
-      const number = text(row.display_number);
-      return {
-        number,
-        image: text(row.image_path),
-        vi: [localized(row, "title", "vi"), highlightEditorial[number]?.vi ?? localized(row, "description", "vi")],
-        en: [localized(row, "title", "en"), highlightEditorial[number]?.en ?? localized(row, "description", "en")],
-      };
-    }),
-    results: resultRows.map((row) => {
-      const id = key(row.id);
-      return {
-        image: text(row.image_path),
-        vi: [resultEditorial[id]?.vi ?? localized(row, "title", "vi"), localized(row, "description", "vi"), localized(row, "category_label", "vi")],
-        en: [resultEditorial[id]?.en ?? localized(row, "title", "en"), localized(row, "description", "en"), localized(row, "category_label", "en")],
-      };
-    }),
-    testimonials: testimonialRows.map((row) => ({
-      initials: text(row.initials),
-      name: { vi: localized(row, "name", "vi"), en: localized(row, "name", "en") },
-      quote: {
-        vi: testimonialEditorial[key(row.id)]?.vi ?? localized(row, "quote", "vi"),
-        en: testimonialEditorial[key(row.id)]?.en ?? localized(row, "quote", "en"),
-      },
+    highlights: highlightRows.map((row) => ({
+      number: text(row.display_number),
+      image: text(row.image_path),
+      vi: [localized(row, "title", "vi"), localized(row, "description", "vi")],
+      en: [localized(row, "title", "en"), localized(row, "description", "en")],
     })),
-    journalArticles: journalRows.map((row) => {
-      const number = text(row.display_number);
+    results: resultRows.map((row) => ({
+      image: text(row.image_path),
+      vi: [
+        vietnamizeBody(localized(row, "title", "vi")),
+        vietnamizeBody(localized(row, "description", "vi")),
+        vietnamizeBody(localized(row, "category_label", "vi")),
+      ],
+      en: [localized(row, "title", "en"), localized(row, "description", "en"), localized(row, "category_label", "en")],
+    })),
+    testimonials: testimonialRows.map((row) => {
       return {
-        number,
-        image: text(row.image_path),
-        vi: { title: journalEditorial[number]?.vi ?? localized(row, "title", "vi"), readingTime: localized(row, "reading_time", "vi") },
-        en: { title: journalEditorial[number]?.en ?? localized(row, "title", "en"), readingTime: localized(row, "reading_time", "en") },
+        initials: text(row.initials),
+        name: { vi: localized(row, "name", "vi"), en: localized(row, "name", "en") },
+        quote: { vi: localized(row, "quote", "vi"), en: localized(row, "quote", "en") },
       };
     }),
-  };
+    journalArticles: journalOrder.map((number) => journalOverrides[number]),
+  });
 }
