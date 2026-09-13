@@ -334,10 +334,10 @@ function fallbackHomeContent(): HomeContent {
     services,
     serviceDetails,
     highlights: [
-      { number: "01", image: "/images/feature-equipment-v2.webp", vi: ["Công nghệ phù hợp", "Thiết bị được lựa chọn theo nhu cầu thật, không chạy theo lời hứa quá mức."], en: ["Suitable technology", "Technology chosen around real needs, without inflated promises."] },
-      { number: "02", image: "/images/feature-space-v2.webp", vi: ["Không gian dễ chịu", "Một nhịp chăm sóc riêng tư, sạch sẽ và đủ chậm để bạn thư giãn."], en: ["A calming space", "A private, clean and unhurried rhythm of care."] },
-      { number: "03", image: "/images/feature-personalized-v2.webp", vi: ["Thông tin minh bạch", "Quy trình, chi phí và kỳ vọng được trao đổi trước khi bắt đầu."], en: ["Clear information", "Process, price and expectations are discussed before care begins."] },
-      { number: "04", image: "/images/feature-team-v2.webp", vi: ["Lắng nghe cẩn trọng", "Đội ngũ bắt đầu từ câu hỏi và điều chỉnh theo cảm nhận của bạn."], en: ["Careful listening", "The team starts with questions and adapts to your comfort."] },
+      { number: "01", image: "/images/feature-equipment-v2.webp", vi: ["Thiết bị hiện đại", "Thiết bị được lựa chọn phù hợp với từng nhu cầu chăm sóc."], en: ["Modern equipment", "Equipment selected to suit each care need."] },
+      { number: "02", image: "/images/feature-team-v2.webp", vi: ["Đội ngũ chuyên nghiệp", "Đội ngũ lắng nghe kỹ và chăm chút trong từng bước thực hiện."], en: ["Professional team", "An attentive team that takes care with every step."] },
+      { number: "03", image: "/images/feature-personalized-v2.webp", vi: ["Dịch vụ cá nhân hóa", "Mỗi dịch vụ được điều chỉnh theo tình trạng và nhu cầu riêng của bạn."], en: ["Personalized service", "Each service is tailored to your condition and individual needs."] },
+      { number: "04", image: "/images/feature-space-v2.webp", vi: ["Không gian thư giãn", "Không gian riêng tư, sạch sẽ và đủ chậm để bạn thư giãn."], en: ["A relaxing space", "A private, clean and unhurried space where you can relax."] },
     ],
     results: [
       { image: "/images/result-skin-v2.webp", vi: ["Làn da đủ ẩm", "Bề mặt da mềm mại và dễ chịu hơn sau chăm sóc.", "Chăm sóc da"], en: ["Replenished skin", "A softer, more comfortable surface after care.", "Skin"] },

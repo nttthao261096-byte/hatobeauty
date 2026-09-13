@@ -110,16 +110,16 @@ const testimonialGuests = [
 
 const originalHighlightCopy = {
   vi: [
-    ["Công nghệ phù hợp", "Thiết bị được lựa chọn theo nhu cầu thật, không chạy theo lời hứa quá mức."],
-    ["Không gian dễ chịu", "Một nhịp chăm sóc riêng tư, sạch sẽ và đủ chậm để bạn thư giãn."],
-    ["Thông tin minh bạch", "Quy trình, chi phí và kỳ vọng được trao đổi trước khi bắt đầu."],
-    ["Lắng nghe cẩn trọng", "Đội ngũ bắt đầu từ câu hỏi và điều chỉnh theo cảm nhận của bạn."],
+    ["Thiết bị hiện đại", "Thiết bị được lựa chọn phù hợp với từng nhu cầu chăm sóc."],
+    ["Đội ngũ chuyên nghiệp", "Đội ngũ lắng nghe kỹ và chăm chút trong từng bước thực hiện."],
+    ["Dịch vụ cá nhân hóa", "Mỗi dịch vụ được điều chỉnh theo tình trạng và nhu cầu riêng của bạn."],
+    ["Không gian thư giãn", "Không gian riêng tư, sạch sẽ và đủ chậm để bạn thư giãn."],
   ],
   en: [
-    ["Suitable technology", "Technology chosen around real needs, without inflated promises."],
-    ["A calming space", "A private, clean and unhurried rhythm of care."],
-    ["Clear information", "Process, price and expectations are discussed before care begins."],
-    ["Careful listening", "The team starts with questions and adapts to your comfort."],
+    ["Modern equipment", "Equipment selected to suit each care need."],
+    ["Professional team", "An attentive team that takes care with every step."],
+    ["Personalized service", "Each service is tailored to your condition and individual needs."],
+    ["A relaxing space", "A private, clean and unhurried space where you can relax."],
   ],
 } as const;
 
