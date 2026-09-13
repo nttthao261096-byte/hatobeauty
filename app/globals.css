@@ -6182,3 +6182,55 @@ a:hover { color: inherit; }
   .service-landing-page--scalp .service-detail-menu-label { border-radius: 24px 54px 24px 54px; }
   .service-landing-page--waxing .service-detail-menu-label { border-radius: 58px 22px 58px 22px; }
 }
+
+/* Owner-requested homepage fixes: stable booking label and tighter service intro. */
+@media (min-width: 901px) {
+  .site-header .header-booking-link,
+  .site-header .header-booking-link:link,
+  .site-header .header-booking-link:visited,
+  .site-header .header-booking-link:hover,
+  .site-header .header-booking-link:focus,
+  .site-header .header-booking-link:focus-visible,
+  .site-header .header-booking-link:active {
+    color: #fff9f4 !important;
+  }
+  .site-header .header-booking-link .header-book-full {
+    display: inline !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: inherit !important;
+  }
+}
+
+.home-page .services-section {
+  padding-top: clamp(58px, 6vw, 86px);
+  padding-bottom: clamp(72px, 7.5vw, 108px);
+}
+.home-page .services-intro {
+  margin-bottom: 28px;
+  gap: clamp(36px, 5vw, 76px);
+  align-items: center;
+}
+.home-page .services-intro h2 { margin-bottom: 0; }
+.home-page .services-intro-side p {
+  margin-bottom: 18px;
+  line-height: 1.65;
+}
+.home-page .service-filters { margin-bottom: 36px; }
+
+@media (max-width: 900px) {
+  .home-page .services-section {
+    padding-top: 54px;
+    padding-bottom: 72px;
+  }
+  .home-page .services-intro {
+    margin-bottom: 22px;
+    gap: 20px;
+  }
+  .home-page .services-intro-side {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .home-page .services-intro-side p { margin-bottom: 14px; }
+  .home-page .service-filters { margin-bottom: 28px; }
+}
