@@ -15,7 +15,11 @@ const socialLinks = [
   { label: "Facebook", icon: FaFacebookF, href: "https://facebook.com/hatobeautyy" },
 ] as const;
 
-export function ContactDetails({ lang, compact = false }: { lang: ContactLang; compact?: boolean }) {
+export function ContactSocials({ lang }: { lang: ContactLang }) {
+  return <div className="contact-socials" aria-label={lang === "vi" ? "Mạng xã hội" : "Social media"}>{socialLinks.map((social) => { const Icon = social.icon; return <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.label} Hato Beauty`} title={social.label} key={social.label}><span aria-hidden="true"><Icon /></span><b>{social.label}</b></a>; })}</div>;
+}
+
+export function ContactDetails({ lang, compact = false, showSocials = true }: { lang: ContactLang; compact?: boolean; showSocials?: boolean }) {
   return <section className={`contact-details${compact ? " contact-details--compact" : ""}`} aria-label={lang === "vi" ? "Thông tin liên hệ Hato Beauty" : "Hato Beauty contact details"}>
     <div className="contact-list">
       <div className="contact-row">
@@ -31,7 +35,7 @@ export function ContactDetails({ lang, compact = false }: { lang: ContactLang; c
         <span className="contact-row-icon" aria-hidden="true"><IconClock /></span><span><small>{lang === "vi" ? "Giờ mở cửa" : "Opening hours"}</small><strong>{lang === "vi" ? "Hằng ngày · 08:30–19:30" : "Daily · 8:30 AM–7:30 PM"}</strong></span>
       </div>
     </div>
-    <div className="contact-socials" aria-label={lang === "vi" ? "Mạng xã hội" : "Social media"}>{socialLinks.map((social) => { const Icon = social.icon; return <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.label} Hato Beauty`} title={social.label} key={social.label}><span aria-hidden="true"><Icon /></span><b>{social.label}</b></a>; })}</div>
+    {showSocials ? <ContactSocials lang={lang} /> : null}
   </section>;
 }
 
