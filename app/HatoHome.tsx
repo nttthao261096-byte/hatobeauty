@@ -15,7 +15,7 @@ import { SiteHeader } from "./SiteHeader";
 import { HeroMedia } from "./HeroMedia";
 import { useMinimumBookingDate } from "./use-minimum-booking-date";
 
-function isTechHighlight(item: { image: string; vi: [string, string]; en: [string, string] }) {
+function isTechHighlight(item: { image: string; vi: readonly [string, string]; en: readonly [string, string] }) {
   return /equipment|technology|thiết bị|công nghệ/i.test(`${item.image} ${item.vi[0]} ${item.en[0]}`);
 }
 
