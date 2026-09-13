@@ -151,7 +151,7 @@ const serviceCardCopy = {
 } as const;
 
 export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent; initialLang?: Lang }) {
-  const { services, serviceDetails, results, testimonials, journalArticles } = content;
+  const { services, serviceDetails, testimonials, journalArticles } = content;
   const highlights = content.highlights.map((item, index) => ({
     ...item,
     vi: originalHighlightCopy.vi[index] ?? item.vi,
@@ -328,34 +328,6 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
           </button>;
         })}{filteredServices.length === 0 && <p className="service-empty">{lang === "vi" ? "Chưa tìm thấy dịch vụ phù hợp. Hãy thử một từ khóa khác." : "No matching service yet. Try another keyword."}</p>}</div>
       </section>
-
-      {results.length > 0 ? <section className="results section" id="results">
-        <div className="results-head">
-          <div>
-            <p className="eyebrow">{t.resultEyebrow}</p>
-            <h2>{t.resultTitle}</h2>
-          </div>
-          <div className="section-heading-side">
-            <p>{t.resultNote}</p>
-            <Link className="section-route-link" href={lang === "vi" ? "/ket-qua/" : "/en/results/"}>{lang === "vi" ? "Xem tất cả kết quả" : "View all results"}<IconArrow /></Link>
-          </div>
-        </div>
-        <div className="result-grid">
-          {results.slice(0, 3).map((item) => (
-            <Link href={lang === "vi" ? "/ket-qua/" : "/en/results/"} key={item.image}>
-              <div className="result-image">
-                <Image src={item.image} alt={item[lang][0]} fill sizes="(max-width: 720px) 80vw, 33vw" />
-                <em>{item[lang][2]}</em>
-              </div>
-              <div className="result-copy">
-                <h3>{item[lang][0]}</h3>
-                <p>{item[lang][1]}</p>
-                <span className="result-link-label">{lang === "vi" ? "Xem kết quả" : "View results"}<IconArrow /></span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section> : null}
 
       <section className="knowledge section" id="knowledge">
         <span className="knowledge-orbit" aria-hidden="true" />

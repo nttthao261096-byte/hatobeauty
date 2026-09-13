@@ -381,8 +381,10 @@ test("ships the new brand hierarchy and accessible booking form", async () => {
   assert.match(dataMigration, /result-brow-lash-v2\.webp/i);
   assert.match(dataMigration, /result-body-v2\.webp/i);
   assert.match(styles, /--display: var\(--font-display\)/i);
-  assert.doesNotMatch(html, /<video/i);
-  assert.match(html, /<img[^>]+fetchPriority="high"/i);
+  assert.match(html, /<video/i);
+  assert.match(html, /autoPlay/i);
+  assert.doesNotMatch(source, /className="results section"/i);
+  assert.doesNotMatch(heroSource, /hero-poster/i);
   assert.match(html, /srcSet="[^"]*\/media\//i);
   assert.match(styles, /\.hato-word[^}]*font-size: 1\.78em/is);
   assert.match(styles, /prefers-reduced-motion: reduce/i);
