@@ -353,18 +353,16 @@ export function HatoHome({ content, initialLang = "vi" }: { content: HomeContent
         <div className="review-pagination" aria-label={lang === "vi" ? "Nhóm đánh giá" : "Review group"}><span>{reviewOffset === 0 ? "01 — 04" : "05 — 08"}<small>/ 08</small></span><div><button className={reviewOffset === 0 ? "active" : ""} onClick={() => setReviewOffset(0)} aria-label={lang === "vi" ? "Xem đánh giá 1 đến 4" : "View reviews 1 to 4"} /><button className={reviewOffset === 4 ? "active" : ""} onClick={() => setReviewOffset(4)} aria-label={lang === "vi" ? "Xem đánh giá 5 đến 8" : "View reviews 5 to 8"} /></div></div>
       </section>
 
-      <section className="newsletter-section" id="contact">
-        <div><p className="eyebrow">{lang === "vi" ? "Ưu đãi dành riêng cho bạn" : "A thoughtful note for you"}</p><h2>{lang === "vi" ? "Nhận ưu đãi mới mỗi tháng." : "Receive new offers each month."}</h2><p>{lang === "vi" ? "Gợi ý chăm sóc theo mùa và cập nhật hữu ích từ Hato Beauty." : "Seasonal care ideas and useful updates from Hato Beauty."}</p></div>
-        <form onSubmit={submitNewsletter}>
-          <label htmlFor={`newsletter-email-${lang}`}>{lang === "vi" ? "Email của bạn" : "Your email"}</label>
-          <div><input id={`newsletter-email-${lang}`} type="email" inputMode="email" autoComplete="email" required maxLength={254} placeholder={lang === "vi" ? "Email của bạn" : "Your email"} value={newsletterEmail} onChange={(event) => { setNewsletterEmail(event.target.value); setNewsletterStatus("idle"); }} /><button type="submit" disabled={newsletterStatus === "sending"}>{newsletterStatus === "sending" ? (lang === "vi" ? "Đang gửi..." : "Sending...") : (lang === "vi" ? "Đăng ký" : "Subscribe")}<IconArrow /></button></div>
-          <p className={`newsletter-message is-${newsletterStatus}`} aria-live="polite">{newsletterStatus === "success" ? (lang === "vi" ? "Ứng dụng email đã được mở để bạn xác nhận đăng ký." : "Your email app has opened so you can confirm.") : newsletterStatus === "error" ? (lang === "vi" ? "Chưa thể đăng ký lúc này. Vui lòng thử lại." : "Unable to subscribe right now. Please try again.") : (lang === "vi" ? "Bạn có thể hủy đăng ký bất kỳ lúc nào." : "You can unsubscribe at any time.")}</p>
-        </form>
-      </section>
-
-      <footer className="site-footer">
+      <footer className="site-footer" id="contact">
         <span className="footer-halo footer-halo-one" aria-hidden="true" /><span className="footer-halo footer-halo-two" aria-hidden="true" />
-        <div className="footer-intro"><p>Hato Beauty · Beauty Studio</p><h2>{lang === "vi" ? "Hẹn gặp bạn tại Hato Beauty." : "See you at Hato Beauty."}</h2></div>
+        <div className="footer-intro footer-newsletter">
+          <div className="footer-newsletter-copy"><p className="eyebrow">{lang === "vi" ? "Ưu đãi dành riêng cho bạn" : "A thoughtful note for you"}</p><h2>{lang === "vi" ? "Nhận ưu đãi mới mỗi tháng." : "Receive new offers each month."}</h2><p>{lang === "vi" ? "Gợi ý chăm sóc theo mùa và cập nhật hữu ích từ Hato Beauty." : "Seasonal care ideas and useful updates from Hato Beauty."}</p></div>
+          <form className="footer-newsletter-form" onSubmit={submitNewsletter}>
+            <label htmlFor={`newsletter-email-${lang}`}>{lang === "vi" ? "Email của bạn" : "Your email"}</label>
+            <div><input id={`newsletter-email-${lang}`} type="email" inputMode="email" autoComplete="email" required maxLength={254} placeholder={lang === "vi" ? "Email của bạn" : "Your email"} value={newsletterEmail} onChange={(event) => { setNewsletterEmail(event.target.value); setNewsletterStatus("idle"); }} /><button type="submit" disabled={newsletterStatus === "sending"}>{newsletterStatus === "sending" ? (lang === "vi" ? "Đang gửi..." : "Sending...") : (lang === "vi" ? "Đăng ký" : "Subscribe")}<IconArrow /></button></div>
+            <p className={`newsletter-message is-${newsletterStatus}`} aria-live="polite">{newsletterStatus === "success" ? (lang === "vi" ? "Ứng dụng email đã được mở để bạn xác nhận đăng ký." : "Your email app has opened so you can confirm.") : newsletterStatus === "error" ? (lang === "vi" ? "Chưa thể đăng ký lúc này. Vui lòng thử lại." : "Unable to subscribe right now. Please try again.") : (lang === "vi" ? "Bạn có thể hủy đăng ký bất kỳ lúc nào." : "You can unsubscribe at any time.")}</p>
+          </form>
+        </div>
         <div className="footer-brand"><Image src={mediaUrl("/brand/hato-logo-transparent-v3.png")} alt="Hato Beauty" width={1016} height={638} sizes="(max-width: 760px) 132px, 180px" /><ContactSocials lang={lang} /></div>
         <div className="footer-links"><h3>{lang === "vi" ? "Khám phá" : "Discover"}</h3>{navItems.slice(0, 4).map(([href, label], index) => <a href={href} key={href}><span>0{index + 1}</span>{label}</a>)}</div>
         <div className="footer-contact"><h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3><ContactDetails lang={lang} compact showSocials={false} /><a className="footer-consultation-link" href={consultationHref} target="_blank" rel="noopener noreferrer">{t.book}<IconArrow /></a></div>
