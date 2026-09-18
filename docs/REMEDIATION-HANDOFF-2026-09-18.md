@@ -1,12 +1,12 @@
 # Hato Beauty — bàn giao bản sửa ngày 18/09/2026
 
-**Trạng thái:** đã sửa code và kiểm thử bản production chạy local. **Chưa push GitHub, chưa deploy Vercel, chưa chạy migration trên Supabase và chưa thay DNS.** Không coi báo cáo này là xác nhận website công khai đã được cập nhật hoặc backend production đã nghiệm thu.
+**Trạng thái:** đã sửa code, kiểm thử bản production chạy local, push GitHub và đã có Vercel preview READY từ đúng commit. **Chưa chạy migration trên Supabase, chưa promote production và chưa thay DNS.** Không coi preview là xác nhận backend production đã nghiệm thu.
 
 Repository: `C:/Users/LEGION/Desktop/hatobeauty/.corrected-source`.
 
 Source of truth: yêu cầu triển khai trong `pasted-text.txt` và `AUDIT-HATO-BEAUTY-2026-09-14 (3).html`. Bản audit workspace có cùng SHA-256 với bản người dùng cung cấp. Giữ logo, font, beige–nâu, video gốc, VI/EN, năm nhóm dịch vụ, bốn nhãn carousel đã duyệt, social dưới logo và newsletter footer. Không đưa before/after trở lại homepage.
 
-Preview trên máy này: http://127.0.0.1:3040/ — chỉ tồn tại khi tiến trình local còn chạy. Preview này không có credentials backend thật; không dùng để nhận khách. Hai URL bài CMS đã được QA bằng snapshot nội dung công khai trong môi trường kiểm thử riêng, không phải bằng cách sửa CMS production.
+Preview local trên máy này: http://127.0.0.1:3040/ — chỉ tồn tại khi tiến trình local còn chạy và không có credentials backend thật. Vercel preview từ commit `07e778392fcf45f9b28c71ad2f0bc2cc5055cffe`: https://hatobeauty-62vo3futw-thao-vtca.vercel.app/ — dùng để kiểm tra giao diện, không dùng để nhận khách cho tới khi staging/backend được nghiệm thu. Hai URL bài CMS đã được QA bằng snapshot nội dung công khai trong môi trường kiểm thử riêng, không phải bằng cách sửa CMS production.
 
 ## 1. Completed
 
@@ -158,10 +158,10 @@ Homepage giảm khoảng **88,6% transferred bytes** trong các lần đo này. 
 
 Thứ tự an toàn; chưa thực hiện những bước mutate dưới đây:
 
-1. Review diff trong **đúng nested repository `.corrected-source`**, không gom các sửa đổi không liên quan từ thư mục cha. Tạo branch/commit theo quy trình hiện tại sau khi duyệt; chưa có Git push/PR từ đợt này.
+1. Đã review diff trong **đúng nested repository `.corrected-source`**, không gom các sửa đổi không liên quan từ thư mục cha. Đã push branch GitHub `codex/hato-latest` với commit `07e778392fcf45f9b28c71ad2f0bc2cc5055cffe`; không tạo PR. Các URL/slug hiện hữu được giữ nguyên, không thêm redirect/canonical đổi URL trong đợt này.
 2. Sao lưu và thử migration `20260916153230_contact_channels.sql` trên staging phù hợp trước. Kiểm tra tên constraint theo schema thật, không chạy lặp migration thủ công nếu đã apply. Migration phải chạy **trước** phiên bản app mới vì DB hiện chưa có các cột channel/email/social/option và phone booking còn NOT NULL. Không xóa dữ liệu cũ; kiểm tra RLS/grants vẫn giữ nguyên.
 3. Trên đúng Vercel project, xác minh `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY` thuộc đúng môi trường. Secret chỉ ở server; không dùng prefix public. Không đưa credential test double lên Vercel. Giữ cấu hình admin hiện có.
-4. Dùng Next build đã cấu hình trong `vercel.json`: `pnpm run build:vercel`; root directory phải là repository ứng dụng đúng, không thư mục audit/cha. Deploy preview trước, chưa promote production khi E2E chưa qua.
+4. Đã chạy `pnpm run build:vercel` trong repository ứng dụng đúng và Vercel đã tạo preview READY từ branch `codex/hato-latest`. Chưa promote production khi migration và E2E backend thật chưa qua.
 5. Trên staging thật, gửi một lead có kiểm soát cho mỗi kênh được hỗ trợ: kiểm tra row DB, selected channel, dữ liệu admin, trạng thái request và nhân viên đọc được. Xác minh không có false-success khi lỗi DB. Không gửi dữ liệu khách thật trong test. Chưa có bằng chứng hệ thống tự gửi thông báo nhân viên, nên không hứa tính năng đó.
 6. **www TLS:** thêm/kiểm tra `www.hatobeauty.com` trên cùng Vercel project, dùng chính DNS record Vercel yêu cầu tại thời điểm cấu hình, chờ certificate bao phủ hostname www. Không dùng IP/CNAME phỏng đoán, không tắt xác minh TLS. Sau đó kiểm tra cả HTTP/HTTPS, apex/www cùng `/en/book?service=skin` để xác nhận canonical và giữ query.
 7. Sau khi staging/owner approval qua, mới release; kiểm tra lại live form, sitemap/robots, canonical/hreflang, redirects, mobile và performance bằng cùng phiên bản công cụ. Handoff cho nhân viên xác nhận lead nhận được. Khi rollback ứng dụng, không drop các cột mới hay xóa dữ liệu lead đã ghi.
