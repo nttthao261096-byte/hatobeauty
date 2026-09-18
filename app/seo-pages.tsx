@@ -1,8 +1,4 @@
-import {
-  articlePath,
-  loadPublishedArticles,
-  type PublishedArticle,
-} from "./journal-content";
+import { articlePath, loadPublishedArticles } from "./journal-content";
 import Image from "./OptimizedImage";
 import Link from "next/link";
 import { journalGuidance } from "./journal-guidance";
@@ -41,12 +37,6 @@ import { ServicePriceTable } from "./ServicePriceTable";
 import { journalIntentFaqs, serviceIntentFaqs } from "./seo-faq-data";
 
 type ServiceDetailGroup = { title: string; items: string[] };
-
-function journalCardImage(article: PublishedArticle) {
-  return /^\/(?!\/)/.test(article.image_path) && !article.image_path.includes("\\")
-    ? article.image_path
-    : "/images/journal-skin-v2.webp";
-}
 
 type ServiceExperienceCopy = { introKicker: string; answerKicker: string };
 
@@ -415,19 +405,8 @@ export async function KnowledgeIndex({ lang }: { lang: SeoLang }) {
               href={articlePath(article, lang)}
               key={article.id}
             >
-              <div className="index-card-image">
-                <Image
-                  src={journalCardImage(article)}
-                  alt={article[`title_${lang}`]}
-                  fill
-                  sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw"
-                />
-              </div>
               <div className="index-card-copy">
-                <div>
-                  <span>{String(article.id).padStart(2, "0")}</span>
-                  <small>{article[`reading_time_${lang}`]}</small>
-                </div>
+                <small>{article[`reading_time_${lang}`]}</small>
                 <h2>{article[`title_${lang}`]}</h2>
                 <p>{article[`excerpt_${lang}`]}</p>
                 <strong>
