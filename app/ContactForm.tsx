@@ -1,24 +1,39 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 import { getBookingErrorMessage } from "./booking-errors";
-import { BOOKING_PHONE_PATTERN } from "./booking-validation";
+import { ContactChannelFields } from "./ContactChannelFields";
+import { contactValueError, parseContactValue } from "./contact-validation";
 import { IconArrow } from "./icons";
 import type { SeoLang } from "./seo-data";
 
 export function ContactForm({ lang }: { lang: SeoLang }) {
+  const submitting = useRef(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submitting.current) return;
+    submitting.current = true;
     setError("");
     setIsSubmitting(true);
     const form = event.currentTarget;
     const data = new FormData(form);
+    const contact = parseContactValue(Object.fromEntries(data));
+    if (!contact || contactValueError(contact)) {
+      setError(
+        lang === "vi"
+          ? "Vui lòng kiểm tra thông tin của kênh liên hệ đã chọn."
+          : "Please check the details for your selected contact method.",
+      );
+      submitting.current = false;
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch("/api/contact", {
@@ -29,6 +44,8 @@ export function ContactForm({ lang }: { lang: SeoLang }) {
           phone: data.get("phone"),
           email: data.get("email"),
           preference: data.get("preference"),
+          social: data.get("social"),
+          consent: data.get("consent") === "on",
           message: data.get("message"),
           website: data.get("website"),
           locale: lang,
@@ -36,7 +53,7 @@ export function ContactForm({ lang }: { lang: SeoLang }) {
       });
 
       if (!response.ok) {
-        setError(await getBookingErrorMessage(response, lang));
+        setError(await getBookingErrorMessage(response, lang, "contact"));
         return;
       }
 
@@ -44,38 +61,104 @@ export function ContactForm({ lang }: { lang: SeoLang }) {
       setSubmitted(true);
     } catch (submitError) {
       console.error(submitError);
-      setError(lang === "vi" ? "Chưa thể gửi yêu cầu. Vui lòng thử lại sau ít phút." : "We could not send your request. Please try again shortly.");
+      setError(
+        lang === "vi"
+          ? "Chưa thể gửi yêu cầu. Vui lòng thử lại sau ít phút."
+          : "We could not send your request. Please try again shortly.",
+      );
     } finally {
+      submitting.current = false;
       setIsSubmitting(false);
     }
   }
 
   if (submitted) {
-    return <section className="contact-form-success" role="status">
-      <span aria-hidden="true">✓</span>
-      <h2>{lang === "vi" ? "hato đã nhận được yêu cầu" : "hato has received your request"}</h2>
-      <p>{lang === "vi" ? "Đội ngũ sẽ liên hệ với bạn qua phương thức đã chọn trong thời gian sớm nhất." : "Our team will contact you through your preferred method as soon as possible."}</p>
-      <button type="button" onClick={() => setSubmitted(false)}>{lang === "vi" ? "Gửi yêu cầu khác" : "Send another request"}</button>
-    </section>;
+    return (
+      <section className="contact-form-success" role="status">
+        <span aria-hidden="true">✓</span>
+        <h2>
+          {lang === "vi"
+            ? "hato đã nhận được yêu cầu"
+            : "hato has received your request"}
+        </h2>
+        <p>
+          {lang === "vi"
+            ? "Đội ngũ sẽ liên hệ với bạn qua phương thức đã chọn."
+            : "Our team will contact you through your preferred method."}
+        </p>
+        <button type="button" onClick={() => setSubmitted(false)}>
+          {lang === "vi" ? "Gửi yêu cầu khác" : "Send another request"}
+        </button>
+      </section>
+    );
   }
 
-  return <form className="contact-lead-form" onSubmit={submit}>
-    <header>
-      <p>{lang === "vi" ? "GỬI YÊU CẦU" : "SEND A REQUEST"}</p>
-      <h2>{lang === "vi" ? "Để hato liên hệ với bạn" : "Let hato contact you"}</h2>
-      <span>{lang === "vi" ? "Chia sẻ nhu cầu của bạn, đội ngũ hato sẽ tư vấn và xác nhận thông tin phù hợp." : "Share what you need and the hato team will follow up with suitable information."}</span>
-    </header>
-    <div className="contact-form-grid">
-      <label>{lang === "vi" ? "Họ và tên *" : "Full name *"}<input name="name" autoComplete="name" minLength={2} maxLength={120} required /></label>
-      <label>{lang === "vi" ? "Số điện thoại *" : "Phone number *"}<input name="phone" type="tel" autoComplete="tel" inputMode="tel" minLength={8} maxLength={30} pattern={BOOKING_PHONE_PATTERN} title={lang === "vi" ? "Nhập số điện thoại gồm 8–15 chữ số." : "Enter a phone number containing 8–15 digits."} required /></label>
-      <label className="contact-form-wide">{lang === "vi" ? "Email (nếu có)" : "Email (optional)"}<input name="email" type="email" autoComplete="email" maxLength={254} /></label>
-      <label className="contact-form-wide">{lang === "vi" ? "Bạn muốn hato liên hệ bằng cách nào?" : "How should hato contact you?"}<select name="preference" defaultValue="phone"><option value="phone">{lang === "vi" ? "Liên hệ lại qua điện thoại" : "Call me by phone"}</option><option value="email">{lang === "vi" ? "Liên hệ lại qua email" : "Contact me by email"}</option><option value="whatsapp">WhatsApp</option><option value="instagram">Instagram</option><option value="facebook">Facebook</option></select></label>
-      <label className="contact-form-wide">{lang === "vi" ? "Nhu cầu / ghi chú" : "Your needs / notes"}<textarea name="message" maxLength={2000} rows={5} /></label>
-      <label className="contact-form-honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
-    </div>
-    <p className="contact-form-note">{lang === "vi" ? "Chi phí, thời gian và chính sách chỉ được xác nhận khi hato liên hệ lại." : "Pricing, timing and policies are confirmed when hato contacts you."}</p>
-    <label className="contact-form-consent"><input type="checkbox" required /><span>{lang === "vi" ? "Tôi đồng ý để hato liên hệ lại về yêu cầu này theo " : "I agree that hato may contact me about this request under the "}<Link href={lang === "vi" ? "/chinh-sach-bao-mat/" : "/en/privacy/"}>{lang === "vi" ? "chính sách bảo mật" : "privacy policy"}</Link>.</span></label>
-    {error && <p className="booking-error" role="alert">{error}</p>}
-    <button className="button primary" type="submit" disabled={isSubmitting}>{isSubmitting ? (lang === "vi" ? "Đang gửi..." : "Sending...") : (lang === "vi" ? "Gửi yêu cầu" : "Send request")}<IconArrow /></button>
-  </form>;
+  return (
+    <form className="contact-lead-form" onSubmit={submit}>
+      <header>
+        <p>{lang === "vi" ? "GỬI YÊU CẦU" : "SEND A REQUEST"}</p>
+        <h2>
+          {lang === "vi" ? "Để hato liên hệ với bạn" : "Let hato contact you"}
+        </h2>
+        <span>
+          {lang === "vi"
+            ? "Chia sẻ nhu cầu của bạn, đội ngũ hato sẽ tư vấn và xác nhận thông tin phù hợp."
+            : "Share what you need and the hato team will follow up with suitable information."}
+        </span>
+      </header>
+      <div className="contact-form-grid">
+        <label>
+          {lang === "vi" ? "Họ và tên *" : "Full name *"}
+          <input
+            name="name"
+            autoComplete="name"
+            minLength={2}
+            maxLength={120}
+            required
+          />
+        </label>
+        <ContactChannelFields lang={lang} />
+        <label className="contact-form-wide">
+          {lang === "vi" ? "Nhu cầu / ghi chú" : "Your needs / notes"}
+          <textarea name="message" minLength={2} maxLength={2000} rows={5} />
+        </label>
+        <label className="contact-form-honeypot" aria-hidden="true">
+          Website
+          <input name="website" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
+      <p className="contact-form-note">
+        {lang === "vi"
+          ? "Chi phí, thời gian và chính sách chỉ được xác nhận khi hato liên hệ lại."
+          : "Pricing, timing and policies are confirmed when hato contacts you."}
+      </p>
+      <label className="contact-form-consent">
+        <input name="consent" type="checkbox" required />
+        <span>
+          {lang === "vi"
+            ? "Tôi đồng ý để hato liên hệ lại về yêu cầu này theo "
+            : "I agree that hato may contact me about this request under the "}
+          <Link href={lang === "vi" ? "/chinh-sach-bao-mat" : "/en/privacy"}>
+            {lang === "vi" ? "chính sách bảo mật" : "privacy policy"}
+          </Link>
+          .
+        </span>
+      </label>
+      {error && (
+        <p className="booking-error" role="alert">
+          {error}
+        </p>
+      )}
+      <button className="button primary" type="submit" disabled={isSubmitting}>
+        {isSubmitting
+          ? lang === "vi"
+            ? "Đang gửi..."
+            : "Sending..."
+          : lang === "vi"
+            ? "Gửi yêu cầu"
+            : "Send request"}
+        <IconArrow />
+      </button>
+    </form>
+  );
 }

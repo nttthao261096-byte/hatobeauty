@@ -55,8 +55,12 @@ export function PublishedJournal({
 }) {
   const title = article[`title_${lang}`],
     path = articlePath(article, lang),
-    index = lang === "vi" ? "/kien-thuc/" : "/en/journal/",
+    index = lang === "vi" ? "/kien-thuc" : "/en/journal",
     tags = parseTags(article[`tags_${lang}`]);
+  const updated =
+    article.updated_at && !Number.isNaN(Date.parse(article.updated_at))
+      ? new Date(article.updated_at)
+      : undefined;
   const schema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -66,6 +70,7 @@ export function PublishedJournal({
     mainEntityOfPage: siteUrl + path,
     url: siteUrl + path,
     image: siteUrl + cover(article),
+    ...(updated ? { dateModified: updated.toISOString() } : {}),
     publisher: { "@type": "Organization", name: "Hato Beauty", url: siteUrl },
   };
   return (
@@ -76,13 +81,23 @@ export function PublishedJournal({
           __html: JSON.stringify(schema).replace(/</g, "\u003c"),
         }}
       />
-      <SeoHeader lang={lang} />
-      <main className="seo-article journal-article">
+      <SeoHeader
+        lang={lang}
+        languagePaths={{
+          vi: articlePath(article, "vi"),
+          en: articlePath(article, "en"),
+        }}
+      />
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="seo-article journal-article"
+      >
         <nav
           className="breadcrumbs"
           aria-label={lang === "vi" ? "Đường dẫn" : "Breadcrumb"}
         >
-          <Link href={lang === "vi" ? "/" : "/en/"}>
+          <Link href={lang === "vi" ? "/" : "/en"}>
             {lang === "vi" ? "Trang chủ" : "Home"}
           </Link>
           <span>/</span>
@@ -94,6 +109,24 @@ export function PublishedJournal({
           </p>
           <h1>{title}</h1>
           <p>{article[`excerpt_${lang}`]}</p>
+          {updated && (
+            <p className="article-meta">
+              <small>
+                {lang === "vi" ? "Cập nhật: " : "Updated: "}
+                <time dateTime={updated.toISOString()}>
+                  {updated.toLocaleDateString(
+                    lang === "vi" ? "vi-VN" : "en-GB",
+                    {
+                      timeZone: "Asia/Ho_Chi_Minh",
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    },
+                  )}
+                </time>
+              </small>
+            </p>
+          )}
         </header>
         <div
           style={{ position: "relative", aspectRatio: "16/9", marginBlock: 24 }}
@@ -108,7 +141,16 @@ export function PublishedJournal({
           />
         </div>
         <ArticleMarkdown content={article[`content_${lang}`]} />
-        {tags.length > 0 && <div className="article-tags" aria-label={lang === "vi" ? "Chủ đề bài viết" : "Article topics"}>{tags.map((tag) => <span key={tag}>{tag}</span>)}</div>}
+        {tags.length > 0 && (
+          <div
+            className="article-tags"
+            aria-label={lang === "vi" ? "Chủ đề bài viết" : "Article topics"}
+          >
+            {tags.map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
+          </div>
+        )}
         <div className="article-next">
           <Link href={index}>
             {lang === "vi" ? "Xem tất cả bài viết" : "View all articles"}

@@ -3,7 +3,8 @@ import { createPageMetadata } from "../seo-metadata";
 
 export const metadata = createPageMetadata({
   title: "Sản phẩm chăm sóc da",
-  description: "Sữa rửa mặt, toner, serum, kem dưỡng và chống nắng đi cùng lộ trình spa tại Hato Beauty Đà Nẵng. Giá hiện dưới từng ảnh.",
+  description:
+    "Sữa rửa mặt, toner, serum, kem dưỡng và chống nắng đi cùng lộ trình spa tại Hato Beauty Đà Nẵng. Liên hệ để xác nhận danh mục và giá hiện có.",
   path: "/san-pham/",
   viPath: "/san-pham/",
   enPath: "/en/care-products/",

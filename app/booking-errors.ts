@@ -4,8 +4,32 @@ interface BookingErrorPayload {
   code?: string;
 }
 
-export async function getBookingErrorMessage(response: Response, lang: SeoLang) {
-  const payload = await response.json().catch(() => ({})) as BookingErrorPayload;
+export async function getBookingErrorMessage(
+  response: Response,
+  lang: SeoLang,
+  context: "booking" | "contact" = "booking",
+) {
+  const payload = (await response
+    .json()
+    .catch(() => ({}))) as BookingErrorPayload;
+
+  if (
+    [
+      "invalid_email",
+      "invalid_whatsapp",
+      "invalid_social",
+      "invalid_channel",
+    ].includes(payload.code ?? "")
+  ) {
+    return lang === "vi"
+      ? "Vui lòng kiểm tra email, số WhatsApp có mã quốc gia hoặc tài khoản mạng xã hội của kênh đã chọn."
+      : "Check the email, WhatsApp number with country code, or social profile for your selected contact method.";
+  }
+  if (context === "contact" && response.status === 400) {
+    return lang === "vi"
+      ? "Vui lòng kiểm tra họ tên, kênh liên hệ, ghi chú và đồng ý liên hệ lại."
+      : "Please check your name, preferred contact details, notes and contact consent.";
+  }
 
   if (payload.code === "unknown_service") {
     return lang === "vi"

@@ -1,8 +1,12 @@
 import { Fragment, type ReactNode } from "react";
+import { canonicalPath } from "./route-paths";
 export function safeHref(value: string) {
-  if (/^\/(?!\/)/.test(value) && !value.includes("\\")) return value;
+  if (/^\/(?!\/)/.test(value) && !value.includes("\\"))
+    return canonicalPath(value);
   try {
     const url = new URL(value);
+    if (url.origin === "https://hatobeauty.com")
+      return url.origin + canonicalPath(url.pathname + url.search + url.hash);
     return ["https:", "http:"].includes(url.protocol) ? url.href : undefined;
   } catch {
     return undefined;

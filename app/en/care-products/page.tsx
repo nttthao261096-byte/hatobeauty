@@ -3,7 +3,8 @@ import { createPageMetadata } from "../../seo-metadata";
 
 export const metadata = createPageMetadata({
   title: "Skin care products",
-  description: "Cleanser, toner, serum, cream and SPF that sit with the spa plan at Hato Beauty in Da Nang. Price sits under each photo.",
+  description:
+    "Ask Hato Beauty in Da Nang about home skincare suited to your needs. Product availability and pricing are confirmed before you buy.",
   path: "/en/care-products/",
   viPath: "/san-pham/",
   enPath: "/en/care-products/",
