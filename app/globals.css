@@ -6467,3 +6467,6 @@ a:hover { color: inherit; }
   .service-card, .service-photo img, .feature-stage { transition: none; }
   .service-card:hover { transform: none; }
 }
+
+/* Keep Vercel's preview toolbar from appearing as a floating site control. */
+vercel-live-feedback { display: none !important; }
