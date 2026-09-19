@@ -32,7 +32,7 @@ export function ContactDetails({ lang, compact = false, showSocials = true }: { 
         <span className="contact-row-icon" aria-hidden="true"><IconMail /></span><span><small>Email</small><strong>hatobeautydanang@gmail.com</strong></span>
       </a>
       <div className="contact-row">
-        <span className="contact-row-icon" aria-hidden="true"><IconClock /></span><span><small>{lang === "vi" ? "Giờ mở cửa" : "Opening hours"}</small><strong>{lang === "vi" ? "Hằng ngày · 09:00–17:00" : "Daily · 9:00 AM–5:00 PM"}</strong></span>
+        <span className="contact-row-icon" aria-hidden="true"><IconClock /></span><span><small>{lang === "vi" ? "Giờ mở cửa" : "Opening hours"}</small><strong>{lang === "vi" ? "Hằng ngày · 09:00–19:00" : "Daily · 9:00 AM–7:00 PM"}</strong></span>
       </div>
     </div>
     {showSocials ? <ContactSocials lang={lang} /> : null}
