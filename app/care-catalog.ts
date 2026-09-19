@@ -2,27 +2,29 @@ import { isBusinessDataApproved } from "./business-data";
 export type CareLang = "vi" | "en";
 
 export const SAMPLE_PRICE_NOTE = {
-  vi: "Vui lòng liên hệ để xác nhận sản phẩm hiện có và giá trước khi mua.",
-  en: "Please contact us to confirm available products and pricing before purchasing.",
+  vi: "Giá sản phẩm mang tính tham khảo và có thể thay đổi. Vui lòng hỏi chuyên viên trước khi chọn mua.",
+  en: "Product prices are indicative and may change. Please ask the team before purchasing.",
 } as const;
 
 const draft_careProducts = [
   {
     id: "cleanser",
-    image: "/images/product-cleanser-v1.jpg",
-    size: "150 ml",
-    price: 320000,
-    filters: ["dry", "oily", "sensitive", "acne", "aftercare"],
+    image: "/images/product-oxygen-2-in-1-cleanser.jpg",
+    size: "200 ml",
+    price: 1050000,
+    brand: "OXYGEN",
+    origin: "New Zealand",
+    filters: ["oily", "sensitive", "acne"],
     when: { vi: "Sáng / Tối", en: "AM / PM" },
     vi: {
-      name: "Sữa rửa mặt dịu pH 5.5",
-      concern: "Mọi loại da, nhất là da dễ căng",
-      use: "Làm sạch bụi và dầu mà không kéo da khô.",
+      name: "Sữa rửa mặt OXYGEN 2 in 1 Cleanser",
+      concern: "Da dầu, da mụn và da nhạy cảm",
+      use: "Làm sạch sâu, loại bỏ dầu thừa và tẩy tế bào chết nhẹ với đá bọt siêu mịn.",
     },
     en: {
-      name: "Gentle pH 5.5 cleanser",
-      concern: "All skin, especially tightness-prone",
-      use: "Lifts the day without stripping the barrier.",
+      name: "OXYGEN 2 in 1 Cleanser",
+      concern: "Oily, blemish-prone and sensitive skin",
+      use: "Deep-cleanses excess oil and gently exfoliates with ultra-fine pumice.",
     },
   },
   {

@@ -18,9 +18,11 @@ export function ProductCard({
 }) {
   const copy = product[lang];
   const consult = lang === "vi" ? zalo : wa;
+  const provenance =
+    "brand" in product ? `${product.brand} · ${product.origin}` : null;
   return (
     <article
-      className={`product-card${compact ? " is-compact" : ""}`}
+      className={`product-card product-card--${product.id}${compact ? " is-compact" : ""}`}
       id={`product-${product.id}`}
     >
       <div className="product-photo">
@@ -32,6 +34,7 @@ export function ProductCard({
         />
       </div>
       <div className="product-card-copy">
+        {provenance && <p className="product-brand">{provenance}</p>}
         <p className="product-price">{formatVnd(product.price)}</p>
         <h3>{copy.name}</h3>
         <p className="product-use">{copy.use}</p>
@@ -42,11 +45,9 @@ export function ProductCard({
         </p>
         <div className="product-card-actions">
           <Link
-            href={lang === "vi" ? "/lo-trinh#steps" : "/en/care-plan#steps"}
+            href={lang === "vi" ? "/lo-trinh#journeys" : "/en/care-plan#journeys"}
           >
-            {lang === "vi"
-              ? "Tìm hiểu lộ trình chăm sóc"
-              : "Explore the care plan"}
+            {lang === "vi" ? "Thêm vào lộ trình" : "Add to plan"}
           </Link>
           <a href={consult} target="_blank" rel="noopener noreferrer">
             {lang === "vi" ? "Hỏi chuyên viên" : "Ask the team"}

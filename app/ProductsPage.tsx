@@ -26,13 +26,13 @@ export function ProductsPage({ lang }: { lang: CareLang }) {
           </p>
           <h1>
             {lang === "vi"
-              ? "Chọn chăm sóc tại nhà phù hợp với làn da."
-              : "Find home skincare that suits your skin."}
+              ? "Những sản phẩm chăm sóc da bạn nên có tại nhà."
+              : "At-home skincare essentials worth keeping close."}
           </h1>
           <p>
             {lang === "vi"
-              ? "Trao đổi với Hato Beauty về sản phẩm bạn đang dùng và nhu cầu hiện tại. Chúng tôi sẽ cùng bạn xây dựng chu trình đơn giản, đồng thời xác nhận sản phẩm sẵn có và chi phí trước khi mua."
-              : "Tell us about your current routine and what your skin needs. We can help you keep your routine simple and confirm product availability and pricing before you buy."}
+              ? "Từ làm sạch, cấp ẩm, phục hồi đến chống nắng, đây là những gợi ý giúp bạn xây dựng chu trình gọn nhẹ và dễ duy trì. Hãy soi da trước để chọn đúng món, đúng thời điểm và tránh dùng quá nhiều hoạt chất cùng lúc."
+              : "From cleansing and hydration to barrier support and sunscreen, these suggestions help you build a simple routine you can maintain. Start with a skin check to choose the right item and timing without stacking too many actives."}
           </p>
         </header>
         <ProductCatalog lang={lang} />

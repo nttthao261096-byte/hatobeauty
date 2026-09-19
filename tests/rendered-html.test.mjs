@@ -80,14 +80,17 @@ test("public route, brand, claim, canonical and booking contracts", async (t) =>
         const vi = await get("/san-pham/");
         const en = await get("/en/care-products/");
         for (const html of [vi, en]) {
-          assert.equal((html.match(/class="product-card"/g) || []).length, 10);
+          assert.equal(
+            (html.match(/class="product-card(?:\s|\")/g) || []).length,
+            10,
+          );
           assert.doesNotMatch(
             html,
             /Danh mục đang được cập nhật|catalogue is being updated/,
           );
         }
-        assert.match(vi, /Sữa rửa mặt dịu pH 5\.5/);
-        assert.match(en, /Gentle pH 5\.5 cleanser/);
+        assert.match(vi, /Sữa rửa mặt OXYGEN 2 in 1 Cleanser/);
+        assert.match(en, /OXYGEN 2 in 1 Cleanser/);
       },
     );
     await t.test(
