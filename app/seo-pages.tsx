@@ -403,6 +403,7 @@ export async function KnowledgeIndex({ lang }: { lang: SeoLang }) {
             <Link
               className="index-card journal-index-card"
               href={articlePath(article, lang)}
+              prefetch={false}
               key={article.id}
             >
               <div className="index-card-copy">
@@ -423,6 +424,7 @@ export async function KnowledgeIndex({ lang }: { lang: SeoLang }) {
               <Link
                 className="index-card journal-index-card"
                 href={journalPath(service, lang)}
+                prefetch={false}
                 key={topic.id}
               >
                 <div className="index-card-image">

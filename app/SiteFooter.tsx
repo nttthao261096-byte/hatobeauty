@@ -5,7 +5,7 @@ import Image from "./OptimizedImage";
 import { ContactDetails, ContactSocials } from "./ContactDetails";
 import { IconArrow } from "./icons";
 import { mediaUrl, type SeoLang } from "./seo-data";
-import { bookingPath, pageRoutes } from "./route-paths";
+import { pageRoutes } from "./route-paths";
 
 export function SiteFooter({ lang }: { lang: SeoLang }) {
   const [newsletterEmail, setNewsletterEmail] = useState("");
@@ -104,10 +104,6 @@ export function SiteFooter({ lang }: { lang: SeoLang }) {
       <div className="footer-contact">
         <h3>{lang === "vi" ? "Hẹn cùng chúng tôi" : "Plan your visit"}</h3>
         <ContactDetails lang={lang} compact showSocials={false} />
-        <a className="footer-consultation-link" href={bookingPath(lang)}>
-          {lang === "vi" ? "Đặt lịch hẹn" : "Request an appointment"}
-          <IconArrow />
-        </a>
       </div>
       <div className="footer-bottom">
         <span>© 2026 Hato Beauty</span>
