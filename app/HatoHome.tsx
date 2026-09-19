@@ -611,7 +611,7 @@ export function HatoHome({
           <div className="knowledge-grid">
             {seoServices.slice(0, 4).map((item) => (
               <article className="knowledge-card" key={item.id}>
-                <a href={journalPath(item, lang)}>
+                <Link href={journalPath(item, lang)} prefetch={false}>
                   <div className="knowledge-image">
                     <Image
                       src={item.image}
@@ -630,7 +630,7 @@ export function HatoHome({
                       <IconArrow />
                     </span>
                   </div>
-                </a>
+                </Link>
               </article>
             ))}
           </div>

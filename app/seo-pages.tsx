@@ -400,9 +400,10 @@ export async function KnowledgeIndex({ lang }: { lang: SeoLang }) {
         </header>
         <section className="index-grid knowledge-index-grid" aria-label={title}>
           {published.map((article) => (
-            <a
+            <Link
               className="index-card journal-index-card"
               href={articlePath(article, lang)}
+              prefetch={false}
               key={article.id}
             >
               <div className="index-card-copy">
@@ -414,15 +415,16 @@ export async function KnowledgeIndex({ lang }: { lang: SeoLang }) {
                   <IconArrow />
                 </strong>
               </div>
-            </a>
+            </Link>
           ))}
           {journalTopics.map((topic, index) => {
             const service = topic.service;
             const articleTitle = journalTitle(service, lang);
             return (
-              <a
+              <Link
                 className="index-card journal-index-card"
                 href={journalPath(service, lang)}
+                prefetch={false}
                 key={topic.id}
               >
                 <div className="index-card-image">
@@ -445,7 +447,7 @@ export async function KnowledgeIndex({ lang }: { lang: SeoLang }) {
                     <IconArrow />
                   </strong>
                 </div>
-              </a>
+              </Link>
             );
           })}
         </section>
