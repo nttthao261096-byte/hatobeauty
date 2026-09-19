@@ -1,9 +1,15 @@
 import { seoServices, type SeoLang, type SeoService } from "./seo-data";
 
 export type Approval = { evidence: string; approvedAt: string };
-// Empty intentionally: repository seed data is not owner approval.
-// Add a verifiable source reference and approval date before publishing.
-const publicationApprovals: Readonly<Record<string, Approval>> = {};
+// Only owner-approved catalogue keys are published.
+// Add a verifiable source reference and approval date for each new key.
+const publicationApprovals: Readonly<Record<string, Approval>> = {
+  careProducts: {
+    evidence:
+      "Owner request on 2026-09-19 to restore the previously published product catalogue.",
+    approvedAt: "2026-09-19",
+  },
+};
 export function isBusinessDataApproved(key: string): boolean {
   const approval = publicationApprovals[key];
   return Boolean(

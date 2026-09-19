@@ -75,6 +75,22 @@ test("public route, brand, claim, canonical and booking contracts", async (t) =>
       },
     );
     await t.test(
+      "restores the approved bilingual product catalogue",
+      async () => {
+        const vi = await get("/san-pham/");
+        const en = await get("/en/care-products/");
+        for (const html of [vi, en]) {
+          assert.equal((html.match(/class="product-card"/g) || []).length, 10);
+          assert.doesNotMatch(
+            html,
+            /Danh mục đang được cập nhật|catalogue is being updated/,
+          );
+        }
+        assert.match(vi, /Sữa rửa mặt dịu pH 5\.5/);
+        assert.match(en, /Gentle pH 5\.5 cleanser/);
+      },
+    );
+    await t.test(
       "all sitemap URLs return final 200, one H1, metadata and reciprocal final alternates",
       async () => {
         const xml = await (await fetch(app.origin + "/sitemap.xml")).text();
