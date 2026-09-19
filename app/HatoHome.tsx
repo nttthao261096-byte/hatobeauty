@@ -204,6 +204,21 @@ const originalHighlightCopy = {
   ],
 } as const;
 
+const originalHighlightCopy = {
+  vi: [
+    ["Thiết bị hiện đại", "Thiết bị được lựa chọn phù hợp với từng nhu cầu chăm sóc."],
+    ["Đội ngũ chuyên nghiệp", "Đội ngũ lắng nghe kỹ và chăm chút trong từng bước thực hiện."],
+    ["Dịch vụ cá nhân hóa", "Mỗi dịch vụ được điều chỉnh theo tình trạng và nhu cầu riêng của bạn."],
+    ["Không gian thư giãn", "Không gian riêng tư, sạch sẽ và đủ chậm để bạn thư giãn."],
+  ],
+  en: [
+    ["Modern equipment", "Equipment selected to suit each care need."],
+    ["Professional team", "An attentive team that takes care with every step."],
+    ["Personalized service", "Each service is tailored to your condition and individual needs."],
+    ["A relaxing space", "A private, clean and unhurried space where you can relax."],
+  ],
+} as const;
+
 const serviceCardCopy = {
   skin: {
     vi: {
