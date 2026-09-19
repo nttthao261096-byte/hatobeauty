@@ -212,6 +212,26 @@
       864
     ]
   },
+  "/images/product-dermeden-intense-night-cream.png": {
+    "prefix": "product-dermeden-intense-night-cream-c630bbbe2842",
+    "widths": [
+      96,
+      192,
+      320,
+      343
+    ]
+  },
+  "/images/product-dermeden-lumixderm.png": {
+    "prefix": "product-dermeden-lumixderm-44484f327d37",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      687
+    ]
+  },
   "/images/product-exfoliant-v1.jpg": {
     "prefix": "product-exfoliant-v1-59ce7c04e986",
     "widths": [
@@ -234,6 +254,16 @@
       864
     ]
   },
+  "/images/product-obagi-claribright.png": {
+    "prefix": "product-obagi-claribright-5a75d1c845f8",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      512
+    ]
+  },
   "/images/product-oxygen-2-in-1-cleanser.jpg": {
     "prefix": "product-oxygen-2-in-1-cleanser-d20bc663314f",
     "widths": [
@@ -242,6 +272,15 @@
       320,
       480,
       554
+    ]
+  },
+  "/images/product-purles-156-sos-calm-mask.png": {
+    "prefix": "product-purles-156-sos-calm-mask-2065e4c3d89c",
+    "widths": [
+      96,
+      192,
+      320,
+      345
     ]
   },
   "/images/product-serum-ha-v1.jpg": {

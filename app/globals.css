@@ -6512,8 +6512,32 @@ a:hover { color: inherit; }
 }
 .product-card--cleanser .product-card-actions a { font-size: 14px; }
 
+.product-card--lumixderm .product-photo,
+.product-card--purles-sos-calm-mask .product-photo,
+.product-card--dermeden-intense-night-cream .product-photo,
+.product-card--obagi-claribright .product-photo {
+  background: #fff;
+}
+.product-card--lumixderm .product-photo::before,
+.product-card--purles-sos-calm-mask .product-photo::before,
+.product-card--dermeden-intense-night-cream .product-photo::before,
+.product-card--obagi-claribright .product-photo::before {
+  display: none;
+}
+.product-card--lumixderm .product-photo img,
+.product-card--purles-sos-calm-mask .product-photo img,
+.product-card--dermeden-intense-night-cream .product-photo img,
+.product-card--obagi-claribright .product-photo img {
+  padding: 18px;
+  object-fit: contain;
+}
+
 @media (max-width: 600px) {
   .product-card--cleanser .product-photo img { padding: 16px; }
+  .product-card--lumixderm .product-photo img,
+  .product-card--purles-sos-calm-mask .product-photo img,
+  .product-card--dermeden-intense-night-cream .product-photo img,
+  .product-card--obagi-claribright .product-photo img { padding: 12px; }
   .product-card--cleanser .product-card-copy { padding: 16px 15px 18px; }
   .product-card--cleanser .product-card-copy h3 { font-size: 19px; }
   .product-card--cleanser .product-use { font-size: 14px; }

@@ -189,6 +189,98 @@ const draft_careProducts = [
       use: "Adds a light layer of hydration without a heavy finish.",
     },
   },
+  {
+    id: "lumixderm",
+    image: "/images/product-dermeden-lumixderm.png",
+    size: "40 ml",
+    price: 0,
+    priceLabel: { vi: "Liên hệ", en: "Contact us" },
+    brand: "DermEden",
+    origin: "France",
+    officialSource:
+      "https://dermeden.com/a/l/en/collections/soins-dejour/products/lumixder-creme-eclaircissante",
+    filters: ["dry", "oily", "sensitive"],
+    when: { vi: "Hằng ngày", en: "Daily" },
+    vi: {
+      name: "DermEden LUMIXDERM Brightening Cream",
+      concern: "Da không đều màu, có đốm sậm màu",
+      use: "Kem dưỡng hỗ trợ bề mặt da trông đều màu, rạng rỡ hơn và duy trì độ ẩm.",
+    },
+    en: {
+      name: "DermEden LUMIXDERM Brightening Cream",
+      concern: "Uneven tone and visible dark spots",
+      use: "A moisturising cream that helps skin look brighter and more even-toned.",
+    },
+  },
+  {
+    id: "purles-sos-calm-mask",
+    image: "/images/product-purles-156-sos-calm-mask.png",
+    size: "50 ml",
+    price: 0,
+    priceLabel: { vi: "Liên hệ", en: "Contact us" },
+    brand: "Purlés",
+    origin: "Poland",
+    officialSource:
+      "https://products.purles.eu/en/products/156-sos-calm-mask-17074.html",
+    filters: ["dry", "sensitive", "aftercare"],
+    when: { vi: "2–3 lần/tuần", en: "2–3 times a week" },
+    vi: {
+      name: "Purlés 156 SOS Calm Mask",
+      concern: "Da nhạy cảm, khô, thiếu nước hoặc dễ khó chịu",
+      use: "Mặt nạ gel-kem giúp cấp ẩm, làm dịu cảm giác khó chịu và hỗ trợ hàng rào da.",
+    },
+    en: {
+      name: "Purlés 156 SOS Calm Mask",
+      concern: "Sensitive, dry, dehydrated or uncomfortable skin",
+      use: "A gel-cream mask that hydrates, comforts and supports the skin barrier.",
+    },
+  },
+  {
+    id: "dermeden-intense-night-cream",
+    image: "/images/product-dermeden-intense-night-cream.png",
+    size: "50 ml",
+    price: 0,
+    priceLabel: { vi: "Liên hệ", en: "Contact us" },
+    brand: "DermEden",
+    origin: "France",
+    officialSource:
+      "https://dermeden.com/products/creme-de-nuit-anti-age-intense",
+    filters: ["dry", "oily"],
+    when: { vi: "Tối · bắt đầu cách đêm", en: "PM · start every other night" },
+    vi: {
+      name: "DermEden Intense Night Cream",
+      concern: "Da không đều màu, bề mặt thô ráp, có dấu hiệu tuổi tác",
+      use: "Kem dưỡng đêm có retinol và AHA, hỗ trợ bề mặt da trông mịn và đều màu hơn. Dùng chống nắng vào ban ngày.",
+    },
+    en: {
+      name: "DermEden Intense Night Cream",
+      concern: "Uneven tone, rough texture and visible signs of ageing",
+      use: "A retinol and AHA night cream that helps skin look smoother and more even. Use sunscreen during the day.",
+    },
+  },
+  {
+    id: "obagi-claribright",
+    image: "/images/product-obagi-claribright.png",
+    size: "50 g",
+    price: 0,
+    priceLabel: { vi: "Liên hệ", en: "Contact us" },
+    brand: "SUZANOBAGIMD®",
+    origin: "United States",
+    officialSource:
+      "https://www.obagi.com/products/suzanobagimd-claribright-radiance-brightening-lotion",
+    filters: ["dry", "oily", "sensitive"],
+    when: { vi: "Sáng / Tối", en: "AM / PM" },
+    vi: {
+      name: "SUZANOBAGIMD® Claribright Lotion",
+      concern: "Da không đều màu, nhạy cảm hoặc có vùng sậm màu",
+      use: "Lotion dưỡng sáng giúp bề mặt da trông đều màu hơn, đồng thời hỗ trợ làm dịu và hàng rào da.",
+    },
+    en: {
+      name: "SUZANOBAGIMD® Claribright Lotion",
+      concern: "Uneven tone, sensitivity or visible discolouration",
+      use: "A brightening lotion that helps skin look more even while supporting comfort and the skin barrier.",
+    },
+  },
 ] as const;
 
 export type ProductId = (typeof careProducts)[number]["id"];

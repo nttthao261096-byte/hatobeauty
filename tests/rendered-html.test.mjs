@@ -82,7 +82,7 @@ test("public route, brand, claim, canonical and booking contracts", async (t) =>
         for (const html of [vi, en]) {
           assert.equal(
             (html.match(/class="product-card(?:\s|\")/g) || []).length,
-            10,
+            14,
           );
           assert.doesNotMatch(
             html,
@@ -90,6 +90,10 @@ test("public route, brand, claim, canonical and booking contracts", async (t) =>
           );
         }
         assert.match(vi, /Sữa rửa mặt OXYGEN 2 in 1 Cleanser/);
+        assert.match(vi, /DermEden LUMIXDERM Brightening Cream/);
+        assert.match(vi, /Purlés 156 SOS Calm Mask/);
+        assert.match(vi, /DermEden Intense Night Cream/);
+        assert.match(vi, /SUZANOBAGIMD® Claribright Lotion/);
         assert.match(en, /OXYGEN 2 in 1 Cleanser/);
       },
     );

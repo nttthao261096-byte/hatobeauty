@@ -35,7 +35,11 @@ export function ProductCard({
       </div>
       <div className="product-card-copy">
         {provenance && <p className="product-brand">{provenance}</p>}
-        <p className="product-price">{formatVnd(product.price)}</p>
+        <p className="product-price">
+          {"priceLabel" in product
+            ? product.priceLabel[lang]
+            : formatVnd(product.price)}
+        </p>
         <h3>{copy.name}</h3>
         <p className="product-use">{copy.use}</p>
         <p className="product-meta">

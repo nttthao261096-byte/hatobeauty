@@ -51,7 +51,7 @@ export default async function Home() {
         },
         hasMap:
           "https://www.google.com/maps/search/?api=1&query=127%20Ch%C3%A2u%20Th%E1%BB%8B%20V%C4%A9nh%20T%E1%BA%BF%2C%20Ng%C5%A9%20H%C3%A0nh%20S%C6%A1n%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng",
-        openingHours: "Mo-Su 08:30-19:30",
+        openingHours: "Mo-Su 09:00-17:00",
         sameAs: [
           "https://www.tiktok.com/@hatobeauty",
           "https://www.instagram.com/hatobeauty/",

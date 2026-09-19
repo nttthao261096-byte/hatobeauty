@@ -40,7 +40,7 @@ function brandText(text: string): ReactNode {
 const copy = {
   vi: {
     announcement:
-      "Soi da khi đặt liệu trình · 08:30–19:30 · 127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn",
+      "Soi da khi đặt liệu trình · 09:00–17:00 · 127 Châu Thị Vĩnh Tế, Ngũ Hành Sơn",
     book: "Đặt lịch hẹn",
     nav: ["Về Hato Beauty", "Dịch vụ", "Trải nghiệm", "Kết quả", "Cảm nhận"],
     heroTitle: "Tỏa sáng là chính bạn.",
@@ -96,7 +96,7 @@ const copy = {
   },
   en: {
     announcement:
-      "Skin check with treatment · 08:30–19:30 · 127 Chau Thi Vinh Te, Ngu Hanh Son",
+      "Skin check with treatment · 09:00–17:00 · 127 Chau Thi Vinh Te, Ngu Hanh Son",
     book: "Request an appointment",
     nav: ["About us", "Services", "Experience", "Results", "Reviews"],
     heroTitle: "Shine as you are.",
