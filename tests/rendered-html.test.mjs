@@ -94,10 +94,10 @@ test("public route, brand, claim, canonical and booking contracts", async (t) =>
         assert.match(vi, /Purlés 156 SOS Calm Mask/);
         assert.match(vi, /DermEden Intense Night Cream/);
         assert.match(vi, /SUZANOBAGIMD® Claribright Lotion/);
-        assert.match(vi, /Giá hãng · 60,90 €/);
-        assert.match(vi, /Giá hãng · 96,00 zł/);
-        assert.match(vi, /Giá hãng · 55,90 €/);
-        assert.match(vi, /Giá hãng · 178,00 USD/);
+        assert.match(vi, /1\.867\.000đ/);
+        assert.match(vi, /658\.000đ/);
+        assert.match(vi, /1\.714\.000đ/);
+        assert.match(vi, /4\.629\.000đ/);
         assert.doesNotMatch(vi, /Toner cân bằng/);
         assert.doesNotMatch(vi, /Serum HA cấp ẩm/);
         assert.doesNotMatch(vi, /Serum niacinamide làm đều tone/);

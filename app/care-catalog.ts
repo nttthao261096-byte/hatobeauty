@@ -11,8 +11,7 @@ const draft_careProducts = [
     id: "lumixderm",
     image: "/images/product-dermeden-lumixderm.png",
     size: "40 ml",
-    price: 0,
-    priceLabel: { vi: "Giá hãng · 60,90 €", en: "Official price · €60.90" },
+    price: 1867000,
     brand: "DermEden",
     origin: "France",
     officialSource:
@@ -34,11 +33,7 @@ const draft_careProducts = [
     id: "purles-sos-calm-mask",
     image: "/images/product-purles-156-sos-calm-mask.png",
     size: "50 ml",
-    price: 0,
-    priceLabel: {
-      vi: "Giá hãng · 96,00 zł",
-      en: "Official price · PLN 96.00",
-    },
+    price: 658000,
     brand: "Purlés",
     origin: "Poland",
     officialSource:
@@ -60,8 +55,7 @@ const draft_careProducts = [
     id: "dermeden-intense-night-cream",
     image: "/images/product-dermeden-intense-night-cream.png",
     size: "50 ml",
-    price: 0,
-    priceLabel: { vi: "Giá hãng · 55,90 €", en: "Official price · €55.90" },
+    price: 1714000,
     brand: "DermEden",
     origin: "France",
     officialSource:
@@ -83,11 +77,7 @@ const draft_careProducts = [
     id: "obagi-claribright",
     image: "/images/product-obagi-claribright.png",
     size: "50 g",
-    price: 0,
-    priceLabel: {
-      vi: "Giá hãng · 178,00 USD",
-      en: "Official price · $178.00",
-    },
+    price: 4629000,
     brand: "SUZANOBAGIMD®",
     origin: "United States",
     officialSource:
