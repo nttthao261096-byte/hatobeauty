@@ -82,7 +82,7 @@ test("public route, brand, claim, canonical and booking contracts", async (t) =>
         for (const html of [vi, en]) {
           assert.equal(
             (html.match(/class="product-card(?:\s|\")/g) || []).length,
-            14,
+            10,
           );
           assert.doesNotMatch(
             html,
@@ -94,6 +94,14 @@ test("public route, brand, claim, canonical and booking contracts", async (t) =>
         assert.match(vi, /Purlés 156 SOS Calm Mask/);
         assert.match(vi, /DermEden Intense Night Cream/);
         assert.match(vi, /SUZANOBAGIMD® Claribright Lotion/);
+        assert.doesNotMatch(vi, /Toner cân bằng/);
+        assert.doesNotMatch(vi, /Serum HA cấp ẩm/);
+        assert.doesNotMatch(vi, /Serum niacinamide làm đều tone/);
+        assert.doesNotMatch(vi, /Kem dưỡng phục hồi hàng rào/);
+        assert.ok(
+          vi.indexOf("DermEden LUMIXDERM Brightening Cream") <
+            vi.indexOf("Sữa rửa mặt OXYGEN 2 in 1 Cleanser"),
+        );
         assert.match(en, /OXYGEN 2 in 1 Cleanser/);
       },
     );

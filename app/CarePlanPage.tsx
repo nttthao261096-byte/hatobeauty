@@ -196,7 +196,9 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
                               <b>{item[lang].name}</b>
                               <small>
                                 {item.size} · {item.when[lang]} ·{" "}
-                                {formatVnd(item.price)}
+                                {"priceLabel" in item
+                                  ? item.priceLabel[lang]
+                                  : formatVnd(item.price)}
                               </small>
                             </span>
                           </li>
@@ -282,6 +284,9 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
                   0,
                 );
                 const setPrice = retail - combo.save;
+                const needsPriceConfirmation = items.some(
+                  (item) => item && "priceLabel" in item,
+                );
                 return (
                   <article className="plan-combo-card" key={combo.id}>
                     <div className="plan-combo-photo">
@@ -293,11 +298,21 @@ export function CarePlanPage({ lang }: { lang: CareLang }) {
                       />
                     </div>
                     <h3>{combo[lang].name}</h3>
-                    <p className="product-price">{formatVnd(setPrice)}</p>
+                    <p className="product-price">
+                      {needsPriceConfirmation
+                        ? lang === "vi"
+                          ? "Liên hệ"
+                          : "Contact us"
+                        : formatVnd(setPrice)}
+                    </p>
                     <p className="plan-combo-save">
-                      {lang === "vi"
-                        ? `Lẻ ${formatVnd(retail)} · tiết kiệm ${formatVnd(combo.save)}`
-                        : `Singly ${formatVnd(retail)} · save ${formatVnd(combo.save)}`}
+                      {needsPriceConfirmation
+                        ? lang === "vi"
+                          ? "Vui lòng xác nhận giá với chuyên viên"
+                          : "Please confirm pricing with the team"
+                        : lang === "vi"
+                          ? `Lẻ ${formatVnd(retail)} · tiết kiệm ${formatVnd(combo.save)}`
+                          : `Singly ${formatVnd(retail)} · save ${formatVnd(combo.save)}`}
                     </p>
                     <p>{combo[lang].fit}</p>
                     <ul>

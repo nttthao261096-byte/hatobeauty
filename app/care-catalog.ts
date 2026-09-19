@@ -8,6 +8,98 @@ export const SAMPLE_PRICE_NOTE = {
 
 const draft_careProducts = [
   {
+    id: "lumixderm",
+    image: "/images/product-dermeden-lumixderm.png",
+    size: "40 ml",
+    price: 0,
+    priceLabel: { vi: "Liên hệ", en: "Contact us" },
+    brand: "DermEden",
+    origin: "France",
+    officialSource:
+      "https://dermeden.com/a/l/en/collections/soins-dejour/products/lumixder-creme-eclaircissante",
+    filters: ["dry", "oily", "sensitive"],
+    when: { vi: "Hằng ngày", en: "Daily" },
+    vi: {
+      name: "DermEden LUMIXDERM Brightening Cream",
+      concern: "Da không đều màu, có đốm sậm màu",
+      use: "Kem dưỡng hỗ trợ bề mặt da trông đều màu, rạng rỡ hơn và duy trì độ ẩm.",
+    },
+    en: {
+      name: "DermEden LUMIXDERM Brightening Cream",
+      concern: "Uneven tone and visible dark spots",
+      use: "A moisturising cream that helps skin look brighter and more even-toned.",
+    },
+  },
+  {
+    id: "purles-sos-calm-mask",
+    image: "/images/product-purles-156-sos-calm-mask.png",
+    size: "50 ml",
+    price: 0,
+    priceLabel: { vi: "Liên hệ", en: "Contact us" },
+    brand: "Purlés",
+    origin: "Poland",
+    officialSource:
+      "https://products.purles.eu/en/products/156-sos-calm-mask-17074.html",
+    filters: ["dry", "sensitive", "aftercare"],
+    when: { vi: "2–3 lần/tuần", en: "2–3 times a week" },
+    vi: {
+      name: "Purlés 156 SOS Calm Mask",
+      concern: "Da nhạy cảm, khô, thiếu nước hoặc dễ khó chịu",
+      use: "Mặt nạ gel-kem giúp cấp ẩm, làm dịu cảm giác khó chịu và hỗ trợ hàng rào da.",
+    },
+    en: {
+      name: "Purlés 156 SOS Calm Mask",
+      concern: "Sensitive, dry, dehydrated or uncomfortable skin",
+      use: "A gel-cream mask that hydrates, comforts and supports the skin barrier.",
+    },
+  },
+  {
+    id: "dermeden-intense-night-cream",
+    image: "/images/product-dermeden-intense-night-cream.png",
+    size: "50 ml",
+    price: 0,
+    priceLabel: { vi: "Liên hệ", en: "Contact us" },
+    brand: "DermEden",
+    origin: "France",
+    officialSource:
+      "https://dermeden.com/products/creme-de-nuit-anti-age-intense",
+    filters: ["dry", "oily"],
+    when: { vi: "Tối · bắt đầu cách đêm", en: "PM · start every other night" },
+    vi: {
+      name: "DermEden Intense Night Cream",
+      concern: "Da không đều màu, bề mặt thô ráp, có dấu hiệu tuổi tác",
+      use: "Kem dưỡng đêm có retinol và AHA, hỗ trợ bề mặt da trông mịn và đều màu hơn. Dùng chống nắng vào ban ngày.",
+    },
+    en: {
+      name: "DermEden Intense Night Cream",
+      concern: "Uneven tone, rough texture and visible signs of ageing",
+      use: "A retinol and AHA night cream that helps skin look smoother and more even. Use sunscreen during the day.",
+    },
+  },
+  {
+    id: "obagi-claribright",
+    image: "/images/product-obagi-claribright.png",
+    size: "50 g",
+    price: 0,
+    priceLabel: { vi: "Liên hệ", en: "Contact us" },
+    brand: "SUZANOBAGIMD®",
+    origin: "United States",
+    officialSource:
+      "https://www.obagi.com/products/suzanobagimd-claribright-radiance-brightening-lotion",
+    filters: ["dry", "oily", "sensitive"],
+    when: { vi: "Sáng / Tối", en: "AM / PM" },
+    vi: {
+      name: "SUZANOBAGIMD® Claribright Lotion",
+      concern: "Da không đều màu, nhạy cảm hoặc có vùng sậm màu",
+      use: "Lotion dưỡng sáng giúp bề mặt da trông đều màu hơn, đồng thời hỗ trợ làm dịu và hàng rào da.",
+    },
+    en: {
+      name: "SUZANOBAGIMD® Claribright Lotion",
+      concern: "Uneven tone, sensitivity or visible discolouration",
+      use: "A brightening lotion that helps skin look more even while supporting comfort and the skin barrier.",
+    },
+  },
+  {
     id: "cleanser",
     image: "/images/product-oxygen-2-in-1-cleanser.jpg",
     size: "200 ml",
@@ -25,78 +117,6 @@ const draft_careProducts = [
       name: "OXYGEN 2 in 1 Cleanser",
       concern: "Oily, blemish-prone and sensitive skin",
       use: "Deep-cleanses excess oil and gently exfoliates with ultra-fine pumice.",
-    },
-  },
-  {
-    id: "toner",
-    image: "/images/product-toner-v1.jpg",
-    size: "150 ml",
-    price: 380000,
-    filters: ["dry", "oily", "sensitive", "aftercare"],
-    when: { vi: "Sáng / Tối", en: "AM / PM" },
-    vi: {
-      name: "Toner cân bằng",
-      concern: "Da thiếu nước, da vừa rửa xong",
-      use: "Cấp một lớp nước mỏng trước serum và kem.",
-    },
-    en: {
-      name: "Balancing toner",
-      concern: "Dehydrated or freshly cleansed skin",
-      use: "A light water layer before serum and cream.",
-    },
-  },
-  {
-    id: "serum-ha",
-    image: "/images/product-serum-ha-v1.jpg",
-    size: "30 ml",
-    price: 490000,
-    filters: ["dry", "sensitive", "aftercare"],
-    when: { vi: "Sáng / Tối", en: "AM / PM" },
-    vi: {
-      name: "Serum HA cấp ẩm",
-      concern: "Da căng, bong nhẹ, thiếu ẩm",
-      use: "Giữ nước trên bề mặt, da dễ chịu hơn trong ngày.",
-    },
-    en: {
-      name: "HA hydrating serum",
-      concern: "Tight, flaky or thirsty skin",
-      use: "Holds water at the surface so skin feels easier.",
-    },
-  },
-  {
-    id: "serum-niacinamide",
-    image: "/images/product-serum-niacinamide-v1.jpg",
-    size: "30 ml",
-    price: 520000,
-    filters: ["oily", "acne", "aftercare"],
-    when: { vi: "Tối", en: "PM" },
-    vi: {
-      name: "Serum niacinamide làm đều tone",
-      concern: "Da xỉn, lỗ chân lông, thâm nhẹ",
-      use: "Hỗ trợ bề mặt trông đều và bớt bóng dầu.",
-    },
-    en: {
-      name: "Niacinamide even-tone serum",
-      concern: "Dullness, pores, light marks",
-      use: "Helps the surface look calmer and more even.",
-    },
-  },
-  {
-    id: "cream",
-    image: "/images/product-cream-barrier-v1.jpg",
-    size: "50 ml",
-    price: 560000,
-    filters: ["dry", "sensitive", "aftercare"],
-    when: { vi: "Tối", en: "PM" },
-    vi: {
-      name: "Kem dưỡng phục hồi hàng rào",
-      concern: "Da mỏng, dễ rát, sau spa",
-      use: "Khóa ẩm và làm dịu cảm giác căng.",
-    },
-    en: {
-      name: "Barrier repair cream",
-      concern: "Thin, sting-prone, post-spa skin",
-      use: "Seals water in and eases tightness.",
     },
   },
   {
@@ -187,98 +207,6 @@ const draft_careProducts = [
       name: "Soothing gel serum",
       concern: "Warm, redness-prone or dehydrated skin",
       use: "Adds a light layer of hydration without a heavy finish.",
-    },
-  },
-  {
-    id: "lumixderm",
-    image: "/images/product-dermeden-lumixderm.png",
-    size: "40 ml",
-    price: 0,
-    priceLabel: { vi: "Liên hệ", en: "Contact us" },
-    brand: "DermEden",
-    origin: "France",
-    officialSource:
-      "https://dermeden.com/a/l/en/collections/soins-dejour/products/lumixder-creme-eclaircissante",
-    filters: ["dry", "oily", "sensitive"],
-    when: { vi: "Hằng ngày", en: "Daily" },
-    vi: {
-      name: "DermEden LUMIXDERM Brightening Cream",
-      concern: "Da không đều màu, có đốm sậm màu",
-      use: "Kem dưỡng hỗ trợ bề mặt da trông đều màu, rạng rỡ hơn và duy trì độ ẩm.",
-    },
-    en: {
-      name: "DermEden LUMIXDERM Brightening Cream",
-      concern: "Uneven tone and visible dark spots",
-      use: "A moisturising cream that helps skin look brighter and more even-toned.",
-    },
-  },
-  {
-    id: "purles-sos-calm-mask",
-    image: "/images/product-purles-156-sos-calm-mask.png",
-    size: "50 ml",
-    price: 0,
-    priceLabel: { vi: "Liên hệ", en: "Contact us" },
-    brand: "Purlés",
-    origin: "Poland",
-    officialSource:
-      "https://products.purles.eu/en/products/156-sos-calm-mask-17074.html",
-    filters: ["dry", "sensitive", "aftercare"],
-    when: { vi: "2–3 lần/tuần", en: "2–3 times a week" },
-    vi: {
-      name: "Purlés 156 SOS Calm Mask",
-      concern: "Da nhạy cảm, khô, thiếu nước hoặc dễ khó chịu",
-      use: "Mặt nạ gel-kem giúp cấp ẩm, làm dịu cảm giác khó chịu và hỗ trợ hàng rào da.",
-    },
-    en: {
-      name: "Purlés 156 SOS Calm Mask",
-      concern: "Sensitive, dry, dehydrated or uncomfortable skin",
-      use: "A gel-cream mask that hydrates, comforts and supports the skin barrier.",
-    },
-  },
-  {
-    id: "dermeden-intense-night-cream",
-    image: "/images/product-dermeden-intense-night-cream.png",
-    size: "50 ml",
-    price: 0,
-    priceLabel: { vi: "Liên hệ", en: "Contact us" },
-    brand: "DermEden",
-    origin: "France",
-    officialSource:
-      "https://dermeden.com/products/creme-de-nuit-anti-age-intense",
-    filters: ["dry", "oily"],
-    when: { vi: "Tối · bắt đầu cách đêm", en: "PM · start every other night" },
-    vi: {
-      name: "DermEden Intense Night Cream",
-      concern: "Da không đều màu, bề mặt thô ráp, có dấu hiệu tuổi tác",
-      use: "Kem dưỡng đêm có retinol và AHA, hỗ trợ bề mặt da trông mịn và đều màu hơn. Dùng chống nắng vào ban ngày.",
-    },
-    en: {
-      name: "DermEden Intense Night Cream",
-      concern: "Uneven tone, rough texture and visible signs of ageing",
-      use: "A retinol and AHA night cream that helps skin look smoother and more even. Use sunscreen during the day.",
-    },
-  },
-  {
-    id: "obagi-claribright",
-    image: "/images/product-obagi-claribright.png",
-    size: "50 g",
-    price: 0,
-    priceLabel: { vi: "Liên hệ", en: "Contact us" },
-    brand: "SUZANOBAGIMD®",
-    origin: "United States",
-    officialSource:
-      "https://www.obagi.com/products/suzanobagimd-claribright-radiance-brightening-lotion",
-    filters: ["dry", "oily", "sensitive"],
-    when: { vi: "Sáng / Tối", en: "AM / PM" },
-    vi: {
-      name: "SUZANOBAGIMD® Claribright Lotion",
-      concern: "Da không đều màu, nhạy cảm hoặc có vùng sậm màu",
-      use: "Lotion dưỡng sáng giúp bề mặt da trông đều màu hơn, đồng thời hỗ trợ làm dịu và hàng rào da.",
-    },
-    en: {
-      name: "SUZANOBAGIMD® Claribright Lotion",
-      concern: "Uneven tone, sensitivity or visible discolouration",
-      use: "A brightening lotion that helps skin look more even while supporting comfort and the skin barrier.",
     },
   },
 ] as const;
@@ -406,7 +334,7 @@ const draft_skinJourneys = [
   {
     id: "barrier",
     image: "/images/lifestyle-aftercare-v1.jpg",
-    products: ["cleanser", "serum-ha", "cream"] as const,
+    products: ["cleanser", "purles-sos-calm-mask", "lumixderm"] as const,
     vi: {
       name: "Da thiếu ẩm / hàng rào yếu",
       fit: "Da căng sau rửa, bong nhẹ, dễ rát gió biển.",
@@ -433,7 +361,7 @@ const draft_skinJourneys = [
   {
     id: "texture",
     image: "/images/lifestyle-treatment-v1.jpg",
-    products: ["cleanser", "serum-niacinamide", "sunscreen"] as const,
+    products: ["cleanser", "obagi-claribright", "sunscreen"] as const,
     vi: {
       name: "Da xỉn, lỗ chân lông, bề mặt không đều",
       fit: "Da dầu nhẹ, makeup không mịn, lỗ chân lông vùng má/T-zone.",
@@ -460,7 +388,7 @@ const draft_skinJourneys = [
   {
     id: "blemishes",
     image: "/images/lifestyle-skin-assess-v1.jpg",
-    products: ["cleanser", "serum-niacinamide", "sunscreen"] as const,
+    products: ["cleanser", "obagi-claribright", "sunscreen"] as const,
     vi: {
       name: "Da mụn nhẹ / thâm sau mụn",
       fit: "Mụn sưng ít, thâm cũ, không đang uống thuốc da liễu.",
@@ -487,7 +415,7 @@ const draft_skinJourneys = [
   {
     id: "glow",
     image: "/images/service-skin-v2.webp",
-    products: ["toner", "cream", "sunscreen"] as const,
+    products: ["lumixderm", "purles-sos-calm-mask", "sunscreen"] as const,
     vi: {
       name: "Da cần căng bóng / duy trì",
       fit: "Da ổn, muốn giữ đều và đủ ẩm theo tháng.",
@@ -517,7 +445,7 @@ const draft_careCombos = [
   {
     id: "combo-barrier",
     image: "/images/lifestyle-aftercare-v1.jpg",
-    items: ["cleanser", "serum-ha", "cream"] as const,
+    items: ["cleanser", "purles-sos-calm-mask", "lumixderm"] as const,
     save: 180000,
     vi: { name: "Bộ hàng rào", fit: "Da căng, dễ rát, mới làm sạch sâu." },
     en: {
@@ -528,7 +456,7 @@ const draft_careCombos = [
   {
     id: "combo-even",
     image: "/images/lifestyle-aftercare-v1.jpg",
-    items: ["cleanser", "serum-niacinamide", "sunscreen"] as const,
+    items: ["cleanser", "obagi-claribright", "sunscreen"] as const,
     save: 170000,
     vi: { name: "Bộ đều bề mặt", fit: "Da xỉn, lỗ chân lông, ra nắng nhiều." },
     en: { name: "Even-surface set", fit: "Dullness, pores, a lot of sun." },
@@ -536,7 +464,7 @@ const draft_careCombos = [
   {
     id: "combo-maintain",
     image: "/images/lifestyle-aftercare-v1.jpg",
-    items: ["toner", "cream", "sunscreen"] as const,
+    items: ["lumixderm", "purles-sos-calm-mask", "sunscreen"] as const,
     save: 170000,
     vi: { name: "Bộ duy trì tháng", fit: "Da ổn, cần giữ ẩm và chống nắng." },
     en: {
