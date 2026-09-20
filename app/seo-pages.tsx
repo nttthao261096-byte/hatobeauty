@@ -1223,14 +1223,32 @@ export function TrustPage({
           ? ["Chăm sóc da chuyên sâu", "Làm sạch & cấp ẩm", "Theo dõi phản hồi của da"]
           : ["Advanced facial care", "Cleansing & hydration", "Skin-response observation"],
     },
-    ...Array.from({ length: 4 }, (_, index) => ({
-      number: String(index + 3).padStart(2, "0"),
+    {
+      number: "03",
+      image: "/images/hato-team-nguyen-thanh-cong.jpg",
+      alt:
+        lang === "vi"
+          ? "Dược sĩ Nguyễn Thành Công tại Hato Beauty"
+          : "Pharmacist Nguyen Thanh Cong at Hato Beauty",
+      name: "Nguyễn Thành Công",
+      role: lang === "vi" ? "Dược sĩ" : "Pharmacist",
+      description:
+        lang === "vi"
+          ? "Đồng hành cùng đội ngũ trong việc rà soát thông tin sản phẩm, giải thích cách sử dụng và các lưu ý chăm sóc theo hướng rõ ràng, thận trọng và dễ áp dụng."
+          : "Supports the team by reviewing product information and explaining practical use and care considerations in a clear, thoughtful and easy-to-follow way.",
+      expertise:
+        lang === "vi"
+          ? ["Thông tin sản phẩm", "Hướng dẫn sử dụng", "Lưu ý chăm sóc"]
+          : ["Product information", "Usage guidance", "Care considerations"],
+    },
+    ...Array.from({ length: 3 }, (_, index) => ({
+      number: String(index + 4).padStart(2, "0"),
       image: null,
       alt: "",
       name:
         lang === "vi"
-          ? `Thành viên ${String(index + 3).padStart(2, "0")}`
-          : `Team member ${String(index + 3).padStart(2, "0")}`,
+          ? `Thành viên ${String(index + 4).padStart(2, "0")}`
+          : `Team member ${String(index + 4).padStart(2, "0")}`,
       role:
         lang === "vi"
           ? "Hồ sơ đang được cập nhật"
