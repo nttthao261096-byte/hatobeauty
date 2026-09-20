@@ -1241,14 +1241,35 @@ export function TrustPage({
           ? ["Thông tin sản phẩm", "Hướng dẫn sử dụng", "Lưu ý chăm sóc"]
           : ["Product information", "Usage guidance", "Care considerations"],
     },
-    ...Array.from({ length: 3 }, (_, index) => ({
-      number: String(index + 4).padStart(2, "0"),
+    {
+      number: "04",
+      image: "/images/hato-team-nguyen-thi-kim-loan.png",
+      alt:
+        lang === "vi"
+          ? "Chuyên gia Head Spa và chăm sóc da đầu Nguyễn Thị Kim Loan tại Hato Beauty"
+          : "Head Spa and scalp care specialist Nguyen Thi Kim Loan at Hato Beauty",
+      name: "Nguyễn Thị Kim Loan",
+      role:
+        lang === "vi"
+          ? "Chuyên gia Head Spa & chăm sóc da đầu"
+          : "Head Spa & scalp care specialist",
+      description:
+        lang === "vi"
+          ? "Mang đến trải nghiệm chăm sóc da đầu nhẹ nhàng qua các bước làm sạch, thư giãn và theo dõi cảm nhận; điều chỉnh thao tác theo nhu cầu và mức độ thoải mái của từng khách."
+          : "Provides a gentle scalp-care experience through cleansing, relaxation and close attention to comfort, adapting each technique to the guest’s needs.",
+      expertise:
+        lang === "vi"
+          ? ["Head Spa thư giãn", "Làm sạch da đầu", "Chăm sóc theo cảm nhận"]
+          : ["Relaxing Head Spa", "Scalp cleansing", "Comfort-led care"],
+    },
+    ...Array.from({ length: 2 }, (_, index) => ({
+      number: String(index + 5).padStart(2, "0"),
       image: null,
       alt: "",
       name:
         lang === "vi"
-          ? `Thành viên ${String(index + 4).padStart(2, "0")}`
-          : `Team member ${String(index + 4).padStart(2, "0")}`,
+          ? `Thành viên ${String(index + 5).padStart(2, "0")}`
+          : `Team member ${String(index + 5).padStart(2, "0")}`,
       role:
         lang === "vi"
           ? "Hồ sơ đang được cập nhật"
