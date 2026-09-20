@@ -1184,6 +1184,10 @@ export function TrustPage({
     {
       number: "01",
       image: "/images/hato-team-nguyen-thi-thu-thao.png",
+      alt:
+        lang === "vi"
+          ? "Dược sĩ Nguyễn Thị Thu Thảo tại Hato Beauty"
+          : "Pharmacist Nguyen Thi Thu Thao at Hato Beauty",
       name: "Nguyễn Thị Thu Thảo",
       role:
         lang === "vi"
@@ -1198,13 +1202,35 @@ export function TrustPage({
           ? ["Tư vấn cá nhân hóa", "Phân tích nhu cầu da", "Hướng dẫn chăm sóc tại nhà"]
           : ["Personalised consultation", "Skin-needs analysis", "Home-care guidance"],
     },
-    ...Array.from({ length: 5 }, (_, index) => ({
-      number: String(index + 2).padStart(2, "0"),
+    {
+      number: "02",
+      image: "/images/hato-team-nguyen-thi-huyen.png",
+      alt:
+        lang === "vi"
+          ? "Chuyên gia chăm sóc da Nguyễn Thị Huyền tại Hato Beauty"
+          : "Facial care specialist Nguyen Thi Huyen at Hato Beauty",
+      name: "Nguyễn Thị Huyền",
+      role:
+        lang === "vi"
+          ? "Chuyên gia chăm sóc da chuyên sâu"
+          : "Advanced facial care specialist",
+      description:
+        lang === "vi"
+          ? "Tập trung vào quy trình làm sạch, cấp ẩm và chăm sóc bề mặt da theo nhu cầu thực tế; theo dõi phản hồi của da trong từng bước để điều chỉnh trải nghiệm nhẹ nhàng, phù hợp."
+          : "Focused on cleansing, hydration and surface-level skin care tailored to each guest, with close attention to the skin’s response throughout every step.",
+      expertise:
+        lang === "vi"
+          ? ["Chăm sóc da chuyên sâu", "Làm sạch & cấp ẩm", "Theo dõi phản hồi của da"]
+          : ["Advanced facial care", "Cleansing & hydration", "Skin-response observation"],
+    },
+    ...Array.from({ length: 4 }, (_, index) => ({
+      number: String(index + 3).padStart(2, "0"),
       image: null,
+      alt: "",
       name:
         lang === "vi"
-          ? `Thành viên ${String(index + 2).padStart(2, "0")}`
-          : `Team member ${String(index + 2).padStart(2, "0")}`,
+          ? `Thành viên ${String(index + 3).padStart(2, "0")}`
+          : `Team member ${String(index + 3).padStart(2, "0")}`,
       role:
         lang === "vi"
           ? "Hồ sơ đang được cập nhật"
@@ -1316,20 +1342,16 @@ export function TrustPage({
               </p>
             </div>
             <div className="about-team-grid">
-              {teamProfiles.map((profile, index) => (
+              {teamProfiles.map((profile) => (
                 <article
-                  className={`about-team-card${index === 0 ? " is-profiled" : " is-placeholder"}`}
+                  className={`about-team-card${profile.image ? " is-profiled" : " is-placeholder"}`}
                   key={profile.number}
                 >
                   {profile.image ? (
                     <div className="about-team-photo">
                       <Image
                         src={profile.image}
-                        alt={
-                          lang === "vi"
-                            ? `Dược sĩ Nguyễn Thị Thu Thảo tại Hato Beauty`
-                            : `Pharmacist Nguyen Thi Thu Thao at Hato Beauty`
-                        }
+                        alt={profile.alt}
                         fill
                         sizes="(max-width: 700px) 84vw, (max-width: 1000px) 50vw, 33vw"
                       />

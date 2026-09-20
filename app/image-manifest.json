@@ -64,6 +64,18 @@
       1920
     ]
   },
+  "/images/hato-team-nguyen-thi-huyen.png": {
+    "prefix": "hato-team-nguyen-thi-huyen-95a7dcae9172",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1122
+    ]
+  },
   "/images/hato-team-nguyen-thi-thu-thao.png": {
     "prefix": "hato-team-nguyen-thi-thu-thao-eb05d59a92f7",
     "widths": [
