@@ -289,7 +289,6 @@ export function HatoHome({
     return firstCalm >= 0 ? firstCalm : 0;
   });
   const [serviceQuery, setServiceQuery] = useState("");
-  const [ribbonPaused, setRibbonPaused] = useState(false);
   const t = copy[lang];
   const normalizedQuery = serviceQuery
     .trim()
@@ -352,12 +351,7 @@ export function HatoHome({
           </div>
         </section>
 
-        <div
-          className={
-            ribbonPaused ? "service-ribbon is-paused" : "service-ribbon"
-          }
-          aria-label={t.servicesEyebrow}
-        >
+        <div className="service-ribbon" aria-label={t.servicesEyebrow}>
           <div className="service-ribbon-track">
             {[0, 1].flatMap((copy) =>
               ribbonGroups.map((id) => (
@@ -378,18 +372,6 @@ export function HatoHome({
               )),
             )}
           </div>
-          <button
-            className="ribbon-pause"
-            onClick={() => setRibbonPaused(!ribbonPaused)}
-            aria-pressed={ribbonPaused}
-            aria-label={
-              lang === "vi"
-                ? "Dừng chuyển động danh mục"
-                : "Pause service ribbon"
-            }
-          >
-            {ribbonPaused ? "▷" : "Ⅱ"}
-          </button>
         </div>
 
         <section className="why section" id="about">

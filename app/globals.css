@@ -6403,10 +6403,8 @@ a:hover { color: inherit; }
 .home-page .hero { min-height: 620px; height: min(78vh, 760px); }
 .home-page .hero-copy { bottom: 50px; }
 .home-page .hero-copy .eyebrow { margin-bottom: 16px; }
-.ribbon-pause { width: 44px; height: 44px; border-radius: 50%; border: 1px solid #fff9f4; background: #3f2a22; color: #fff9f4; cursor: pointer; }
 .service-ribbon { position: relative; }
-.ribbon-pause { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); }
-.service-ribbon.is-paused .service-ribbon-track, .service-ribbon:focus-within .service-ribbon-track { animation-play-state: paused; }
+.service-ribbon:focus-within .service-ribbon-track { animation-play-state: paused; }
 .booking-page-form .booking-form-grid label, .contact-lead-form .contact-form-grid label { font-size: 14px; line-height: 1.5; color: #5c3d32; }
 .booking-page-form .booking-form-grid :is(input,select,textarea), .contact-lead-form .contact-form-grid :is(input,select,textarea), .footer-newsletter-form input { font-family: var(--body); font-size: 16px; min-height: 48px; }
 .booking-page-form .booking-form-grid label small, .contact-lead-form .contact-form-grid label small { font-size: 13px; overflow-wrap: anywhere; }
