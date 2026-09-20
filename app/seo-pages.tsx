@@ -1262,24 +1262,45 @@ export function TrustPage({
           ? ["Head Spa thư giãn", "Làm sạch da đầu", "Chăm sóc theo cảm nhận"]
           : ["Relaxing Head Spa", "Scalp cleansing", "Comfort-led care"],
     },
-    ...Array.from({ length: 2 }, (_, index) => ({
-      number: String(index + 5).padStart(2, "0"),
-      image: null,
-      alt: "",
-      name:
+    {
+      number: "05",
+      image: "/images/hato-team-nguyen-thi-hoa-quynh.jpg",
+      alt:
         lang === "vi"
-          ? `Thành viên ${String(index + 5).padStart(2, "0")}`
-          : `Team member ${String(index + 5).padStart(2, "0")}`,
+          ? "Chuyên gia mi và mày Nguyễn Thị Hoa Quỳnh tại Hato Beauty"
+          : "Lash and brow specialist Nguyen Thi Hoa Quynh at Hato Beauty",
+      name: "Nguyễn Thị Hoa Quỳnh",
       role:
         lang === "vi"
-          ? "Hồ sơ đang được cập nhật"
-          : "Profile coming soon",
+          ? "Chuyên gia mi & mày"
+          : "Lash & brow specialist",
       description:
         lang === "vi"
-          ? "Thông tin chuyên môn và hình ảnh sẽ được bổ sung khi Hato Beauty xác nhận hồ sơ."
-          : "Professional details and photography will be added once the profile is confirmed by Hato Beauty.",
-      expertise: [] as string[],
-    })),
+          ? "Quan sát dáng mắt, đường nét khuôn mặt và mong muốn của khách để điều chỉnh trải nghiệm chăm sóc mi & mày theo hướng nhẹ nhàng, hài hòa và dễ duy trì."
+          : "Considers each guest’s eye shape, facial features and preferences to create a gentle, balanced lash and brow care experience that is easy to maintain.",
+      expertise:
+        lang === "vi"
+          ? ["Chăm sóc mi & mày", "Tạo dáng hài hòa", "Hướng dẫn chăm sóc sau dịch vụ"]
+          : ["Lash & brow care", "Balanced shaping", "Aftercare guidance"],
+    },
+    {
+      number: "06",
+      image: "/images/hato-team-nguyen-minh-hoang.jpg",
+      alt:
+        lang === "vi"
+          ? "Dược sĩ Nguyễn Minh Hoàng tại Hato Beauty"
+          : "Pharmacist Nguyen Minh Hoang at Hato Beauty",
+      name: "Nguyễn Minh Hoàng",
+      role: lang === "vi" ? "Dược sĩ" : "Pharmacist",
+      description:
+        lang === "vi"
+          ? "Đồng hành cùng đội ngũ trong việc giải thích thông tin sản phẩm, cách sử dụng và các lưu ý cần thiết theo hướng rõ ràng, thận trọng và dễ hiểu."
+          : "Supports the team by explaining product information, practical use and important considerations in a clear, thoughtful and easy-to-understand way.",
+      expertise:
+        lang === "vi"
+          ? ["Thông tin sản phẩm", "Hướng dẫn sử dụng", "Lưu ý cần thiết"]
+          : ["Product information", "Usage guidance", "Key considerations"],
+    },
   ];
   const consultationHref = bookingPath(lang);
   return (

@@ -64,6 +64,19 @@
       1920
     ]
   },
+  "/images/hato-team-nguyen-minh-hoang.jpg": {
+    "prefix": "hato-team-nguyen-minh-hoang-b3af841a9718",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1600
+    ]
+  },
   "/images/hato-team-nguyen-thanh-cong.jpg": {
     "prefix": "hato-team-nguyen-thanh-cong-fd5e70d5b8b6",
     "widths": [
@@ -74,6 +87,18 @@
       640,
       960,
       1024
+    ]
+  },
+  "/images/hato-team-nguyen-thi-hoa-quynh.jpg": {
+    "prefix": "hato-team-nguyen-thi-hoa-quynh-bb0afef0c400",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1086
     ]
   },
   "/images/hato-team-nguyen-thi-huyen.png": {
