@@ -329,7 +329,7 @@ export function HatoHome({
 
       <main id="main-content" tabIndex={-1}>
         <section className="hero">
-          <HeroMedia lang={lang} />
+          <HeroMedia />
           <div className="hero-overlay" />
           <div className="hero-copy">
             <p className="eyebrow">

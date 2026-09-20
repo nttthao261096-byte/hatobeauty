@@ -3149,10 +3149,10 @@ p .hato-word, li .hato-word, .announcement .hato-word {
 }
 .text-link .icon-arrow,
 .section-route-link .icon-arrow,
-.result-link-label .icon-arrow,
-.knowledge-arrow .icon-arrow {
+.result-link-label .icon-arrow {
   color: var(--icon-on-light);
 }
+.knowledge-arrow .icon-arrow { color: inherit; }
 .result-link-label,
 .index-card-copy strong,
 .service-detail-menu-summary > a,
@@ -6403,8 +6403,7 @@ a:hover { color: inherit; }
 .home-page .hero { min-height: 620px; height: min(78vh, 760px); }
 .home-page .hero-copy { bottom: 50px; }
 .home-page .hero-copy .eyebrow { margin-bottom: 16px; }
-.hero-motion-toggle, .ribbon-pause { width: 44px; height: 44px; border-radius: 50%; border: 1px solid #fff9f4; background: #3f2a22; color: #fff9f4; cursor: pointer; }
-.hero-motion-toggle { position: absolute; right: 18px; top: 18px; z-index: 5; }
+.ribbon-pause { width: 44px; height: 44px; border-radius: 50%; border: 1px solid #fff9f4; background: #3f2a22; color: #fff9f4; cursor: pointer; }
 .service-ribbon { position: relative; }
 .ribbon-pause { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); }
 .service-ribbon.is-paused .service-ribbon-track, .service-ribbon:focus-within .service-ribbon-track { animation-play-state: paused; }
