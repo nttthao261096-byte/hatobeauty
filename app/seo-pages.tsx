@@ -1180,6 +1180,42 @@ export function TrustPage({
             "The team starts with questions and adapts to your comfort.",
           ],
         ] as const);
+  const teamProfiles = [
+    {
+      number: "01",
+      image: "/images/hato-team-nguyen-thi-thu-thao.png",
+      name: "Nguyễn Thị Thu Thảo",
+      role:
+        lang === "vi"
+          ? "Dược sĩ · Chuyên gia tư vấn & phân tích da"
+          : "Pharmacist · Skin consultation & analysis specialist",
+      description:
+        lang === "vi"
+          ? "Tập trung lắng nghe nhu cầu, hỗ trợ quan sát tình trạng bề mặt da và giải thích các lựa chọn chăm sóc phù hợp theo hướng rõ ràng, thực tế."
+          : "Focused on listening carefully, observing visible skin concerns and explaining suitable care options in a clear, realistic way.",
+      expertise:
+        lang === "vi"
+          ? ["Tư vấn cá nhân hóa", "Phân tích nhu cầu da", "Hướng dẫn chăm sóc tại nhà"]
+          : ["Personalised consultation", "Skin-needs analysis", "Home-care guidance"],
+    },
+    ...Array.from({ length: 5 }, (_, index) => ({
+      number: String(index + 2).padStart(2, "0"),
+      image: null,
+      name:
+        lang === "vi"
+          ? `Thành viên ${String(index + 2).padStart(2, "0")}`
+          : `Team member ${String(index + 2).padStart(2, "0")}`,
+      role:
+        lang === "vi"
+          ? "Hồ sơ đang được cập nhật"
+          : "Profile coming soon",
+      description:
+        lang === "vi"
+          ? "Thông tin chuyên môn và hình ảnh sẽ được bổ sung khi Hato Beauty xác nhận hồ sơ."
+          : "Professional details and photography will be added once the profile is confirmed by Hato Beauty.",
+      expertise: [] as string[],
+    })),
+  ];
   const consultationHref = bookingPath(lang);
   return (
     <div className="seo-page" lang={lang}>
@@ -1255,6 +1291,73 @@ export function TrustPage({
                 <p>{text}</p>
               </article>
             ))}
+          </section>
+        )}
+        {kind === "about" && (
+          <section
+            className="about-team"
+            aria-labelledby="about-team-title"
+          >
+            <div className="about-team-heading">
+              <div>
+                <p className="seo-eyebrow">
+                  {lang === "vi" ? "Đội ngũ Hato Beauty" : "The Hato Beauty team"}
+                </p>
+                <h2 id="about-team-title">
+                  {lang === "vi"
+                    ? "Chuyên môn rõ ràng, chăm sóc bằng sự lắng nghe."
+                    : "Clear expertise, care shaped by listening."}
+                </h2>
+              </div>
+              <p>
+                {lang === "vi"
+                  ? "Gặp gỡ những người trực tiếp lắng nghe, tư vấn và đồng hành cùng trải nghiệm chăm sóc của bạn tại Hato Beauty."
+                  : "Meet the people who listen, advise and support your care experience at Hato Beauty."}
+              </p>
+            </div>
+            <div className="about-team-grid">
+              {teamProfiles.map((profile, index) => (
+                <article
+                  className={`about-team-card${index === 0 ? " is-profiled" : " is-placeholder"}`}
+                  key={profile.number}
+                >
+                  {profile.image ? (
+                    <div className="about-team-photo">
+                      <Image
+                        src={profile.image}
+                        alt={
+                          lang === "vi"
+                            ? `Dược sĩ Nguyễn Thị Thu Thảo tại Hato Beauty`
+                            : `Pharmacist Nguyen Thi Thu Thao at Hato Beauty`
+                        }
+                        fill
+                        sizes="(max-width: 700px) 84vw, (max-width: 1000px) 50vw, 33vw"
+                      />
+                    </div>
+                  ) : (
+                    <div className="about-team-placeholder" aria-hidden="true">
+                      <span>{profile.number}</span>
+                      <i>hato</i>
+                    </div>
+                  )}
+                  <div className="about-team-copy">
+                    <div className="about-team-meta">
+                      <span>{profile.number}</span>
+                      <small>{profile.role}</small>
+                    </div>
+                    <h3>{profile.name}</h3>
+                    <p>{profile.description}</p>
+                    {profile.expertise.length > 0 && (
+                      <ul aria-label={lang === "vi" ? "Chuyên môn" : "Expertise"}>
+                        {profile.expertise.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
           </section>
         )}
         {kind === "about" && (
