@@ -1,4 +1,3 @@
-import { articlePath, loadPublishedArticles } from "./journal-content";
 import Image from "./OptimizedImage";
 import Link from "next/link";
 import { journalGuidance } from "./journal-guidance";
@@ -10,7 +9,6 @@ import { getCuratedServiceGroups, type ResultContent } from "./content";
 import { IconArrow } from "./icons";
 import {
   journalPath,
-  journalTopics,
   primarySeoServices,
   seoServices,
   servicePath,
@@ -362,8 +360,7 @@ export function ServiceIndex({ lang }: { lang: SeoLang }) {
   );
 }
 
-export async function KnowledgeIndex({ lang }: { lang: SeoLang }) {
-  const published = await loadPublishedArticles();
+export function KnowledgeIndex({ lang }: { lang: SeoLang }) {
   const title =
     lang === "vi"
       ? "Kiến thức để chăm sóc nhẹ nhàng và đúng lúc"
@@ -372,6 +369,64 @@ export async function KnowledgeIndex({ lang }: { lang: SeoLang }) {
     lang === "vi"
       ? "Thư viện bài viết từ đội ngũ biên tập Hato Beauty, giúp bạn hiểu dịch vụ, chuẩn bị trước buổi hẹn và đặt kỳ vọng thực tế."
       : "Editorial guides from Hato Beauty to help you understand each service, prepare well and set realistic expectations.";
+  const careTopics = [
+    {
+      id: "skin",
+      service: seoServices.find((service) => service.id === "skin")!,
+      vi: {
+        title: "Chăm sóc da",
+        description:
+          "Hiểu tình trạng da, chọn cách làm sạch, cấp ẩm và phục hồi phù hợp với nhu cầu thực tế.",
+      },
+      en: {
+        title: "Skin care",
+        description:
+          "Understand your skin and choose cleansing, hydration and recovery care that fits its current needs.",
+      },
+    },
+    {
+      id: "brow-lash",
+      service: seoServices.find((service) => service.id === "brow-lash")!,
+      vi: {
+        title: "Chăm sóc mi & mày",
+        description:
+          "Chuẩn bị trước buổi hẹn và giữ nếp mi, dáng mày hài hòa, tự nhiên lâu hơn.",
+      },
+      en: {
+        title: "Lash & brow care",
+        description:
+          "Prepare for your appointment and keep lashes lifted and brows naturally defined for longer.",
+      },
+    },
+    {
+      id: "scalp",
+      service: seoServices.find((service) => service.id === "scalp")!,
+      vi: {
+        title: "Chăm sóc da đầu",
+        description:
+          "Làm sạch nhẹ nhàng, chăm sóc đúng nhịp và thả lỏng vùng đầu, vai, gáy.",
+      },
+      en: {
+        title: "Scalp care",
+        description:
+          "Cleanse gently, care consistently and unwind through the scalp, neck and shoulders.",
+      },
+    },
+    {
+      id: "waxing",
+      service: seoServices.find((service) => service.id === "waxing")!,
+      vi: {
+        title: "Chăm sóc tẩy lông",
+        description:
+          "Biết cách chuẩn bị và làm dịu da để buổi tẩy lông kín đáo, nhẹ nhàng và thoải mái hơn.",
+      },
+      en: {
+        title: "Hair removal care",
+        description:
+          "Prepare and soothe the skin for a more private, gentle and comfortable hair removal experience.",
+      },
+    },
+  ] as const;
 
   return (
     <div className="seo-page" lang={lang}>
@@ -399,27 +454,9 @@ export async function KnowledgeIndex({ lang }: { lang: SeoLang }) {
           <p>{intro}</p>
         </header>
         <section className="index-grid knowledge-index-grid" aria-label={title}>
-          {published.map((article) => (
-            <Link
-              className="index-card journal-index-card"
-              href={articlePath(article, lang)}
-              prefetch={false}
-              key={article.id}
-            >
-              <div className="index-card-copy">
-                <small>{article[`reading_time_${lang}`]}</small>
-                <h2>{article[`title_${lang}`]}</h2>
-                <p>{article[`excerpt_${lang}`]}</p>
-                <strong>
-                  {lang === "vi" ? "Đọc bài viết" : "Read article"}{" "}
-                  <IconArrow />
-                </strong>
-              </div>
-            </Link>
-          ))}
-          {journalTopics.map((topic, index) => {
+          {careTopics.map((topic, index) => {
             const service = topic.service;
-            const articleTitle = journalTitle(service, lang);
+            const copy = topic[lang];
             return (
               <Link
                 className="index-card journal-index-card"
@@ -429,10 +466,10 @@ export async function KnowledgeIndex({ lang }: { lang: SeoLang }) {
               >
                 <div className="index-card-image">
                   <Image
-                    src={topic.image}
-                    alt={articleTitle}
+                    src={service.image}
+                    alt={copy.title}
                     fill
-                    sizes="(max-width: 760px) 100vw, 50vw"
+                    sizes="(max-width: 720px) 100vw, 50vw"
                   />
                 </div>
                 <div className="index-card-copy">
@@ -440,8 +477,8 @@ export async function KnowledgeIndex({ lang }: { lang: SeoLang }) {
                     <span>{String(index + 1).padStart(2, "0")}</span>
                     <small>{journalReadingTime(service, lang)}</small>
                   </div>
-                  <h2>{articleTitle}</h2>
-                  <p>{journalDescription(service, lang)}</p>
+                  <h2>{copy.title}</h2>
+                  <p>{copy.description}</p>
                   <strong>
                     {lang === "vi" ? "Đọc bài viết" : "Read article"}{" "}
                     <IconArrow />
