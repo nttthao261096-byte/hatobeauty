@@ -635,15 +635,6 @@ export function ServiceLanding({
                       <li key={item}>
                         <span>{String(itemIndex + 1).padStart(2, "0")}</span>
                         <strong>{item}</strong>
-                        <Link
-                          href={bookingPath(
-                            lang,
-                            service.id,
-                            options[itemIndex]?.id,
-                          )}
-                        >
-                          {lang === "vi" ? "Chọn" : "Select"}
-                        </Link>
                       </li>
                     ))}
                   </ol>

@@ -233,7 +233,9 @@ test("public route, brand, claim, canonical and booking contracts", async (t) =>
           ["/dich-vu/triet-long-da-nang", "Triệt full body"],
           ["/dich-vu/tay-long-da-nang", "Tẩy theo vùng cơ thể"],
         ]) {
-          assert.ok((await get(route)).includes(serviceName), route);
+          const html = await get(route);
+          assert.ok(html.includes(serviceName), route);
+          assert.doesNotMatch(html, />Chọn<\/a>/, route);
         }
         for (const route of [
           "/dat-lich?service=skin",
