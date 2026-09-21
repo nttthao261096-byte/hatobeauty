@@ -166,6 +166,28 @@ const curatedServiceChoices: Partial<Record<string, Pick<ServiceDetailContent, "
   },
 };
 
+export function getCuratedServiceGroups(serviceId: string, lang: Lang) {
+  const choices = curatedServiceChoices[serviceId];
+  if (choices?.groups?.length) {
+    return choices.groups.map((group) => ({
+      title: lang === "vi" ? group.viTitle : group.enTitle,
+      items: group[lang],
+    }));
+  }
+
+  if (choices?.options?.[lang]?.length) {
+    const service = seoServices.find((item) => item.id === serviceId);
+    return [
+      {
+        title: service?.[lang].name ?? serviceId,
+        items: choices.options[lang],
+      },
+    ];
+  }
+
+  return [];
+}
+
 function applyCuratedServiceChoices(details: Record<string, ServiceDetailContent>) {
   Object.entries(curatedServiceChoices).forEach(([serviceId, choices]) => {
     if (details[serviceId]) details[serviceId] = { ...details[serviceId], ...choices };

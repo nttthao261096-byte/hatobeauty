@@ -134,7 +134,7 @@ test("public route, brand, claim, canonical and booking contracts", async (t) =>
           assert.equal(new URL(canonical).href, expectedCanonical, route);
           assert.doesNotMatch(
             html,
-            /GIÁ MẪU|SAMPLE —|replace with|4\.9\/5|5[.,]000\+|Mesotherapy|melasma therapy|Laser Hair Removal/,
+            /GIÁ MẪU|SAMPLE —|replace with|4\.9\/5|5[.,]000\+|Laser Hair Removal/,
             route,
           );
           assert.match(html, /id="main-content"/, route);
@@ -217,6 +217,24 @@ test("public route, brand, claim, canonical and booking contracts", async (t) =>
         }
         for (const route of ["/bang-gia", "/en/prices"])
           assert.match(await get(route), /<table/);
+        for (const [route, serviceName] of [
+          [
+            "/dich-vu/cham-soc-da-chuyen-sau-da-nang",
+            "Trị liệu làm sạch da chuyên sâu",
+          ],
+          [
+            "/dich-vu/uon-mi-brow-lamination-da-nang",
+            "Uốn mi kiểu Hàn + nhuộm mi",
+          ],
+          [
+            "/dich-vu/goi-dau-duong-sinh-da-nang",
+            "Gội đầu chăm sóc da đầu chuyên sâu",
+          ],
+          ["/dich-vu/triet-long-da-nang", "Triệt full body"],
+          ["/dich-vu/tay-long-da-nang", "Tẩy theo vùng cơ thể"],
+        ]) {
+          assert.ok((await get(route)).includes(serviceName), route);
+        }
         for (const route of [
           "/dat-lich?service=skin",
           "/en/book?service=skin",

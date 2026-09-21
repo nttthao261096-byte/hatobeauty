@@ -6,7 +6,7 @@ import { journalGuidance } from "./journal-guidance";
 import { BookingForm } from "./BookingForm";
 import { ContactForm } from "./ContactForm";
 import { ContactDetails, ContactMap } from "./ContactDetails";
-import type { ResultContent } from "./content";
+import { getCuratedServiceGroups, type ResultContent } from "./content";
 import { IconArrow } from "./icons";
 import {
   journalPath,
@@ -467,9 +467,10 @@ export function ServiceLanding({
   const c = service[lang];
   const [price, duration] = serviceFacts(service.id, lang);
   const options = approvedServiceOptions(service.id);
-  const detailGroups: ServiceDetailGroup[] = options.length
-    ? [{ title: c.name, items: options.map((option) => option.name[lang]) }]
-    : [];
+  const detailGroups: ServiceDetailGroup[] = getCuratedServiceGroups(
+    service.id,
+    lang,
+  );
   const resultGallery = isBusinessDataApproved("results")
     ? serviceResultGalleries[service.id]
     : undefined;
