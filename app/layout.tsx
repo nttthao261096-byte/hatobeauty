@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Be_Vietnam_Pro, Cormorant_Garamond, Lora } from "next/font/google";
 import Script from "next/script";
 import { LanguageSync } from "./LanguageSync";
 import { mediaUrl } from "./seo-data";
 import { imageVariant } from "./image-variants";
 import "./globals.css";
+
+const GOOGLE_ANALYTICS_ID = "G-LSXM2LTGJF";
 
 const bodyFont = Be_Vietnam_Pro({ subsets: ["latin", "vietnamese"], weight: ["300", "400", "500", "600"], variable: "--font-body", display: "swap", preload: false });
 const brandFont = Cormorant_Garamond({ subsets: ["latin", "vietnamese"], variable: "--font-brand", display: "swap", preload: false });
@@ -40,5 +43,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <Script id="sync-document-language" strategy="beforeInteractive">{`document.documentElement.lang=location.pathname.startsWith('/en')?'en':'vi'`}</Script>
     <LanguageSync />
     {children}
-  </body></html>;
+  </body>
+  <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
+  </html>;
 }

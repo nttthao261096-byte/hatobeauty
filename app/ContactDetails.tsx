@@ -1,5 +1,8 @@
+"use client";
+
 import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa6";
 
+import { trackEvent } from "./analytics";
 import { IconArrow, IconClock, IconMail, IconPhone, IconPin } from "./icons";
 
 type ContactLang = "vi" | "en";
@@ -16,19 +19,19 @@ const socialLinks = [
 ] as const;
 
 export function ContactSocials({ lang }: { lang: ContactLang }) {
-  return <div className="contact-socials" aria-label={lang === "vi" ? "Mạng xã hội" : "Social media"}>{socialLinks.map((social) => { const Icon = social.icon; return <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.label} Hato Beauty`} title={social.label} key={social.label}><span aria-hidden="true"><Icon /></span><b>{social.label}</b></a>; })}</div>;
+  return <div className="contact-socials" aria-label={lang === "vi" ? "Mạng xã hội" : "Social media"}>{socialLinks.map((social) => { const Icon = social.icon; return <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.label} Hato Beauty`} title={social.label} key={social.label} onClick={() => trackEvent(social.label === "WhatsApp" ? "contact_click" : "social_click", { channel: social.label.toLowerCase(), language: lang })}><span aria-hidden="true"><Icon /></span><b>{social.label}</b></a>; })}</div>;
 }
 
 export function ContactDetails({ lang, compact = false, showSocials = true }: { lang: ContactLang; compact?: boolean; showSocials?: boolean }) {
   return <section className={`contact-details${compact ? " contact-details--compact" : ""}`} aria-label={lang === "vi" ? "Thông tin liên hệ Hato Beauty" : "Hato Beauty contact details"}>
     <div className="contact-list">
       <div className="contact-row">
-        <span className="contact-row-icon" aria-hidden="true"><IconPhone /></span><span><small>{lang === "vi" ? "Điện thoại" : "Phone"}</small><strong className="contact-phone-links"><a href="tel:+84703214868">0703214868</a></strong></span>
+        <span className="contact-row-icon" aria-hidden="true"><IconPhone /></span><span><small>{lang === "vi" ? "Điện thoại" : "Phone"}</small><strong className="contact-phone-links"><a href="tel:+84703214868" onClick={() => trackEvent("contact_click", { channel: "phone", language: lang })}>0703214868</a></strong></span>
       </div>
-      <a className="contact-row" href={directionsUrl} target="_blank" rel="noopener noreferrer">
+      <a className="contact-row" href={directionsUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("directions_click", { language: lang })}>
         <span className="contact-row-icon" aria-hidden="true"><IconPin /></span><span><small>{lang === "vi" ? "Địa chỉ" : "Address"}</small><strong>{hatoAddress}</strong></span>
       </a>
-      <a className="contact-row" href="mailto:hatobeautydanang@gmail.com">
+      <a className="contact-row" href="mailto:hatobeautydanang@gmail.com" onClick={() => trackEvent("contact_click", { channel: "email", language: lang })}>
         <span className="contact-row-icon" aria-hidden="true"><IconMail /></span><span><small>Email</small><strong>hatobeautydanang@gmail.com</strong></span>
       </a>
       <div className="contact-row">
@@ -42,6 +45,6 @@ export function ContactDetails({ lang, compact = false, showSocials = true }: { 
 export function ContactMap({ lang }: { lang: ContactLang }) {
   return <section className="contact-map-card" aria-label={lang === "vi" ? "Bản đồ Hato Beauty" : "Hato Beauty map"}>
     <iframe src={mapEmbedUrl} title={lang === "vi" ? "Bản đồ đến Hato Beauty" : "Map to Hato Beauty"} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
-    <div className="contact-map-caption"><span aria-hidden="true"><IconPin /></span><div><small>{lang === "vi" ? "Ghé thăm Hato Beauty" : "Visit Hato Beauty"}</small><strong>{hatoAddress}</strong></div><a href={directionsUrl} target="_blank" rel="noopener noreferrer">{lang === "vi" ? "Chỉ đường" : "Directions"}<IconArrow /></a></div>
+    <div className="contact-map-caption"><span aria-hidden="true"><IconPin /></span><div><small>{lang === "vi" ? "Ghé thăm Hato Beauty" : "Visit Hato Beauty"}</small><strong>{hatoAddress}</strong></div><a href={directionsUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("directions_click", { language: lang })}>{lang === "vi" ? "Chỉ đường" : "Directions"}<IconArrow /></a></div>
   </section>;
 }

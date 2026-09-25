@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useRef, useState } from "react";
 
+import { trackEvent } from "./analytics";
 import { getBookingErrorMessage } from "./booking-errors";
 import { ContactChannelFields } from "./ContactChannelFields";
 import { contactValueError, parseContactValue } from "./contact-validation";
@@ -53,14 +54,27 @@ export function ContactForm({ lang }: { lang: SeoLang }) {
       });
 
       if (!response.ok) {
+        trackEvent("contact_submit_error", {
+          language: lang,
+          response_status: response.status,
+        });
         setError(await getBookingErrorMessage(response, lang, "contact"));
         return;
       }
 
       form.reset();
       setSubmitted(true);
+      trackEvent("generate_lead", {
+        language: lang,
+        contact_channel: String(data.get("preference") || "unknown"),
+        lead_source: "contact_form",
+      });
     } catch (submitError) {
       console.error(submitError);
+      trackEvent("contact_submit_error", {
+        language: lang,
+        response_status: "network_error",
+      });
       setError(
         lang === "vi"
           ? "Chưa thể gửi yêu cầu. Vui lòng thử lại sau ít phút."

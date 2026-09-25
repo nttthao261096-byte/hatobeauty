@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useRef, useState } from "react";
 
+import { trackEvent } from "./analytics";
 import { getBookingErrorMessage } from "./booking-errors";
 import { ContactChannelFields } from "./ContactChannelFields";
 import { contactValueError, parseContactValue } from "./contact-validation";
@@ -69,13 +70,29 @@ export function BookingForm({
         }),
       });
       if (!response.ok) {
+        trackEvent("booking_submit_error", {
+          language: lang,
+          response_status: response.status,
+          service_id: String(data.get("service") || "unknown"),
+        });
         setError(await getBookingErrorMessage(response, lang));
         return;
       }
       form.reset();
       setSubmitted(true);
+      trackEvent("booking_submit_success", {
+        language: lang,
+        contact_channel: String(data.get("preference") || "unknown"),
+        service_id: String(data.get("service") || "unknown"),
+        service_option: String(data.get("option") || "unspecified"),
+      });
     } catch (submitError) {
       console.error(submitError);
+      trackEvent("booking_submit_error", {
+        language: lang,
+        response_status: "network_error",
+        service_id: String(data.get("service") || "unknown"),
+      });
       setError(
         lang === "vi"
           ? "Chưa thể gửi yêu cầu. Vui lòng thử lại sau ít phút."

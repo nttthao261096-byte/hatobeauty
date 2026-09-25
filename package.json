@@ -17,6 +17,7 @@
     "test:articles": "npm run build:vercel && node --experimental-strip-types --test tests/article-ai.test.mjs tests/article-workflow.test.mjs"
   },
   "dependencies": {
+    "@next/third-parties": "16.2.6",
     "next": "16.2.6",
     "react": "19.2.6",
     "react-dom": "19.2.6",

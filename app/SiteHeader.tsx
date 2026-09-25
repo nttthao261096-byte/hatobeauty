@@ -12,6 +12,7 @@ import {
 } from "./route-paths";
 import { useModalFocus } from "./use-modal-focus";
 
+import { trackEvent } from "./analytics";
 import { ContactDetails } from "./ContactDetails";
 import type { Lang } from "./content";
 import { IconArrow } from "./icons";
@@ -207,7 +208,10 @@ export function SiteHeader({
             <a
               className="header-booking-link nav-drawer-book"
               href={consultationHref}
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setMenuOpen(false);
+                trackEvent("booking_start", { language: lang, placement: "menu" });
+              }}
             >
               <span className="header-book-full">{bookLabel}</span>
               <IconArrow />
@@ -244,7 +248,7 @@ export function SiteHeader({
             </Link>
           </div>
           {!hideDesktopConsultation ? (
-            <a className="header-booking-link" href={consultationHref}>
+            <a className="header-booking-link" href={consultationHref} onClick={() => trackEvent("booking_start", { language: lang, placement: "header" })}>
               <span className="header-book-full">{bookLabel}</span>
               <span className="header-book-short">
                 {lang === "vi" ? "Đặt lịch" : "Book"}
@@ -269,11 +273,11 @@ export function SiteHeader({
         hidden={menuOpen || isLeadPage}
         aria-label={lang === "vi" ? "Liên hệ nhanh" : "Quick contact"}
       >
-        <a className="mobile-dock-call" href="tel:+84703214868">
+        <a className="mobile-dock-call" href="tel:+84703214868" onClick={() => trackEvent("contact_click", { channel: "phone", language: lang, placement: "mobile_dock" })}>
           <span>{lang === "vi" ? "Gọi" : "Call"}</span>
           <strong>0703 214 868</strong>
         </a>
-        <a className="mobile-dock-book" href={consultationHref}>
+        <a className="mobile-dock-book" href={consultationHref} onClick={() => trackEvent("booking_start", { language: lang, placement: "mobile_dock" })}>
           {lang === "vi" ? "Đặt lịch hẹn" : "Request appointment"}
         </a>
       </div>

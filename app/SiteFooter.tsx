@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { trackEvent } from "./analytics";
 import Image from "./OptimizedImage";
 import { ContactDetails, ContactSocials } from "./ContactDetails";
 import { IconArrow } from "./icons";
@@ -28,6 +29,7 @@ export function SiteFooter({ lang }: { lang: SeoLang }) {
       lang === "vi"
         ? `Tôi muốn đăng ký nhận email ưu đãi của Hato Beauty tại: ${newsletterEmail}. Vui lòng xác nhận cách đăng ký và ngừng nhận email.`
         : `I would like to receive Hato Beauty offers at: ${newsletterEmail}. Please confirm how to subscribe and unsubscribe.`;
+    trackEvent("newsletter_signup_start", { language: lang });
     window.location.href = `mailto:hatobeautydanang@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
   return (
