@@ -1053,7 +1053,7 @@ export function TrustPage({
       ],
       privacy: [
         "Chính sách bảo mật",
-        "Thông tin bạn gửi qua biểu mẫu chỉ được dùng để tư vấn, xác nhận lịch và hỗ trợ liên quan đến yêu cầu của bạn. hato không công khai dữ liệu liên hệ của khách hàng.",
+        "Thông tin bạn gửi qua biểu mẫu chỉ được dùng để tư vấn, xác nhận lịch và hỗ trợ liên quan đến yêu cầu của bạn. hato không công khai dữ liệu liên hệ của khách hàng. Website dùng Google Analytics để đo lường tổng hợp lượt xem và thao tác; tên, số điện thoại, email và nội dung biểu mẫu không được gửi vào Analytics.",
       ],
       editorial: [
         "Chính sách biên tập",
@@ -1087,7 +1087,7 @@ export function TrustPage({
       ],
       privacy: [
         "Privacy policy",
-        "Details sent through the form are used only to discuss and confirm your appointment and support your request. hato does not publish guest contact details.",
+        "Details sent through the form are used only to discuss and confirm your appointment and support your request. hato does not publish guest contact details. The website uses Google Analytics for aggregate page-view and interaction measurement; names, phone numbers, email addresses and form messages are not sent to Analytics.",
       ],
       editorial: [
         "Editorial policy",
