@@ -1275,60 +1275,21 @@ export function TrustPage({
       image: "/images/hato-team-nguyen-thi-kim-loan.png",
       alt:
         lang === "vi"
-          ? "Chuyên gia Head Spa và chăm sóc da đầu Nguyễn Thị Kim Loan tại Hato Beauty"
-          : "Head Spa and scalp care specialist Nguyen Thi Kim Loan at Hato Beauty",
+          ? "Chuyên gia Head Spa, chăm sóc da đầu, mi và mày Nguyễn Thị Kim Loan tại Hato Beauty"
+          : "Head Spa, scalp, lash and brow specialist Nguyen Thi Kim Loan at Hato Beauty",
       name: "Nguyễn Thị Kim Loan",
       role:
         lang === "vi"
-          ? "Chuyên gia Head Spa & chăm sóc da đầu"
-          : "Head Spa & scalp care specialist",
+          ? "Chuyên gia Head Spa, da đầu & Mi & Mày"
+          : "Head Spa, scalp, lash & brow specialist",
       description:
         lang === "vi"
-          ? "Mang đến trải nghiệm chăm sóc da đầu nhẹ nhàng qua các bước làm sạch, thư giãn và theo dõi cảm nhận; điều chỉnh thao tác theo nhu cầu và mức độ thoải mái của từng khách."
-          : "Provides a gentle scalp-care experience through cleansing, relaxation and close attention to comfort, adapting each technique to the guest’s needs.",
+          ? "Mang đến trải nghiệm chăm sóc da đầu nhẹ nhàng, đồng thời quan sát đường nét gương mặt để chăm sóc mi & mày hài hòa, tự nhiên và phù hợp với từng khách."
+          : "Provides gentle scalp care while considering each guest’s facial features to create balanced, natural-looking lash and brow results.",
       expertise:
         lang === "vi"
-          ? ["Head Spa thư giãn", "Làm sạch da đầu", "Chăm sóc theo cảm nhận"]
-          : ["Relaxing Head Spa", "Scalp cleansing", "Comfort-led care"],
-    },
-    {
-      number: "05",
-      image: "/images/hato-team-nguyen-thi-hoa-quynh.jpg",
-      alt:
-        lang === "vi"
-          ? "Chuyên gia mi và mày Nguyễn Thị Hoa Quỳnh tại Hato Beauty"
-          : "Lash and brow specialist Nguyen Thi Hoa Quynh at Hato Beauty",
-      name: "Nguyễn Thị Hoa Quỳnh",
-      role:
-        lang === "vi"
-          ? "Chuyên gia mi & mày"
-          : "Lash & brow specialist",
-      description:
-        lang === "vi"
-          ? "Quan sát dáng mắt, đường nét khuôn mặt và mong muốn của khách để điều chỉnh trải nghiệm chăm sóc mi & mày theo hướng nhẹ nhàng, hài hòa và dễ duy trì."
-          : "Considers each guest’s eye shape, facial features and preferences to create a gentle, balanced lash and brow care experience that is easy to maintain.",
-      expertise:
-        lang === "vi"
-          ? ["Chăm sóc mi & mày", "Tạo dáng hài hòa", "Hướng dẫn chăm sóc sau dịch vụ"]
-          : ["Lash & brow care", "Balanced shaping", "Aftercare guidance"],
-    },
-    {
-      number: "06",
-      image: "/images/hato-team-nguyen-minh-hoang.jpg",
-      alt:
-        lang === "vi"
-          ? "Dược sĩ Nguyễn Minh Hoàng tại Hato Beauty"
-          : "Pharmacist Nguyen Minh Hoang at Hato Beauty",
-      name: "Nguyễn Minh Hoàng",
-      role: lang === "vi" ? "Dược sĩ" : "Pharmacist",
-      description:
-        lang === "vi"
-          ? "Đồng hành cùng đội ngũ trong việc giải thích thông tin sản phẩm, cách sử dụng và các lưu ý cần thiết theo hướng rõ ràng, thận trọng và dễ hiểu."
-          : "Supports the team by explaining product information, practical use and important considerations in a clear, thoughtful and easy-to-understand way.",
-      expertise:
-        lang === "vi"
-          ? ["Thông tin sản phẩm", "Hướng dẫn sử dụng", "Lưu ý cần thiết"]
-          : ["Product information", "Usage guidance", "Key considerations"],
+          ? ["Head Spa thư giãn", "Chăm sóc da đầu", "Chăm sóc mi & mày"]
+          : ["Relaxing Head Spa", "Scalp care", "Lash & brow care"],
     },
   ];
   const consultationHref = bookingPath(lang);

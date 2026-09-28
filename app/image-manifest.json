@@ -78,7 +78,7 @@
     ]
   },
   "/images/hato-team-nguyen-thanh-cong.jpg": {
-    "prefix": "hato-team-nguyen-thanh-cong-fd5e70d5b8b6",
+    "prefix": "hato-team-nguyen-thanh-cong-7735a3f888c4",
     "widths": [
       96,
       192,
@@ -165,6 +165,19 @@
   },
   "/images/journal-brow-v2.webp": {
     "prefix": "journal-brow-v2-b01c3496ca01",
+    "widths": [
+      96,
+      192,
+      320,
+      480,
+      640,
+      960,
+      1280,
+      1536
+    ]
+  },
+  "/images/journal-oily-scalp-hato-v1.webp": {
+    "prefix": "journal-oily-scalp-hato-v1-005eb78f0a04",
     "widths": [
       96,
       192,
