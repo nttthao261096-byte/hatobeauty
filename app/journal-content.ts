@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { journalTopics, type SeoLang } from "./seo-data";
+import { localPublishedArticles } from "./local-journal-articles";
 export type PublishedArticle = {
   id: number;
   title_vi: string;
@@ -27,7 +28,8 @@ export const loadPublishedArticles = cache(
   async (): Promise<PublishedArticle[]> => {
     const base = process.env.SUPABASE_URL;
     const key = process.env.SUPABASE_PUBLISHABLE_KEY;
-    if (!base || !key) return [];
+    const localArticles = localPublishedArticles as PublishedArticle[];
+    if (!base || !key) return localArticles;
     const query = new URLSearchParams({
       select:
         "id,title_vi,title_en,slug_vi,slug_en,excerpt_vi,excerpt_en,content_vi,content_en,tags_vi,tags_en,image_path,reading_time_vi,reading_time_en,created_at,updated_at,is_published",
@@ -43,19 +45,25 @@ export const loadPublishedArticles = cache(
         signal: AbortSignal.timeout(10000),
       },
     );
-    if (!response.ok) throw new Error("Không thể tải bài viết đã xuất bản.");
+    if (!response.ok) return localArticles;
     const rows = (await response.json()) as PublishedArticle[];
-    return rows.filter(
+    const localSlugs = new Set(
+      localArticles.flatMap((article) => [article.slug_vi, article.slug_en]),
+    );
+    const remoteArticles = rows.filter(
       (x) =>
         x.is_published === true &&
         x.content_vi?.trim() &&
         x.content_en?.trim() &&
         /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(x.slug_vi) &&
         /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(x.slug_en) &&
+        !localSlugs.has(x.slug_vi) &&
+        !localSlugs.has(x.slug_en) &&
         !journalTopics.some(
           (t) => t.viSlug === x.slug_vi || t.enSlug === x.slug_en,
         ),
     );
+    return [...localArticles, ...remoteArticles];
   },
 );
 export async function findPublishedArticle(slug: string, lang: SeoLang) {
