@@ -26,6 +26,11 @@ export const pageRoutes = {
 
 export type LanguagePaths = Record<SeoLang, string>;
 
+const bookingChannels: Record<SeoLang, string> = {
+  vi: "https://zalo.me/0703214868",
+  en: "https://wa.me/84703214868",
+};
+
 export function equivalentPaths(pathname: string): LanguagePaths | undefined {
   const path = canonicalPath(pathname);
   const pairs: LanguagePaths[] = [
@@ -38,10 +43,27 @@ export function equivalentPaths(pathname: string): LanguagePaths | undefined {
   return pairs.find((pair) => pair.vi === path || pair.en === path);
 }
 
-export function bookingPath(lang: SeoLang, service?: string, option?: string) {
+export function bookingPagePath(
+  lang: SeoLang,
+  service?: string,
+  option?: string,
+) {
   const query = new URLSearchParams();
   if (service && seoServices.some((item) => item.id === service))
     query.set("service", service);
   if (option) query.set("option", option);
   return pageRoutes.book[lang] + (query.size ? `?${query}` : "");
+}
+
+export function bookingPath(lang: SeoLang, service?: string, option?: string) {
+  if (lang === "vi") return bookingChannels.vi;
+
+  const serviceName = service
+    ? seoServices.find((item) => item.id === service)?.en.name
+    : undefined;
+  const message = serviceName
+    ? `Hello Hato Beauty, I would like to book an appointment for ${serviceName}.`
+    : "Hello Hato Beauty, I would like to book an appointment.";
+  const optionNote = option ? ` My selected option is ${option}.` : "";
+  return `${bookingChannels.en}?text=${encodeURIComponent(message + optionNote)}`;
 }

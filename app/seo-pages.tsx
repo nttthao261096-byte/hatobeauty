@@ -18,7 +18,11 @@ import {
 } from "./seo-data";
 import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
-import { bookingPath, type LanguagePaths } from "./route-paths";
+import {
+  bookingPagePath,
+  bookingPath,
+  type LanguagePaths,
+} from "./route-paths";
 import {
   approvedServiceOptions,
   commercialNotice,
@@ -543,7 +547,7 @@ export function ServiceLanding({
                 priceCurrency: "VND",
                 price: option.priceVnd,
                 name: option.name[lang],
-                url: `${siteUrl}${bookingPath(lang, service.id, option.id)}`,
+                url: bookingPath(lang, service.id),
               })),
             }
           : {}),
@@ -1300,8 +1304,8 @@ export function TrustPage({
         languagePaths={
           kind === "book"
             ? {
-                vi: bookingPath("vi", initialService, initialOption),
-                en: bookingPath("en", initialService, initialOption),
+                vi: bookingPagePath("vi", initialService, initialOption),
+                en: bookingPagePath("en", initialService, initialOption),
               }
             : undefined
         }
